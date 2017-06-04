@@ -3,3 +3,6 @@ node_js:
   -"iojs"
   -"8"
   -"7"
+services:
+  -"mongodb"
+  
