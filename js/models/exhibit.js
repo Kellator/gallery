@@ -6,6 +6,10 @@ var exhibitSchema = new mongoose.Schema({
     title: {
         type: String
     },
+    _creator: {
+        type: ObjectId,
+        required: [true, 'Creator ID required for Exhibit']
+    },
     image:  {
         type: String,
         required: [true, 'Image required for Exhibit']

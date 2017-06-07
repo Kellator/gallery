@@ -1,7 +1,7 @@
-//wall contains the exhibits - name of the wall, exhibits contained on the wall, search categories applicable to wall
+//Wall contains all exhibits in the gallery app in the category 
 var mongoose = require('mongoose');
 
-var wallSchema = new mongoose.Schema({
+var WallSchema = new mongoose.Schema({
     title: {
         type: String
     },
@@ -12,5 +12,5 @@ var wallSchema = new mongoose.Schema({
         type: Array
     }
 });
-var Wall = mongoose.model('Wall', wallSchema);
+var Wall = mongoose.model('Wall', WallSchema);
 module.exports = Wall;
