@@ -1,4 +1,4 @@
-//schema for exhibit item - includes title, image, src link, search categories, comments
+//schema for exhibit item - includes title, image, src link, search categories, comments.
 
 var mongoose = require('mongoose');
 
