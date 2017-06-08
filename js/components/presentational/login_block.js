@@ -6,15 +6,17 @@ import PropTypes from 'prop-types';
 
 //declare propTypes prior to component
 
-LandingPage.propTypes = {
+LoginBlock.propTypes = {
 
 }
 
-class LandingPage extends React.Component {
+class LoginBlock extends React.Component {
     render() {
         return (
             <div className="">
-                <LoginBlock className="">
+                <GalleryLogo className=""></GalleryLogo>
+                <LoginInput className=""></LoginInput>
+                <SignUp className=""></SignUp>
             </div>
         );
     }
