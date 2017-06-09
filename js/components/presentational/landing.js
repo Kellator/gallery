@@ -2,7 +2,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 //separate local imports from dependencies
-
+import LoginBlock from './login_block';
 
 //declare propTypes prior to component
 
