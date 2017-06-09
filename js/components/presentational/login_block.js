@@ -7,9 +7,9 @@ import LoginInput from './login_input';
 import SignUp from './sign_up';
 //declare propTypes prior to component
 
-LoginBlock.propTypes = {
+// LoginBlock.propTypes = {
 
-}
+// }
 
 export default class LoginBlock extends React.Component {
     render() {

@@ -11,6 +11,8 @@ describe('SignUpInstructions component', () => {
         const renderer = TestUtils.createRenderer();
         renderer.render(<SignUpInstructions />);
         const result = renderer.getRenderOutput();
-        console.log(result);
+        result.props.className.should.equal('su_instructions');
+        result.props.children.should.equal('Signing up for the Gallery is as simple as entering in an email and password below!');
+        console.log(result.props);
     })
 })

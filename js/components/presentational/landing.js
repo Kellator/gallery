@@ -6,9 +6,9 @@ import LoginBlock from './login_block';
 
 //declare propTypes prior to component
 
-LandingPage.propTypes = {
+// LandingPage.propTypes = {
 
-}
+// }
 
 export default class LandingPage extends React.Component {
     render() {

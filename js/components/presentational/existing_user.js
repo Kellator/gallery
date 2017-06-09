@@ -6,9 +6,9 @@ import PropTypes from 'prop-types';
 
 //declare propTypes prior to component
 
-ExistingUser.propTypes = {
+// ExistingUser.propTypes = {
 
-}
+// }
 
 export default class ExistingUser extends React.Component {
     render() {

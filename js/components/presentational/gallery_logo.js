@@ -6,9 +6,9 @@ import PropTypes from 'prop-types';
 
 //declare propTypes prior to component
 
-GalleryLogo.propTypes = {
+// GalleryLogo.propTypes = {
 
-}
+// }
 
 export default class GalleryLogo extends React.Component {
     render() {

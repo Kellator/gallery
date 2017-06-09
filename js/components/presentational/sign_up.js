@@ -6,9 +6,9 @@ import PropTypes from 'prop-types';
 
 //declare propTypes prior to component
 
-SignUp.propTypes = {
+// SignUp.propTypes = {
 
-}
+// }
 
 export default class SignUp extends React.Component {
     render() {

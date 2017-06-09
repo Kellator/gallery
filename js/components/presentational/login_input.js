@@ -7,9 +7,9 @@ import { Form, Button } from 'semantic-ui-react';
 
 //declare propTypes prior to component
 
-LoginInput.propTypes = {
+// LoginInput.propTypes = {
 
-}
+// }
 
 export default class LoginInput extends React.Component {
     render() {
