@@ -11,7 +11,7 @@ LoginBlock.propTypes = {
 
 }
 
-class LoginBlock extends React.Component {
+export default class LoginBlock extends React.Component {
     render() {
         return (
             <div className="">

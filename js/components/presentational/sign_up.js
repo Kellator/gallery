@@ -10,7 +10,7 @@ SignUp.propTypes = {
 
 }
 
-class SignUp extends React.Component {
+export default class SignUp extends React.Component {
     render() {
         return (
             <p className="new_user_signup">New to Gallery?  Sign up <a href="" >here!</a></p>

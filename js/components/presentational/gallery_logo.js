@@ -10,7 +10,7 @@ GalleryLogo.propTypes = {
 
 }
 
-class GalleryLogo extends React.Component {
+export default class GalleryLogo extends React.Component {
     render() {
         return <h1 className="full_logo">Gallery</h1>
     }

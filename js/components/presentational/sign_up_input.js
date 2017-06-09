@@ -11,7 +11,7 @@ import { Form, Button } from 'semantic-ui-react';
 SignUpInput.propTypes = {
 
 }
-class SignUpInput extends React.Component {
+export default class SignUpInput extends React.Component {
     render() {
         return (
             <div className="">

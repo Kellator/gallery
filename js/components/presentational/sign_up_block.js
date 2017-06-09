@@ -11,11 +11,12 @@ SignUpBlock.propTypes = {
 
 }
 
-class SignUpBlock extends React.Component {
+export default class SignUpBlock extends React.Component {
     render() {
         return (
             <div className="">
                 <GalleryLogo className=""></GalleryLogo>
+                <SignUpInstructions className=""></SignUpInstructions>
                 <SignUpInput className=""></SignUpInput>
                 <ExistingUser className=""></ExistingUser>
             </div>

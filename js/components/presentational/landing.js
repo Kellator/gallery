@@ -10,7 +10,7 @@ LandingPage.propTypes = {
 
 }
 
-class LandingPage extends React.Component {
+export default class LandingPage extends React.Component {
     render() {
         return (
             <div className="">
