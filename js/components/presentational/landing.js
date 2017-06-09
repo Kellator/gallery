@@ -2,15 +2,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 //separate local imports from dependencies
-
+import LoginBlock from './login_block';
 
 //declare propTypes prior to component
 
-LandingPage.propTypes = {
+// LandingPage.propTypes = {
 
-}
+// }
 
-class LandingPage extends React.Component {
+export default class LandingPage extends React.Component {
     render() {
         return (
             <div className="">

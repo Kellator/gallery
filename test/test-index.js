@@ -4,14 +4,15 @@ import chai from 'chai';
 
 const should = chai.should();
 
-//app
+import SignUpInstructions from '../js/components/presentational/sign_up_instructions.js';
 
-//nav_rail
-
-//browse_rail
-
-//right_rail
-
-//landing
-
-//action_menu
+describe('SignUpInstructions component', () => {
+    it('Renders a single line of text', () => {
+        const renderer = TestUtils.createRenderer();
+        renderer.render(<SignUpInstructions />);
+        const result = renderer.getRenderOutput();
+        result.props.className.should.equal('su_instructions');
+        result.props.children.should.equal('Signing up for the Gallery is as simple as entering in an email and password below!');
+        console.log(result.props);
+    })
+})

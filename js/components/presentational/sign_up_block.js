@@ -3,21 +3,22 @@ import React from 'react';
 import PropTypes from 'prop-types';
 //separate local imports from dependencies
 import GalleryLogo from './gallery_logo';
-import LoginInput from './login_input';
-import SignUp from './sign_up';
+import SignUpInput from './sign_up_input';
+import ExistingUser from './existing_user';
 //declare propTypes prior to component
 
-// LoginBlock.propTypes = {
+// SignUpBlock.propTypes = {
 
 // }
 
-export default class LoginBlock extends React.Component {
+export default class SignUpBlock extends React.Component {
     render() {
         return (
             <div className="">
                 <GalleryLogo className=""></GalleryLogo>
-                <LoginInput className=""></LoginInput>
-                <SignUp className=""></SignUp>
+                <SignUpInstructions className=""></SignUpInstructions>
+                <SignUpInput className=""></SignUpInput>
+                <ExistingUser className=""></ExistingUser>
             </div>
         );
     }
