@@ -9,4 +9,6 @@ var userGallerySchema = new mongoose.Schema({
     walls: {
         type: Array
     }
-})
+});
+var UserGallery = mongoose.model('UserGallery', userGallerySchema);
+module.exports = UserGallery;
