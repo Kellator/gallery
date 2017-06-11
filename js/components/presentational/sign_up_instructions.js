@@ -13,7 +13,10 @@ import PropTypes from 'prop-types';
 export default class SignUpInstructions extends React.Component {
     render() {
         return (
-            <p className="su_instructions">Signing up for the Gallery is as simple as entering in an email and password below!</p>
+            <div className="su_instructions">
+                <p>Signing up for the Gallery is as simple as entering in an email and password below!</p>
+                <p>Passwords must be at least 8 characters long</p>
+            </div>
         );
     }
 }
