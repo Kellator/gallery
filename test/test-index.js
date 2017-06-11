@@ -64,5 +64,11 @@ describe('SignUpInput', () => {
         renderer.render(<SignUpInput />); 
         const result = renderer.getRenderOutput();
         console.log(result);
+        const div = result.type;
+        div.should.equal('div');
+        const children = result.props.children;
+        const form = children.type;
+        form.should.equal('form');
+        children.props.should.be.an('object');
     })
 })
