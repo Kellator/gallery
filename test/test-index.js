@@ -6,8 +6,11 @@ const should = chai.should();
 
 import SignUpInstructions from '../js/components/presentational/sign_up_instructions.js';
 import ExistingUser from '../js/components/presentational/existing_user.js';
+import SignUp from '../js/components/presentational/sign_up.js';
 import SignUpBlock from '../js/components/presentational/sign_up_block.js';
 import SignUpInput from '../js/components/presentational/sign_up_input.js';
+import LogInBlock from '../js/components/presentational/login_block.js';
+import LoginInput from '../js/components/presentational/login_input.js';
 
 describe('SignUpInstructions component', () => {
     it('Renders 2 lines of text', () => {
@@ -38,6 +41,22 @@ describe('ExistingUser component', () => {
     })
 });
 
+describe('SignUp component', () => {
+    it('Renders a single line of text with a link', () => {
+        const renderer = TestUtils.createRenderer();
+        renderer.render(<SignUp />);
+        const result = renderer.getRenderOutput();
+        result.props.className.should.equal('new_user_signup');
+        const children = result.props.children;
+        children.should.have.lengthOf(2);
+        let childOne = children[0];
+        childOne.should.equal('New to Gallery?  Sign up ');
+        let childTwo = children[1];
+        childTwo.props.should.be.an('object');
+        childTwo.type.should.equal('a');
+    })
+});
+
 describe('SignUpBlock', () => {
     it('Renders a single div containing 4 components', () => {
         const renderer = TestUtils.createRenderer();
@@ -49,7 +68,7 @@ describe('SignUpBlock', () => {
         let childArray = result.props.children;
         childArray.should.have.lengthOf(4);
         let childOne = result.props.children[0];
-        console.log(childOne);
+
         let childTwo = result.props.children[1];
 
         let childThree = result.props.children[2];
@@ -58,12 +77,28 @@ describe('SignUpBlock', () => {
     })
 });
 
+describe('LogInBlock', () => {
+    it('Renders a div containing 3 components', () => {
+        const renderer = TestUtils.createRenderer();
+        renderer.render(<LogInBlock />); 
+        const result = renderer.getRenderOutput();
+        const div = result.type;
+        div.should.equal('div');
+        const children = result.props.children;
+        children.should.have.lengthOf(3);
+        let childOne = result.props.children[0];
+
+        let childTwo = result.props.children[1];
+
+        let childThree = result.props.children[2];
+    })
+})
+
 describe('SignUpInput', () => {
     it('Renders renders a div containing a form', () => {
         const renderer = TestUtils.createRenderer();
         renderer.render(<SignUpInput />); 
         const result = renderer.getRenderOutput();
-        console.log(result);
         const div = result.type;
         div.should.equal('div');
         const children = result.props.children;
@@ -71,4 +106,19 @@ describe('SignUpInput', () => {
         form.should.equal('form');
         children.props.should.be.an('object');
     })
+});
+
+describe('LoginInput', () => {
+    it('Renders a div containing a form', () => {
+        const renderer = TestUtils.createRenderer();
+        renderer.render(<LoginInput />); 
+        const result = renderer.getRenderOutput();
+        const div = result.type;
+        div.should.equal('div');
+        const children = result.props.children;
+        const form = children.type;
+        form.should.equal('form');
+        children.props.should.be.an('object');       
+    })
 })
+
