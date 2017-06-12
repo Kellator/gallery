@@ -14,7 +14,7 @@ export default class LandingPage extends React.Component {
     render() {
         return (
             <div className="">
-                <LoginBlock className="">
+                <LoginBlock className="" />
             </div>
         );
     }

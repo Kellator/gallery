@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 //separate local imports from dependencies
 import GalleryLogo from './gallery_logo';
 import SignUpInput from './sign_up_input';
+import SignUpInstructions from './sign_up_instructions';
 import ExistingUser from './existing_user';
 //declare propTypes prior to component
 
