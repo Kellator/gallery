@@ -1,5 +1,6 @@
 //landing page contains the log-in component and link to set up new user profile
 import React from 'react';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 //separate local imports from dependencies
 import LoginBlock from './login_block';
@@ -13,8 +14,8 @@ import LoginBlock from './login_block';
 export default class LandingPage extends React.Component {
     render() {
         return (
-            <div className="">
-                <LoginBlock className="" />
+            <div>
+                <LoginBlock  />
             </div>
         );
     }
