@@ -1,7 +1,15 @@
 //user validation actions
 export const CHECK_USER = 'CHECK_USER'; //?thunk request to server
+export const checkUser = (email, password) => ({
+    type: CHECK_USER,
+    email,
+    password
+});
 
 export const ENTER_GALLERY = 'ENTER_GALLERY'; //change view from landing page to gallery
+export const enterGallery = () => {
+    type: ENTER_GALLERY
+};
 
 //GALLERY ACTIONS
 //adds exhibit data to exhibit document
@@ -49,25 +57,56 @@ export const SHOW_SIGNUP = 'SHOW_SIGNUP';
 
 //in user gallery on log in - nav with user menu, search bar, browse rail, and message rail
 export const SHOW_MENU = 'SHOW_MENU';
+export const showMenu = (menu) => ({
+    type: SHOW_MENU,
+    menu
+});
 
 export const HIDE_MENU = 'HIDE_MENU';
+export const hideMenu = (menu) => ({
+    type: HIDE_MENU,
+    menu
+});
 
 export const LOG_OUT = 'LOG_OUT';
 
 //shows selected exhibit
 export const SHOW_EXHIBIT = 'SHOW_EXHIBIT';
+export const showExhibit = (exhibit) => ({
+    type: SHOW_EXHIBIT,
+    exhibit
+});
 
 //shows selected user wall
 export const SHOW_USER_WALL = 'SHOW_USER_WALL';
+export const showUserWall = (userID, wall) => ({
+    type: SHOW_USER_WALL,
+    userID,
+    wall
+});
 
 //shows selected user gallery
 export const SHOW_USER_GALLERY = 'SHOW_USER_GALLERY';
+export const showUserGallery = (userID, gallery) => ({
+    type: SHOW_USER_GALLERY,
+    userID,
+    gallery
+});
 
 //shows selected wall 
 export const SHOW_WALL = 'SHOW_WALL';
+export const showWall = (wall) => ({
+    type: SHOW_WALL,
+    wall
+});
 
 //shows all exhibits in app
 export const SHOW_GALLERY = 'SHOW_GALLERY';
+export const showGallery = (gallery) => ({
+    type: SHOW_GALLERY,
+    gallery
+});
 
 
 //thunks?
+//retrieve documents from monogo - exhibits, walls, user gallery etc
