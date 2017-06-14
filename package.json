@@ -57,6 +57,7 @@
     "mkdirp": "^0.5.1",
     "mocha": "^3.4.2",
     "npm-run-all": "^3.1.2",
+    "redux-logger": "^3.0.6",
     "rimraf": "^2.6.1",
     "sinon": "^1.17.7",
     "sinon-chai": "^2.10.0",
@@ -64,6 +65,7 @@
   },
   "dependencies": {
     "express": "^4.15.3",
+    "history": "^4.6.1",
     "isomorphic-fetch": "^2.2.1",
     "mkdirp": "^0.5.1",
     "mongodb": "^2.2.28",

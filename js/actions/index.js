@@ -1,15 +1,20 @@
 //user validation actions
-export const CHECK_USER = 'CHECK_USER'; //?thunk request to server
+export const CHECK_USER = 'CHECK_USER'; 
 export const checkUser = (email, password) => ({
     type: CHECK_USER,
     email,
     password
 });
 
-export const ENTER_GALLERY = 'ENTER_GALLERY'; //change view from landing page to gallery
-export const enterGallery = () => {
+export const DIRECT_TO_SIGNUP = 'DIRECT_TO_SIGNUP';
+export const directToSignup = () => ({
+    type: DIRECT_TO_SIGNUP
+});
+
+export const ENTER_GALLERY = 'ENTER_GALLERY'; 
+export const enterGallery = () => ({
     type: ENTER_GALLERY
-};
+});
 
 //GALLERY ACTIONS
 //adds exhibit data to exhibit document
@@ -52,8 +57,14 @@ export const addNewWall = (title, categories) => ({
 //UI ACTIONS - changes that occur to ui state tree
 //landing page - login vs sign up
 export const SHOW_LOGIN = 'SHOW_LOGIN';
+export const showLogin = () => ({
+    type: SHOW_LOGIN
+});
 
 export const SHOW_SIGNUP = 'SHOW_SIGNUP';
+export const showSignup = () => ({
+    type: SHOW_SIGNUP
+});
 
 //in user gallery on log in - nav with user menu, search bar, browse rail, and message rail
 export const SHOW_MENU = 'SHOW_MENU';
@@ -69,6 +80,9 @@ export const hideMenu = (menu) => ({
 });
 
 export const LOG_OUT = 'LOG_OUT';
+export const logOut = () => ({
+    type: LOG_OUT
+});
 
 //shows selected exhibit
 export const SHOW_EXHIBIT = 'SHOW_EXHIBIT';
