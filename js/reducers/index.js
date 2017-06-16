@@ -1,6 +1,7 @@
 import * as actions from '../actions/index';
 //import { initialState } from '../store';
 import { combineReducers } from 'redux';
+import { routerReducer } from 'react-router-redux';
 
 export const initialState = {
     authorized: false
@@ -14,7 +15,7 @@ const validation = ( state = initialState, action ) => {
                 password: password  
             });
         
-        case 'DIRECT_TO_SIGNUP': 
+        case 'SHOW_SIGNUP': 
             return Object.assign({}, state, {
                 authorized: false
             });
@@ -27,19 +28,70 @@ const validation = ( state = initialState, action ) => {
         default: return state;
     }
 };
-
+// dependent on user authorization - require state: authorized : true
 const gallery = ( state = 0, action ) => {
-    return state;
+    switch(action.type) {
+        case 'SHOW_GALLERY': 
+            return Object.assign({}, state, {
+                gallery: gallery
+            });
+        case 'SHOW_WALL':
+            return Object.assign({}, state, {
+                wall: wall
+            });
+        case 'SHOW_EXHIBIT':
+            return Object.assign({}, state, {
+                exhibit: exhibit
+            });
+        case 'SHOW_USER_GALLERY':
+            return Object.assign({}, state, {
+                userID: userID,
+                gallery: gallery
+            });
+        case 'SHOW_USER_WALL':
+            return Object.assign({}, state, {
+                userID: userID,
+                wall: wall
+            });
+        case 'ADD_NEW_EXHIBIT': 
+            return Object.assign({}, state, {
+                title: title,
+                image: image,
+                source: source,
+                categories: categories,
+                userID: userID
+            });
+        case 'ADD_TO_WALL':
+            return Object.assign({}, state, {
+                exhibit: exhibit,
+                wall: wall
+            });
+        case 'ADD_NEW_WALL':
+            return Object.assign({}, state, {
+                title: title,
+                categories: categories
+            });
+        default: return state;
+    }
 };
 
 const menu = ( state = 0, action ) => {
-    return state;
+    switch(action.type) {
+        case 'EXPAND_MENU':
+            return Object.assign({}, state, {
+                menu: menu  
+            });
+        case 'HIDE_MENU':
+            return Object.assign({}, state, {
+                menu: menu
+            });
+        default: return state;
+    }
 };
-
-
 
 export default combineReducers({
     validation: validation,
     gallery: gallery,
-    menu: menu
+    menu: menu,
+    routing: routerReducer
 });
