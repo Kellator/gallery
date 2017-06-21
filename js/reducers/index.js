@@ -1,18 +1,27 @@
 import * as actions from '../actions/index';
-//import { initialState } from '../store';
 import { combineReducers } from 'redux';
 import { routerReducer } from 'react-router-redux';
 
-export const initialState = {
-    authorized: false
+const initialState = {
+    userState: {
+        authorized: false,
+        login: true,
+        user: {
+            email: '',
+            password: ''
+        } 
+    },
+    displayState: {}
 };
 
-const validation = ( state = initialState, action ) => {
+const validation = ( state = initialState.userState, action ) => {
     switch(action.type) {
         case 'CHECK_USER':   //query server to check if user exists
             return Object.assign({}, state, {
-                email: email,
-                password: password  
+                user: { //should this really be part of the store?  or just sent to the server for validation
+                    email: email,
+                    password: password
+                } 
             });
         
         case 'SHOW_SIGNUP': 
