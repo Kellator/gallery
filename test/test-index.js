@@ -11,6 +11,17 @@ import SignUpBlock from '../js/components/presentational/sign_up_block.js';
 import SignUpInput from '../js/components/presentational/sign_up_input.js';
 import LogInBlock from '../js/components/presentational/login_block.js';
 import LoginInput from '../js/components/presentational/login_input.js';
+import { LandingPage } from '../js/components/presentational/landing.js';
+
+// describe('LandingPage component', () => {
+//     it('Renders a div containing 3 components', () => {
+//         let login = true;
+//         const renderer = TestUtils.createRenderer();
+//         renderer.render(<LandingPage />);
+//         const result = renderer.getRenderOutput();
+//         console.log(result);
+//     })
+// });
 
 describe('SignUpInstructions component', () => {
     it('Renders 2 lines of text', () => {
@@ -92,7 +103,7 @@ describe('LogInBlock', () => {
 
         let childThree = result.props.children[2];
     })
-})
+});
 
 describe('SignUpInput', () => {
     it('Renders renders a div containing a form', () => {
@@ -120,5 +131,5 @@ describe('LoginInput', () => {
         form.should.equal('form');
         children.props.should.be.an('object');       
     })
-})
+});
 

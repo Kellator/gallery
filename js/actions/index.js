@@ -6,11 +6,6 @@ export const checkUser = (email, password) => ({
     password
 });
 
-export const DIRECT_TO_SIGNUP = 'DIRECT_TO_SIGNUP';
-export const directToSignup = () => ({
-    type: DIRECT_TO_SIGNUP
-});
-
 export const ENTER_GALLERY = 'ENTER_GALLERY'; 
 export const enterGallery = () => ({
     type: ENTER_GALLERY
@@ -18,9 +13,9 @@ export const enterGallery = () => ({
 
 //GALLERY ACTIONS
 //adds exhibit data to exhibit document
-export const ADD_EXHIBIT = 'ADD_EXHIBIT';
-export const addExhibit = (title, image, source, categories, userID) => ({
-    type: ADD_EXHIBIT,
+export const ADD_NEW_EXHIBIT = 'ADD_NEW_EXHIBIT';
+export const addNewExhibit = (title, image, source, categories, userID) => ({
+    type: ADD_NEW_EXHIBIT,
     title,
     image,
     source,
@@ -67,9 +62,9 @@ export const showSignup = () => ({
 });
 
 //in user gallery on log in - nav with user menu, search bar, browse rail, and message rail
-export const SHOW_MENU = 'SHOW_MENU';
-export const showMenu = (menu) => ({
-    type: SHOW_MENU,
+export const EXPAND_MENU = 'EXPAND_MENU';
+export const expandMenu = (menu) => ({
+    type: EXPAND_MENU,
     menu
 });
 
