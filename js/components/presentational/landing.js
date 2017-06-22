@@ -11,17 +11,10 @@ import SignUpBlock from './sign_up_block';
 
 // }
 
-// export default class LandingPage extends React.Component {
-//     render() {
-//         return (
-//             <div>
-//                 <LoginBlock  />
-//             </div>
-//         );
-//     }
-// }
-
 class LandingPage extends React.Component {
+    signUpLinkOnClick = (dispatch) {
+        
+    }
     render() {
         console.log(this.props);
         console.log(this.props.login);
@@ -38,7 +31,6 @@ class LandingPage extends React.Component {
 const mapStateToProps = (state, props) => ({
     login: state.validation.login
     // email: state.validation.user.email,
-    // password: state.validation.user.password
-})
+});
 
 export default connect(mapStateToProps)(LandingPage);
