@@ -16,12 +16,9 @@ import * as actions from '../../actions/index';
 
 class LandingPage extends React.Component {
     render() {
-        console.log(actions.showSignup);
-        console.log("landing component");
-        console.log(this.props.login);
         let landingState = this.props.login
         if (landingState == false) {
-            return <SignupBlock />
+            return <SignUpBlock />
         }
         return <LoginBlock sign_up={this.props.onClickSignup}/>
     }
@@ -34,7 +31,7 @@ const mapStateToProps = (state, props) => ({
     // email: state.validation.user.email,
 });
 const mapDispatchToProps = (dispatch, ownProps) => {
-    return { onClickSignup: () => { dispatch(actions.showSignup)}}
+    return { onClickSignup: () => { dispatch(actions.showSignup())}}
 }
 // const mapDispatchToProps = (dispatch, ownProps) => ({
 //     actions: bindActionCreators(actions, dispatch)

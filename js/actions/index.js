@@ -57,9 +57,11 @@ export const showLogin = () => ({
 });
 
 export const SHOW_SIGNUP = 'SHOW_SIGNUP';
-export const showSignup = () => ({
-    type: SHOW_SIGNUP
-});
+export const showSignup = () => {
+    return {
+        type: SHOW_SIGNUP
+    };
+};
 
 //in user gallery on log in - nav with user menu, search bar, browse rail, and message rail
 export const EXPAND_MENU = 'EXPAND_MENU';

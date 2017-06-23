@@ -7,24 +7,24 @@ const initialState = {
         authorized: false,
         login: true,
         user: {
-            email: '',
-            password: ''
+            email: ''
         } 
     },
     displayState: {}
 };
 
 const validation = ( state = initialState.userState, action ) => {
+    console.log("Tada: " + action.type);
     switch(action.type) {
         case 'CHECK_USER':   //query server to check if user exists
             return Object.assign({}, state, {
                 user: { //should this really be part of the store?  or just sent to the server for validation
-                    email: email,
-                    password: password
+                    email: email
                 } 
             });
         
         case 'SHOW_SIGNUP': 
+            console.log("Hello!!!");
             return Object.assign({}, state, {
                 login: false
             });
@@ -99,8 +99,8 @@ const menu = ( state = 0, action ) => {
 };
 
 export default combineReducers({
-    validation: validation,
-    gallery: gallery,
-    menu: menu,
+    validation,
+    gallery,
+    menu,
     routing: routerReducer
 });
