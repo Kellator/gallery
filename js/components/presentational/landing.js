@@ -2,9 +2,12 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { bindActionCreators } from 'redux';
+import { dispatch } from 'react-redux';
 //separate local imports from dependencies
 import LoginBlock from './login_block';
 import SignUpBlock from './sign_up_block';
+import * as actions from '../../actions/index';
 //declare propTypes prior to component
 
 // LandingPage.propTypes = {
@@ -12,17 +15,15 @@ import SignUpBlock from './sign_up_block';
 // }
 
 class LandingPage extends React.Component {
-    signUpLinkOnClick = (dispatch) {
-        
-    }
     render() {
-        console.log(this.props);
+        console.log(actions.showSignup);
+        console.log("landing component");
         console.log(this.props.login);
         let landingState = this.props.login
         if (landingState == false) {
             return <SignupBlock />
         }
-        return <LoginBlock />
+        return <LoginBlock sign_up={this.props.onClickSignup}/>
     }
 }
 //event handlers and mapDispatchToProps?
@@ -32,5 +33,11 @@ const mapStateToProps = (state, props) => ({
     login: state.validation.login
     // email: state.validation.user.email,
 });
+const mapDispatchToProps = (dispatch, ownProps) => {
+    return { onClickSignup: () => { dispatch(actions.showSignup)}}
+}
+// const mapDispatchToProps = (dispatch, ownProps) => ({
+//     actions: bindActionCreators(actions, dispatch)
+// });
 
-export default connect(mapStateToProps)(LandingPage);
+export default connect(mapStateToProps, mapDispatchToProps)(LandingPage);

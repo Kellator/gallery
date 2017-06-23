@@ -64,7 +64,7 @@ describe('SignUp component', () => {
         childOne.should.equal('New to Gallery?  Sign up ');
         let childTwo = children[1];
         childTwo.props.should.be.an('object');
-        childTwo.type.should.equal('a');
+        childTwo.type.should.equal('button');
     })
 });
 
