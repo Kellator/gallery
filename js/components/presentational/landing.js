@@ -18,7 +18,7 @@ class LandingPage extends React.Component {
     render() {
         let landingState = this.props.login
         if (landingState == false) {
-            return <SignUpBlock />
+            return <SignUpBlock log_in={this.props.onClickLogin}/>
         }
         return <LoginBlock sign_up={this.props.onClickSignup}/>
     }
@@ -31,7 +31,9 @@ const mapStateToProps = (state, props) => ({
     // email: state.validation.user.email,
 });
 const mapDispatchToProps = (dispatch, ownProps) => {
-    return { onClickSignup: () => { dispatch(actions.showSignup())}}
+    return { onClickSignup: () => { dispatch(actions.showSignup())},
+    onClickLogin: () => { dispatch(actions.showLogin())}
+    }
 }
 // const mapDispatchToProps = (dispatch, ownProps) => ({
 //     actions: bindActionCreators(actions, dispatch)

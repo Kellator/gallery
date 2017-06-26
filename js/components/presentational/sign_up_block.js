@@ -14,12 +14,14 @@ import ExistingUser from './existing_user';
 
 export default class SignUpBlock extends React.Component {
     render() {
+        console.log("sign-up block");
+        console.log(this.props);
         return (
             <div className="">
                 <GalleryLogo className=""></GalleryLogo>
                 <SignUpInstructions className=""></SignUpInstructions>
                 <SignUpInput className=""></SignUpInput>
-                <ExistingUser className=""></ExistingUser>
+                <ExistingUser className="" log_in={this.props.log_in}></ExistingUser>
             </div>
         );
     }

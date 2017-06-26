@@ -19,10 +19,10 @@ export default class SignUpInput extends React.Component {
                 <form className="">
                     <fieldset className="gallery_signup">
                         <legend className="">Log In</legend>
-                            <label for="email_signup">Email</label>
+                            <label htmlFor="email_signup">Email</label>
                             <input id="email_signup" type="email" required></input>
 
-                            <label for="email_signup_password">Password</label>
+                            <label htmlFor="email_signup_password">Password</label>
                             <input id="email_signup_password" type="password" required></input>
 
                             <button className="" type="submit">Login</button>

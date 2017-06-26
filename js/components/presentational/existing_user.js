@@ -13,7 +13,7 @@ import PropTypes from 'prop-types';
 export default class ExistingUser extends React.Component {
     render() {
         return (
-            <p className="existing_user_line">Already a part of the Gallery?  Click <a href="" >here</a> to login.</p>
+            <p className="existing_user_line">Already a part of the Gallery?  Click <button onClick={this.props.log_in} >here</button> to login.</p>
         );
     }
 }

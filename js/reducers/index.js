@@ -29,6 +29,12 @@ const validation = ( state = initialState.userState, action ) => {
                 login: false
             });
         
+        case 'SHOW_LOGIN':
+            console.log("Howdy");
+            return Object.assign({}, state, {
+                login: true
+            });
+            
         case 'ENTER_GALLERY':   //would be dispatched upon successful server query return
             return Object.assign({}, state, {
                 authorized: true
