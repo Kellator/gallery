@@ -18,7 +18,10 @@ export default class LoginBlock extends React.Component {
         return (
             <div className="">
                 <GalleryLogo className=""></GalleryLogo>
-                <LoginInput className=""></LoginInput>
+                <LoginInput className=""
+                    onChange={this.props.onChange}
+                    formUpdate={this.props.formUpdate}>
+                </LoginInput>
                 <SignUp className="" sign_up={this.props.sign_up}></SignUp>
             </div>
         );
