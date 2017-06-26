@@ -46,7 +46,7 @@ describe('ExistingUser component', () => {
         const startP = result.props.children[0];
         startP.should.equal('Already a part of the Gallery?  Click ')
         const link = result.props.children[1];
-        link.type.should.equal('a');
+        link.type.should.equal('button');
         const endP = result.props.children[2];
         endP.should.equal(' to login.');
     })
@@ -64,7 +64,7 @@ describe('SignUp component', () => {
         childOne.should.equal('New to Gallery?  Sign up ');
         let childTwo = children[1];
         childTwo.props.should.be.an('object');
-        childTwo.type.should.equal('a');
+        childTwo.type.should.equal('button');
     })
 });
 

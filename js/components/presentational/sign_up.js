@@ -10,10 +10,12 @@ import PropTypes from 'prop-types';
 
 // }
 
-export default class SignUp extends React.Component {
+export default class SignUp extends React.Component {   
     render() {
+        console.log("sign_up component");
+        console.log(this.props);
         return (
-            <p className="new_user_signup">New to Gallery?  Sign up <a href="" >here!</a></p>
+            <p className="new_user_signup">New to Gallery?  Sign up <button onClick={this.props.sign_up} >here!</button></p>
         );
     }
 }
