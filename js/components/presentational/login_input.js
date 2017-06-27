@@ -33,30 +33,27 @@ const renderSelect = field => (
 );
 
 
-const LoginInput = (props) => {
-    const { handleSubmit, pristine, reset, submitting } = props
-    console.log("login input");
-    return (
-        <div className="">
-            <form onSubmit={handleSubmit}>
-                <fieldset className="gallery_login">
-                    <legend className="">Log In</legend>
-                        <label htmlFor="email_login">Email</label>
-                        <Field id="email_login" name="email" type="email" placeholder="you@email.com" component={renderField}/>
-                        <label htmlFor="email_login_password">Password</label>
-                        <Field id="email_login_password" name="password" type="text" placeholder="********" component={renderField}/>
-                        <button action="submit">Login</button>
-                </fieldset>
-            </form>
-        </div>
-    );
+class LoginInput extends React.Component {
+    render() {
+        const { handleSubmit, pristine, reset, submitting } = this.props;
+        return (
+            <div className="">
+                <form onSubmit={handleSubmit}>
+                    <fieldset className="gallery_login">
+                        <legend className="">Log In</legend>
+                            <label htmlFor="email_login">Email</label>
+                            <Field id="email_login" name="email" type="email" placeholder="you@email.com" component={renderField}/>
+                            <label htmlFor="email_login_password">Password</label>
+                            <Field id="email_login_password" name="password" type="text" placeholder="********" component={renderField}/>
+                            <button action="submit">Login</button>
+                    </fieldset>
+                </form>
+            </div>
+        )
+    }
 }
-export default reduxForm({
+LoginInput = reduxForm({
     form: 'login'
 })(LoginInput);
 
-                            // <label htmlFor="email_login">Email</label>
-                            // <input id="email_login" type="email" name="userEmail" required></input>
-
-                            // <label htmlFor="email_login_password">Password</label>
-                            // <input id="email_login_password" type="password" name="password" required></input>
+export default LoginInput;

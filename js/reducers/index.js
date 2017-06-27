@@ -1,6 +1,7 @@
 import * as actions from '../actions/index';
 import { combineReducers } from 'redux';
 import { routerReducer } from 'react-router-redux';
+import { reducer as formReducer } from 'redux-form'
 
 const initialState = {
     userState: {
@@ -109,5 +110,6 @@ export default combineReducers({
     validation,
     gallery,
     menu,
-    routing: routerReducer
+    routing: routerReducer,
+    form: formReducer
 });

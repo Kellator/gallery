@@ -33,24 +33,28 @@ const renderSelect = field => (
     </div>
 );
 
-const SignUpInput = (props) => {
-    console.log("signup input");
-    const { handleSubmit, pristine, reset, submitting } = props
-    return (
-        <div className="">
-            <form onSubmit={handleSubmit}>
-                <fieldset className="gallery_signup">
-                    <legend className="">Log In</legend>
-                        <label htmlFor="email_signup">Email</label>
-                        <Field id="email_signup" name="email" type="email" component={renderField}/>
-                        <label htmlFor="email_signup_password">Password</label>
-                        <Field id="email_signup_password" name="password" type="text" component={renderField}/>
-                        <button action="submit" disabled={pristine || submitting}>Login</button>
-                </fieldset>
-            </form>
-        </div>
-    );
+class SignUpInput extends React.Component {
+    render() {
+        console.log("signup input");
+        const { handleSubmit, pristine, reset, submitting } = this.props;
+        return (
+            <div className="">
+                <form onSubmit={handleSubmit}>
+                    <fieldset className="gallery_signup">
+                        <legend className="">Log In</legend>
+                            <label htmlFor="email_signup">Email</label>
+                            <Field id="email_signup" name="email" type="email" component={renderField}/>
+                            <label htmlFor="email_signup_password">Password</label>
+                            <Field id="email_signup_password" name="password" type="text" component={renderField}/>
+                            <button action="submit" disabled={pristine || submitting}>Login</button>
+                    </fieldset>
+                </form>
+            </div>
+        );
+    }
 }
-export default reduxForm({
+SignUpInput = reduxForm({
     form: 'signup'
 })(SignUpInput);
+
+export default SignUpInput;
