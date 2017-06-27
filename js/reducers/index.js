@@ -17,6 +17,7 @@ const validation = ( state = initialState.userState, action ) => {
     console.log("Tada: " + action.type);
     switch(action.type) {
         case 'CHECK_USER':   //query server to check if user exists
+            console.log("what's up");
             return Object.assign({}, state, {
                 user: { //should this really be part of the store?  or just sent to the server for validation
                     email: email
