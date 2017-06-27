@@ -18,7 +18,7 @@ export default class SignUpBlock extends React.Component {
             <div className="">
                 <GalleryLogo className=""></GalleryLogo>
                 <SignUpInstructions className=""></SignUpInstructions>
-                <SignUpInput className="" ></SignUpInput>
+                <SignUpInput className="" onSubmit={this.props.onSubmit}></SignUpInput>
                 <ExistingUser className="" log_in={this.props.log_in}></ExistingUser>
             </div>
         );

@@ -19,7 +19,7 @@ class LandingPage extends React.Component {
     render() {
         let landingState = this.props.login
         if (landingState == false) {
-            return <SignUpBlock log_in={this.props.onClickLogin} />
+            return <SignUpBlock log_in={this.props.onClickLogin} onSubmit={this.props.signupSubmit}/>
         }
         return <LoginBlock sign_up={this.props.onClickSignup} onSubmit={this.props.loginSubmit}/>
     }
@@ -33,7 +33,8 @@ const mapStateToProps = (state, props) => ({
 const mapDispatchToProps = (dispatch, ownProps) => {
     return { onClickSignup: () => { dispatch(actions.showSignup())},
     onClickLogin: () => { dispatch(actions.showLogin())},
-    loginSubmit: () => { console.log("Hello submit worked")}
+    loginSubmit: () => { console.log("Hello submit worked")},
+    signupSubmit: () => { console.log("Howdy, sign up input worked")}
     }
 }
 // const mapDispatchToProps = (dispatch, ownProps) => ({

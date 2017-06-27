@@ -40,14 +40,14 @@ class SignUpInput extends React.Component {
         console.log(this.props.onSubmit);
         return (
             <div className="">
-                <form onSubmit={handleSubmit}>
+                <form onSubmit={handleSubmit(this.props.onSubmit)}>
                     <fieldset className="gallery_signup">
                         <legend className="">Sign Up</legend>
                             <label htmlFor="email_signup">Email</label>
-                            <Field id="email_signup" name="email" type="email" component="input"/>
+                            <Field id="email_signup" name="email" type="email" placeholder="you@email.com" component="input"/>
                             <label htmlFor="email_signup_password">Password</label>
-                            <Field id="email_signup_password" name="password" type="password" component="input"/>
-                            <button action="submit">Submit</button>
+                            <Field id="email_signup_password" name="password" type="password" placeholder="********" component="input"/>
+                            <button action="submit">Join Gallery</button>
                     </fieldset>
                 </form>
             </div>
