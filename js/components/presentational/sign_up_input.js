@@ -37,16 +37,17 @@ class SignUpInput extends React.Component {
     render() {
         console.log("signup input");
         const { handleSubmit, pristine, reset, submitting } = this.props;
+        console.log(this.props.onSubmit);
         return (
             <div className="">
                 <form onSubmit={handleSubmit}>
                     <fieldset className="gallery_signup">
-                        <legend className="">Log In</legend>
+                        <legend className="">Sign Up</legend>
                             <label htmlFor="email_signup">Email</label>
-                            <Field id="email_signup" name="email" type="email" component={renderField}/>
+                            <Field id="email_signup" name="email" type="email" component="input"/>
                             <label htmlFor="email_signup_password">Password</label>
-                            <Field id="email_signup_password" name="password" type="text" component={renderField}/>
-                            <button action="submit" disabled={pristine || submitting}>Login</button>
+                            <Field id="email_signup_password" name="password" type="password" component="input"/>
+                            <button action="submit">Submit</button>
                     </fieldset>
                 </form>
             </div>

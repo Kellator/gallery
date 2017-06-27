@@ -13,10 +13,11 @@ import SignUp from './sign_up';
 
 export default class LoginBlock extends React.Component {
     render() {
+        console.log(this.props);
         return (
             <div className="">
                 <GalleryLogo className=""></GalleryLogo>
-                <LoginInput className="" ></LoginInput>
+                <LoginInput className="" onSubmit={this.props.onSubmit}></LoginInput>
                 <SignUp className="" sign_up={this.props.sign_up}></SignUp>
             </div>
         );

@@ -35,16 +35,18 @@ const renderSelect = field => (
 
 class LoginInput extends React.Component {
     render() {
+        console.log(this);
         const { handleSubmit, pristine, reset, submitting } = this.props;
+        console.log(this.props.onSubmit);
         return (
             <div className="">
-                <form onSubmit={handleSubmit}>
+                <form onSubmit={handleSubmit(this.props.onSubmit)} >
                     <fieldset className="gallery_login">
                         <legend className="">Log In</legend>
                             <label htmlFor="email_login">Email</label>
-                            <Field id="email_login" name="email" type="email" placeholder="you@email.com" component={renderField}/>
+                            <Field required id="email_login" name="email" type="email" placeholder="you@email.com" component="input"/>
                             <label htmlFor="email_login_password">Password</label>
-                            <Field id="email_login_password" name="password" type="text" placeholder="********" component={renderField}/>
+                            <Field required id="email_login_password" name="password" type="password" placeholder="********" component="input"/>
                             <button action="submit">Login</button>
                     </fieldset>
                 </form>
