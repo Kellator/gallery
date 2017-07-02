@@ -1,6 +1,7 @@
 import * as actions from '../actions/index';
 import { combineReducers } from 'redux';
 import { routerReducer } from 'react-router-redux';
+import { reducer as formReducer } from 'redux-form'
 
 const initialState = {
     userState: {
@@ -17,6 +18,7 @@ const validation = ( state = initialState.userState, action ) => {
     console.log("Tada: " + action.type);
     switch(action.type) {
         case 'CHECK_USER':   //query server to check if user exists
+            console.log("what's up");
             return Object.assign({}, state, {
                 user: { //should this really be part of the store?  or just sent to the server for validation
                     email: email
@@ -108,5 +110,6 @@ export default combineReducers({
     validation,
     gallery,
     menu,
-    routing: routerReducer
+    routing: routerReducer,
+    form: formReducer
 });

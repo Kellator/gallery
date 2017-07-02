@@ -6,6 +6,13 @@ export const checkUser = (email, password) => ({
     password
 });
 
+export const ADD_USER = 'ADD_USER';
+export const addUser = (email, password) => ({
+    type: ADD_USER,
+    email,
+    password
+});
+
 export const ENTER_GALLERY = 'ENTER_GALLERY'; 
 export const enterGallery = () => ({
     type: ENTER_GALLERY

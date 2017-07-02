@@ -1,7 +1,7 @@
 //div that contains login input fields for email and password.  Also contains submit button
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Form, Button } from 'semantic-ui-react';
+import { Field, reduxForm, initialize } from 'redux-form';
 //separate local imports from dependencies
 
 
@@ -11,64 +11,51 @@ import { Form, Button } from 'semantic-ui-react';
 
 // }
 
-export default class LoginInput extends React.Component {
+//added from reduxForm tutorial example
+const form = reduxForm({
+    form: 'loginForm'   
+});
+
+const renderField = field => (
+    <div>
+        <label>{field.input.label}</label>
+        <input {...field.input}/>
+        {field.touched && field.error && <div className="error">{field.error}</div>}
+    </div>
+);
+
+const renderSelect = field => (
+    <div>
+        <label>{field.input.label}</label>
+        <select {...field.input}/>
+        {field.touched && field.error && <div className="error">{field.error}</div>}
+    </div>
+);
+
+
+class LoginInput extends React.Component {
     render() {
+        console.log(this);
+        const { handleSubmit, pristine, reset, submitting } = this.props;
+        console.log(this.props.onSubmit);
         return (
             <div className="">
-                <form className="">
+                <form onSubmit={handleSubmit(this.props.onSubmit)} >
                     <fieldset className="gallery_login">
                         <legend className="">Log In</legend>
                             <label htmlFor="email_login">Email</label>
-                            <input id="email_login" type="email" name="userEmail" required></input>
-
+                            <Field required id="email_login" name="email" type="email" placeholder="you@email.com" component="input"/>
                             <label htmlFor="email_login_password">Password</label>
-                            <input id="email_login_password" type="password" name="password" required></input>
-
-                            <button className="" type="submit">Login</button>
+                            <Field required id="email_login_password" name="password" type="password" placeholder="********" component="input"/>
+                            <button action="submit">Login</button>
                     </fieldset>
                 </form>
             </div>
-        );
+        )
     }
 }
+LoginInput = reduxForm({
+    form: 'login'
+})(LoginInput);
 
-// export default class LoginInput extends React.Component {
-//     constructor(props) {
-//         super(props);
-//         this.state = {
-//             userEmail: "user@email.com",
-//             password: "password"
-//         };
-
-//         this.handleInputChange = this.handleInputChange.bind(this);
-//         this.handleSubmit = this.handleSubmit.bind(this);
-//     }
-//     handleInputChange(event) {
-//         const target = event.target;
-//         const value = target.value;
-//         const name = target.name;
-
-//         this.setState({
-//             [name]: value
-//         });
-//         console.log(this.state);
-//     }
-//     render() {
-//         return (
-//             <div className="">
-//                 <form className="" onSubmit={this.handleSubmit}>
-//                     <fieldset className="gallery_login">
-//                         <legend className="">Log In</legend>
-//                             <label htmlFor="email_login">Email</label>
-//                             <input id="email_login" type="email" name="userEmail" required onChange={this.handleInputChange} value={this.state.value}></input>
-
-//                             <label htmlFor="email_login_password">Password</label>
-//                             <input id="email_login_password" type="password" name="password" required onChange={this.handleInputChange} value={this.state.value}></input>
-
-//                             <button className="" type="submit">Login</button>
-//                     </fieldset>
-//                 </form>
-//             </div>
-//         );
-//     }
-// }
+export default LoginInput;
