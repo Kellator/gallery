@@ -37,8 +37,5 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     signupSubmit: () => { console.log("Howdy, sign up input worked")}
     }
 }
-// const mapDispatchToProps = (dispatch, ownProps) => ({
-//     actions: bindActionCreators(actions, dispatch)
-// });
 
 export default connect(mapStateToProps, mapDispatchToProps)(LandingPage);

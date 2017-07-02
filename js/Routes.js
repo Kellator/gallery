@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import LandingPage from './components/container/landing';
-import GalleryApp from './components/presentational/app';
+import GalleryApp from './components/container/app';
 import LoginBlock from './components/presentational/login_block';
 
 
