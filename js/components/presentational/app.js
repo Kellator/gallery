@@ -5,7 +5,7 @@ export default class GalleryApp extends React.Component {
     render() {
         return (
             <div>
-                <p>Hello World</p>
+                <p>Welcome to the Gallery</p>
             </div>
         )
     }

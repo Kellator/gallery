@@ -10,7 +10,13 @@ export default class Routes extends React.Component {
         return (
             <Router history={ history }>
                 <div>
+                    <ul>
+                        <li><Link to="/">Landing</Link></li>
+                        <li><Link to="/gallery">Gallery</Link></li>
+                        {/*<li><Link to="/topics">Topics</Link></li>*/}
+                    </ul>
                     <Route exact path="/" component={LandingPage} /> 
+                    <Route path="/gallery" component={GalleryApp} />
                 </div>
             </Router>
         )
