@@ -6,8 +6,8 @@ import { bindActionCreators } from 'redux';
 import { dispatch } from 'react-redux';
 import { Field, reduxForm, initialize } from 'redux-form';
 //separate local imports from dependencies
-import LoginBlock from './login_block';
-import SignUpBlock from './sign_up_block';
+import LoginBlock from '../presentational/login_block';
+import SignUpBlock from '../presentational/sign_up_block';
 import * as actions from '../../actions/index';
 //declare propTypes prior to component
 
