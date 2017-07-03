@@ -61,10 +61,11 @@
     "rimraf": "^2.6.1",
     "sinon": "^1.17.7",
     "sinon-chai": "^2.10.0",
-    "webpack": "^1.15.0",
+    "webpack": "2.x",
     "webpack-dev-server": "^2.5.0"
   },
   "dependencies": {
+    "babel-core": "^6.25.0",
     "express": "^4.15.3",
     "history": "^4.6.1",
     "isomorphic-fetch": "^2.2.1",
