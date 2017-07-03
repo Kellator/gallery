@@ -4,13 +4,13 @@ import chai from 'chai';
 
 const should = chai.should();
 
-import SignUpInstructions from '../js/components/presentational/sign_up_instructions.js';
-import ExistingUser from '../js/components/presentational/existing_user.js';
-import SignUp from '../js/components/presentational/sign_up.js';
-import SignUpBlock from '../js/components/presentational/sign_up_block.js';
-import SignUpInput from '../js/components/presentational/sign_up_input.js';
-import LogInBlock from '../js/components/presentational/login_block.js';
-import LoginInput from '../js/components/presentational/login_input.js';
+import SignUpInstructions from '../js/components/presentational/landing/sign_up_instructions.js';
+import ExistingUser from '../js/components/presentational/landing/existing_user.js';
+import SignUp from '../js/components/presentational/landing/sign_up.js';
+import SignUpBlock from '../js/components/presentational/landing/sign_up_block.js';
+import SignUpInput from '../js/components/presentational/landing/sign_up_input.js';
+import LogInBlock from '../js/components/presentational/landing/login_block.js';
+import LoginInput from '../js/components/presentational/landing/login_input.js';
 import { LandingPage } from '../js/components/container/landing.js';
 
 // describe('LandingPage component', () => {
