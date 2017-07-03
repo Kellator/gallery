@@ -4,7 +4,7 @@
   "description": "Gallery App designed from Thinkful React Template",
   "main": "js/index.js",
   "scripts": {
-    "start": "http-server -c-1 build",
+    "start": "webpack-dev-server build",
     "dev": "run-p watch serve",
     "test": "mocha --recursive --compilers js:babel-core/register",
     "build": "run-s build:*",
@@ -61,7 +61,8 @@
     "rimraf": "^2.6.1",
     "sinon": "^1.17.7",
     "sinon-chai": "^2.10.0",
-    "webpack": "^1.15.0"
+    "webpack": "^1.15.0",
+    "webpack-dev-server": "^2.5.0"
   },
   "dependencies": {
     "express": "^4.15.3",
@@ -77,6 +78,7 @@
     "react-router": "^4.1.1",
     "react-router-dom": "^4.1.1",
     "react-router-redux": "^4.0.8",
+    "react-transition-group": "^1.2.0",
     "redux": "^3.6.0",
     "redux-form": "^6.8.0",
     "redux-logger": "^3.0.6",

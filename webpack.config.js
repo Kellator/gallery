@@ -17,5 +17,8 @@ module.exports = {
           loader: 'babel',
         },
       ]
+    },
+    devServer: {
+      historyApiFallback: true
     }
 };

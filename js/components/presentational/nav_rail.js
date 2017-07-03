@@ -3,6 +3,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 //separate local imports from dependencies
 import GallerySearch from './gallery_search';
+import GalleryLogo from '../presentational/landing/gallery_logo';
 import Menu from './action_menu'
 
 export default class NavBar extends React.Component {
@@ -11,7 +12,8 @@ export default class NavBar extends React.Component {
         return (
             <div>
                 <GallerySearch onSubmit={this.props.onSubmit}/>
-                {/*<Menu />*/}
+                <GalleryLogo />
+                <Menu />
             </div>
         );
     }
