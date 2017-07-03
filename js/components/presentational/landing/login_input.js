@@ -35,9 +35,7 @@ const renderSelect = field => (
 
 class LoginInput extends React.Component {
     render() {
-        console.log(this);
         const { handleSubmit, pristine, reset, submitting } = this.props;
-        console.log(this.props.onSubmit);
         return (
             <div className="">
                 <form onSubmit={handleSubmit(this.props.onSubmit)} >

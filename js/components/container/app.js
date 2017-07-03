@@ -8,6 +8,7 @@ import { Field, reduxForm, initialize } from 'redux-form';
 import Messenger from '../presentational/messenger_rail';
 import BrowserRail from '../presentational/browser_rail';
 import NavBar from '../presentational/nav_rail';
+import * as actions from '../../actions/index';
 //declare propTypes prior to component
 
 // GalleryApp.propTypes = {
@@ -15,14 +16,15 @@ import NavBar from '../presentational/nav_rail';
 // }
 
 //user state to block access?  if authorized: true render component else redirect to login page
+//need state to remove welcome message and display only the 3 components (navBar, BrowserView, MessengerRail)
 
 class GalleryApp extends React.Component {
     render() {
-        let userName = this.props.username;
-        let text = userName
+        let userName = this.props.username
         return (
             <div>
-                <p>Welcome to the Gallery, {text}!</p>
+                <NavBar onSubmit={this.props.onSearchSubmit}/>
+                <p>Welcome to the Gallery, {userName}!</p>
             </div>
         )
     }
@@ -33,8 +35,12 @@ const mapStateToProps = (state, props) => ({
     username: "Betty"
 });
 const mapDispatchToProps = (dispatch, ownProps) => {
-    // return { onClickSignup: () => { dispatch(actions.showSignup())},
-    // }
+    return { onSearchSubmit: (value) => {
+        event.preventDefault();
+        let newValue = value.gallery_search_input;
+        console.log(newValue);
+        dispatch(actions.searchGallery(newValue))},
+    }
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(GalleryApp);

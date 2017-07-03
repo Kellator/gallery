@@ -99,6 +99,12 @@ export const logOut = () => ({
     type: LOG_OUT
 });
 
+//search 
+export const SEARCH_GALLERY = 'SEARCH_GALLERY';
+export const searchGallery = (value) => ({
+    type: SEARCH_GALLERY,
+    value
+});
 //shows selected exhibit
 export const SHOW_EXHIBIT = 'SHOW_EXHIBIT';
 export const showExhibit = (exhibit) => ({
