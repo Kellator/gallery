@@ -40,7 +40,6 @@
   "author": "Kelly Miller <k.macleod21@gmail.com>",
   "license": "UNLICENSED",
   "devDependencies": {
-    "babel": "^6.23.0",
     "babel-cli": "^6.24.1",
     "babel-loader": "^6.4.1",
     "babel-plugin-transform-object-rest-spread": "^6.23.0",
