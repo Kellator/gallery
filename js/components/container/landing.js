@@ -6,8 +6,8 @@ import { bindActionCreators } from 'redux';
 import { dispatch } from 'react-redux';
 import { Field, reduxForm, initialize } from 'redux-form';
 //separate local imports from dependencies
-import LoginBlock from '../presentational/login_block';
-import SignUpBlock from '../presentational/sign_up_block';
+import LoginBlock from '../presentational/landing/login_block';
+import SignUpBlock from '../presentational/landing/sign_up_block';
 import * as actions from '../../actions/index';
 //declare propTypes prior to component
 
@@ -33,12 +33,13 @@ const mapStateToProps = (state, props) => ({
 const mapDispatchToProps = (dispatch, ownProps) => {
     return { onClickSignup: () => { dispatch(actions.showSignup())},
     onClickLogin: () => { dispatch(actions.showLogin())},
-    loginSubmit: () => { console.log("Hello submit worked")},
-    signupSubmit: () => { console.log("Howdy, sign up input worked")}
+    loginSubmit: () => { 
+        event.preventDefault();
+        console.log("Hello submit worked")},
+    signupSubmit: () => { 
+        event.preventDefault();
+        console.log("Howdy, sign up input worked")}
     }
 }
-// const mapDispatchToProps = (dispatch, ownProps) => ({
-//     actions: bindActionCreators(actions, dispatch)
-// });
 
 export default connect(mapStateToProps, mapDispatchToProps)(LandingPage);
