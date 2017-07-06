@@ -4,7 +4,7 @@
   "description": "Gallery App designed from Thinkful React Template",
   "main": "js/index.js",
   "scripts": {
-    "start": "http-server build",
+    "start": "webpack-dev-server build",
     "dev": "run-p watch serve",
     "test": "mocha --recursive --compilers js:babel-core/register",
     "build": "run-s build:*",
@@ -41,6 +41,7 @@
   "license": "UNLICENSED",
   "devDependencies": {
     "babel-cli": "^6.24.1",
+    "babel-core": "^6.25.0",
     "babel-loader": "^6.4.1",
     "babel-plugin-transform-object-rest-spread": "^6.23.0",
     "babel-polyfill": "^6.23.0",
@@ -64,10 +65,10 @@
     "webpack-dev-server": "^2.5.0"
   },
   "dependencies": {
-    "babel-core": "^6.25.0",
     "express": "^4.15.3",
     "history": "^4.6.3",
     "isomorphic-fetch": "^2.2.1",
+    "loader-utils": "^1.1.0",
     "mongodb": "^2.2.29",
     "mongoose": "^4.11.1",
     "prop-types": "^15.5.10",
