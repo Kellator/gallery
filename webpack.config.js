@@ -2,6 +2,9 @@ var path = require('path');
 
 var webpack = require('webpack');
 
+// process.traceDeprecation = true;
+// process.noDeprecation = true;
+
 module.exports = {
     entry: path.resolve(__dirname, 'js/index.js'),
     output: {
@@ -14,8 +17,10 @@ module.exports = {
         {
           test: /\.js$/,
           exclude: /(node_modules)/,
-          loader: 'babel-loader',
-        },
+          use: {
+            loader: 'babel-loader'
+            }
+          }
       ]
     },
     devServer: {
