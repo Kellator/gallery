@@ -57,7 +57,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
         onClick: () => {
             event.preventDefault();
             console.log(ownProps);
-            // dispatch(actions.toggleMenu());
+            // dispatch(actions.toggleMenu()); 
             console.log("menu clicked")
         }
     }
