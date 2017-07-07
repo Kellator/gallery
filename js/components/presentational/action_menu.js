@@ -13,11 +13,6 @@ import * as actions from '../../actions/index';
 
 // }
 class Menu extends React.Component {
-    // onClick(menuState) {
-    //     newState = !menuState;
-    //     console.log(newState);
-    //     return newState;
-    // };
     render() {
         console.log(this.props);
         let menuState = this.props.displayState.menuActive;
@@ -56,9 +51,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     return { 
         onClick: () => {
             event.preventDefault();
-            console.log(ownProps);
-            // dispatch(actions.toggleMenu()); 
-            console.log("menu clicked")
+            dispatch(actions.toggleMenu()); 
         }
     }
 }
