@@ -13,14 +13,18 @@ import * as actions from '../../actions/index';
 
 // }
 class Menu extends React.Component {
-    // toggleMenu = () => {
-    //     console.log(this.props);
-    // howdy
-    // }
+    // onClick(menuState) {
+    //     newState = !menuState;
+    //     console.log(newState);
+    //     return newState;
+    // };
     render() {
         console.log(this.props);
+        let menuState = this.props.displayState.menuActive;
+        console.log(menuState);
+        console.log(this.props.displayState);
         let menu;
-        if (this.props.displayState.menuActive) {
+        if (menuState == true) {
             menu = <div>
                         <ul>
                             <li>View My Gallery</li>
@@ -45,17 +49,17 @@ class Menu extends React.Component {
 //comments in map are examples - must be removed
 const mapStateToProps = (state, props) => ({
     displayState: {
-        menuActive: false
+        menuActive: state.menu.menuActive
     }
-    // login: state.validation.login
 });
 const mapDispatchToProps = (dispatch, ownProps) => {
-    return { onClick: () => {
-        event.preventDefault();
-        // toggleMenu();
-        console.log(ownProps);
-        // console.log(menuState);
-        console.log("menu clicked")}
+    return { 
+        onClick: () => {
+            event.preventDefault();
+            console.log(ownProps);
+            // dispatch(actions.toggleMenu());
+            console.log("menu clicked")
+        }
     }
 }
 
