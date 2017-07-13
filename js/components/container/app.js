@@ -7,7 +7,7 @@ import { Field, reduxForm, initialize } from 'redux-form';
 //separate local imports from dependencies;
 import Messenger from '../presentational/messenger_rail';
 import BrowserRail from '../presentational/browser_rail';
-import NavBar from '../presentational/nav_rail';
+import NavBar from '../container/nav_rail';
 import * as actions from '../../actions/index';
 //declare propTypes prior to component
 

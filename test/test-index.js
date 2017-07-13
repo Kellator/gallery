@@ -4,6 +4,7 @@ import chai from 'chai';
 
 const should = chai.should();
 
+//  LANDING PAGE COMPONENT IMPORTS
 import SignUpInstructions from '../js/components/presentational/landing/sign_up_instructions.js';
 import ExistingUser from '../js/components/presentational/landing/existing_user.js';
 import SignUp from '../js/components/presentational/landing/sign_up.js';
@@ -12,6 +13,12 @@ import SignUpInput from '../js/components/presentational/landing/sign_up_input.j
 import LogInBlock from '../js/components/presentational/landing/login_block.js';
 import LoginInput from '../js/components/presentational/landing/login_input.js';
 import { LandingPage } from '../js/components/container/landing.js';
+
+//  NAVIGATION BAR COMPONENT IMPORTS
+
+//  NAVIGATION BAR COMPONENT TESTS
+
+//  LANDING PAGE COMPONENT TESTS
 
 // describe('LandingPage component', () => {
 //     it('Renders a div containing 3 components', () => {

@@ -6,7 +6,6 @@ import { dispatch } from 'react-redux';
 // import ReactCSSTransitionGroup from 'react-transition-group';
 import { CSSTransitionGroup } from 'react-transition-group'
 //separate local imports from dependencies
-import * as actions from '../../actions/index';
 //declare propTypes prior to component
 
 // Menu.propTypes = {
@@ -16,9 +15,9 @@ class Menu extends React.Component {
     render() {
         console.log(this.props);
         let menuState = this.props.displayState.menuActive;
-        console.log(menuState);
-        console.log(this.props.displayState);
         let menu;
+        let list;
+        let menuName = this.props.title;
         if (menuState == true) {
             menu = <div>
                         <ul>
@@ -33,7 +32,7 @@ class Menu extends React.Component {
         }
         return (
             <div className="menu">
-                <button className="user_menu" onClick={this.props.onClick}>User Menu</button>
+                <button className="user_menu" onClick={this.props.onClick} >{this.props.title}</button>
                 <CSSTransitionGroup transitionName="menu" transitionEnterTimeout={1000} transitionLeaveTimeout={1000}>
                     {menu}
                 </CSSTransitionGroup>
@@ -47,13 +46,6 @@ const mapStateToProps = (state, props) => ({
         menuActive: state.menu.menuActive
     }
 });
-const mapDispatchToProps = (dispatch, ownProps) => {
-    return { 
-        onClick: () => {
-            event.preventDefault();
-            dispatch(actions.toggleMenu()); 
-        }
-    }
-}
 
-export default connect(mapStateToProps, mapDispatchToProps)(Menu);
+
+export default connect(mapStateToProps)(Menu);
