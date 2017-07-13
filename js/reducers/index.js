@@ -11,7 +11,9 @@ const initialState = {
             email: ''
         } 
     },
-    displayState: {}
+    displayState: {
+        menuActive: false
+    }
 };
 
 const validation = ( state = initialState.userState, action ) => {
@@ -92,8 +94,12 @@ const gallery = ( state = 0, action ) => {
     }
 };
 
-const menu = ( state = 0, action ) => {
+const menu = ( state = initialState.displayState, action ) => {
     switch(action.type) {
+        case 'TOGGLE_MENU':
+            return Object.assign({}, state, {
+                    menuActive: !state.menuActive
+            })
         case 'EXPAND_MENU':
             return Object.assign({}, state, {
                 menu: menu  

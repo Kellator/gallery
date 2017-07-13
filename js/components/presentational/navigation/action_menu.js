@@ -6,21 +6,19 @@ import { dispatch } from 'react-redux';
 // import ReactCSSTransitionGroup from 'react-transition-group';
 import { CSSTransitionGroup } from 'react-transition-group'
 //separate local imports from dependencies
-import * as actions from '../../actions/index';
 //declare propTypes prior to component
 
 // Menu.propTypes = {
 
 // }
 class Menu extends React.Component {
-    // toggleMenu = () => {
-    //     console.log(this.props);
-    // howdy
-    // }
     render() {
         console.log(this.props);
+        let menuState = this.props.displayState.menuActive;
         let menu;
-        if (this.props.displayState.menuActive) {
+        let list;
+        let menuName = this.props.title;
+        if (menuState == true) {
             menu = <div>
                         <ul>
                             <li>View My Gallery</li>
@@ -34,7 +32,7 @@ class Menu extends React.Component {
         }
         return (
             <div className="menu">
-                <button className="user_menu" onClick={this.props.onClick}>User Menu</button>
+                <button className="user_menu" onClick={this.props.onClick} >{this.props.title}</button>
                 <CSSTransitionGroup transitionName="menu" transitionEnterTimeout={1000} transitionLeaveTimeout={1000}>
                     {menu}
                 </CSSTransitionGroup>
@@ -45,18 +43,9 @@ class Menu extends React.Component {
 //comments in map are examples - must be removed
 const mapStateToProps = (state, props) => ({
     displayState: {
-        menuActive: false
+        menuActive: state.menu.menuActive
     }
-    // login: state.validation.login
 });
-const mapDispatchToProps = (dispatch, ownProps) => {
-    return { onClick: () => {
-        event.preventDefault();
-        // toggleMenu();
-        console.log(ownProps);
-        // console.log(menuState);
-        console.log("menu clicked")}
-    }
-}
 
-export default connect(mapStateToProps, mapDispatchToProps)(Menu);
+
+export default connect(mapStateToProps)(Menu);

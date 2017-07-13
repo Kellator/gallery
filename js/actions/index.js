@@ -94,6 +94,10 @@ export const hideMenu = (menu) => ({
     menu
 });
 
+export const TOGGLE_MENU = 'TOGGLE_MENU';
+export const toggleMenu = () => ({
+    type: TOGGLE_MENU
+});
 export const LOG_OUT = 'LOG_OUT';
 export const logOut = () => ({
     type: LOG_OUT

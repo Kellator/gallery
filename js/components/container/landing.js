@@ -17,11 +17,20 @@ import * as actions from '../../actions/index';
 
 class LandingPage extends React.Component {
     render() {
-        let landingState = this.props.login
-        if (landingState == false) {
-            return <SignUpBlock log_in={this.props.onClickLogin} onSubmit={this.props.signupSubmit}/>
+        let landing;
+        let landingState = this.props.login;
+        console.log(landingState);
+        if (landingState == true) {
+            landing = <LoginBlock sign_up={this.props.onClickSignup} onSubmit={this.props.loginSubmit}/>
+        } 
+        else {
+            landing = <SignUpBlock log_in={this.props.onClickLogin} onSubmit={this.props.signupSubmit}/>
         }
-        return <LoginBlock sign_up={this.props.onClickSignup} onSubmit={this.props.loginSubmit}/>
+        return (
+            <div className="landing_display">
+                {landing}
+            </div>
+        )
     }
 }
 //event handlers and mapDispatchToProps?
