@@ -82,21 +82,20 @@ export const showSignup = () => {
 };
 
 //in user gallery on log in - nav with user menu, search bar, browse rail, and message rail
-export const EXPAND_MENU = 'EXPAND_MENU';
-export const expandMenu = (menu) => ({
-    type: EXPAND_MENU,
-    menu
+export const USER_MENU = 'USER_MENU';
+export const userMenu = () => ({
+    type: USER_MENU,
 });
 
-export const HIDE_MENU = 'HIDE_MENU';
-export const hideMenu = (menu) => ({
-    type: HIDE_MENU,
-    menu
+export const GALLERY_MENU = 'GALLERY_MENU';
+export const galleryMenu = () => ({
+    type: GALLERY_MENU,
 });
 
 export const TOGGLE_MENU = 'TOGGLE_MENU';
-export const toggleMenu = () => ({
-    type: TOGGLE_MENU
+export const toggleMenu = (menu) => ({
+    type: TOGGLE_MENU,
+    menu
 });
 export const LOG_OUT = 'LOG_OUT';
 export const logOut = () => ({
