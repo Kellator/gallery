@@ -20,21 +20,21 @@ class Menu extends React.Component {
         let list;
         let menuName = this.props.title;
         console.log(menuType);
-        if (menuType == "user_menu") {
-            list = <ul className="user_menu">
-                        <li>View My Gallery</li>
-                        <li>Check My Messages</li>
-                        <li>Log Out</li>
-                    </ul>
-        }
-        if (menuType == "gallery_menu") {
-            list = <ul className="gallery_menu">
-                        <li>Share Exhibit</li>
-                        <li>Share Wall</li>
-                        <li>View Exhibit</li>
-                    </ul>
-        }
         if (menuState == true) {
+            if (menuType == "user_menu") {
+                list = <ul className="user_menu">
+                            <li>View My Gallery</li>
+                            <li>Check My Messages</li>
+                            <li>Log Out</li>
+                        </ul>
+            }
+            if (menuType == "gallery_menu") {
+                list = <ul className="gallery_menu">
+                            <li>Share Exhibit</li>
+                            <li>Share Wall</li>
+                            <li>View Exhibit</li>
+                        </ul>
+            };
             menu = <div>
                         {list}
                     </div>
@@ -61,7 +61,7 @@ const mapStateToProps = (state, props) => ({
 });
 
 
-// export default connect(mapStateToProps)(Menu);
+export default connect(mapStateToProps)(Menu);
 
 //         if ( (menuType == "user_menu") && (menuState == true ) ) {
 //             menu = <div>

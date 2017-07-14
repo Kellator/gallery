@@ -58,6 +58,7 @@
     "mocha": "^3.4.2",
     "npm-run-all": "^3.1.2",
     "redux-logger": "^3.0.6",
+    "redux-mock-store": "^1.2.3",
     "rimraf": "^2.6.1",
     "sinon": "^1.17.7",
     "sinon-chai": "^2.11.0",
