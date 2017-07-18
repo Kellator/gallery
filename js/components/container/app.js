@@ -8,6 +8,7 @@ import { Field, reduxForm, initialize } from 'redux-form';
 import Messenger from '../presentational/messenger_rail';
 import BrowserRail from '../presentational/browser_rail';
 import NavBar from '../container/nav_rail';
+import Gallery from '../container/gallery';
 import * as actions from '../../actions/index';
 //declare propTypes prior to component
 
@@ -25,6 +26,7 @@ class GalleryApp extends React.Component {
             <div>
                 <NavBar onSubmit={this.props.onSearchSubmit}/>
                 <p>Welcome to the Gallery, {userName}!</p>
+                <Gallery />
             </div>
         )
     }

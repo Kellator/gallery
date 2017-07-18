@@ -74,7 +74,7 @@ var mockUserGallery = new mongoose.Schema({
         userEmail: 'mockEmail@email.com'
     },
     walls: [mockUserWall] 
-};
+});
 //mock users
 var mockUser = {
     email: 'mockEmail@email.com',
