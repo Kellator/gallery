@@ -17,8 +17,8 @@ class NavBar extends React.Component {
             <div>
                 <GallerySearch onSubmit={this.props.onSubmit}/>
                 <GalleryLogo />
-                <Menu title={"Menu A"} id={"user_menu"} onClick={this.props.onClickA}/>
-                <Menu title={"Menu B"} id={"gallery_menu"} onClick={this.props.onClickB}/>
+                <Menu title={"Menu A"} className={"user_menu"} onClick={this.props.onClickA}/>
+                <Menu title={"Menu B"} className={"gallery_menu"} onClick={this.props.onClickB}/>
             </div>
         );
     }

@@ -23,19 +23,63 @@ import LandingPage from '../js/components/container/landing.js';
 
 //  NAVIGATION BAR COMPONENT TESTS
 
+//  USER GALLERY COMPONENT IMPORTS
+import Exhibit from '../js/components/presentational/gallery/exhibit.js';
+import Menu from '../js/components/presentational/navigation/action_menu.js';
+//  USER GALLERY COMPONENT TESTS
+describe('<Exhibit/>', () => {
+    it('will render a div with an image, a paragraph, and a <Menu/> without going boom', () => {
+        const renderer = TestUtils.createRenderer();
+        renderer.render(<Exhibit />);
+        const result = renderer.getRenderOutput();
+        // console.log(result);
+        const children = result.props.children;
+        const childOne = children[0];
+        const childTwo = children[1];
+        const childThree = children[2];
+        console.log(childThree.type);
+        expect(childOne.type).to.equal('img');
+        expect(childTwo.type).to.equal('p');
+        expect(childThree.type.displayName).to.equal('Connect(Menu)');
+        expect(childThree.type.WrappedComponent).to.be.a('function');
+    });
+});
 //  LANDING PAGE COMPONENT TESTS
 
-describe('<LandingPage/>', () => {
-    const mockState = {
-        validation: {
-            login: true
-        }
-    };
-    const mockStore = configureStore();
-    const store = mockStore(mockState);
-    let wrapper = shallow(<LandingPage />, { context: { store: store } });
-});
+// describe('<LandingPage/>', () => {
+//     beforeEach(() => {
+//         const mockState = {
+//             validation: {
+//                 login: true
+//             }
+//         };
+//         const mockStore = configureStore();
+//         const store = mockStore(mockState);
+//     })
+//     it('renders a container component with going kablooey', () => {
+//         let wrapper = shallow(<LandingPage />, { context: { store: store } });
+//         expect(wrapper.find(LandingPage).length).to.equal(1);
+//     });
+// });
 
+    
+
+
+// describe('<LandingPage />', () => {
+//     beforeEach(() => {
+//         const mockState = {
+//             validation: {
+//                 login: true
+//             }
+//         };
+//         const mockStore = configureStore();
+//         const store = mockStore(mockState);
+//     });
+//     it('Renders a container component without going kaboom', (store) => {
+//         let wrapper = shallow(<LandingPage />, { context: { store: store } });
+//         expect(wrapper.find(LandingPage).length).to.equal(1);
+//     });
+// });
 
 // describe('LandingPage component', () => { 
 //     it('Renders a div containing 3 components', () => {

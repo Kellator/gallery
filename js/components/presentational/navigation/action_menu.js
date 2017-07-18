@@ -15,7 +15,7 @@ class Menu extends React.Component {
     render() {
         console.log(this.props);
         let menuState = this.props.displayState.menuActive;
-        let menuType = this.props.id;
+        let menuType = this.props.className;
         let menu;
         let list;
         let menuName = this.props.title;
