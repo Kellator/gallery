@@ -3,7 +3,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 //separate local imports from dependencies
 import Menu from '../navigation/action_menu.js';
-import Exhibit from './exhibit'
+import Exhibit from './exhibit';
 
 //declare propTypes prior to component
 

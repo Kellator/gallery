@@ -48,7 +48,7 @@ const validation = ( state = initialState.userState, action ) => {
     }
 };
 // dependent on user authorization - require state: authorized : true
-const gallery = ( state = 0, action ) => {
+const gallery = ( state = {}, action ) => {
     switch(action.type) {
         case 'SHOW_GALLERY': 
             return Object.assign({}, state, {

@@ -18,7 +18,7 @@ class NavBar extends React.Component {
                 <GallerySearch onSubmit={this.props.onSubmit}/>
                 <GalleryLogo />
                 <Menu title={"Menu A"} className={"user_menu"} onClick={this.props.onClickA}/>
-                <Menu title={"Menu B"} className={"gallery_menu"} onClick={this.props.onClickB}/>
+                {/* <Menu title={"Menu B"} className={"gallery_menu"} onClick={this.props.onClickB}/> */}
             </div>
         );
     }
@@ -36,12 +36,12 @@ const mapDispatchToProps = (dispatch, ownProps) => {
             console.log(this);
             dispatch(actions.toggleMenu());
             console.log("Button A Clicked");
-        },
-        onClickB: () => {
-            event.preventDefault();
-            dispatch(actions.toggleMenu());
-            console.log("Button B Clicked");
         }
+        // onClickB: () => {
+        //     event.preventDefault();
+        //     dispatch(actions.toggleMenu());
+        //     console.log("Button B Clicked");
+        // }
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(NavBar);

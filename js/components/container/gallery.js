@@ -15,12 +15,13 @@ import Wall from '../presentational/gallery/wall';
 
 // }
 // SHOULD SHOW ALL WALLS IN THE APP ON LOAD AND THEN SWITCH WHEN USER SELECTS 'VIEW MY GALLERY'
+
 class Gallery extends React.Component {
     render() {
         console.log(this.props);
         return (
             <div>
-                <p>To show Gallery Loaded</p>
+                <p>To Show Gallery Loaded</p>
                 <Wall />                
             </div>
         );
