@@ -1,6 +1,11 @@
 import React from 'react';
 import TestUtils from 'react-addons-test-utils';
 import chai from 'chai';
+import { Provider } from 'react-redux';
+import configureStore from 'redux-mock-store';
+import { shallow } from 'enzyme';
+import { mount } from 'enzyme';
+import { expect } from 'chai';
 
 const should = chai.should();
 
@@ -12,15 +17,71 @@ import SignUpBlock from '../js/components/presentational/landing/sign_up_block.j
 import SignUpInput from '../js/components/presentational/landing/sign_up_input.js';
 import LogInBlock from '../js/components/presentational/landing/login_block.js';
 import LoginInput from '../js/components/presentational/landing/login_input.js';
-import { LandingPage } from '../js/components/container/landing.js';
+import LandingPage from '../js/components/container/landing.js';
 
 //  NAVIGATION BAR COMPONENT IMPORTS
 
 //  NAVIGATION BAR COMPONENT TESTS
 
+//  USER GALLERY COMPONENT IMPORTS
+import Exhibit from '../js/components/presentational/gallery/exhibit.js';
+import Menu from '../js/components/presentational/navigation/action_menu.js';
+//  USER GALLERY COMPONENT TESTS
+describe('<Exhibit/>', () => {
+    it('will render a div with an image, a paragraph, and a <Menu/> without going boom', () => {
+        const renderer = TestUtils.createRenderer();
+        renderer.render(<Exhibit />);
+        const result = renderer.getRenderOutput();
+        // console.log(result);
+        const children = result.props.children;
+        const childOne = children[0];
+        const childTwo = children[1];
+        const childThree = children[2];
+        console.log(childThree.type);
+        expect(childOne.type).to.equal('img');
+        expect(childTwo.type).to.equal('p');
+        expect(childThree.type.displayName).to.equal('Connect(Menu)');
+        expect(childThree.type.WrappedComponent).to.be.a('function');
+    });
+});
 //  LANDING PAGE COMPONENT TESTS
 
-// describe('LandingPage component', () => {
+// describe('<LandingPage/>', () => {
+//     beforeEach(() => {
+//         const mockState = {
+//             validation: {
+//                 login: true
+//             }
+//         };
+//         const mockStore = configureStore();
+//         const store = mockStore(mockState);
+//     })
+//     it('renders a container component with going kablooey', () => {
+//         let wrapper = shallow(<LandingPage />, { context: { store: store } });
+//         expect(wrapper.find(LandingPage).length).to.equal(1);
+//     });
+// });
+
+    
+
+
+// describe('<LandingPage />', () => {
+//     beforeEach(() => {
+//         const mockState = {
+//             validation: {
+//                 login: true
+//             }
+//         };
+//         const mockStore = configureStore();
+//         const store = mockStore(mockState);
+//     });
+//     it('Renders a container component without going kaboom', (store) => {
+//         let wrapper = shallow(<LandingPage />, { context: { store: store } });
+//         expect(wrapper.find(LandingPage).length).to.equal(1);
+//     });
+// });
+
+// describe('LandingPage component', () => { 
 //     it('Renders a div containing 3 components', () => {
 //         let login = true;
 //         const renderer = TestUtils.createRenderer();
@@ -30,103 +91,103 @@ import { LandingPage } from '../js/components/container/landing.js';
 //     })
 // });
 
-describe('SignUpInstructions component', () => {
-    it('Renders 2 lines of text', () => {
-        const renderer = TestUtils.createRenderer();
-        renderer.render(<SignUpInstructions />);
-        const result = renderer.getRenderOutput();
-        result.props.className.should.equal('su_instructions');
-        result.props.children.should.be.an('array');
-        const lineOne = result.props.children[0]
-        lineOne.props.children.should.be.a('string');
-        const lineTwo = result.props.children[1];
-        lineTwo.props.children.should.be.a('string');
-    })
-});
+// describe('SignUpInstructions component', () => {
+//     it('Renders 2 lines of text', () => {
+//         const renderer = TestUtils.createRenderer();
+//         renderer.render(<SignUpInstructions />);
+//         const result = renderer.getRenderOutput();
+//         result.props.className.should.equal('su_instructions');
+//         result.props.children.should.be.an('array');
+//         const lineOne = result.props.children[0]
+//         lineOne.props.children.should.be.a('string');
+//         const lineTwo = result.props.children[1];
+//         lineTwo.props.children.should.be.a('string');
+//     })
+// });
 
-describe('ExistingUser component', () => {
-    it('Renders a single line of text with a link', () => {
-        const renderer = TestUtils.createRenderer();
-        renderer.render(<ExistingUser />);
-        const result = renderer.getRenderOutput();
-        result.props.className.should.equal('existing_user_line');
-        const startP = result.props.children[0];
-        startP.should.equal('Already a part of the Gallery?  Click ')
-        const link = result.props.children[1];
-        link.type.should.equal('button');
-        const endP = result.props.children[2];
-        endP.should.equal(' to login.');
-    })
-});
+// describe('ExistingUser component', () => {
+//     it('Renders a single line of text with a link', () => {
+//         const renderer = TestUtils.createRenderer();
+//         renderer.render(<ExistingUser />);
+//         const result = renderer.getRenderOutput();
+//         result.props.className.should.equal('existing_user_line');
+//         const startP = result.props.children[0];
+//         startP.should.equal('Already a part of the Gallery?  Click ')
+//         const link = result.props.children[1];
+//         link.type.should.equal('button');
+//         const endP = result.props.children[2];
+//         endP.should.equal(' to login.');
+//     })
+// });
 
-describe('SignUp component', () => {
-    it('Renders a single line of text with a link', () => {
-        const renderer = TestUtils.createRenderer();
-        renderer.render(<SignUp />);
-        const result = renderer.getRenderOutput();
-        result.props.className.should.equal('new_user_signup');
-        const children = result.props.children;
-        children.should.have.lengthOf(2);
-        let childOne = children[0];
-        childOne.should.equal('New to Gallery?  Sign up ');
-        let childTwo = children[1];
-        childTwo.props.should.be.an('object');
-        childTwo.type.should.equal('button');
-    })
-});
+// describe('SignUp component', () => {
+//     it('Renders a single line of text with a link', () => {
+//         const renderer = TestUtils.createRenderer();
+//         renderer.render(<SignUp />);
+//         const result = renderer.getRenderOutput();
+//         result.props.className.should.equal('new_user_signup');
+//         const children = result.props.children;
+//         children.should.have.lengthOf(2);
+//         let childOne = children[0];
+//         childOne.should.equal('New to Gallery?  Sign up ');
+//         let childTwo = children[1];
+//         childTwo.props.should.be.an('object');
+//         childTwo.type.should.equal('button');
+//     })
+// });
 
-describe('SignUpBlock', () => {
-    it('Renders a single div containing 4 components', () => {
-        const renderer = TestUtils.createRenderer();
-        renderer.render(<SignUpBlock />);
-        const result = renderer.getRenderOutput();
-        let div = result.type;
-        div.should.equal('div');
-        result.props.children.should.be.an('array');
-        let childArray = result.props.children;
-        childArray.should.have.lengthOf(4);
-        let childOne = result.props.children[0];
+// describe('SignUpBlock', () => {
+//     it('Renders a single div containing 4 components', () => {
+//         const renderer = TestUtils.createRenderer();
+//         renderer.render(<SignUpBlock />);
+//         const result = renderer.getRenderOutput();
+//         let div = result.type;
+//         div.should.equal('div');
+//         result.props.children.should.be.an('array');
+//         let childArray = result.props.children;
+//         childArray.should.have.lengthOf(4);
+//         let childOne = result.props.children[0];
 
-        let childTwo = result.props.children[1];
+//         let childTwo = result.props.children[1];
 
-        let childThree = result.props.children[2];
+//         let childThree = result.props.children[2];
 
-        let childFour = result.props.children[3];
-    })
-});
+//         let childFour = result.props.children[3];
+//     })
+// });
 
-describe('LogInBlock', () => {
-    it('Renders a div containing 3 components', () => {
-        const renderer = TestUtils.createRenderer();
-        renderer.render(<LogInBlock />); 
-        const result = renderer.getRenderOutput();
-        const div = result.type;
-        div.should.equal('div');
-        const children = result.props.children;
-        children.should.have.lengthOf(3);
-        let childOne = result.props.children[0];
+// describe('LogInBlock', () => {
+//     it('Renders a div containing 3 components', () => {
+//         const renderer = TestUtils.createRenderer();
+//         renderer.render(<LogInBlock />); 
+//         const result = renderer.getRenderOutput();
+//         const div = result.type;
+//         div.should.equal('div');
+//         const children = result.props.children;
+//         children.should.have.lengthOf(3);
+//         let childOne = result.props.children[0];
 
-        let childTwo = result.props.children[1];
+//         let childTwo = result.props.children[1];
 
-        let childThree = result.props.children[2];
-    })
-});
+//         let childThree = result.props.children[2];
+//     })
+// });
 
-describe('SignUpInput', () => {
-    it('Renders a div containing a form', () => {
-        const renderer = TestUtils.createRenderer();
-        renderer.render(<SignUpInput />); 
-        const result = renderer.getRenderOutput();
-        console.log(result);
-    })
-});
+// describe('SignUpInput', () => {
+//     it('Renders a div containing a form', () => {
+//         const renderer = TestUtils.createRenderer();
+//         renderer.render(<SignUpInput />); 
+//         const result = renderer.getRenderOutput();
+//         console.log(result);
+//     })
+// });
 
-describe('LoginInput', () => {
-    it('Renders a div containing a form', () => {
-        const renderer = TestUtils.createRenderer();
-        renderer.render(<LoginInput />); 
-        const result = renderer.getRenderOutput();
-        console.log(result);
-    })
-});
+// describe('LoginInput', () => {
+//     it('Renders a div containing a form', () => {
+//         const renderer = TestUtils.createRenderer();
+//         renderer.render(<LoginInput />); 
+//         const result = renderer.getRenderOutput();
+//         console.log(result);
+//     })
+// });
 

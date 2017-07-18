@@ -17,14 +17,14 @@ class NavBar extends React.Component {
             <div>
                 <GallerySearch onSubmit={this.props.onSubmit}/>
                 <GalleryLogo />
-                <Menu title={"Menu A"} onClick={this.props.onClickA}/>
-                <Menu title={"Menu B"} onClick={this.props.onClickB}/>
+                <Menu title={"Menu A"} className={"user_menu"} onClick={this.props.onClickA}/>
+                <Menu title={"Menu B"} className={"gallery_menu"} onClick={this.props.onClickB}/>
             </div>
         );
     }
 }
 const mapStateToProps = (state, props) => ({
-    
+   
 });
 const mapDispatchToProps = (dispatch, ownProps) => {
     return { 
@@ -33,13 +33,14 @@ const mapDispatchToProps = (dispatch, ownProps) => {
         },
         onClickA: () => {
             event.preventDefault();
-            dispatch(actions.toggleMenu()); 
-            console.log("Button Clicked");
+            console.log(this);
+            dispatch(actions.toggleMenu());
+            console.log("Button A Clicked");
         },
         onClickB: () => {
             event.preventDefault();
-            dispatch(actions.toggleMenu()); 
-            console.log("Button Clicked");
+            dispatch(actions.toggleMenu());
+            console.log("Button B Clicked");
         }
     }
 }
