@@ -1,8 +1,10 @@
+//  CONTAINER FOR MESSENGER COMPONENTS - DISPLAY FEED AND INPUT FORM
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { dispatch } from 'react-redux';
+import io from 'socket.io-client';
 
 //separate local imports from dependencies
 import * as actions from '../../actions/index';
@@ -13,8 +15,8 @@ import MessageInput from '../presentational/messenger/message_input';
 // Messenger.propTypes = {
 
 // }
-
-//  MESSENGER COMPONENT AS CONTAINER - FEEDS MESSAGE STATE FROM INPUT TO DISPLAY?
+// MAIN CHAT LOGIC HERE - COMMUNICATE WITH CHAT SERVER (SEND AND RECEIVE MSGS)  THEN PASS DATA RECEIVED FROM 
+// SERVER TO OTHER COMPONENTS TO DISPLAY
 class Messenger extends React.Component {
     render() {
         console.log(this.props);
@@ -26,3 +28,4 @@ class Messenger extends React.Component {
         )
     }
 }
+export default Messenger;
