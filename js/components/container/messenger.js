@@ -22,8 +22,8 @@ class Messenger extends React.Component {
         console.log(this.props);
         return (
             <div>
-                <MessageFeed />
-                <MessageInput />
+                <MessageFeed messages={} />
+                <MessageInput onSend={} />
             </div>
         )
     }
