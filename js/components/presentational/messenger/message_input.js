@@ -1,9 +1,6 @@
 // INPUT FOR REAL TIME MESSENGER
 import React from 'react';
 import PropTypes from 'prop-types';
-//declare propTypes prior to component
-
-//separate local imports from dependencies
 
 // MessageInput.propTypes = {
 
