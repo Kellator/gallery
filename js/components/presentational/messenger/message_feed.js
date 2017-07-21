@@ -10,10 +10,12 @@ import Message from './message';
 // loop through each message and pass it to the message component
 class MessageFeed extends React.Component {
     render() {
-        <div>
-            <p>Message Feed Component</p>
-        </div>
-    }
-}
+        return (
+            <div>
+                <p>Message Feed Component</p>
+            </div>
+        );
+    };
+};
 
 export default MessageFeed;

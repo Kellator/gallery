@@ -24,4 +24,6 @@ app.use(express.static('public'));
 var server = http.Server(app);
 
 
-app.listen(process.env.PORT || 8080)
+app.listen((process.env.PORT || 8080), function() {
+    console.log('server listening on port 8080');
+})

@@ -27,8 +27,8 @@ class Gallery extends React.Component {
                 <Messenger />               
             </div>
         );
-    }
-}
+    };
+};
 const mapStateToProps = (state, props) => ({
    
 });

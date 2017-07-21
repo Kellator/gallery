@@ -26,7 +26,7 @@ class Messenger extends React.Component {
                 <MessageFeed messages={"this.state.messages"} />
                 <MessageInput onSend={"this.sendHandler"} />
             </div>
-        )
-    }
-}
+        );
+    };
+};
 export default Messenger;
