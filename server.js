@@ -1,27 +1,28 @@
 // dependencies
-var express = require('express');
-var bodyParser = require('body-parser');
-var mongoose = require('monogoose');
-var http = require('http');
-var bcrypt = require('bcryptjs');
-var session = require('express-session');
-var passport = require('passport');
+import express from 'express';
+import bodyParser from 'body-parser';
+import mongoose from 'mongoose';
+import http from 'http';
+import bcrypt from 'bcryptjs';
+import session from 'express-session';
+import passport from 'passport';
 // local import
-var config = require('./config');
+import config from './config';
 // mongoose models
-var Exhibit = require('./models/exhibit');
-var Gallery = require('./models/gallery');
-var Message = require('./models/message');
-var UserGallery = require('./models/user-gallery');
-var UserWall = require('models/user-wall');
-var User = require('models/user');
-var Wall = require('models/wall');
+import Exhibit from './models/exhibit';
+import Gallery from './models/gallery';
+import Message from './models/message';
+import UserGallery from './models/user-gallery);
+import UserWall from 'models/user-wall';
+import User from 'models/user';
+import Wall from 'models/wall';
 
-var app = express();
+
+const app = express();
 app.use(bodyParser.json());
 app.use(express.static('public'));
 
-var server = http.Server(app);
+const server = http.Server(app);
 
 
 app.listen((process.env.PORT || 8080), function() {
