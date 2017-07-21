@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { dispatch } from 'react-redux';
 // import ReactCSSTransitionGroup from 'react-transition-group';
-import { CSSTransitionGroup } from 'react-transition-group'
+import { CSSTransitionGroup } from 'react-transition-group';
 //separate local imports from dependencies
 //declare propTypes prior to component
 
@@ -22,13 +22,14 @@ class Menu extends React.Component {
         console.log(menuType);
         if (menuState == true) {
             if (menuType == "user_menu") {
-                list = <ul className="user_menu">
+                list = <ul className="user_menu_list">
                             <li>View My Gallery</li>
+                            <li>View Gallery Walls</li>
                             <li>Check My Messages</li>
                             <li>Log Out</li>
                         </ul>
             }
-            if (menuType == "gallery_menu") {
+            if (menuType == "gallery_menu_list") {
                 list = <ul className="gallery_menu">
                             <li>Share Exhibit</li>
                             <li>Share Wall</li>

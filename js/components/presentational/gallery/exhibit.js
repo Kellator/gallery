@@ -24,6 +24,7 @@ export default class Exhibit extends React.Component {
                 <img src={exhibitImage}/>
                 <p>{exhibitDescription}</p>
                 <Menu className={"gallery_menu"}/>
+                <p>To Show Exhibit Loaded</p>
             </div>
         )
     }

@@ -9,6 +9,39 @@ import { expect } from 'chai';
 
 const should = chai.should();
 
+//  MOCK DATA FOR TESTS
+var mockExhibit = {
+    title: 'Replacement for the Stars',
+    _creator: {
+        userEmail: 'mockEmail@email.com'
+    },
+    image:  'http://orig00.deviantart.net/c31e/f/2016/089/d/c/replacement_for_the_stars_by_yuumei-d9x282e.jpg',
+    siteLink: 'http://yuumei.deviantart.com/art/Replacement-for-the-Stars-599726678',
+    categories: ['illustration', 'manga', 'digital', 'landscapes', 'scenery', 'people', 'portrait']
+};
+var mockExhibit3 = {
+    title: 'Fly by Night',
+    _creator: {
+        userEmail: 'mockEmail@email.com'
+    },
+    image:  'http://dspncdn.com/a1/media/692x/78/c8/a1/78c8a13c4dd878d82d22940b48512315.jpg',
+    siteLink: 'http://designspiration.net/image/4609558023629/',
+    categories: ['illustration', 'painting', 'digital', 'whimsical', 'people', 'portrait']
+};
+// var mockWall = {
+//     title: 'Illustration',
+//     exhibits: [mockExhibit, mockExhibit2, mockExhibit3],
+//     categories: ['illustration', 'painting', 'drawing']
+// };
+var mockUserWall = {
+    _creator: {
+        userEmail: 'mockEmail@email.com'
+    },
+    title: 'Portraits',
+    exhibits: [mockExhibit, mockExhibit3],  
+    categories: ['portrait', 'people']
+};
+
 //  LANDING PAGE COMPONENT IMPORTS
 import SignUpInstructions from '../js/components/presentational/landing/sign_up_instructions.js';
 import ExistingUser from '../js/components/presentational/landing/existing_user.js';
@@ -25,23 +58,55 @@ import LandingPage from '../js/components/container/landing.js';
 
 //  USER GALLERY COMPONENT IMPORTS
 import Exhibit from '../js/components/presentational/gallery/exhibit.js';
+import Wall from '../js/components/presentational/gallery/wall.js';
 import Menu from '../js/components/presentational/navigation/action_menu.js';
+import Gallery from '../js/components/container/gallery.js';
+
 //  USER GALLERY COMPONENT TESTS
-describe('<Exhibit/>', () => {
-    it('will render a div with an image, a paragraph, and a <Menu/> without going boom', () => {
+// describe('<Exhibit/>', () => {
+//     it('will render a div with an image, a paragraph, and a <Menu/> without going boom', () => {
+//         const renderer = TestUtils.createRenderer();
+//         renderer.render(<Exhibit />);
+//         const result = renderer.getRenderOutput();
+//         // console.log(result);
+//         const children = result.props.children;
+//         const childOne = children[0];
+//         const childTwo = children[1];
+//         const childThree = children[2];
+//         console.log(childThree.type);
+//         expect(childOne.type).to.equal('img');
+//         expect(childTwo.type).to.equal('p');
+//         expect(childThree.type.displayName).to.equal('Connect(Menu)');
+//         expect(childThree.type.WrappedComponent).to.be.a('function');
+//     });
+// });
+
+describe('<Wall /> Component', () => {
+    it('will render a div containing a list of exhibits without breaking', () => {
         const renderer = TestUtils.createRenderer();
-        renderer.render(<Exhibit />);
+        renderer.render(<Wall />);
         const result = renderer.getRenderOutput();
-        // console.log(result);
-        const children = result.props.children;
-        const childOne = children[0];
-        const childTwo = children[1];
-        const childThree = children[2];
-        console.log(childThree.type);
-        expect(childOne.type).to.equal('img');
-        expect(childTwo.type).to.equal('p');
-        expect(childThree.type.displayName).to.equal('Connect(Menu)');
-        expect(childThree.type.WrappedComponent).to.be.a('function');
+        console.log(result);       
+    })
+})
+
+describe('<Gallery /> Component', () => {
+    it('will render a div containing a list of walls without exploding things', () => {
+        const mockState = {
+            mockGallery: {
+                _creator: {
+                    userEmail: 'mockEmail@email.com'
+                },
+                walls: [mockUserWall] 
+            }
+        };
+        const mockStore = configureStore();
+        const store = mockStore(mockState);
+        it('renders a container component successfully', () => {
+            let wrapper = shallow(<Gallery />, { context : { store: store } });
+            expect(wrapper.find(Gallery).length).to.equal(1);
+            console.log(wrapper);
+        });      
     });
 });
 //  LANDING PAGE COMPONENT TESTS
