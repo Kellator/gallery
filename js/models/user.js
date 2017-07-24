@@ -18,7 +18,7 @@ var UserSchema = new mongoose.Schema({
         required: true
     },
     //use population to link to documents in other collection - galleries contain walls, walls contain exhibits
-    galleries: [{ type: Schema.Types.ObjectId, ref:'Wall'}]
+    galleries: [{ type: mongoose.Schema.Types.ObjectId, ref:'Wall'}]
 });
 UserSchema.statics.findByEmail = function(email, callback) {
     return this.findOne({email: email}, function(err, user) {

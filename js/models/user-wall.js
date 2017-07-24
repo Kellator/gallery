@@ -3,7 +3,7 @@ var mongoose = require('mongoose');
 
 var userWallSchema = new mongoose.Schema({
     _creator: {
-        type: ObjectId,
+        type: mongoose.Schema.Types.ObjectId,
         required: [true, 'Creator ID required for Wall']
     },
     title: {
@@ -16,5 +16,5 @@ var userWallSchema = new mongoose.Schema({
         type: Array
     }
 });
-var UserWall = mongoose.model('Wall', userWallSchema);
+var UserWall = mongoose.model('UserWall', userWallSchema);
 module.exports = UserWall;
