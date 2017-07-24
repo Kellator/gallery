@@ -67,6 +67,6 @@ if (require.main === module) {
 exports.app = app;
 exports.runServer = runServer;
 
-app.listen((process.env.PORT || 8080), function() {
-    console.log('server listening on port 8080');
+app.listen((process.env.PORT || 5050), function() {
+    console.log('server listening on port 5050');
 });

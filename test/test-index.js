@@ -49,7 +49,7 @@ import SignUp from '../js/components/presentational/landing/sign_up.js';
 import SignUpBlock from '../js/components/presentational/landing/sign_up_block.js';
 import SignUpInput from '../js/components/presentational/landing/sign_up_input.js';
 import LogInBlock from '../js/components/presentational/landing/login_block.js';
-import LoginInput from '../js/components/presentational/landing/login_input.js';
+import LoginForm from '../js/components/presentational/landing/login_form.js';
 import LandingPage from '../js/components/container/landing.js';
 
 //  NAVIGATION BAR COMPONENT IMPORTS
@@ -247,7 +247,7 @@ describe('<Gallery /> Component', () => {
 //     })
 // });
 
-// describe('LoginInput', () => {
+// describe('LoginForm', () => {
 //     it('Renders a div containing a form', () => {
 //         const renderer = TestUtils.createRenderer();
 //         renderer.render(<LoginInput />); 

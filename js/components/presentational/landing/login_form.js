@@ -11,10 +11,10 @@ import { Field, reduxForm, initialize } from 'redux-form';
 
 // }
 
-//added from reduxForm tutorial example
-const form = reduxForm({
-    form: 'loginForm'   
-});
+// //added from reduxForm tutorial example
+// const form = reduxForm({
+//     form: 'loginForm'   
+// });
 
 const renderField = field => (
     <div>
@@ -33,7 +33,14 @@ const renderSelect = field => (
 );
 
 
-class LoginInput extends React.Component {
+class LoginForm extends React.Component {
+    constructor(props, context) {
+        super(props, context);
+        this.state = {
+            username: "",
+            password: ""
+        };
+    }
     render() {
         const { handleSubmit, pristine, reset, submitting } = this.props;
         return (
@@ -42,9 +49,11 @@ class LoginInput extends React.Component {
                     <fieldset className="gallery_login">
                         <legend className="">Log In</legend>
                             <label htmlFor="email_login">Email</label>
-                            <Field required id="email_login" name="email" type="email" placeholder="you@email.com" component="input"/>
+                            <Field required id="email_login" name="email" type="email" placeholder="Enter your Email" component="input"/>
+
                             <label htmlFor="email_login_password">Password</label>
-                            <Field required id="email_login_password" name="password" type="password" placeholder="********" component="input"/>
+                            <Field required id="email_login_password" name="password" type="password" placeholder="Enter your Password" component="input"/>
+                            
                             <button action="submit">Login</button>
                     </fieldset>
                 </form>
@@ -52,8 +61,8 @@ class LoginInput extends React.Component {
         )
     }
 }
-LoginInput = reduxForm({
+LoginForm = reduxForm({
     form: 'login'
-})(LoginInput);
+})(LoginForm);
 
-export default LoginInput;
+export default LoginForm;
