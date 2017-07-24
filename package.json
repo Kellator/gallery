@@ -65,7 +65,10 @@
     "webpack": "2.x"
   },
   "dependencies": {
+    "babel-preset-env": "^1.6.0",
+    "babel-preset-node6": "^11.0.0",
     "bcrypt": "^1.0.2",
+    "bcryptjs": "^2.4.3",
     "body-parser": "^1.17.2",
     "express": "^4.15.3",
     "express-session": "^1.15.4",

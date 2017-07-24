@@ -7,7 +7,7 @@ var exhibitSchema = new mongoose.Schema({
         type: String
     },
     _creator: {
-        type: ObjectId,
+        type: mongoose.Schema.Types.ObjectId,
         required: [true, 'Creator ID required for Exhibit']
     },
     image:  {
