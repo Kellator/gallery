@@ -10,10 +10,8 @@ import SignUp from './sign_up';
 // LoginBlock.propTypes = {
 
 // }
-
-export default class LoginBlock extends React.Component {
+class LoginBlock extends React.Component {
     render() {
-        console.log(this.props);
         return (
             <div className="">
                 <GalleryLogo className=""></GalleryLogo>
@@ -24,3 +22,4 @@ export default class LoginBlock extends React.Component {
         );
     }
 }
+export default LoginBlock;

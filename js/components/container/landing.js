@@ -42,9 +42,11 @@ const mapStateToProps = (state, props) => ({
 const mapDispatchToProps = (dispatch, ownProps) => {
     return { onClickSignup: () => { dispatch(actions.showSignup())},
     onClickLogin: () => { dispatch(actions.showLogin())},
-    loginSubmit: () => { 
+    loginSubmit: (values) => { 
         event.preventDefault();
-        console.log("Hello submit worked")},
+        console.log(values);
+        console.log("Hello submit worked");
+    },
     signupSubmit: () => { 
         event.preventDefault();
         console.log("Howdy, sign up input worked")}

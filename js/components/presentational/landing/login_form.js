@@ -34,13 +34,6 @@ const renderSelect = field => (
 
 
 class LoginForm extends React.Component {
-    constructor(props, context) {
-        super(props, context);
-        this.state = {
-            username: "",
-            password: ""
-        };
-    }
     render() {
         const { handleSubmit, pristine, reset, submitting } = this.props;
         return (
@@ -54,7 +47,7 @@ class LoginForm extends React.Component {
                             <label htmlFor="email_login_password">Password</label>
                             <Field required id="email_login_password" name="password" type="password" placeholder="Enter your Password" component="input"/>
                             
-                            <button action="submit">Login</button>
+                            <button onClick={handleSubmit(this.props.onSubmit)} action="submit" disabled={pristine || submitting}>Login</button>
                     </fieldset>
                 </form>
             </div>
