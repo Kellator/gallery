@@ -47,7 +47,7 @@ import SignUpInstructions from '../js/components/presentational/landing/sign_up_
 import ExistingUser from '../js/components/presentational/landing/existing_user.js';
 import SignUp from '../js/components/presentational/landing/sign_up.js';
 import SignUpBlock from '../js/components/presentational/landing/sign_up_block.js';
-import SignUpInput from '../js/components/presentational/landing/sign_up_input.js';
+import SignUpForm from '../js/components/presentational/landing/sign_up_form.js';
 import LogInBlock from '../js/components/presentational/landing/login_block.js';
 import LoginForm from '../js/components/presentational/landing/login_form.js';
 import LandingPage from '../js/components/container/landing.js';
@@ -238,10 +238,10 @@ describe('<Gallery /> Component', () => {
 //     })
 // });
 
-// describe('SignUpInput', () => {
+// describe('SignUpForm', () => {
 //     it('Renders a div containing a form', () => {
 //         const renderer = TestUtils.createRenderer();
-//         renderer.render(<SignUpInput />); 
+//         renderer.render(<SignUpForm />); 
 //         const result = renderer.getRenderOutput();
 //         console.log(result);
 //     })
@@ -250,7 +250,7 @@ describe('<Gallery /> Component', () => {
 // describe('LoginForm', () => {
 //     it('Renders a div containing a form', () => {
 //         const renderer = TestUtils.createRenderer();
-//         renderer.render(<LoginInput />); 
+//         renderer.render(<LoginForm />); 
 //         const result = renderer.getRenderOutput();
 //         console.log(result);
 //     })

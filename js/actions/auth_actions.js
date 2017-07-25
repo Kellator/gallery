@@ -1,10 +1,11 @@
 //user validation actions
 export const CHECK_USER = 'CHECK_USER'; 
-export const checkUser = (email, password) => ({
-    type: CHECK_USER,
-    email,
-    password
-});
+export const checkUser = (email, password) => {
+    return dispatch => {
+        dispatch(fetchUserRequest())
+        console.log("checkUser Fired");
+    }
+};
 
 export const ADD_USER = 'ADD_USER';
 export const addUser = (email, password) => ({
@@ -27,4 +28,14 @@ export const formUpdateValue = (value) => ({
 export const FORM_RESET = 'FORM_RESET';
 export const formReset = () => ({
     type: FORM_RESET
+});
+
+export const FETCH_USER_REQUEST = 'FETCH_USER_REQUEST';
+export const fetchUserRequest = () => ({
+    type: FETCH_USER_REQUEST
+});
+
+export const FETCH_SUCCESS = 'FETCH_SUCCESS';
+export const fetchSuccess = () => ({
+    type: FETCH_SUCCESS
 });

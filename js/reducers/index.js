@@ -16,17 +16,26 @@ const initialState = {
     }
 };
 
-const validation = ( state = initialState.userState, action ) => {
+const validation = ( state = initialState, action ) => {
     console.log("Tada: " + action.type);
     switch(action.type) {
-        case 'CHECK_USER':   //query server to check if user exists
-            console.log("what's up");
+        // case 'CHECK_USER':   //query server to check if user exists
+        //     console.log("what's up");
+        //     console.log(state);
+        //     return Object.assign({}, state, {
+        //         login: true
+        //     });
+        case 'FETCH_USER_REQUEST':
+            console.log("fetching user");
             return Object.assign({}, state, {
-                user: { //should this really be part of the store?  or just sent to the server for validation
-                    email: email
-                } 
+                fetching: true
             });
-        
+
+        case 'FETCH_SUCCESS':
+            console.log("fetch success");
+            return Object.assign({}, state, {
+                fetching: false
+            });
         case 'SHOW_SIGNUP': 
             console.log("Hello!!!");
             return Object.assign({}, state, {
