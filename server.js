@@ -25,6 +25,7 @@ var http = require('http');
 var bcrypt = require('bcryptjs');
 var session = require('express-session');
 var passport = require('passport');
+var LocalStrategy = require('passport-local').Strategy;
 // local import
 var config = require('./config');
 // mongoose models
@@ -67,6 +68,141 @@ if (require.main === module) {
 exports.app = app;
 exports.runServer = runServer;
 
-app.listen((process.env.PORT || 8080), function() {
-    console.log('server listening on port 8080');
-})
+passport.use(new LocalStrategy(
+    function(email, password, done) {
+        console.log('local strat pw ' + password);
+        User.findByEmail(email, function(err, user) {
+            console.log(user.email);
+            console.log(user.password);
+            if (err) {
+                console.log(err);
+                return done(err);
+            }
+            if (!user) {
+                return done(null, false, {
+                    message: 'Incorrect username.'
+                });
+            }
+            user.validatePassword(password, function(err, isValid) {
+                if(err || !isValid) { return done(null, false, {
+                    message: 'Incorrect Password.'
+                });
+            }
+                return done(null, user);
+            });
+        });
+    }
+));
+//authenticated session persistance
+passport.serializeUser(function(user, callback) {
+    console.log("serialize");
+    callback(null, user.id);
+});
+passport.deserializeUser(function(id, callback) {
+    console.log("deserialize");
+    User.findById(id, function(err, user) {
+        if (err) {
+            return callback(err);
+        }
+        callback(null, user);
+    });
+});
+
+// passport.use(strategy);
+app.use(passport.initialize());
+app.use(passport.session());
+
+app.use(require('express-session')({
+    secret: 'pickle relish',
+    resave: false,
+    saveUninitialized: false
+}));
+
+app.get('/', function(req, res) {
+    return res.sendStatus(200);
+});
+
+//userName & password endpoints
+//creating a username & password 
+app.post('/thegallery/users', function(req, res) {
+    if (!req.body) {
+        return res.status(400).json({
+            message: "No Request Body"
+        });
+    }
+    if (!('email' in req.body)) {
+        return res.status(422).json({
+            message: "Missing Field: email"
+        });
+    }
+    var email = req.body.email;
+    console.log(username);
+    if (typeof email !== 'string') {
+        return res.status(422).json({
+            message: "Incorrect Field Type: email'"
+        });
+    }
+    email = email.trim();
+    if (email === '') {
+        return res.status(422).json({
+            message: "Incorrect Field Length: email"
+        });
+    }
+    var password = req.body.password;
+    if (typeof password !== 'string') {
+        return res.status(422).json({
+            message: "Incorrect Field Type: password"
+        });
+    }
+    password = password.trim();
+    if (password === '') {
+        return res.status(422).json({
+            message: "Incorrect Field Length: password"
+        });
+    }
+    bcrypt.genSalt(10, function(err, salt) {
+        if (err) {
+            console.log(err);
+            return res.status(500).json({
+                message: "Internal Server Error"
+            });
+        }
+        bcrypt.hash(password, salt, function(err, hash) {
+            if (err) {
+                console.log(err);
+                return res.status(500).json({
+                    message: "Internal Server Error"
+                });
+            }
+            var user = new User({
+                email: email,
+                password: hash
+            });
+            console.log(user);
+            user.save(function(err) {
+                if (err) {
+                    console.log(err);
+                    return res.status(500).json({
+                        message: "Internal Server Error"
+                    });
+                }
+                return res.status(201).json({});
+            });
+        });
+    });
+});
+
+//log in authentication request
+app.post('/thegallery/login', passport.authenticate('local'), function(req, res) {
+    res.status(200).json({
+        status: 'Login successful!'
+    });
+});
+//log out of alcis
+app.get('/thegallery/logout', function(req, res) {
+    req.logout();
+    res.redirect('/');
+});
+app.listen((process.env.PORT || 5050), function() {
+    console.log('server listening on port 5050');
+});

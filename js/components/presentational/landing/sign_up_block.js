@@ -3,7 +3,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 //separate local imports from dependencies
 import GalleryLogo from './gallery_logo';
-import SignUpInput from './sign_up_input';
+import SignUpForm from './sign_up_form';
 import SignUpInstructions from './sign_up_instructions';
 import ExistingUser from './existing_user';
 //declare propTypes prior to component
@@ -18,7 +18,7 @@ export default class SignUpBlock extends React.Component {
             <div className="">
                 <GalleryLogo className=""></GalleryLogo>
                 <SignUpInstructions className=""></SignUpInstructions>
-                <SignUpInput className="" onSubmit={this.props.onSubmit}></SignUpInput>
+                <SignUpForm className="" onSubmit={this.props.onSubmit}></SignUpForm>
                 <ExistingUser className="" log_in={this.props.log_in}></ExistingUser>
             </div>
         );

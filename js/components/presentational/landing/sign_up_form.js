@@ -33,7 +33,7 @@ const renderSelect = field => (
     </div>
 );
 
-class SignUpInput extends React.Component {
+class SignUpForm extends React.Component {
     render() {
         const { handleSubmit, pristine, reset, submitting } = this.props;
         return (
@@ -52,8 +52,8 @@ class SignUpInput extends React.Component {
         );
     }
 }
-SignUpInput = reduxForm({
+SignUpForm = reduxForm({
     form: 'signup'
-})(SignUpInput);
+})(SignUpForm);
 
-export default SignUpInput;
+export default SignUpForm;

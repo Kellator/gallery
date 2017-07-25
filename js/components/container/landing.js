@@ -9,6 +9,9 @@ import { Field, reduxForm, initialize } from 'redux-form';
 import LoginBlock from '../presentational/landing/login_block';
 import SignUpBlock from '../presentational/landing/sign_up_block';
 import * as actions from '../../actions/index';
+console.log(actions);
+const auth = actions.AuthActions;
+const gal = actions.GalleryActions;
 //declare propTypes prior to component
 
 // LandingPage.propTypes = {
@@ -37,16 +40,23 @@ class LandingPage extends React.Component {
 //onSubmitLogin should dispatch CHECK_USER
 
 const mapStateToProps = (state, props) => ({
-    login: state.validation.login
+    login: state.validation.userState.login
 });
 const mapDispatchToProps = (dispatch, ownProps) => {
-    return { onClickSignup: () => { dispatch(actions.showSignup())},
-    onClickLogin: () => { dispatch(actions.showLogin())},
-    loginSubmit: () => { 
+    return { onClickSignup: () => { dispatch(gal.showSignup())},
+    onClickLogin: () => { dispatch(gal.showLogin())},
+    loginSubmit: (values) => { 
         event.preventDefault();
-        console.log("Hello submit worked")},
-    signupSubmit: () => { 
+        console.log(values);
+        console.log(values.email);
+        console.log(values.password);
+        let email = values.email;
+        let password = values.password;
+        dispatch(auth.checkUser(email, password));
+    },
+    signupSubmit: (values) => { 
         event.preventDefault();
+        console.log(values);
         console.log("Howdy, sign up input worked")}
     }
 }
