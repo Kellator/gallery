@@ -25,6 +25,7 @@ var http = require('http');
 var bcrypt = require('bcryptjs');
 var session = require('express-session');
 var passport = require('passport');
+var LocalStrategy = require('passport-local').Strategy;
 // local import
 var config = require('./config');
 // mongoose models

@@ -24,7 +24,11 @@ const validation = ( state = initialState, action ) => {
             return Object.assign({}, state, {
                 fetching: true
             });
+        case 'NEW_USER':
+            console.log("new user");
+            return Object.assign({}, state, {
 
+            });
         case 'FETCH_SUCCESS':
             console.log("fetch success");
             return Object.assign({}, state, {

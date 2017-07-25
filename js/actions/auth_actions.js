@@ -4,15 +4,17 @@ export const checkUser = (email, password) => {
     return dispatch => {
         dispatch(fetchUserRequest())
         console.log("checkUser Fired");
+        console.log(email);
     }
 };
 
 export const ADD_USER = 'ADD_USER';
-export const addUser = (email, password) => ({
-    type: ADD_USER,
-    email,
-    password
-});
+export const addUser = (email, password) => {
+    return dispatch => {
+        // dispatch(newUserRequest())
+        console.log("newUser Fired");
+    }
+};
 
 export const ENTER_GALLERY = 'ENTER_GALLERY'; 
 export const enterGallery = () => ({
