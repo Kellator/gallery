@@ -39,13 +39,17 @@ const validation = ( state = initialState, action ) => {
         case 'SHOW_SIGNUP': 
             console.log("Hello!!!");
             return Object.assign({}, state, {
-                login: false
+                userState: {
+                    login: false
+                }
             });
         
         case 'SHOW_LOGIN':
             console.log("Howdy");
             return Object.assign({}, state, {
-                login: true
+                userState: {
+                    login: true
+                }
             });
             
         case 'ENTER_GALLERY':   //would be dispatched upon successful server query return
