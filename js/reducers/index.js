@@ -19,12 +19,6 @@ const initialState = {
 const validation = ( state = initialState, action ) => {
     console.log("Tada: " + action.type);
     switch(action.type) {
-        // case 'CHECK_USER':   //query server to check if user exists
-        //     console.log("what's up");
-        //     console.log(state);
-        //     return Object.assign({}, state, {
-        //         login: true
-        //     });
         case 'FETCH_USER_REQUEST':
             console.log("fetching user");
             return Object.assign({}, state, {
