@@ -6,6 +6,13 @@ var mongoose = require('mongoose');
 var bcrypt = require('bcryptjs');
 
 var UserSchema = new mongoose.Schema({
+    userName: {
+        type: String,
+        required: true,
+        index: {
+            unique: true
+        }
+    },
     email: {
         type: String,
         required: true,
@@ -22,6 +29,15 @@ var UserSchema = new mongoose.Schema({
 });
 UserSchema.statics.findByEmail = function(email, callback) {
     return this.findOne({email: email}, function(err, user) {
+        if (err) {
+            callback(err);
+            return;
+        }
+        callback(null, user);
+    });
+};
+UserSchema.statics.findbyUser = function(userName, callback) {
+    return this.findOne({userName: userName}, function(err, user) {
         if (err) {
             callback(err);
             return;

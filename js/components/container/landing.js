@@ -57,6 +57,11 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     signupSubmit: (values) => { 
         event.preventDefault();
         console.log(values);
+        console.log(values.email);
+        console.log(values.password);
+        let email = values.email;
+        let password = values.password;
+        dispatch(auth.addUser(email, password));
         console.log("Howdy, sign up input worked")}
     }
 }

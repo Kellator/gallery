@@ -26,6 +26,8 @@ var bcrypt = require('bcryptjs');
 var session = require('express-session');
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
+var cors = require('cors');
+
 // local import
 var config = require('./config');
 // mongoose models
@@ -40,6 +42,7 @@ var Wall = require('./js/models/wall');
 const app = express();
 app.use(bodyParser.json());
 app.use(express.static('public'));
+app.use(cors());
 
 const server = http.Server(app);
 
@@ -121,10 +124,21 @@ app.use(require('express-session')({
 app.get('/', function(req, res) {
     return res.sendStatus(200);
 });
-
+//log in authentication request
+app.post('/login', passport.authenticate('local'), function(req, res) {
+    console.log(req);
+    res.status(200).json({
+        status: 'Login successful!'
+    });
+});
+//log out
+app.get('/logout', function(req, res) {
+    req.logout();
+    res.redirect('/');
+});
 //userName & password endpoints
 //creating a username & password 
-app.post('/thegallery/users', function(req, res) {
+app.post('/users', function(req, res) {
     if (!req.body) {
         return res.status(400).json({
             message: "No Request Body"
@@ -136,7 +150,7 @@ app.post('/thegallery/users', function(req, res) {
         });
     }
     var email = req.body.email;
-    console.log(username);
+    console.log(email);
     if (typeof email !== 'string') {
         return res.status(422).json({
             message: "Incorrect Field Type: email'"
@@ -192,17 +206,6 @@ app.post('/thegallery/users', function(req, res) {
     });
 });
 
-//log in authentication request
-app.post('/thegallery/login', passport.authenticate('local'), function(req, res) {
-    res.status(200).json({
-        status: 'Login successful!'
-    });
-});
-//log out of alcis
-app.get('/thegallery/logout', function(req, res) {
-    req.logout();
-    res.redirect('/');
-});
-app.listen((process.env.PORT || 5050), function() {
-    console.log('server listening on port 5050');
+app.listen((process.env.PORT || 8081), function() {
+    console.log('server listening on port 8081');
 });
