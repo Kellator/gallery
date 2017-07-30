@@ -46,6 +46,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     return { onClickSignup: () => { dispatch(gal.showSignup())},
     onClickLogin: () => { dispatch(gal.showLogin())},
     loginSubmit: (values) => { 
+        console.log('landing login : ' + values)
         event.preventDefault();
         let username = values.username;
         let email = values.email;
@@ -54,6 +55,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     },
     signupSubmit: (values) => { 
         event.preventDefault();
+        console.log('landing submit :  ' + values);
         let username = values.username;
         let email = values.email;
         let password = values.password;

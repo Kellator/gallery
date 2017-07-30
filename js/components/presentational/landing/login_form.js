@@ -41,11 +41,14 @@ class LoginForm extends React.Component {
                 <form onSubmit={handleSubmit(this.props.onSubmit)} >
                     <fieldset className="gallery_login">
                         <legend className="">Log In</legend>
+                            <label htmlFor="username_login">Username</label>
+                            <Field id="username_login" name="username" type="text" required placeholder="Enter your Username" component="input"/>
+
                             <label htmlFor="email_login">Email</label>
                             <Field required id="email_login" name="email" type="email" placeholder="Enter your Email" component="input"/>
 
                             <label htmlFor="email_login_password">Password</label>
-                            <Field required id="email_login_password" name="password" type="password" placeholder="Enter your Password" component="input"/>
+                            <Field required id="password_login" name="password" type="password" placeholder="Enter your Password" component="input"/>
                             
                             <button onClick={handleSubmit(this.props.onSubmit)} action="submit" disabled={pristine || submitting}>Login</button>
                     </fieldset>

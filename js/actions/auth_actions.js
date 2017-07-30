@@ -22,7 +22,7 @@ export const checkUser = (username, email, password) => {
         .catch(error => {
             console.log(error);
         });
-        console.log("checkUser Fired");
+        console.log("AUTHORIZATION COMPLETED");
         console.log(email);        
     }
 };
@@ -30,7 +30,7 @@ export const checkUser = (username, email, password) => {
 export const ADD_USER = 'ADD_USER';
 export const addUser = (username, email, password) => {
     return dispatch => {
-        axios.post(fetchUrl + 'users', {
+        axios.post(fetchUrl + 'register', {
             username: username,
             email: email,
             password: password
@@ -41,7 +41,7 @@ export const addUser = (username, email, password) => {
         .catch(error => {
             console.log(error);
         });
-        console.log("newUser Fired");
+        console.log("REGISTRATION COMPLETED");
     }
 };
 

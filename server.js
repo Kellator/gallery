@@ -139,8 +139,8 @@ app.get('/logout', function(req, res) {
 });
 //userName & password endpoints
 //creating a username & password 
-app.post('/users', function(req, res) {
-    console.log('main post /users console log: ' + req)
+app.post('/register', function(req, res) {
+    console.log('main post /register console log: ' + req)
     if (!req.body) {
         return res.status(400).json({
             message: "No Request Body"
