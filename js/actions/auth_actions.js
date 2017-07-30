@@ -23,7 +23,7 @@ export const checkUser = (username, email, password) => {
             console.log(error);
         });
         console.log("AUTHORIZATION COMPLETED");
-        console.log(email);        
+        console.log("Welcome to the Gallery " + username + "!");        
     }
 };
 

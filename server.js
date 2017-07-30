@@ -1,22 +1,4 @@
 // dependencies
-//  ES6 IMPORT NOT CURRENTLY WORKING
-// import express from 'express';
-// import bodyParser from 'body-parser';
-// import mongoose from 'mongoose';
-// import http from 'http';
-// import bcrypt from 'bcryptjs';
-// import session from 'express-session';
-// import passport from 'passport';
-//  LOCAL IMPORT
-// import config from './config';
-// mongoose models
-// import Exhibit from './models/exhibit';
-// import Gallery from './models/gallery';
-// import Message from './models/message';
-// import UserGallery from './models/user-gallery';
-// import UserWall from 'models/user-wall';
-// import User from 'models/user';
-// import Wall from 'models/wall';
 require("babel-register");
 var express = require('express');
 var bodyParser = require('body-parser');
@@ -72,12 +54,30 @@ exports.app = app;
 exports.runServer = runServer;
 
 passport.use(new LocalStrategy(
-    function(username, email, password, done) {
+    function(email, password, done) {
         console.log('local strat pw ' + password);
+        // User.findByUsername(username, function(err, user) {
+        //     console.log('pass strat find user: ' + username);
+        //     if (err) {
+        //         console.log('local strat error : ' + err);
+        //         return done(err);
+        //     }
+        //     if (!user) {
+        //         return done(null, false, {
+        //             message: 'Incorrect username.'
+        //         });
+        //     }
+        //     user.validatePassword(password, function(err, isValid) {
+        //         if(err || !isValid) { return done(null, false, {
+        //             message: 'Incorrect Password.'
+        //         });
+        //     }
+        //         return done(null, user);
+        //     });
+        // });
         User.findByEmail(email, function(err, user) {
-            console.log('pass strat find user: ' + username);
-            console.log('pass strat find email: ' +user.email);
-            console.log('pass strat find pass: ' +user.password);
+            // console.log('pass strat find email: ' + user.email);
+            console.log("finding by email");
             if (err) {
                 console.log('local strat error : ' + err);
                 return done(err);
@@ -127,6 +127,7 @@ app.get('/', function(req, res) {
 });
 //log in authentication request
 app.post('/login', passport.authenticate('local'), function(req, res) {
+    console.log('YOU HAVE MADE IT TO THE LOGIN SECTION');
     console.log('/login post log: ' + req);
     res.status(200).json({
         status: 'Login successful!'
@@ -140,7 +141,7 @@ app.get('/logout', function(req, res) {
 //userName & password endpoints
 //creating a username & password 
 app.post('/register', function(req, res) {
-    console.log('main post /register console log: ' + req)
+    // console.log('main post /register console log: ' + req)
     if (!req.body) {
         return res.status(400).json({
             message: "No Request Body"
@@ -157,7 +158,7 @@ app.post('/register', function(req, res) {
         });
     }
     var username = req.body.username;
-    console.log(username);
+    // console.log(username);
     if (typeof username !== 'string') {
         return res.status(422).json({
             message: "Incorrect Field Type: username"
@@ -170,7 +171,7 @@ app.post('/register', function(req, res) {
         });
     }
     var email = req.body.email;
-    console.log(email);
+    // console.log(email);
     if (typeof email !== 'string') {
         return res.status(422).json({
             message: "Incorrect Field Type: email'"
@@ -230,3 +231,10 @@ app.post('/register', function(req, res) {
 app.listen((process.env.PORT || 8081), function() {
     console.log('server listening on port 8081');
 });
+// var username_sample = 'user3@email.com';
+//     User.findOne(username_sample, function (err, user) {
+//         if (err) {
+//             console.error('cannot find user');
+//         }
+//         console.log('client found');
+//     });
