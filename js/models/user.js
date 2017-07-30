@@ -6,7 +6,7 @@ var mongoose = require('mongoose');
 var bcrypt = require('bcryptjs');
 
 var UserSchema = new mongoose.Schema({
-    userName: {
+    username: {
         type: String,
         required: true,
         index: {
@@ -27,8 +27,8 @@ var UserSchema = new mongoose.Schema({
     //use population to link to documents in other collection - galleries contain walls, walls contain exhibits
     galleries: [{ type: mongoose.Schema.Types.ObjectId, ref:'Wall'}]
 });
-UserSchema.statics.findByEmail = function(email, callback) {
-    return this.findOne({email: email}, function(err, user) {
+UserSchema.statics.findbyUser = function(username, callback) {
+    return this.findOne({username: username}, function(err, user) {
         if (err) {
             callback(err);
             return;
@@ -36,8 +36,8 @@ UserSchema.statics.findByEmail = function(email, callback) {
         callback(null, user);
     });
 };
-UserSchema.statics.findbyUser = function(userName, callback) {
-    return this.findOne({userName: userName}, function(err, user) {
+UserSchema.statics.findByEmail = function(email, callback) {
+    return this.findOne({email: email}, function(err, user) {
         if (err) {
             callback(err);
             return;

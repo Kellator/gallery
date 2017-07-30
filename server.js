@@ -72,13 +72,14 @@ exports.app = app;
 exports.runServer = runServer;
 
 passport.use(new LocalStrategy(
-    function(email, password, done) {
+    function(username, email, password, done) {
         console.log('local strat pw ' + password);
         User.findByEmail(email, function(err, user) {
-            console.log(user.email);
-            console.log(user.password);
+            console.log('pass strat find user: ' + username);
+            console.log('pass strat find email: ' +user.email);
+            console.log('pass strat find pass: ' +user.password);
             if (err) {
-                console.log(err);
+                console.log('local strat error : ' + err);
                 return done(err);
             }
             if (!user) {
@@ -126,7 +127,7 @@ app.get('/', function(req, res) {
 });
 //log in authentication request
 app.post('/login', passport.authenticate('local'), function(req, res) {
-    console.log(req);
+    console.log('/login post log: ' + req);
     res.status(200).json({
         status: 'Login successful!'
     });
@@ -139,14 +140,33 @@ app.get('/logout', function(req, res) {
 //userName & password endpoints
 //creating a username & password 
 app.post('/users', function(req, res) {
+    console.log('main post /users console log: ' + req)
     if (!req.body) {
         return res.status(400).json({
             message: "No Request Body"
         });
     }
+    if (!('username' in req.body)) {
+        return res.status(422).json({
+            message: "Missing Field: username"
+        });
+    }
     if (!('email' in req.body)) {
         return res.status(422).json({
             message: "Missing Field: email"
+        });
+    }
+    var username = req.body.username;
+    console.log(username);
+    if (typeof username !== 'string') {
+        return res.status(422).json({
+            message: "Incorrect Field Type: username"
+        });
+    }
+    username = username.trim();
+    if (username === '') {
+        return res.status(422).json({
+            message: "Incorrect Field Length: username"
         });
     }
     var email = req.body.email;
@@ -189,6 +209,7 @@ app.post('/users', function(req, res) {
                 });
             }
             var user = new User({
+                username: username,
                 email: email,
                 password: hash
             });

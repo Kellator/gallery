@@ -4,13 +4,14 @@ let fetchUrl = 'http://localhost:5050/';
 
 //user validation actions
 export const CHECK_USER = 'CHECK_USER'; 
-export const checkUser = (email, password) => {
+export const checkUser = (username, email, password) => {
     return dispatch => {
         dispatch(fetchUserRequest())
         axios({
             method: 'post',
             url: fetchUrl + 'login',
             data: {
+                username: username,
                 email: email,
                 password: password
             }
@@ -27,9 +28,10 @@ export const checkUser = (email, password) => {
 };
 
 export const ADD_USER = 'ADD_USER';
-export const addUser = (email, password) => {
+export const addUser = (username, email, password) => {
     return dispatch => {
         axios.post(fetchUrl + 'users', {
+            username: username,
             email: email,
             password: password
         })
