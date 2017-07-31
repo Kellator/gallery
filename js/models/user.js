@@ -6,6 +6,13 @@ var mongoose = require('mongoose');
 var bcrypt = require('bcryptjs');
 
 var UserSchema = new mongoose.Schema({
+    username: {
+        type: String,
+        required: true,
+        index: {
+            unique: true
+        }
+    },
     email: {
         type: String,
         required: true,
@@ -18,10 +25,10 @@ var UserSchema = new mongoose.Schema({
         required: true
     },
     //use population to link to documents in other collection - galleries contain walls, walls contain exhibits
-    galleries: [{ type: mongoose.Schema.Types.ObjectId, ref:'Wall'}]
-});
-UserSchema.statics.findByEmail = function(email, callback) {
-    return this.findOne({email: email}, function(err, user) {
+    galleries: [{ type: mongoose.Schema.Types.ObjectId, ref:'Wall'}],
+    });
+UserSchema.statics.findByUsername = function(username, callback) {
+    return this.findOne({username: username}, function(err, user) {
         if (err) {
             callback(err);
             return;
@@ -29,6 +36,16 @@ UserSchema.statics.findByEmail = function(email, callback) {
         callback(null, user);
     });
 };
+// UserSchema.statics.findByEmail = function(email, callback) {
+//     return this.findOne({email: email}, function(err, user) {
+//         console.log(user);
+//         if (err) {
+//             callback(err);
+//             return;
+//         }
+//         callback(null, user);
+//     });
+// };
 UserSchema.methods.validatePassword = function(password, callback) {
     console.log('validate');
     console.log('compare ' + password + ' ' + this.password);

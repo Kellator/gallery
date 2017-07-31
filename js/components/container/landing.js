@@ -47,16 +47,19 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     onClickLogin: () => { dispatch(gal.showLogin())},
     loginSubmit: (values) => { 
         event.preventDefault();
-        console.log(values);
-        console.log(values.email);
-        console.log(values.password);
+        let username = values.username;
         let email = values.email;
         let password = values.password;
-        dispatch(auth.checkUser(email, password));
+        console.log('landing login : ' + username, email, password)
+        dispatch(auth.checkUser(username, email, password));
     },
     signupSubmit: (values) => { 
         event.preventDefault();
-        console.log(values);
+        let username = values.username;
+        let email = values.email;
+        let password = values.password;
+        console.log('landing submit :  ' + username, email, password);
+        dispatch(auth.addUser(username, email, password));
         console.log("Howdy, sign up input worked")}
     }
 }

@@ -1,22 +1,4 @@
 // dependencies
-//  ES6 IMPORT NOT CURRENTLY WORKING
-// import express from 'express';
-// import bodyParser from 'body-parser';
-// import mongoose from 'mongoose';
-// import http from 'http';
-// import bcrypt from 'bcryptjs';
-// import session from 'express-session';
-// import passport from 'passport';
-//  LOCAL IMPORT
-// import config from './config';
-// mongoose models
-// import Exhibit from './models/exhibit';
-// import Gallery from './models/gallery';
-// import Message from './models/message';
-// import UserGallery from './models/user-gallery';
-// import UserWall from 'models/user-wall';
-// import User from 'models/user';
-// import Wall from 'models/wall';
 require("babel-register");
 var express = require('express');
 var bodyParser = require('body-parser');
@@ -26,6 +8,9 @@ var bcrypt = require('bcryptjs');
 var session = require('express-session');
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
+var BasicStrategy = require('passport-http').BasicStrategy;
+var cors = require('cors');
+
 // local import
 var config = require('./config');
 // mongoose models
@@ -40,6 +25,7 @@ var Wall = require('./js/models/wall');
 const app = express();
 app.use(bodyParser.json());
 app.use(express.static('public'));
+app.use(cors());
 
 const server = http.Server(app);
 
@@ -68,14 +54,39 @@ if (require.main === module) {
 exports.app = app;
 exports.runServer = runServer;
 
+// passport.use(new BasicStrategy(
+//     function(username, password, done) {
+//         User.findbyUsername({ username: username, function(err, user) {
+//             if (err) { 
+//                 console.log('basic strat error: ' + err);
+//                 return  done(err);
+//             }
+//             if (!user) {
+//                 console.log("basic strat error: incorrect uersname")
+//                 return done(null, false, {
+//                     message: 'Incorrect Username'
+//                 });
+//             }
+//             user.validatePassword(password, function(err, isValid) {
+//                 if(err || !isValid) { 
+//                     console.log("basic strat error: incorrect password");
+//                     return done(null, false, {
+//                     message: 'Incorrect Password.'
+//                 });
+//             }
+//                 return done(null, user);
+//             });
+//         }})
+//     }
+// ))
+
 passport.use(new LocalStrategy(
-    function(email, password, done) {
+    function(username, password, done) {
         console.log('local strat pw ' + password);
-        User.findByEmail(email, function(err, user) {
-            console.log(user.email);
-            console.log(user.password);
+        User.findByUsername(username, function(err, user) {
+            console.log('pass strat find user: ' + username);
             if (err) {
-                console.log(err);
+                console.log('local strat error : ' + err);
                 return done(err);
             }
             if (!user) {
@@ -91,6 +102,26 @@ passport.use(new LocalStrategy(
                 return done(null, user);
             });
         });
+        // User.findByEmail(email, function(err, user) {
+        //     // console.log('pass strat find email: ' + user.email);
+        //     console.log("finding by email");
+        //     if (err) {
+        //         console.log('local strat error : ' + err);
+        //         return done(err);
+        //     }
+        //     if (!user) {
+        //         return done(null, false, {
+        //             message: 'Incorrect username.'
+        //         });
+        //     }
+        //     user.validatePassword(password, function(err, isValid) {
+        //         if(err || !isValid) { return done(null, false, {
+        //             message: 'Incorrect Password.'
+        //         });
+        //     }
+        //         return done(null, user);
+        //     });
+        // });
     }
 ));
 //authenticated session persistance
@@ -112,22 +143,45 @@ passport.deserializeUser(function(id, callback) {
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.use(require('express-session')({
-    secret: 'pickle relish',
-    resave: false,
-    saveUninitialized: false
-}));
+// app.use(require('express-session')({
+//     secret: 'pickle relish',
+//     resave: false,
+//     saveUninitialized: false
+// }));
 
 app.get('/', function(req, res) {
     return res.sendStatus(200);
 });
-
+// log in authentication request
+app.post('/login', passport.authenticate('local'), function(req, res) {
+    console.log('YOU HAVE MADE IT TO THE LOGIN SECTION');
+    console.log('/login post log: ' + req);
+    res.status(200).json({
+        status: 'Login successful!'
+    });
+});
+// app.post('/login',
+//     passport.authenticate('basic', {session: false}),
+//     function(req, res) {
+//         res.json({ username: req.user.username, email: req.user.email});
+//     });
+//log out
+app.get('/logout', function(req, res) {
+    req.logout();
+    res.redirect('/');
+});
 //userName & password endpoints
 //creating a username & password 
-app.post('/thegallery/users', function(req, res) {
+app.post('/register', function(req, res) {
+    // console.log('main post /register console log: ' + req)
     if (!req.body) {
         return res.status(400).json({
             message: "No Request Body"
+        });
+    }
+    if (!('username' in req.body)) {
+        return res.status(422).json({
+            message: "Missing Field: username"
         });
     }
     if (!('email' in req.body)) {
@@ -135,8 +189,21 @@ app.post('/thegallery/users', function(req, res) {
             message: "Missing Field: email"
         });
     }
+    var username = req.body.username;
+    // console.log(username);
+    if (typeof username !== 'string') {
+        return res.status(422).json({
+            message: "Incorrect Field Type: username"
+        });
+    }
+    username = username.trim();
+    if (username === '') {
+        return res.status(422).json({
+            message: "Incorrect Field Length: username"
+        });
+    }
     var email = req.body.email;
-    console.log(username);
+    // console.log(email);
     if (typeof email !== 'string') {
         return res.status(422).json({
             message: "Incorrect Field Type: email'"
@@ -175,6 +242,7 @@ app.post('/thegallery/users', function(req, res) {
                 });
             }
             var user = new User({
+                username: username,
                 email: email,
                 password: hash
             });
@@ -192,17 +260,6 @@ app.post('/thegallery/users', function(req, res) {
     });
 });
 
-//log in authentication request
-app.post('/thegallery/login', passport.authenticate('local'), function(req, res) {
-    res.status(200).json({
-        status: 'Login successful!'
-    });
-});
-//log out of alcis
-app.get('/thegallery/logout', function(req, res) {
-    req.logout();
-    res.redirect('/');
-});
-app.listen((process.env.PORT || 5050), function() {
-    console.log('server listening on port 5050');
+app.listen((process.env.PORT || 8081), function() {
+    console.log('server listening on port 8081');
 });
