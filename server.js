@@ -102,28 +102,35 @@ passport.use(new LocalStrategy(
                 return done(null, user);
             });
         });
-        // User.findByEmail(email, function(err, user) {
-        //     // console.log('pass strat find email: ' + user.email);
-        //     console.log("finding by email");
-        //     if (err) {
-        //         console.log('local strat error : ' + err);
-        //         return done(err);
-        //     }
-        //     if (!user) {
-        //         return done(null, false, {
-        //             message: 'Incorrect username.'
-        //         });
-        //     }
-        //     user.validatePassword(password, function(err, isValid) {
-        //         if(err || !isValid) { return done(null, false, {
-        //             message: 'Incorrect Password.'
-        //         });
-        //     }
-        //         return done(null, user);
-        //     });
-        // });
     }
 ));
+// passport.use(new LocalStrategy(
+//     function(email, password, done) {
+//         console.log('local strat pw ' + password);
+//         User.findByEmail(email, function(err, user) {
+//             // console.log('pass strat find email: ' + user.email);
+//             console.log("finding by email");
+//             if (err) {
+//                 console.log('local strat error : ' + err);
+//                 return done(err);
+//             }
+//             if (!user) {
+//                 return done(null, false, {
+//                     message: 'Incorrect username.'
+//                 });
+//             }
+//             user.validatePassword(password, function(err, isValid) {
+//                 if(err || !isValid) { return done(null, false, {
+//                     message: 'Incorrect Password.'
+//                 });
+//             }
+//                 return done(null, user);
+//             });
+//         });
+//     }
+// ));
+
+
 //authenticated session persistance
 passport.serializeUser(function(user, callback) {
     console.log("serialize");
@@ -160,11 +167,6 @@ app.post('/login', passport.authenticate('local'), function(req, res) {
         status: 'Login successful!'
     });
 });
-// app.post('/login',
-//     passport.authenticate('basic', {session: false}),
-//     function(req, res) {
-//         res.json({ username: req.user.username, email: req.user.email});
-//     });
 //log out
 app.get('/logout', function(req, res) {
     req.logout();
