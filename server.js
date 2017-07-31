@@ -8,6 +8,7 @@ var bcrypt = require('bcryptjs');
 var session = require('express-session');
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
+var BasicStrategy = require('passport-http').BasicStrategy;
 var cors = require('cors');
 
 // local import
@@ -53,31 +54,37 @@ if (require.main === module) {
 exports.app = app;
 exports.runServer = runServer;
 
+// passport.use(new BasicStrategy(
+//     function(username, password, done) {
+//         User.findbyUsername({ username: username, function(err, user) {
+//             if (err) { 
+//                 console.log('basic strat error: ' + err);
+//                 return  done(err);
+//             }
+//             if (!user) {
+//                 console.log("basic strat error: incorrect uersname")
+//                 return done(null, false, {
+//                     message: 'Incorrect Username'
+//                 });
+//             }
+//             user.validatePassword(password, function(err, isValid) {
+//                 if(err || !isValid) { 
+//                     console.log("basic strat error: incorrect password");
+//                     return done(null, false, {
+//                     message: 'Incorrect Password.'
+//                 });
+//             }
+//                 return done(null, user);
+//             });
+//         }})
+//     }
+// ))
+
 passport.use(new LocalStrategy(
-    function(email, password, done) {
+    function(username, password, done) {
         console.log('local strat pw ' + password);
-        // User.findByUsername(username, function(err, user) {
-        //     console.log('pass strat find user: ' + username);
-        //     if (err) {
-        //         console.log('local strat error : ' + err);
-        //         return done(err);
-        //     }
-        //     if (!user) {
-        //         return done(null, false, {
-        //             message: 'Incorrect username.'
-        //         });
-        //     }
-        //     user.validatePassword(password, function(err, isValid) {
-        //         if(err || !isValid) { return done(null, false, {
-        //             message: 'Incorrect Password.'
-        //         });
-        //     }
-        //         return done(null, user);
-        //     });
-        // });
-        User.findByEmail(email, function(err, user) {
-            // console.log('pass strat find email: ' + user.email);
-            console.log("finding by email");
+        User.findByUsername(username, function(err, user) {
+            console.log('pass strat find user: ' + username);
             if (err) {
                 console.log('local strat error : ' + err);
                 return done(err);
@@ -95,6 +102,26 @@ passport.use(new LocalStrategy(
                 return done(null, user);
             });
         });
+        // User.findByEmail(email, function(err, user) {
+        //     // console.log('pass strat find email: ' + user.email);
+        //     console.log("finding by email");
+        //     if (err) {
+        //         console.log('local strat error : ' + err);
+        //         return done(err);
+        //     }
+        //     if (!user) {
+        //         return done(null, false, {
+        //             message: 'Incorrect username.'
+        //         });
+        //     }
+        //     user.validatePassword(password, function(err, isValid) {
+        //         if(err || !isValid) { return done(null, false, {
+        //             message: 'Incorrect Password.'
+        //         });
+        //     }
+        //         return done(null, user);
+        //     });
+        // });
     }
 ));
 //authenticated session persistance
@@ -116,16 +143,16 @@ passport.deserializeUser(function(id, callback) {
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.use(require('express-session')({
-    secret: 'pickle relish',
-    resave: false,
-    saveUninitialized: false
-}));
+// app.use(require('express-session')({
+//     secret: 'pickle relish',
+//     resave: false,
+//     saveUninitialized: false
+// }));
 
 app.get('/', function(req, res) {
     return res.sendStatus(200);
 });
-//log in authentication request
+// log in authentication request
 app.post('/login', passport.authenticate('local'), function(req, res) {
     console.log('YOU HAVE MADE IT TO THE LOGIN SECTION');
     console.log('/login post log: ' + req);
@@ -133,6 +160,11 @@ app.post('/login', passport.authenticate('local'), function(req, res) {
         status: 'Login successful!'
     });
 });
+// app.post('/login',
+//     passport.authenticate('basic', {session: false}),
+//     function(req, res) {
+//         res.json({ username: req.user.username, email: req.user.email});
+//     });
 //log out
 app.get('/logout', function(req, res) {
     req.logout();
@@ -231,10 +263,3 @@ app.post('/register', function(req, res) {
 app.listen((process.env.PORT || 8081), function() {
     console.log('server listening on port 8081');
 });
-// var username_sample = 'user3@email.com';
-//     User.findOne(username_sample, function (err, user) {
-//         if (err) {
-//             console.error('cannot find user');
-//         }
-//         console.log('client found');
-//     });

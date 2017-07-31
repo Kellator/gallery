@@ -27,20 +27,8 @@ var UserSchema = new mongoose.Schema({
     //use population to link to documents in other collection - galleries contain walls, walls contain exhibits
     galleries: [{ type: mongoose.Schema.Types.ObjectId, ref:'Wall'}],
     });
-
-// UserSchema.statics.findbyUsername = function(username, callback) {
-//     console.log(this);
-//     return this.findOne({username: username}, function(err, user) {
-//         if (err) {
-//             callback(err);
-//             return;
-//         }
-//         callback(null, user);
-//     });
-// };
-UserSchema.statics.findByEmail = function(email, callback) {
-    return this.findOne({email: email}, function(err, user) {
-        console.log(user);
+UserSchema.statics.findByUsername = function(username, callback) {
+    return this.findOne({username: username}, function(err, user) {
         if (err) {
             callback(err);
             return;
@@ -48,6 +36,16 @@ UserSchema.statics.findByEmail = function(email, callback) {
         callback(null, user);
     });
 };
+// UserSchema.statics.findByEmail = function(email, callback) {
+//     return this.findOne({email: email}, function(err, user) {
+//         console.log(user);
+//         if (err) {
+//             callback(err);
+//             return;
+//         }
+//         callback(null, user);
+//     });
+// };
 UserSchema.methods.validatePassword = function(password, callback) {
     console.log('validate');
     console.log('compare ' + password + ' ' + this.password);
