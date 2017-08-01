@@ -8,7 +8,6 @@ var bcrypt = require('bcryptjs');
 var session = require('express-session');
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
-var BasicStrategy = require('passport-http').BasicStrategy;
 var cors = require('cors');
 
 // local import
@@ -21,6 +20,7 @@ var UserGallery = require('./js/models/user-gallery');
 var UserWall = require('./js/models/user-wall');
 var User = require('./js/models/user');
 var Wall = require('./js/models/wall');
+// import routes from '../common/routes';
 
 const app = express();
 app.use(bodyParser.json());
@@ -28,6 +28,14 @@ app.use(express.static('public'));
 app.use(cors());
 
 const server = http.Server(app);
+
+// load routers
+// const galleryRouter = express.Router();
+// const usersRouter = express.Router();
+// require('./routes/gallery_routes')(galleyrRouter);
+// require('./routes/usersRouter')(usersRouter, passport);
+// app.use('/api', galleryRouter);
+// app.use('/api', usersRouter);
 
 //coordinates the connection to the database, and the running on the HTTP server
 const runServer = function(callback) {
@@ -54,37 +62,9 @@ if (require.main === module) {
 exports.app = app;
 exports.runServer = runServer;
 
-// passport.use(new BasicStrategy(
-//     function(username, password, done) {
-//         User.findbyUsername({ username: username, function(err, user) {
-//             if (err) { 
-//                 console.log('basic strat error: ' + err);
-//                 return  done(err);
-//             }
-//             if (!user) {
-//                 console.log("basic strat error: incorrect uersname")
-//                 return done(null, false, {
-//                     message: 'Incorrect Username'
-//                 });
-//             }
-//             user.validatePassword(password, function(err, isValid) {
-//                 if(err || !isValid) { 
-//                     console.log("basic strat error: incorrect password");
-//                     return done(null, false, {
-//                     message: 'Incorrect Password.'
-//                 });
-//             }
-//                 return done(null, user);
-//             });
-//         }})
-//     }
-// ))
-
 passport.use(new LocalStrategy(
     function(username, password, done) {
-        console.log('local strat pw ' + password);
         User.findByUsername(username, function(err, user) {
-            console.log('pass strat find user: ' + username);
             if (err) {
                 console.log('local strat error : ' + err);
                 return done(err);
@@ -160,12 +140,16 @@ app.get('/', function(req, res) {
     return res.sendStatus(200);
 });
 // log in authentication request
-app.post('/login', passport.authenticate('local'), function(req, res) {
-    console.log('YOU HAVE MADE IT TO THE LOGIN SECTION');
-    console.log('/login post log: ' + req);
-    res.status(200).json({
-        status: 'Login successful!'
-    });
+app.post('/login', passport.authenticate('local', {
+    successRedirect: 'localhost:8080/gallery',
+    failureRedirect: 'localhost:8080/',
+    failureFlash: true}), 
+    function(req, res) {
+        console.log('YOU HAVE MADE IT TO THE LOGIN SECTION');
+        console.log('/login post log: ' + req);
+        res.status(200).json({
+            status: 'Login successful!'
+        });
 });
 //log out
 app.get('/logout', function(req, res) {
