@@ -140,10 +140,7 @@ app.get('/', function(req, res) {
     return res.sendStatus(200);
 });
 // log in authentication request
-app.post('/login', passport.authenticate('local', {
-    successRedirect: 'localhost:8080/gallery',
-    failureRedirect: 'localhost:8080/',
-    failureFlash: true}), 
+app.post('/login', passport.authenticate('local'),
     function(req, res) {
         console.log('YOU HAVE MADE IT TO THE LOGIN SECTION');
         console.log('/login post log: ' + req);

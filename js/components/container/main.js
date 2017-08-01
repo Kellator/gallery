@@ -8,13 +8,18 @@ import Welcome from './welcome';
 export default class Main extends React.Component {
     render() {
         return (
-            <Switch>
-                <Route exact path='/' component={Welcome}/>
-                <Route path='/login' component={LandingPage}/>
-                <Route path='/signup' component={LandingPage}/>
-                {/* <Route path='/gallery/:userId' component={Dashboard}/> */}
-            </Switch>
-            
+           <div>
+               <ul>
+                   <li><Link to='/login' /></li>
+                   <li><Link to='/signup' /></li>
+               </ul>
+                <Switch>
+                    <Route exact path='/' component={Welcome}/>
+                    <Route exact path='/login' component={LandingPage}/>
+                    <Route exact path='/signup' component={LandingPage}/>
+                    {/* <Route path='/gallery/:userId' component={Dashboard}/> */}
+                </Switch>
+            </div>
         )
     }
 }

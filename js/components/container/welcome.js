@@ -17,13 +17,11 @@ class Welcome extends React.Component {
                 <h1>{text}</h1>
                 <div>
                     <h3>Already a member of the Gallery?</h3>
-                    {/* <button onClick={this.props.onClickLogin}>Login to the Gallery</button> */}
-                    <Link to='/login'>Log In to the Gallery</Link>
+                    <Link to='/login' onClick={this.props.onClickLogin}>Log In to the Gallery</Link>
                 </div>
                 <div>
                     <h3>New to the Gallery?</h3>
-                    {/* <button onClick={this.props.onClickSignup}>Sign up for the Gallery</button> */}
-                    <Link to='/signup'>Sign up for the Gallery</Link>
+                    <Link to='/signup' onClick={this.props.onClickSignup}>Sign up for the Gallery</Link>
                 </div>
             </div>
 
