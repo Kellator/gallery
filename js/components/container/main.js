@@ -10,6 +10,8 @@ export default class Main extends React.Component {
         return (
             <Switch>
                 <Route exact path='/' component={Welcome}/>
+                <Route path='/login' component={LandingPage}/>
+                <Route path='/signup' component={LandingPage}/>
                 {/* <Route path='/gallery/:userId' component={Dashboard}/> */}
             </Switch>
             

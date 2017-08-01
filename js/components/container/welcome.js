@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { dispatch } from 'react-redux';
+import { Link } from 'react-router-dom';
 import * as actions from '../../actions/index';
 console.log(actions);
 const auth = actions.AuthActions;
@@ -16,11 +17,13 @@ class Welcome extends React.Component {
                 <h1>{text}</h1>
                 <div>
                     <h3>Already a member of the Gallery?</h3>
-                    <button onClick={this.props.onClickLogin}>Login to the Gallery</button>
+                    {/* <button onClick={this.props.onClickLogin}>Login to the Gallery</button> */}
+                    <Link to='/login'>Log In to the Gallery</Link>
                 </div>
                 <div>
                     <h3>New to the Gallery?</h3>
-                    <button onClick={this.props.onClickSignup}>Sign up for the Gallery</button>
+                    {/* <button onClick={this.props.onClickSignup}>Sign up for the Gallery</button> */}
+                    <Link to='/signup'>Sign up for the Gallery</Link>
                 </div>
             </div>
 
