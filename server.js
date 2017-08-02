@@ -247,7 +247,3 @@ app.post('/register', function(req, res) {
         });
     });
 });
-
-app.listen((process.env.PORT || 8081), function() {
-    console.log('server listening on port 8081');
-});
