@@ -45,12 +45,13 @@ var mockUserWall = {
 //  LANDING PAGE COMPONENT IMPORTS
 import SignUpInstructions from '../js/components/presentational/landing/sign_up_instructions.js';
 import ExistingUser from '../js/components/presentational/landing/existing_user.js';
-import SignUp from '../js/components/presentational/landing/sign_up.js';
+import SignUpText from '../js/components/presentational/landing/sign_up_text.js';
 import SignUpBlock from '../js/components/presentational/landing/sign_up_block.js';
 import SignUpForm from '../js/components/presentational/landing/sign_up_form.js';
 import LogInBlock from '../js/components/presentational/landing/login_block.js';
 import LoginForm from '../js/components/presentational/landing/login_form.js';
-import LandingPage from '../js/components/container/landing.js';
+import LogIn from '../js/components/container/login-container.js';
+import SignUp from '../js/components/container/signup-container.js';
 
 //  NAVIGATION BAR COMPONENT IMPORTS
 
@@ -186,10 +187,10 @@ describe('ExistingUser component', () => {
     })
 });
 
-describe('SignUp component', () => {
+describe('SignUpText component', () => {
     it('Renders a single line of text with a link', () => {
         const renderer = TestUtils.createRenderer();
-        renderer.render(<SignUp />);
+        renderer.render(<SignUpText />);
         const result = renderer.getRenderOutput();
         console.log(result.props.children);
         result.props.className.should.equal('new_user_signup');

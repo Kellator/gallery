@@ -11,7 +11,7 @@ import { Link } from 'react-router-dom';
 
 // }
 
-export default class SignUp extends React.Component {   
+export default class SignUpText extends React.Component {   
     render() {
         console.log(this.props);
         return (

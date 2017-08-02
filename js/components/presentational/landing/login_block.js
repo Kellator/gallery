@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 //separate local imports from dependencies
 import GalleryLogo from './gallery_logo';
 import LoginForm from './login_form';
-import SignUp from './sign_up';
+import SignUpText from './sign_up_text';
 //declare propTypes prior to component
 
 // LoginBlock.propTypes = {
@@ -17,7 +17,7 @@ class LoginBlock extends React.Component {
                 <GalleryLogo className=""></GalleryLogo>
                 <h1>Log in to the Gallery</h1>
                 <LoginForm className="" onSubmit={this.props.onSubmit}></LoginForm>
-                <SignUp className="" sign_up={this.props.sign_up}></SignUp>
+                <SignUpText className="" sign_up={this.props.sign_up}></SignUpText>
             </div>
         );
     }
