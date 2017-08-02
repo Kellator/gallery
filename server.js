@@ -10,6 +10,7 @@ var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 var cors = require('cors');
 
+const path = require('path');
 // local import
 var config = require('./config');
 // mongoose models
@@ -21,10 +22,11 @@ var UserWall = require('./js/models/user-wall');
 var User = require('./js/models/user');
 var Wall = require('./js/models/wall');
 // import routes from '../common/routes';
-
+// var __dirname = 'localhost:8080';
 const app = express();
 app.use(bodyParser.json());
-app.use(express.static('public'));
+// app.use(express.static('public'));
+app.use(express.static(path.join(__dirname, 'build')));
 app.use(cors());
 
 const server = http.Server(app);
@@ -135,10 +137,13 @@ app.use(passport.session());
 //     resave: false,
 //     saveUninitialized: false
 // }));
+app.get('/*', function(req, res) {
+    res.sendFile(path.resolve(__dirname, 'build', 'index.html'));
+})
 
-app.get('/', function(req, res) {
-    return res.sendStatus(200);
-});
+// app.get('/', function(req, res) {
+//     return res.sendStatus(200);
+// });
 // log in authentication request
 app.post('/login', passport.authenticate('local'),
     function(req, res) {

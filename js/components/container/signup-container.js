@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { dispatch } from 'react-redux';
 import { Field, reduxForm, initialize } from 'redux-form';
+
 //separate local imports from dependencies
 import LoginBlock from '../presentational/landing/login_block';
 import SignUpBlock from '../presentational/landing/sign_up_block';
@@ -18,20 +19,11 @@ const gal = actions.GalleryActions;
 
 // }
 
-class LandingPage extends React.Component {
+class SignUp extends React.Component {
     render() {
-        let landing;
-        let landingState = this.props.login;
-        console.log(landingState);
-        if (landingState == true) {
-            landing = <LoginBlock sign_up={this.props.onClickSignup} onSubmit={this.props.loginSubmit}/>
-        } 
-        else {
-            landing = <SignUpBlock log_in={this.props.onClickLogin} onSubmit={this.props.signupSubmit}/>
-        }
         return (
-            <div className="landing_display">
-                {landing}
+            <div className="sign_up">
+                <SignUpBlock log_in={this.props.onClickLogin} onSubmit={this.props.signupSubmit}/>
             </div>
         )
     }
@@ -45,14 +37,6 @@ const mapStateToProps = (state, props) => ({
 const mapDispatchToProps = (dispatch, ownProps) => {
     return { onClickSignup: () => { dispatch(gal.showSignup())},
     onClickLogin: () => { dispatch(gal.showLogin())},
-    loginSubmit: (values) => { 
-        event.preventDefault();
-        let username = values.username;
-        let email = values.email;
-        let password = values.password;
-        console.log('landing login : ' + username, email, password)
-        dispatch(auth.checkUser(username, email, password));
-    },
     signupSubmit: (values) => { 
         event.preventDefault();
         let username = values.username;
@@ -64,4 +48,4 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(LandingPage);
+export default connect(mapStateToProps, mapDispatchToProps)(SignUp);
