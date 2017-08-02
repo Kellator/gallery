@@ -45,12 +45,13 @@ var mockUserWall = {
 //  LANDING PAGE COMPONENT IMPORTS
 import SignUpInstructions from '../js/components/presentational/landing/sign_up_instructions.js';
 import ExistingUser from '../js/components/presentational/landing/existing_user.js';
-import SignUp from '../js/components/presentational/landing/sign_up.js';
+import SignUpText from '../js/components/presentational/landing/sign_up_text.js';
 import SignUpBlock from '../js/components/presentational/landing/sign_up_block.js';
 import SignUpForm from '../js/components/presentational/landing/sign_up_form.js';
 import LogInBlock from '../js/components/presentational/landing/login_block.js';
 import LoginForm from '../js/components/presentational/landing/login_form.js';
-import LandingPage from '../js/components/container/landing.js';
+import LogIn from '../js/components/container/login-container.js';
+import SignUp from '../js/components/container/signup-container.js';
 
 //  NAVIGATION BAR COMPONENT IMPORTS
 
@@ -175,29 +176,28 @@ describe('ExistingUser component', () => {
         const renderer = TestUtils.createRenderer();
         renderer.render(<ExistingUser />);
         const result = renderer.getRenderOutput();
-        result.props.className.should.equal('existing_user_line');
-        const startP = result.props.children[0];
-        startP.should.equal('Already a part of the Gallery?  Click ')
-        const link = result.props.children[1];
-        link.type.should.equal('button');
-        const endP = result.props.children[2];
-        endP.should.equal(' to login.');
+        console.log(result.props.children);
+        result.props.children.should.have.lengthOf(2);
+        let childOne = result.props.children[0];
+        let childTwo = result.props.children[1];
+        childOne.should.be.a('string');
+        childTwo.should.be.a('object');
+        result.props.children.should.be.a('array');
+        console.log(childTwo.props);
     })
 });
 
-describe('SignUp component', () => {
+describe('SignUpText component', () => {
     it('Renders a single line of text with a link', () => {
         const renderer = TestUtils.createRenderer();
-        renderer.render(<SignUp />);
+        renderer.render(<SignUpText />);
         const result = renderer.getRenderOutput();
+        console.log(result.props.children);
         result.props.className.should.equal('new_user_signup');
-        const children = result.props.children;
-        children.should.have.lengthOf(2);
-        let childOne = children[0];
-        childOne.should.equal('New to Gallery?  Sign up ');
-        let childTwo = children[1];
-        childTwo.props.should.be.an('object');
-        childTwo.type.should.equal('button');
+        let childOne = result.props.children[0];
+        let childTwo = result.props.children[1];
+        childOne.should.be.a('string');
+        childTwo.should.be.a('object');
     })
 });
 
