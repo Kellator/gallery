@@ -66,6 +66,7 @@ exports.runServer = runServer;
 
 passport.use(new LocalStrategy(
     function(username, password, done) {
+        console.log('local strat function');
         User.findByUsername(username, function(err, user) {
             if (err) {
                 console.log('local strat error : ' + err);
@@ -147,11 +148,14 @@ app.get('/*', function(req, res) {
 // log in authentication request
 app.post('/login', passport.authenticate('local'),
     function(req, res) {
-        console.log('YOU HAVE MADE IT TO THE LOGIN SECTION');
-        console.log('/login post log: ' + req);
+        let user = res.req.body.username
+
         res.status(200).json({
-            status: 'Login successful!'
+            status: 'Login successful!',
+            user: user 
         });
+        console.log("RESPONSE DATA BELOW")
+        console.log(res.req.body.username);
 });
 //log out
 app.get('/logout', function(req, res) {
@@ -246,8 +250,4 @@ app.post('/register', function(req, res) {
             });
         });
     });
-});
-
-app.listen((process.env.PORT || 8081), function() {
-    console.log('server listening on port 8081');
 });

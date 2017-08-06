@@ -1,6 +1,6 @@
 import axios from 'axios';
 let fetchUrl = 'http://localhost:5050/';
-
+let userUrl = 'http://localhost:8080/';
 
 //user validation actions
 export const CHECK_USER = 'CHECK_USER'; 
@@ -18,6 +18,13 @@ export const checkUser = (username, email, password) => {
         })
         .then(res => {
             console.log(res);
+            console.log(res.data.user);
+            let user = res.data.user;
+            dispatch(enterGallery());
+            axios({
+                method: 'post',
+                url: userUrl + ':' + user,
+            })
         })
         .catch(error => {
             console.log(error);
@@ -37,6 +44,7 @@ export const addUser = (username, email, password) => {
         })
         .then(res => {
             console.log(res);
+            // welcome screen?
         })
         .catch(error => {
             console.log(error);
@@ -49,17 +57,6 @@ export const ENTER_GALLERY = 'ENTER_GALLERY';
 export const enterGallery = () => ({
     type: ENTER_GALLERY
 });
-
-// export const FORM_UPDATE_VALUE = 'FORM_UPDATE_VALUE';
-// export const formUpdateValue = (value) => ({
-//     type: FORM_UPDATE_VALUE,
-//     value
-// });
-
-// export const FORM_RESET = 'FORM_RESET';
-// export const formReset = () => ({
-//     type: FORM_RESET
-// });
 
 export const FETCH_USER_REQUEST = 'FETCH_USER_REQUEST';
 export const fetchUserRequest = () => ({
