@@ -18,13 +18,12 @@ export const checkUser = (username, email, password) => {
         })
         .then(res => {
             console.log(res);
+            console.log(res.data.user);
+            let user = res.data.user;
             dispatch(enterGallery());
             axios({
                 method: 'post',
-                url: userUrl + 'gallery',
-                data: {
-                    username: username
-                }
+                url: userUrl + 'gallery/:' + user,
             })
         })
         .catch(error => {
