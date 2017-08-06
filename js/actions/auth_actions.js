@@ -1,6 +1,6 @@
 import axios from 'axios';
 let fetchUrl = 'http://localhost:5050/';
-
+let userUrl = 'http://localhost:8080/';
 
 //user validation actions
 export const CHECK_USER = 'CHECK_USER'; 
@@ -18,6 +18,14 @@ export const checkUser = (username, email, password) => {
         })
         .then(res => {
             console.log(res);
+            dispatch(enterGallery());
+            axios({
+                method: 'post',
+                url: userUrl + 'gallery',
+                data: {
+                    username: username
+                }
+            })
         })
         .catch(error => {
             console.log(error);
