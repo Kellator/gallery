@@ -1,4 +1,5 @@
 import axios from 'axios';
+import cookie from 'react-cookies';
 let fetchUrl = 'http://localhost:5050/';
 let userUrl = 'http://localhost:8080/';
 
@@ -6,7 +7,7 @@ let userUrl = 'http://localhost:8080/';
 export const CHECK_USER = 'CHECK_USER'; 
 export const checkUser = (username, email, password) => {
     return dispatch => {
-        dispatch(fetchUserRequest())
+        dispatch(authLoad())
         axios({
             method: 'post',
             url: fetchUrl + 'login',
@@ -20,7 +21,7 @@ export const checkUser = (username, email, password) => {
             console.log(res);
             console.log(res.data.user);
             let user = res.data.user;
-            dispatch(enterGallery());
+            dispatch(receiveAuth(user));
             axios({
                 method: 'post',
                 url: userUrl + ':' + user,
@@ -44,7 +45,8 @@ export const addUser = (username, email, password) => {
         })
         .then(res => {
             console.log(res);
-            // welcome screen?
+            dispatch(authSignin)
+            // welcome screen? or log in
         })
         .catch(error => {
             console.log(error);
@@ -53,17 +55,21 @@ export const addUser = (username, email, password) => {
     }
 };
 
-export const ENTER_GALLERY = 'ENTER_GALLERY'; 
-export const enterGallery = () => ({
-    type: ENTER_GALLERY
+export const AUTH_LOAD = 'AUTH_LOAD';
+export const authLoad = () => ({
+    type: AUTH_LOAD
 });
 
-export const FETCH_USER_REQUEST = 'FETCH_USER_REQUEST';
-export const fetchUserRequest = () => ({
-    type: FETCH_USER_REQUEST
-});
+export const AUTH_LOAD_SUCCESS = 'AUTH_LOAD_SUCCESS';
+export const receiveAuth = () => {
+    const user =cookie.load('username');
+    return {
+        type: AUTH_LOAD_SUCCESS,
+        user
+    }
+}
 
-export const FETCH_SUCCESS = 'FETCH_SUCCESS';
-export const fetchSuccess = () => ({
-    type: FETCH_SUCCESS
-});
+export const AUTH_SIGNIN = 'AUTH_SIGNIN';
+export const authSignin = () => ({
+    type: AUTH_SIGNIN
+})

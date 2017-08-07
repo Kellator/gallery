@@ -8,10 +8,8 @@ import { Field, reduxForm, initialize } from 'redux-form';
 //separate local imports from dependencies
 import LoginBlock from '../presentational/landing/login_block';
 import SignUpBlock from '../presentational/landing/sign_up_block';
-import * as actions from '../../actions/index';
-console.log(actions);
-const auth = actions.AuthActions;
-const gal = actions.GalleryActions;
+import {showSignup, showLogin} from '../../actions/index';
+import * as authActions from '../../actions/auth_actions';
 //declare propTypes prior to component
 
 // LandingPage.propTypes = {
@@ -19,7 +17,9 @@ const gal = actions.GalleryActions;
 // }
 
 class LogIn extends React.Component {
+    
     render() {
+        console.log(this.props.login);
         return (
             <div className="log_in">
                 <LoginBlock sign_up={this.props.onClickSignup} onSubmit={this.props.loginSubmit}/>
@@ -31,18 +31,23 @@ class LogIn extends React.Component {
 //onSubmitLogin should dispatch CHECK_USER
 
 const mapStateToProps = (state, props) => ({
-    login: state.validation.userState.login
+    login: state.validation.signingIn
 });
 const mapDispatchToProps = (dispatch, ownProps) => {
-    return { onClickSignup: () => { dispatch(gal.showSignup())},
-    onClickLogin: () => { dispatch(gal.showLogin())},
+    return {
+    onClickSignup: () => { 
+        console.log("signup");
+        dispatch(showSignup())},
+    onClickLogin: () => { 
+        console.log("login");
+        dispatch(showLogin())},
     loginSubmit: (values) => { 
         event.preventDefault();
         let username = values.username;
         let email = values.email;
         let password = values.password;
         console.log('landing login : ' + username, email, password)
-        dispatch(auth.checkUser(username, email, password))}
+        dispatch(authActions.checkUser(username, email, password))}
     }
 }
 
