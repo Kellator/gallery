@@ -1,5 +1,5 @@
+'user strict';
 import axios from 'axios';
-import cookie from 'react-cookies';
 let fetchUrl = 'http://localhost:5050/';
 let userUrl = 'http://localhost:8080/';
 
@@ -54,19 +54,16 @@ export const checkUser = (username, email, password) => {
             }
         })
         .then(res => {
-            console.log(res);
-            console.log(res.data);
             let user = res.data.username;
             let email = res.data.email;
             let id = res.data.id;
             if(res.status == 200) {
                 axios({
-                    method: 'post',
-                    url: ':' + user
+                    method: 'get',
+                    url: userUrl + user,
+                    withCredentials: true
                 })
                 dispatch(authSigninSuccess(user, email, id));
-                console.log(user);
-                console.log('res was ok.  welcome to the gallery');
             }
         })
         .catch(error => {

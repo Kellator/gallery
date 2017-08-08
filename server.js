@@ -1,3 +1,5 @@
+
+'user strict';
 // dependencies
 require("babel-register");
 var express = require('express');
@@ -9,6 +11,7 @@ var session = require('express-session');
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 var cors = require('cors');
+var cookieParser = require('cookie-parser');
 
 const path = require('path');
 // local import
@@ -24,7 +27,9 @@ var Wall = require('./js/models/wall');
 // import routes from '../common/routes';
 // var __dirname = 'localhost:8080';
 const app = express();
-app.use(bodyParser.json());
+  app.use(cookieParser());
+  app.use(bodyParser.json());
+  app.use(session({ secret: 'keyboard cat' }));
 // app.use(express.static('public'));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(cors());
@@ -122,7 +127,7 @@ app.post('/login', passport.authenticate('local'),
             email: email 
         });
         console.log("RESPONSE DATA BELOW")
-        // console.log(res.req);
+        console.log(res.req);
         // console.log(res.req.user);
         // console.log(username);
         // console.log(email);
@@ -218,3 +223,7 @@ app.post('/register', function(req, res) {
         });
     });
 });
+
+app.get('/:user', function(req, res) {
+    console.log(req.cookies);
+})
