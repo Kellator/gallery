@@ -31,7 +31,7 @@ class LogIn extends React.Component {
 //onSubmitLogin should dispatch CHECK_USER
 
 const mapStateToProps = (state, props) => ({
-    login: state.validation.signingIn
+    login: state.form.login
 });
 const mapDispatchToProps = (dispatch, ownProps) => {
     return {

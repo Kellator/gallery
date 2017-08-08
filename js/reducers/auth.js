@@ -1,4 +1,5 @@
-import * as actions from '../actions/index';
+import * as action from '../actions/index';
+console.log(action);
 
 const initialState = {
     loaded: false,
@@ -25,7 +26,8 @@ export default function auth(state = initialState, action) {
                 loading: false,
                 loaded: true,
                 user: {
-                    ...state.user, username: action.user
+                    username: action.user,
+                    id: action.id
                 }
             };    
         // if authorization fails to load    
@@ -47,8 +49,9 @@ export default function auth(state = initialState, action) {
                 ...state,
                 signingIn: false,
                 user: {
-                    username: action.user.name,
-                    id: actions.user.id
+                    username: action.user,
+                    email: action.email,
+                    id: action.id
                 }
             };
         case 'AUTH_SIGNIN_FAIL':

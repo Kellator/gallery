@@ -31,14 +31,6 @@ app.use(cors());
 
 const server = http.Server(app);
 
-// load routers
-// const galleryRouter = express.Router();
-// const usersRouter = express.Router();
-// require('./routes/gallery_routes')(galleyrRouter);
-// require('./routes/usersRouter')(usersRouter, passport);
-// app.use('/api', galleryRouter);
-// app.use('/api', usersRouter);
-
 //coordinates the connection to the database, and the running on the HTTP server
 const runServer = function(callback) {
     mongoose.connect(config.DATABASE_URL, {useMongoClient: true}, function(err) {
@@ -66,10 +58,8 @@ exports.runServer = runServer;
 
 passport.use(new LocalStrategy(
     function(username, password, done) {
-        console.log('local strat function');
         User.findByUsername(username, function(err, user) {
             if (err) {
-                console.log('local strat error : ' + err);
                 return done(err);
             }
             if (!user) {
@@ -87,32 +77,6 @@ passport.use(new LocalStrategy(
         });
     }
 ));
-// passport.use(new LocalStrategy(
-//     function(email, password, done) {
-//         console.log('local strat pw ' + password);
-//         User.findByEmail(email, function(err, user) {
-//             // console.log('pass strat find email: ' + user.email);
-//             console.log("finding by email");
-//             if (err) {
-//                 console.log('local strat error : ' + err);
-//                 return done(err);
-//             }
-//             if (!user) {
-//                 return done(null, false, {
-//                     message: 'Incorrect username.'
-//                 });
-//             }
-//             user.validatePassword(password, function(err, isValid) {
-//                 if(err || !isValid) { return done(null, false, {
-//                     message: 'Incorrect Password.'
-//                 });
-//             }
-//                 return done(null, user);
-//             });
-//         });
-//     }
-// ));
-
 
 //authenticated session persistance
 passport.serializeUser(function(user, callback) {
@@ -148,14 +112,21 @@ app.get('/*', function(req, res) {
 // log in authentication request
 app.post('/login', passport.authenticate('local'),
     function(req, res) {
-        let user = res.req.body.username
-
+        let username = res.req.user.username;
+        let email = res.req.user.email;
+        let id = res.req.user._id;
         res.status(200).json({
             status: 'Login successful!',
-            user: user 
+            username: username,
+            id: id,
+            email: email 
         });
         console.log("RESPONSE DATA BELOW")
-        console.log(res.req.body.username);
+        // console.log(res.req);
+        // console.log(res.req.user);
+        // console.log(username);
+        // console.log(email);
+        // console.log(id);
 });
 //log out
 app.get('/logout', function(req, res) {
@@ -165,7 +136,6 @@ app.get('/logout', function(req, res) {
 //userName & password endpoints
 //creating a username & password 
 app.post('/register', function(req, res) {
-    // console.log('main post /register console log: ' + req)
     if (!req.body) {
         return res.status(400).json({
             message: "No Request Body"
@@ -182,7 +152,6 @@ app.post('/register', function(req, res) {
         });
     }
     var username = req.body.username;
-    // console.log(username);
     if (typeof username !== 'string') {
         return res.status(422).json({
             message: "Incorrect Field Type: username"
@@ -195,7 +164,6 @@ app.post('/register', function(req, res) {
         });
     }
     var email = req.body.email;
-    // console.log(email);
     if (typeof email !== 'string') {
         return res.status(422).json({
             message: "Incorrect Field Type: email'"
@@ -238,7 +206,6 @@ app.post('/register', function(req, res) {
                 email: email,
                 password: hash
             });
-            console.log(user);
             user.save(function(err) {
                 if (err) {
                     console.log(err);

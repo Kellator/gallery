@@ -1,3 +1,4 @@
+'use strict';
 //landing page contains the log-in component and link to set up new user profile
 import React from 'react';
 import { connect } from 'react-redux';
@@ -19,7 +20,7 @@ import * as authActions from '../../actions/auth_actions';
 
 class SignUp extends React.Component {
     render() {
-        console.log(this.props.login);
+        console.log(this.props);
         return (
             <div className="sign_up">
                 <SignUpBlock log_in={this.props.onClickLogin} onSubmit={this.props.signupSubmit}/>
@@ -31,7 +32,7 @@ class SignUp extends React.Component {
 //onSubmitLogin should dispatch CHECK_USER
 
 const mapStateToProps = (state, props) => ({
-    login: state.validation.signingIn
+    login: state.auth.signingIn
 });
 const mapDispatchToProps = (dispatch, ownProps) => {
     return { 
