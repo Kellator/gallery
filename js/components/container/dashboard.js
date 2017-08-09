@@ -21,11 +21,12 @@ import * as actions from '../../actions/index';
 
 class Dashboard extends React.Component {
     render() {
-        let userName = this.props.username
+        console.log(this.props);
+        let username = this.props.username
         return (
             <div>
                 <NavBar onSubmit={this.props.onSearchSubmit}/>
-                <p>Welcome to the Gallery, {userName}!</p>
+                <p>Welcome to the Gallery, {username}!</p>
                 <Gallery />
             </div>
         )
@@ -34,7 +35,9 @@ class Dashboard extends React.Component {
 //comments in map are examples - must be removed
 const mapStateToProps = (state, props) => ({
     // login: state.validation.login
-    username: "Betty"
+    username: state.auth.user.username,
+    email: state.auth.user.email,
+    id: state.auth.user.id
 });
 const mapDispatchToProps = (dispatch, ownProps) => {
     return { onSearchSubmit: (value) => {

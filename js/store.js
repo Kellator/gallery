@@ -3,7 +3,7 @@ import createBrowserHistory from 'history/createBrowserHistory';
 import { syncHistoryWithStore } from 'react-router-redux';
 import logger from 'redux-logger'
 import thunk from 'redux-thunk';
-import reducer from './reducers/index';
+import rootReducer from './reducers/index';
 
 const middleware = [
     logger,
@@ -16,7 +16,7 @@ const enhancers = compose(
 );
 
 let store = createStore(
-    reducer,
+    rootReducer,
     enhancers
 )
 export const history = syncHistoryWithStore(createBrowserHistory(), store);
