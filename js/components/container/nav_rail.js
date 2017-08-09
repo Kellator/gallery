@@ -8,7 +8,7 @@ import { dispatch } from 'react-redux';
 import GallerySearch from '../presentational/navigation/gallery_search';
 import GalleryLogo from '../presentational/landing/gallery_logo';
 import Menu from '../presentational/navigation/action_menu';
-import * as actions from '../../actions/index';
+import * as galleryActions from '../../actions/gallery_actions';
 
 class NavBar extends React.Component {
     render() {
@@ -34,7 +34,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
         onClickA: () => {
             event.preventDefault();
             console.log(this);
-            dispatch(actions.toggleMenu());
+            dispatch(galleryActions.toggleMenu());
             console.log("Button A Clicked");
         }
         // onClickB: () => {

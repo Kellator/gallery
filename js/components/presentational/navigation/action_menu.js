@@ -14,7 +14,7 @@ import { CSSTransitionGroup } from 'react-transition-group';
 class Menu extends React.Component {
     render() {
         console.log(this.props);
-        let menuState = this.props.displayState.menuActive;
+        let menuState = this.props.menu.menuActive;
         let menuType = this.props.className;
         let menu;
         let list;
@@ -55,7 +55,7 @@ class Menu extends React.Component {
 }
 //comments in map are examples - must be removed
 const mapStateToProps = (state, props) => ({
-    displayState: {
+    menu: {
         menuActive: state.menu.menuActive,
         menu: state.menu.menu
     }
@@ -64,26 +64,3 @@ const mapStateToProps = (state, props) => ({
 
 export default connect(mapStateToProps)(Menu);
 
-//         if ( (menuType == "user_menu") && (menuState == true ) ) {
-//             menu = <div>
-//                         <ul className="user_menu">
-//                             <li>View My Gallery</li>
-//                             <li>Check My Messages</li>
-//                             <li>Log Out</li>
-//                         </ul>
-//                     </div>
-//         }
-//         if ( (menuType == "gallery_menu") && (menuState == true ) ) {
-//             menu = <div>
-//                         <ul className="gallery_menu">
-//                             <li>Share Exhibit</li>
-//                             <li>Share Wall</li>
-//                             <li>View Exhibit</li>
-//                         </ul>
-//                     </div>
-//         }
-        // if (menuState == true) {
-        //     menu = <div>
-        //                 {list}
-        //             </div>
-        // }

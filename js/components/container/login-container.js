@@ -26,9 +26,6 @@ class LogIn extends React.Component {
         if(authStatus == true) {
             return <Redirect push to='/user' />
         }
-        // if(this.props.authorized == true) {
-        //     alert("yes it worked");
-        // }
         return (
             <div className="log_in">
                 <LoginBlock sign_up={this.props.onClickSignup} onSubmit={this.props.loginSubmit}/>

@@ -21,6 +21,7 @@ import * as actions from '../../actions/index';
 
 class Dashboard extends React.Component {
     render() {
+        console.log(this.props);
         let username = this.props.username
         return (
             <div>
