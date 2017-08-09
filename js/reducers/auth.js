@@ -3,6 +3,7 @@ console.log(action);
 
 const initialState = {
     loaded: false,
+    authorized: false,
     user: {
         username: null,
         id: null,
@@ -27,6 +28,7 @@ export default function auth(state = initialState, action) {
                 loaded: true,
                 user: {
                     username: action.user,
+                    email: action.email,
                     id: action.id
                 }
             };    
@@ -48,6 +50,7 @@ export default function auth(state = initialState, action) {
             return {
                 ...state,
                 signingIn: false,
+                authorized: true,
                 user: {
                     username: action.user,
                     email: action.email,
@@ -57,6 +60,7 @@ export default function auth(state = initialState, action) {
         case 'AUTH_SIGNIN_FAIL':
             return {
                 ...state,
+                authorized: false,
                 user: { 
                     username: null,
                     id: null
@@ -83,6 +87,7 @@ export default function auth(state = initialState, action) {
         case 'AUTH_SIGNOUT':
             return {
                 ...state,
+                authorized: false,
                 sighingOut: true
             };
         case 'AUTH_SIGNOUT_SUCCESS':

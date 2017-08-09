@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { dispatch } from 'react-redux';
 import { Field, reduxForm, initialize } from 'redux-form';
+import { Redirect } from 'react-router';
 //separate local imports from dependencies
 import LoginBlock from '../presentational/landing/login_block';
 import SignUpBlock from '../presentational/landing/sign_up_block';
@@ -15,11 +16,19 @@ import * as authActions from '../../actions/auth_actions';
 // LandingPage.propTypes = {
 
 // }
-
 class LogIn extends React.Component {
-    
+
     render() {
-        console.log(this.props.login);
+        console.log(this.props.location);
+        console.log(this.props);
+        let authStatus = this.props.authorized;
+        let comp;
+        if(authStatus == true) {
+            return <Redirect push to='/user' />
+        }
+        // if(this.props.authorized == true) {
+        //     alert("yes it worked");
+        // }
         return (
             <div className="log_in">
                 <LoginBlock sign_up={this.props.onClickSignup} onSubmit={this.props.loginSubmit}/>
@@ -31,7 +40,8 @@ class LogIn extends React.Component {
 //onSubmitLogin should dispatch CHECK_USER
 
 const mapStateToProps = (state, props) => ({
-    login: state.form.login
+    login: state.form.login,
+    authorized: state.auth.authorized
 });
 const mapDispatchToProps = (dispatch, ownProps) => {
     return {
@@ -46,7 +56,6 @@ const mapDispatchToProps = (dispatch, ownProps) => {
         let username = values.username;
         let email = values.email;
         let password = values.password;
-        console.log('landing login : ' + username, email, password)
         dispatch(authActions.checkUser(username, email, password))}
     }
 }

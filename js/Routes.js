@@ -13,13 +13,3 @@ export default class Routes extends React.Component {
     }
 }
 
-                // <div>
-                //     <ul>
-                //         <li><Link to="/">Landing</Link></li>
-                //         <li><Link to="/gallery">Gallery</Link></li>
-                //     </ul>
-                //     <Switch>
-                //     <Route exact path="/" component={LandingPage} /> 
-                //     <Route exact path="/gallery" component={Dashboard} />
-                //     </Switch>
-                // </div>

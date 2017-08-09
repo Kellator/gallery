@@ -43,7 +43,7 @@ export const addUser = (username, email, password) => {
 };
 export const checkUser = (username, email, password) => {
     return dispatch => {
-        dispatch(authLoad())
+        dispatch(authLoadSuccess())
         axios({
             method: 'post',
             url: fetchUrl + 'login',
@@ -58,11 +58,11 @@ export const checkUser = (username, email, password) => {
             let email = res.data.email;
             let id = res.data.id;
             if(res.status == 200) {
-                axios({
-                    method: 'get',
-                    url: userUrl + user,
-                    withCredentials: true
-                })
+                // axios({
+                //     method: 'get',
+                //     url: userUrl + user,
+                //     withCredentials: true
+                // })
                 dispatch(authSigninSuccess(user, email, id));
             }
         })
