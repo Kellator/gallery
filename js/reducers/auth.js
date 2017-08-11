@@ -1,5 +1,4 @@
 import * as action from '../actions/index';
-console.log(action);
 
 const initialState = {
     loaded: false,

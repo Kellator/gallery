@@ -5,19 +5,18 @@ import { dispatch } from 'react-redux';
 import { connect } from 'react-redux';
 import { Field, reduxForm, initialize } from 'redux-form';
 //separate local imports from dependencies;
-import Messenger from '../presentational/messenger_rail';
 import BrowserRail from '../presentational/browser_rail';
 import NavBar from '../container/nav_rail';
 import Gallery from '../container/gallery';
+import Messenger from './messenger';
 import * as actions from '../../actions/index';
 //declare propTypes prior to component
 
-// GalleryApp.propTypes = {
-
+// Dashboard.propTypes = {
+//     username: PropTypes.string,
+//     email: PropTypes.string,
+//     id: PropTypes.string
 // }
-
-//user state to block access?  if authorized: true render component else redirect to login page
-//need state to remove welcome message and display only the 3 components (navBar, BrowserView, MessengerRail)
 
 class Dashboard extends React.Component {
     render() {
@@ -25,27 +24,22 @@ class Dashboard extends React.Component {
         let username = this.props.username
         return (
             <div>
-                <NavBar onSubmit={this.props.onSearchSubmit}/>
+                <NavBar />
                 <p>Welcome to the Gallery, {username}!</p>
                 <Gallery />
+                <Messenger /> 
             </div>
         )
     }
 }
-//comments in map are examples - must be removed
+
 const mapStateToProps = (state, props) => ({
-    // login: state.validation.login
     username: state.auth.user.username,
     email: state.auth.user.email,
     id: state.auth.user.id
 });
-const mapDispatchToProps = (dispatch, ownProps) => {
-    return { onSearchSubmit: (value) => {
-        event.preventDefault();
-        let newValue = value.gallery_search_input;
-        console.log(newValue);
-        dispatch(actions.searchGallery(newValue))},
-    }
-}
+// const mapDispatchToProps = (dispatch, ownProps) => {
+    
+// }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);
+export default connect(mapStateToProps)(Dashboard);

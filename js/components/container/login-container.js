@@ -19,8 +19,6 @@ import * as authActions from '../../actions/auth_actions';
 class LogIn extends React.Component {
 
     render() {
-        console.log(this.props.location);
-        console.log(this.props);
         let authStatus = this.props.authorized;
         let comp;
         if(authStatus == true) {
@@ -33,8 +31,6 @@ class LogIn extends React.Component {
         )
     }
 }
-//event handlers and mapDispatchToProps?
-//onSubmitLogin should dispatch CHECK_USER
 
 const mapStateToProps = (state, props) => ({
     login: state.form.login,

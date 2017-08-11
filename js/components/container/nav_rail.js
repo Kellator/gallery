@@ -28,12 +28,15 @@ const mapStateToProps = (state, props) => ({
 });
 const mapDispatchToProps = (dispatch, ownProps) => {
     return { 
-        onSubmit:() => {
+        onSubmit:(values) => {
             event.preventDefault();
+            console.log(values);
+            let newValue = values.gallery_search_input;
+            console.log(newValue);
+            dispatch(galleryActions.searchGallery(newValue))
         },
         onClickA: () => {
             event.preventDefault();
-            console.log(this);
             dispatch(galleryActions.toggleMenu());
             console.log("Button A Clicked");
         }

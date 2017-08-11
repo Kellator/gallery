@@ -6,12 +6,8 @@ import SignUp from './signup-container';
 import Dashboard from './dashboard';
 import Welcome from './welcome';
 
-const requireAuth = () => {
-    
-}
 export default class Main extends React.Component {    
     render() {
-        console.log(this.props);
         return (
             <Switch>
                 <Route exact path='/' component={Welcome}/>
