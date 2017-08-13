@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { dispatch } from 'react-redux';
+import { Link } from 'react-router-dom';
 // import ReactCSSTransitionGroup from 'react-transition-group';
 import { CSSTransitionGroup } from 'react-transition-group';
 //separate local imports from dependencies

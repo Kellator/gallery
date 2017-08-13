@@ -57,6 +57,7 @@ class SignUpForm extends React.Component {
     }
 }
 SignUpForm = reduxForm({
+    name: 'signup',
     form: 'signup'
 })(SignUpForm);
 

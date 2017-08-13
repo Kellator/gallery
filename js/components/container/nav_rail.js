@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { dispatch } from 'react-redux';
-//separate local imports from dependencies
+//separate local imports from dependencies.
 import GallerySearch from '../presentational/navigation/gallery_search';
 import GalleryLogo from '../presentational/landing/gallery_logo';
 import Menu from '../presentational/navigation/action_menu';
@@ -28,12 +28,15 @@ const mapStateToProps = (state, props) => ({
 });
 const mapDispatchToProps = (dispatch, ownProps) => {
     return { 
-        onSubmit:() => {
+        onSubmit:(values) => {
             event.preventDefault();
+            console.log(values);
+            let newValue = values.gallery_search_input;
+            console.log(newValue);
+            dispatch(galleryActions.searchGallery(newValue))
         },
         onClickA: () => {
             event.preventDefault();
-            console.log(this);
             dispatch(galleryActions.toggleMenu());
             console.log("Button A Clicked");
         }

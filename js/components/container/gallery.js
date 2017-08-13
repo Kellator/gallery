@@ -9,7 +9,7 @@ import * as actions from '../../actions/index';
 import Menu from '../presentational/navigation/action_menu';
 import Exhibit from '../presentational/gallery/exhibit';
 import Wall from '../presentational/gallery/wall';
-import Messenger from './messenger';
+
 //declare propTypes prior to component
 
 // Gallery.propTypes = {
@@ -23,8 +23,7 @@ class Gallery extends React.Component {
         return (
             <div>
                 <p>To Show Gallery Loaded</p>
-                <Wall /> 
-                <Messenger />               
+                <Wall />               
             </div>
         );
     };

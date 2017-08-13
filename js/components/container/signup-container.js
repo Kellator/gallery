@@ -28,28 +28,23 @@ class SignUp extends React.Component {
         )
     }
 }
-//event handlers and mapDispatchToProps?
-//onSubmitLogin should dispatch CHECK_USER
 
 const mapStateToProps = (state, props) => ({
     login: state.auth.signingIn
 });
 const mapDispatchToProps = (dispatch, ownProps) => {
     return { 
-    onClickSignup: () => { 
-        console.log("signup");
-        dispatch(showSignup())},
-    onClickLogin: () => { 
-        console.log("login");
-        dispatch(showLogin())},
-    signupSubmit: (values) => { 
-        event.preventDefault();
-        let username = values.username;
-        let email = values.email;
-        let password = values.password;
-        console.log('landing submit :  ' + username, email, password);
-        dispatch(authActions.addUser(username, email, password));
-        console.log("Howdy, sign up input worked")}
+        onClickSignup: () => { 
+            dispatch(showSignup())},
+        onClickLogin: () => { 
+            dispatch(showLogin())},
+        signupSubmit: (values) => { 
+            event.preventDefault();
+            let username = values.username;
+            let email = values.email;
+            let password = values.password;
+            dispatch(authActions.addUser(username, email, password));
+        }
     }
 }
 

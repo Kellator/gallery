@@ -16,7 +16,7 @@ class GallerySearch extends React.Component {
                     <fieldset className="gallery_search">
                         <legend >Gallery Search</legend>
                         <label htmlFor="gallery_search_input">Gallery Search</label>
-                        <Field id="gallery_search_input" name="gallery_search_input" type="text" placeholder="illustration" component="input"/>
+                        <Field name="gallery_search_input" type="text" placeholder="illustration" component="input"/>
                     </fieldset>
                 </form>
             </div>
@@ -25,7 +25,8 @@ class GallerySearch extends React.Component {
 }
 
 GallerySearch = reduxForm({
-    form: 'gallery_search'
+    name: 'gallery_search',
+    form: 'gallerySearch'
 })(GallerySearch);
 
 export default GallerySearch;

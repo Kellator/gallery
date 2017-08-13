@@ -13,7 +13,6 @@ import { Link } from 'react-router-dom';
 
 export default class SignUpText extends React.Component {   
     render() {
-        console.log(this.props);
         return (
             <p className="new_user_signup">New to Gallery?  <Link to='/signup' onClick={this.props.onClick}>Sign up for the Gallery</Link></p>
         );

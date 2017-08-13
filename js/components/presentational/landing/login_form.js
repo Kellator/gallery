@@ -58,6 +58,7 @@ class LoginForm extends React.Component {
     }
 }
 LoginForm = reduxForm({
+    name: 'login',
     form: 'login'
 })(LoginForm);
 
