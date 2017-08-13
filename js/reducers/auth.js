@@ -1,5 +1,6 @@
 import * as action from '../actions/index';
 
+
 const initialState = {
     loaded: false,
     authorized: false,
@@ -11,7 +12,7 @@ const initialState = {
 };
 
 export default function auth(state = initialState, action) {
-    console.log("Heya!  Action Type: " + action.type)
+    // console.log("Heya!  Action Type: " + action.type)
     switch(action.type) {
         // during fetch for authorization
         case 'AUTH_LOAD':

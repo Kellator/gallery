@@ -1,3 +1,7 @@
+'user strict';
+import axios from 'axios';
+let fetchUrl = 'http://localhost:5050/';
+let userUrl = 'http://localhost:8080/';
 //GALLERY ACTIONS
 //adds exhibit data to exhibit document
 export const ADD_NEW_EXHIBIT = 'ADD_NEW_EXHIBIT';
@@ -73,10 +77,31 @@ export const logOut = () => ({
 
 //search 
 export const SEARCH_GALLERY = 'SEARCH_GALLERY';
-export const searchGallery = (value) => ({
-    type: SEARCH_GALLERY,
-    value
+export const searchGallery = () => ({
+    type: SEARCH_GALLERY
 });
+export const SEARCH_GALLERY_SUCCESS = 'SEARCH_GALLERY_SUCCESS';
+export const searchGallerySuccess = (data) => ({
+    type: SEARCH_GALLERY_SUCCESS,
+    data
+});
+export const galleryFetch = () => {
+    return dispatch => {
+        dispatch(searchGallery())
+        axios({
+            method: 'get',
+            url: fetchUrl + 'gallery'
+        })
+        .then(res => {
+            if(res.status == 200) {
+                dispatch(searchGallerySuccess(data));
+            }
+        })
+        .catch(error => {
+            console.log(error);
+        });       
+    }
+};
 //shows selected exhibit
 export const SHOW_EXHIBIT = 'SHOW_EXHIBIT';
 export const showExhibit = (exhibit) => ({

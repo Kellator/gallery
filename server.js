@@ -126,8 +126,8 @@ app.post('/login', passport.authenticate('local'),
             id: id,
             email: email 
         });
-        console.log("RESPONSE DATA BELOW")
-        console.log(res.req);
+        // console.log("RESPONSE DATA BELOW")
+        // console.log(res.req);
         // console.log(res.req.user);
         // console.log(username);
         // console.log(email);
@@ -226,4 +226,8 @@ app.post('/register', function(req, res) {
 
 app.get('/:user', function(req, res) {
     console.log(req.cookies);
-})
+});
+app.get('/gallery', function(req, res) {
+    console.log('gallery request made');
+    console.log(res.req);
+});
