@@ -1,5 +1,4 @@
-
-'user strict';
+'use strict';
 // dependencies
 require("babel-register");
 var express = require('express');
@@ -24,17 +23,22 @@ var UserGallery = require('./js/models/user-gallery');
 var UserWall = require('./js/models/user-wall');
 var User = require('./js/models/user');
 var Wall = require('./js/models/wall');
-// import routes from '../common/routes';
-// var __dirname = 'localhost:8080';
+var routes = require('./routes/routes');
+// var galleryRoutes = require('./routes/gallery_routes');
+// var userRoutes = require('./routes/user_routes');
 const app = express();
   app.use(cookieParser());
   app.use(bodyParser.json());
   app.use(session({ secret: 'keyboard cat' }));
+  app.use('/*', routes);
+//   app.use('/gallery', galleryRoutes);
+//   app.use('/user', userRoutes);
 // app.use(express.static('public'));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(cors());
 
 const server = http.Server(app);
+console.log(routes);
 
 //coordinates the connection to the database, and the running on the HTTP server
 const runServer = function(callback) {
@@ -126,12 +130,6 @@ app.post('/login', passport.authenticate('local'),
             id: id,
             email: email 
         });
-        // console.log("RESPONSE DATA BELOW")
-        // console.log(res.req);
-        // console.log(res.req.user);
-        // console.log(username);
-        // console.log(email);
-        // console.log(id);
 });
 //log out
 app.get('/logout', function(req, res) {
@@ -223,11 +221,41 @@ app.post('/register', function(req, res) {
         });
     });
 });
-
-app.get('/:user', function(req, res) {
-    console.log(req.cookies);
-});
-app.get('/gallery', function(req, res) {
-    console.log('gallery request made');
-    console.log(res.req);
-});
+// let mockExhibit1 = {
+//     title: 'Replacement for the Stars',
+//     username: 'testy',
+//     image:  'http://orig00.deviantart.net/c31e/f/2016/089/d/c/replacement_for_the_stars_by_yuumei-d9x282e.jpg',
+//     siteLink: 'http://yuumei.deviantart.com/art/Replacement-for-the-Stars-599726678',
+//     categories: ['illustration', 'manga', 'digital', 'landscapes', 'scenery', 'people', 'portrait']
+// };
+// var mockExhibit2 = {
+//     title: 'Death Valley',
+//     username: 'testy',
+//     image:  'https://s-media-cache-ak0.pinimg.com/564x/82/37/ee/8237ee9fff1bd5b205cc0b3cc23c253b.jpg',
+//     siteLink: 'http://dabana.deviantart.com/art/Death-Valley-535687540',
+//     categories: ['illustration', 'painting', 'digital', 'landscapes', 'scenery']
+// };
+// var mockExhibit3 = {
+//     title: 'Fly by Night',
+//     username: 'test4',
+//     image:  'http://dspncdn.com/a1/media/692x/78/c8/a1/78c8a13c4dd878d82d22940b48512315.jpg',
+//     siteLink: 'http://designspiration.net/image/4609558023629/',
+//     categories: ['illustration', 'painting', 'digital', 'whimsical', 'people', 'portrait']
+// };
+// let mockExhibit = mockExhibit3
+// Exhibit.create(mockExhibit, function(err, exhibit) {
+//     let title = mockExhibit.title;
+//     let creator = mockExhibit.username;
+//     let image = mockExhibit.image;
+//     let siteLink = mockExhibit.siteLink;
+//     let categories = mockExhibit.categories;
+//     if (err || !exhibit) {
+//         console.error("Could not create exhibit");
+//         console.log(err);
+//         // return res.status(500).json({
+//         //     message: 'Internal Server Error'
+//         // });
+//     }
+//     console.log("Created Exhibit ");
+//     console.log(exhibit);
+// });

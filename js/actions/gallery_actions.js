@@ -88,10 +88,11 @@ export const searchGallerySuccess = (data) => ({
 export const galleryFetch = () => {
     return dispatch => {
         dispatch(searchGallery())
-        axios({
-            method: 'get',
-            url: fetchUrl + 'gallery'
-        })
+        // axios({
+        //     method: 'get',
+        //     url: fetchUrl + 'gallery'
+        // })
+        axios.get(fetchUrl + "gallery")
         .then(res => {
             if(res.status == 200) {
                 dispatch(searchGallerySuccess(data));
