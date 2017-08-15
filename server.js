@@ -34,7 +34,7 @@ const app = express();
 //   app.use('/gallery', galleryRoutes);
 //   app.use('/user', userRoutes);
 // app.use(express.static('public'));
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join()));
 app.use(cors());
 
 const server = http.Server(app);
@@ -112,7 +112,7 @@ app.use(passport.session());
 //     saveUninitialized: false
 // }));
 app.get('/*', function(req, res) {
-    res.sendFile(path.join(__dirname, 'public', 'index.html'));
+    res.sendFile(path.join(__dirname, 'index.html'));
 })
 
 // app.get('/', function(req, res) {

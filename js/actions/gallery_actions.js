@@ -95,7 +95,8 @@ export const galleryFetch = () => {
         axios.get(fetchUrl + "gallery")
         .then(res => {
             if(res.status == 200) {
-                dispatch(searchGallerySuccess(data));
+                console.log(res);
+                dispatch(searchGallerySuccess());
             }
         })
         .catch(error => {
