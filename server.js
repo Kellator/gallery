@@ -27,18 +27,13 @@ var routes = require('./routes/routes');
 // var galleryRoutes = require('./routes/gallery_routes');
 // var userRoutes = require('./routes/user_routes');
 const app = express();
-  app.use(cookieParser());
-  app.use(bodyParser.json());
-  app.use(session({ secret: 'keyboard cat' }));
-  app.use('/*', routes);
-//   app.use('/gallery', galleryRoutes);
-//   app.use('/user', userRoutes);
-// app.use(express.static('public'));
-app.use(express.static(path.join()));
+app.use(cookieParser());
+app.use(bodyParser.json());
+app.use(session({ secret: 'keyboard cat' }));
 app.use(cors());
+app.use('/', routes);
 
 const server = http.Server(app);
-console.log(routes);
 
 //coordinates the connection to the database, and the running on the HTTP server
 const runServer = function(callback) {
@@ -111,13 +106,13 @@ app.use(passport.session());
 //     resave: false,
 //     saveUninitialized: false
 // }));
-app.get('/*', function(req, res) {
-    res.sendFile(path.join(__dirname, 'index.html'));
-})
+// app.get('/*', function(req, res) {
+//     res.sendFile(path.join(__dirname, 'index.html'));
+// })
 
-// app.get('/', function(req, res) {
-//     return res.sendStatus(200);
-// });
+app.get('/', function(req, res) {
+    return res.sendStatus(200);
+});
 // log in authentication request
 app.post('/login', passport.authenticate('local'),
     function(req, res) {

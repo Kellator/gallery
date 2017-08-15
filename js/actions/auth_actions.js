@@ -63,7 +63,7 @@ export const checkUser = (username, email, password) => {
             let gallery = res.data.gallery;
             if(res.status == 200) {
                 dispatch(authSigninSuccess(user, email, id));
-                dispatch(galleryActions.galleryFetch(user, gallery))
+                dispatch(galleryActions.galleryFetch())
             }
         })
         .catch(error => {

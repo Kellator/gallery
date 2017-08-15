@@ -5,6 +5,8 @@ var user_routes = require('./user_routes');
 var express = require('express');
 var router = express.Router();
 
+router.use('/gallery', gallery_routes);
+router.use('/user', user_routes);
 module.exports = router;
 
 

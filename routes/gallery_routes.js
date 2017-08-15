@@ -12,17 +12,33 @@ var router = express.Router();
 
 //  returns all items in the app as a list (array of items)
 //  allows scrolling view of all items or exhibits in the app
-router.get('/gallery', function(req, res) {
+router.get('/', function(req, res) {
     console.log('gallery request made');
-    console.log(req.body);
-    Exhibits.find({}, function(err, exhibit) {
-        if (err) {
-            return res.status(500).json({
-                message: 'Internal Server Error'
-            });
-        }
-        return res.status(201).json(exhibits);
-    });
+    console.log(req.query);
+    var gallerySearch = req.query;
+    if (gallerySearch == "") {
+        Exhibit.find().exec(function(err,exhibits) {
+            if (err) {
+                console.log(err);
+                return res.status(500).json({
+                    message: 'Internal Server Error'
+                });
+            }
+            res.json(exhibits);
+        });
+    }
+    else {
+        res.json({});
+        // Exhibit.find({ 'categories': gallery_search })
+    }
+    // Exhibits.find({}, function(err, exhibit) {
+    //     if (err) {
+    //         return res.status(500).json({
+    //             message: 'Internal Server Error'
+    //         });
+    //     }
+    //     return res.status(201).json(exhibits);
+    // });
 });
 //  returns all walls in the app as a categorized list (array of arrays)
 //  allows a view of all the categories or walls in the entire app
