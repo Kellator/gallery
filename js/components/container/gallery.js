@@ -8,28 +8,30 @@ import { dispatch } from 'react-redux';
 import * as actions from '../../actions/index';
 import Menu from '../presentational/navigation/action_menu';
 import Exhibit from '../presentational/gallery/exhibit';
+import Exhibits from './exhibits';
 import Wall from '../presentational/gallery/wall';
+import NoResult from '../presentational/gallery/noResult';
 
 //declare propTypes prior to component
 
 // Gallery.propTypes = {
 
 // }
-// SHOULD SHOW ALL WALLS IN THE APP ON LOAD AND THEN SWITCH WHEN USER SELECTS 'VIEW MY GALLERY'
+// map over all exhibits and display 
 
 class Gallery extends React.Component {
     render() {
-        console.log(this.props);
-        return (
-            <div>
-                <p>To Show Gallery Loaded</p>
-                <Wall />               
-            </div>
-        );
+        let exhibits = this.props.galleryExhibits;
+        console.log(exhibits);
+        if (exhibits.length === 0) {
+            return <NoResult />
+        }
+        return <Exhibits exhibits={this.props.galleryExhibits} />
     };
 };
 const mapStateToProps = (state, props) => ({
-   
+    gallerySearch: state.gallery.gallerySearch,
+    galleryExhibits: state.gallery.galleryExhibits
 });
 const mapDispatchToProps = (dispatch, ownProps) => {
     return { 
