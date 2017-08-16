@@ -24,8 +24,7 @@ var UserWall = require('./js/models/user-wall');
 var User = require('./js/models/user');
 var Wall = require('./js/models/wall');
 var routes = require('./routes/routes');
-// var galleryRoutes = require('./routes/gallery_routes');
-// var userRoutes = require('./routes/user_routes');
+
 const app = express();
 app.use(cookieParser());
 app.use(bodyParser.json());
@@ -100,15 +99,6 @@ passport.deserializeUser(function(id, callback) {
 // passport.use(strategy);
 app.use(passport.initialize());
 app.use(passport.session());
-
-// app.use(require('express-session')({
-//     secret: 'pickle relish',
-//     resave: false,
-//     saveUninitialized: false
-// }));
-// app.get('/*', function(req, res) {
-//     res.sendFile(path.join(__dirname, 'index.html'));
-// })
 
 app.get('/', function(req, res) {
     return res.sendStatus(200);

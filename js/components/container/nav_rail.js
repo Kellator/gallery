@@ -12,13 +12,11 @@ import * as galleryActions from '../../actions/gallery_actions';
 
 class NavBar extends React.Component {
     render() {
-        console.log(this.props);
         return (
             <div>
                 <GallerySearch onSubmit={this.props.onSubmit}/>
                 <GalleryLogo />
                 <Menu title={"Menu A"} className={"user_menu"} onClick={this.props.onClickA}/>
-                {/* <Menu title={"Menu B"} className={"gallery_menu"} onClick={this.props.onClickB}/> */}
             </div>
         );
     }
@@ -32,25 +30,16 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     return { 
         onSubmit:(values) => {
             event.preventDefault();
-            console.log(values);
-            console.log(ownProps);
             let search = values.gallery_search_input;
             if (search == undefined ) {
                 search = "";
             }
-            console.log(search);
             dispatch(galleryActions.galleryFetch(search))
         },
         onClickA: () => {
             event.preventDefault();
             dispatch(galleryActions.toggleMenu());
-            console.log("Button A Clicked");
         }
-        // onClickB: () => {
-        //     event.preventDefault();
-        //     dispatch(actions.toggleMenu());
-        //     console.log("Button B Clicked");
-        // }
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(NavBar);
