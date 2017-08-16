@@ -14,13 +14,13 @@ import { CSSTransitionGroup } from 'react-transition-group';
 // }
 class Menu extends React.Component {
     render() {
-        console.log(this.props);
+        // console.log(this.props);
         let menuState = this.props.menu.menuActive;
         let menuType = this.props.className;
         let menu;
         let list;
         let menuName = this.props.title;
-        console.log(menuType);
+        // console.log(menuType);
         if (menuState == true) {
             if (menuType == "user_menu") {
                 list = <ul className="user_menu_list">

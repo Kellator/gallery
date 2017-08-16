@@ -1,5 +1,5 @@
 import * as action from '../actions/gallery_actions';
-
+console.log(action);
 const initialState = {
     searching: false,
     loaded: false,
@@ -7,20 +7,25 @@ const initialState = {
     galleryExhibits: []
 }
 export default function gallery(state = initialState, action) {
-    // console.log("gallery reducer: ") + action.type;
-    // console.log(state);
     switch(action.type) {
-        case 'GALLERY_SEARCH' :
+        case 'SEARCH_GALLERY' :
             return {
                 ...state,
                 searching: true,
-                gallerySearch: state.form.values.gallery_search_input
+                gallerySearch: action.gallery
             };
         case 'SEARCH_GALLERY_SUCCESS' :
             return {
                 ...state,
                 searching: false,
                 loaded: true
+            };
+        case 'SEARCH_GALLERY_FAIL' :
+            return {
+                ...state,
+                searching: false,
+                loaded: false,
+                error: action.error
             }
         default :
             return state;

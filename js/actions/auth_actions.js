@@ -61,9 +61,10 @@ export const checkUser = (username, email, password) => {
             let email = res.data.email;
             let id = res.data.id;
             let gallery = res.data.gallery;
+            let search = '';
             if(res.status == 200) {
                 dispatch(authSigninSuccess(user, email, id));
-                dispatch(galleryActions.galleryFetch())
+                dispatch(galleryActions.galleryFetch(search))
             }
         })
         .catch(error => {
