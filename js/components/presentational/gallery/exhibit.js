@@ -12,19 +12,21 @@ import Menu from '../navigation/action_menu.js';
 
 export default class Exhibit extends React.Component {
     render() {
-        let exhibitImage;
-        let imageLink;
-        let sourceLink;
-        let exhibitDescription;
-        let exhibitComments;
+        let exhibitImage = this.props.exhibit.image;
+        let imageLink = this.props.exhibit.image;
+        let siteLink = this.props.exhibit.siteLink;
+        let title = this.props.exhibit.title;
+        let postedBy = this.props.exhibit.username;
         let menuType;
         console.log(this.props);
+        console.log(exhibitImage);
+        console.log(postedBy);
         return (
             <div>
-                <img src={exhibitImage}/>
-                <p>{exhibitDescription}</p>
+                <img className="exhibit-image" alt="image from exhibit" src={exhibitImage}/>
+                <p className="exhibit-title">{title}</p>
+                <p className="exhibit-poster">Posted by: {postedBy} </p>
                 <Menu className={"gallery_menu"}/>
-                <p>To Show Exhibit Loaded</p>
             </div>
         )
     }
