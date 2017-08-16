@@ -77,8 +77,9 @@ export const logOut = () => ({
 
 //search 
 export const SEARCH_GALLERY = 'SEARCH_GALLERY';
-export const searchGallery = (value) => ({
-    type: SEARCH_GALLERY
+export const searchGallery = (search) => ({
+    type: SEARCH_GALLERY,
+    search
 });
 export const SEARCH_GALLERY_SUCCESS = 'SEARCH_GALLERY_SUCCESS';
 export const searchGallerySuccess = (data) => ({
@@ -87,7 +88,7 @@ export const searchGallerySuccess = (data) => ({
 });
 export const galleryFetch = (search) => {
     return dispatch => {
-        dispatch(searchGallery())
+        dispatch(searchGallery(search))
         axios.get(fetchUrl + "gallery", {
             params: {
                 term: search

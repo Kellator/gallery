@@ -25,7 +25,7 @@ class NavBar extends React.Component {
 }
 // add default value to search props to return all on initial load?
 const mapStateToProps = (state, props) => ({
-    gallery: state.gallery.gallerySearch
+    gallerySearch: state.gallery.gallerySearch
 });
 const mapDispatchToProps = (dispatch, ownProps) => {
     return { 
@@ -33,9 +33,9 @@ const mapDispatchToProps = (dispatch, ownProps) => {
             event.preventDefault();
             console.log(values);
             console.log(ownProps);
-            let newValue = values.gallery_search_input;
-            console.log(newValue);
-            dispatch(galleryActions.galleryFetch(newValue))
+            let search = values.gallery_search_input;
+            console.log(search);
+            dispatch(galleryActions.galleryFetch(search))
         },
         onClickA: () => {
             event.preventDefault();

@@ -1,5 +1,5 @@
 import * as action from '../actions/gallery_actions';
-console.log(action);
+
 const initialState = {
     searching: false,
     loaded: false,
@@ -12,7 +12,7 @@ export default function gallery(state = initialState, action) {
             return {
                 ...state,
                 searching: true,
-                gallerySearch: action.gallery
+                gallerySearch: action.search
             };
         case 'SEARCH_GALLERY_SUCCESS' :
             return {

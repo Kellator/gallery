@@ -4,7 +4,8 @@
 'use strict';
 var express = require('express');
 var router = express.Router();
-
+var mongoose = require('mongoose');
+var Exhibit = mongoose.model('Exhibit');
 //  loads index.html for all routes
 // router.get('/*', function (req, res) {
 //     res.sendFile(path.join(__dirname, 'public', 'index.html'));
@@ -15,8 +16,8 @@ var router = express.Router();
 router.get('/', function(req, res) {
     console.log('gallery request made');
     console.log(req.query);
-    var gallerySearch = req.query;
-    if (gallerySearch == "") {
+    var search = req.query.term;
+    if (search == "") {
         Exhibit.find().exec(function(err,exhibits) {
             if (err) {
                 console.log(err);
@@ -28,8 +29,16 @@ router.get('/', function(req, res) {
         });
     }
     else {
-        res.json({});
-        // Exhibit.find({ 'categories': gallery_search })
+        Exhibit.find({ 'categories': search }).exec(function(err, exhibits) {
+            if (err) {
+                console.log(err);
+                console.log('cannot search by category');
+                return res.status(500).json({
+                    message: 'Internal Server Error'
+                });
+            }
+            res.json(exhibits);
+        })
     }
     // Exhibits.find({}, function(err, exhibit) {
     //     if (err) {
