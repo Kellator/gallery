@@ -96,8 +96,15 @@ export const galleryFetch = (search) => {
         })
         .then(res => {
             console.log(res);
+            console.log(res.data);
+            let data = res.data
+            // let exhibitId = res.data._id;
+            // let title = res.data.title;
+            // let imageUrl = res.data.image;
+            // let siteUrl = res.data.siteLink;
+            // let postedBy = res.data.username;
             if(res.status == 200) {
-                dispatch(searchGallerySuccess());
+                dispatch(searchGallerySuccess(data));
             }
         })
         .catch(error => {

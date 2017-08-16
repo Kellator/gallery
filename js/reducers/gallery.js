@@ -18,7 +18,8 @@ export default function gallery(state = initialState, action) {
             return {
                 ...state,
                 searching: false,
-                loaded: true
+                loaded: true,
+                galleryExhibits: action.data
             };
         case 'SEARCH_GALLERY_FAIL' :
             return {
