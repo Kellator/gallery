@@ -1,8 +1,5 @@
 import React from 'react';
-// import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-// import { bindActionCreators } from 'redux';
-// import { dispatch } from 'react-redux';
 import { Field, reduxForm, initialize } from 'redux-form';
 
 class GallerySearch extends React.Component {

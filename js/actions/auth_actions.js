@@ -1,7 +1,10 @@
 'user strict';
+import * as galleryActions from '../actions/gallery_actions';
 import axios from 'axios';
 let fetchUrl = 'http://localhost:5050/';
 let userUrl = 'http://localhost:8080/';
+
+
 
 export const ADD_USER = 'ADD_USER';
 export const CHECK_USER = 'CHECK_USER'; 
@@ -57,13 +60,11 @@ export const checkUser = (username, email, password) => {
             let user = res.data.username;
             let email = res.data.email;
             let id = res.data.id;
+            let gallery = res.data.gallery;
+            let search = '';
             if(res.status == 200) {
-                // axios({
-                //     method: 'get',
-                //     url: userUrl + user,
-                //     withCredentials: true
-                // })
                 dispatch(authSigninSuccess(user, email, id));
+                dispatch(galleryActions.galleryFetch(search))
             }
         })
         .catch(error => {

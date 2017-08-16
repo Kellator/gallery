@@ -44,8 +44,8 @@ class LoginForm extends React.Component {
                             <label htmlFor="username_login">Username</label>
                             <Field id="username_login" name="username" type="text" placeholder="Enter your Username" component="input"/>
 
-                            <label htmlFor="email_login">Email</label>
-                            <Field required id="email_login" name="email" type="email" required placeholder="Enter your Email" component="input"/>
+                            {/* <label htmlFor="email_login">Email</label>
+                            <Field required id="email_login" name="email" type="email" required placeholder="Enter your Email" component="input"/> */}
 
                             <label htmlFor="email_login_password">Password</label>
                             <Field required id="password_login" name="password" type="password" required placeholder="Enter your Password" component="input"/>
