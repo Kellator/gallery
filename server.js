@@ -1,3 +1,4 @@
+'use strict';
 // dependencies
 require("babel-register");
 var express = require('express');
@@ -9,6 +10,7 @@ var session = require('express-session');
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 var cors = require('cors');
+var cookieParser = require('cookie-parser');
 
 const path = require('path');
 // local import
@@ -21,23 +23,16 @@ var UserGallery = require('./js/models/user-gallery');
 var UserWall = require('./js/models/user-wall');
 var User = require('./js/models/user');
 var Wall = require('./js/models/wall');
-// import routes from '../common/routes';
-// var __dirname = 'localhost:8080';
+var routes = require('./routes/routes');
+
 const app = express();
+app.use(cookieParser());
 app.use(bodyParser.json());
-// app.use(express.static('public'));
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(session({ secret: 'keyboard cat' }));
 app.use(cors());
+app.use('/', routes);
 
 const server = http.Server(app);
-
-// load routers
-// const galleryRouter = express.Router();
-// const usersRouter = express.Router();
-// require('./routes/gallery_routes')(galleyrRouter);
-// require('./routes/usersRouter')(usersRouter, passport);
-// app.use('/api', galleryRouter);
-// app.use('/api', usersRouter);
 
 //coordinates the connection to the database, and the running on the HTTP server
 const runServer = function(callback) {
@@ -68,7 +63,6 @@ passport.use(new LocalStrategy(
     function(username, password, done) {
         User.findByUsername(username, function(err, user) {
             if (err) {
-                console.log('local strat error : ' + err);
                 return done(err);
             }
             if (!user) {
@@ -86,32 +80,6 @@ passport.use(new LocalStrategy(
         });
     }
 ));
-// passport.use(new LocalStrategy(
-//     function(email, password, done) {
-//         console.log('local strat pw ' + password);
-//         User.findByEmail(email, function(err, user) {
-//             // console.log('pass strat find email: ' + user.email);
-//             console.log("finding by email");
-//             if (err) {
-//                 console.log('local strat error : ' + err);
-//                 return done(err);
-//             }
-//             if (!user) {
-//                 return done(null, false, {
-//                     message: 'Incorrect username.'
-//                 });
-//             }
-//             user.validatePassword(password, function(err, isValid) {
-//                 if(err || !isValid) { return done(null, false, {
-//                     message: 'Incorrect Password.'
-//                 });
-//             }
-//                 return done(null, user);
-//             });
-//         });
-//     }
-// ));
-
 
 //authenticated session persistance
 passport.serializeUser(function(user, callback) {
@@ -132,25 +100,20 @@ passport.deserializeUser(function(id, callback) {
 app.use(passport.initialize());
 app.use(passport.session());
 
-// app.use(require('express-session')({
-//     secret: 'pickle relish',
-//     resave: false,
-//     saveUninitialized: false
-// }));
-app.get('/*', function(req, res) {
-    res.sendFile(path.join(__dirname, 'public', 'index.html'));
-})
-
-// app.get('/', function(req, res) {
-//     return res.sendStatus(200);
-// });
+app.get('/', function(req, res) {
+    return res.sendStatus(200);
+});
 // log in authentication request
 app.post('/login', passport.authenticate('local'),
     function(req, res) {
-        console.log('YOU HAVE MADE IT TO THE LOGIN SECTION');
-        console.log('/login post log: ' + req);
+        let username = res.req.user.username;
+        let email = res.req.user.email;
+        let id = res.req.user._id;
         res.status(200).json({
-            status: 'Login successful!'
+            status: 'Login successful!',
+            username: username,
+            id: id,
+            email: email 
         });
 });
 //log out
@@ -161,7 +124,6 @@ app.get('/logout', function(req, res) {
 //userName & password endpoints
 //creating a username & password 
 app.post('/register', function(req, res) {
-    // console.log('main post /register console log: ' + req)
     if (!req.body) {
         return res.status(400).json({
             message: "No Request Body"
@@ -178,7 +140,6 @@ app.post('/register', function(req, res) {
         });
     }
     var username = req.body.username;
-    // console.log(username);
     if (typeof username !== 'string') {
         return res.status(422).json({
             message: "Incorrect Field Type: username"
@@ -191,7 +152,6 @@ app.post('/register', function(req, res) {
         });
     }
     var email = req.body.email;
-    // console.log(email);
     if (typeof email !== 'string') {
         return res.status(422).json({
             message: "Incorrect Field Type: email'"
@@ -234,7 +194,6 @@ app.post('/register', function(req, res) {
                 email: email,
                 password: hash
             });
-            console.log(user);
             user.save(function(err) {
                 if (err) {
                     console.log(err);
@@ -247,7 +206,41 @@ app.post('/register', function(req, res) {
         });
     });
 });
-
-app.listen((process.env.PORT || 8081), function() {
-    console.log('server listening on port 8081');
-});
+// let mockExhibit1 = {
+//     title: 'Replacement for the Stars',
+//     username: 'testy',
+//     image:  'http://orig00.deviantart.net/c31e/f/2016/089/d/c/replacement_for_the_stars_by_yuumei-d9x282e.jpg',
+//     siteLink: 'http://yuumei.deviantart.com/art/Replacement-for-the-Stars-599726678',
+//     categories: ['illustration', 'manga', 'digital', 'landscapes', 'scenery', 'people', 'portrait']
+// };
+// var mockExhibit2 = {
+//     title: 'Death Valley',
+//     username: 'testy',
+//     image:  'https://s-media-cache-ak0.pinimg.com/564x/82/37/ee/8237ee9fff1bd5b205cc0b3cc23c253b.jpg',
+//     siteLink: 'http://dabana.deviantart.com/art/Death-Valley-535687540',
+//     categories: ['illustration', 'painting', 'digital', 'landscapes', 'scenery']
+// };
+// var mockExhibit3 = {
+//     title: 'Fly by Night',
+//     username: 'test4',
+//     image:  'http://dspncdn.com/a1/media/692x/78/c8/a1/78c8a13c4dd878d82d22940b48512315.jpg',
+//     siteLink: 'http://designspiration.net/image/4609558023629/',
+//     categories: ['illustration', 'painting', 'digital', 'whimsical', 'people', 'portrait']
+// };
+// let mockExhibit = mockExhibit3
+// Exhibit.create(mockExhibit, function(err, exhibit) {
+//     let title = mockExhibit.title;
+//     let creator = mockExhibit.username;
+//     let image = mockExhibit.image;
+//     let siteLink = mockExhibit.siteLink;
+//     let categories = mockExhibit.categories;
+//     if (err || !exhibit) {
+//         console.error("Could not create exhibit");
+//         console.log(err);
+//         // return res.status(500).json({
+//         //     message: 'Internal Server Error'
+//         // });
+//     }
+//     console.log("Created Exhibit ");
+//     console.log(exhibit);
+// });

@@ -6,14 +6,14 @@ import SignUp from './signup-container';
 import Dashboard from './dashboard';
 import Welcome from './welcome';
 
-export default class Main extends React.Component {
+export default class Main extends React.Component {    
     render() {
         return (
             <Switch>
                 <Route exact path='/' component={Welcome}/>
                 <Route exact path='/login' component={LogIn}/>
                 <Route exact path='/signup' component={SignUp}/>
-                {/* <Route path='/gallery/:userId' component={Dashboard}/> */}
+                <Route path='/:user' component={Dashboard}/> 
             </Switch>
         )
     }

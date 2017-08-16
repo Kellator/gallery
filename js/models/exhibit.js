@@ -6,8 +6,8 @@ var exhibitSchema = new mongoose.Schema({
     title: {
         type: String
     },
-    _creator: {
-        type: mongoose.Schema.Types.ObjectId,
+    username: {
+        type: String,
         required: [true, 'Creator ID required for Exhibit']
     },
     image:  {
