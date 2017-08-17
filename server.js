@@ -211,21 +211,45 @@ app.post('/register', function(req, res) {
 //     username: 'testy',
 //     image:  'http://orig00.deviantart.net/c31e/f/2016/089/d/c/replacement_for_the_stars_by_yuumei-d9x282e.jpg',
 //     siteLink: 'http://yuumei.deviantart.com/art/Replacement-for-the-Stars-599726678',
-//     categories: ['illustration', 'manga', 'digital', 'landscapes', 'scenery', 'people', 'portrait']
+//     categories: ['illustration', 'manga', 'digital', 'landscapes', 'scenery', 'people', 'portrait'],
+//     comments: [
+//         {'username':'username',
+//         'date': 'date',
+//         'comments text': 'comments text'},
+//         {'username':'username2',
+//         'date': 'date2',
+//         'comments text': 'comments text2'}
+//     ]
 // };
 // var mockExhibit2 = {
 //     title: 'Death Valley',
 //     username: 'testy',
 //     image:  'https://s-media-cache-ak0.pinimg.com/564x/82/37/ee/8237ee9fff1bd5b205cc0b3cc23c253b.jpg',
 //     siteLink: 'http://dabana.deviantart.com/art/Death-Valley-535687540',
-//     categories: ['illustration', 'painting', 'digital', 'landscapes', 'scenery']
+//     categories: ['illustration', 'painting', 'digital', 'landscapes', 'scenery'],
+//     comments: [
+//         {'username':'username',
+//         'date': 'date',
+//         'comments text': 'comments text'},
+//         {'username':'username2',
+//         'date': 'date2',
+//         'comments text': 'comments text2'}
+//     ]
 // };
 // var mockExhibit3 = {
 //     title: 'Fly by Night',
 //     username: 'test4',
 //     image:  'http://dspncdn.com/a1/media/692x/78/c8/a1/78c8a13c4dd878d82d22940b48512315.jpg',
 //     siteLink: 'http://designspiration.net/image/4609558023629/',
-//     categories: ['illustration', 'painting', 'digital', 'whimsical', 'people', 'portrait']
+//     categories: ['illustration', 'painting', 'digital', 'whimsical', 'people', 'portrait'],
+//     comments: [
+//         {'username':'username',
+//         'date': 'date',
+//         'comments text': 'comments text'},
+//         {'username':'username2',
+//         'date': 'date2',
+//         'comments text': 'comments text2'}
+//     ]
 // };
 // let mockExhibit = mockExhibit3
 // Exhibit.create(mockExhibit, function(err, exhibit) {
@@ -234,6 +258,7 @@ app.post('/register', function(req, res) {
 //     let image = mockExhibit.image;
 //     let siteLink = mockExhibit.siteLink;
 //     let categories = mockExhibit.categories;
+//     let comments = mockExhibit.comments;
 //     if (err || !exhibit) {
 //         console.error("Could not create exhibit");
 //         console.log(err);

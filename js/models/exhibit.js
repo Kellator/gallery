@@ -20,10 +20,11 @@ var exhibitSchema = new mongoose.Schema({
     },
     categories: {
         type: Array
-    }
+    },
     //comments as own collection that is referenced here - allows for moderation of comments
-    // comments: {       
-    // }
+    comments: {   
+        type: Array    
+    }
 });
 
 var Exhibit = mongoose.model('Exhibit', exhibitSchema);
