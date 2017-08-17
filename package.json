@@ -3,6 +3,9 @@
   "version": "0.0.1",
   "description": "Gallery App designed from Thinkful React Template",
   "main": "js/index.js",
+  "engines": {
+    "node": "8.0.0"
+  },
   "scripts": {
     "start": "http-server build",
     "dev": "run-p watch serve",
