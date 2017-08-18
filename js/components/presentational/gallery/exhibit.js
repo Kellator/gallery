@@ -17,16 +17,16 @@ export default class Exhibit extends React.Component {
         let imageLink = this.props.exhibit.image;
         let location = this.props.exhibit.location;
         let title = this.props.exhibit.title;
-        let postedBy = this.props.exhibit.username;
+        let creator = this.props.exhibit.creator;
         let menuType;
         console.log(this.props);
         console.log(exhibitImage);
-        console.log(postedBy);
+        console.log(creator);
         return (
             <div>
                 <a href={location} target="_blank">{<img className="exhibit-image" alt="image from exhibit" src={exhibitImage}/>}</a>
                 <h2 className="exhibit-title"><a href={location} target="_blank">{title}</a></h2>
-                <p className="exhibit-poster">Posted by: {postedBy} </p>
+                <p className="exhibit-poster">Posted by: {creator} </p>
                 <Menu className={"gallery_menu"}/>
             </div>
         )
