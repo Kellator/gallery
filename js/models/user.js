@@ -1,9 +1,9 @@
-//identifies user via unique email address
-//stores email address, hashed password, index
+// mongoose model for user document
 //bcrypt for password hashing
 
 var mongoose = require('mongoose');
 var bcrypt = require('bcryptjs');
+var timestamps = require('mongoose-timestamp');
 
 var UserSchema = new mongoose.Schema({
     username: {
@@ -25,16 +25,18 @@ var UserSchema = new mongoose.Schema({
         required: true
     },
     avatar: {
-        type: String,
-        required: [true, 'Avatar image for user. Default assigned in none chosen.']
+        type: String
+        // required: [true, 'Avatar image for user. Default assigned in none chosen.']
     },
     //use population to link to documents in other collection ?return list of exhibits with id as creator?
     galleries: {
         originals: [{ type: mongoose.Schema.Types.ObjectId, ref:'Exhibit'}],
-        collaborations: A[{ type: mongoose.Schema.Types.ObjectId, ref:'Exhibit'}]
+        collaborations: [{ type: mongoose.Schema.Types.ObjectId, ref:'Exhibit'}]
     }
+});
     // galleries: [{ type: mongoose.Schema.Types.ObjectId, ref:'Wall'}],
     // });
+UserSchema.plugin(timestamps);
 UserSchema.statics.findByUsername = function(username, callback) {
     return this.findOne({username: username}, function(err, user) {
         if (err) {

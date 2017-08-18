@@ -201,6 +201,7 @@ app.post('/register', function(req, res) {
                         message: "Internal Server Error"
                     });
                 }
+                console.log(user.updatedAt);
                 return res.status(201).json({});
             });
         });
@@ -210,7 +211,7 @@ app.post('/register', function(req, res) {
 //     title: 'Replacement for the Stars',
 //     username: 'testy',
 //     image:  'http://orig00.deviantart.net/c31e/f/2016/089/d/c/replacement_for_the_stars_by_yuumei-d9x282e.jpg',
-//     siteLink: 'http://yuumei.deviantart.com/art/Replacement-for-the-Stars-599726678',
+//     location: 'http://yuumei.deviantart.com/art/Replacement-for-the-Stars-599726678',
 //     categories: ['illustration', 'manga', 'digital', 'landscapes', 'scenery', 'people', 'portrait'],
 //     comments: [
 //         {'username':'username',
@@ -225,7 +226,7 @@ app.post('/register', function(req, res) {
 //     title: 'Death Valley',
 //     username: 'testy',
 //     image:  'https://s-media-cache-ak0.pinimg.com/564x/82/37/ee/8237ee9fff1bd5b205cc0b3cc23c253b.jpg',
-//     siteLink: 'http://dabana.deviantart.com/art/Death-Valley-535687540',
+//     location: 'http://dabana.deviantart.com/art/Death-Valley-535687540',
 //     categories: ['illustration', 'painting', 'digital', 'landscapes', 'scenery'],
 //     comments: [
 //         {'username':'username',
@@ -240,8 +241,29 @@ app.post('/register', function(req, res) {
 //     title: 'Fly by Night',
 //     username: 'test4',
 //     image:  'http://dspncdn.com/a1/media/692x/78/c8/a1/78c8a13c4dd878d82d22940b48512315.jpg',
-//     siteLink: 'http://designspiration.net/image/4609558023629/',
+//     location: 'http://designspiration.net/image/4609558023629/',
 //     categories: ['illustration', 'painting', 'digital', 'whimsical', 'people', 'portrait'],
+    // comments: [
+    //     {'username':'username',
+    //     'date': 'date',
+    //     'comments text': 'comments text'},
+    //     {'username':'username2',
+    //     'date': 'date2',
+    //     'comments text': 'comments text2'}
+    // ]
+// };
+
+// var mockExhibit4 = {
+//     title: 'Fly by Night',
+//     image: 'http://dspncdn.com/a1/media/692x/78/c8/a1/78c8a13c4dd878d82d22940b48512315.jpg',
+//     description: 'Boy in red from manga called Knite.  For viewing only. Piece completed.',
+//     exhibitType: 'Art',
+//     status: 'Viewing Only',
+//     creator: "597e913edb7e6660086f25da",
+//     collaborators: ["5988eb35c616a7950825a6fd"],
+//     location: 'http://designspiration.net/image/4609558023629/',
+//     categories: ['illustration', 'painting', 'digital', 'whimsical', 'people', 'portrait'],
+//     //comments as own collection that is referenced here - allows for moderation of comments
 //     comments: [
 //         {'username':'username',
 //         'date': 'date',
@@ -251,13 +273,17 @@ app.post('/register', function(req, res) {
 //         'comments text': 'comments text2'}
 //     ]
 // };
-// let mockExhibit = mockExhibit3
+// let mockExhibit = mockExhibit4
 // Exhibit.create(mockExhibit, function(err, exhibit) {
 //     let title = mockExhibit.title;
-//     let creator = mockExhibit.username;
+//     let creator = mockExhibit.creator;
 //     let image = mockExhibit.image;
-//     let siteLink = mockExhibit.siteLink;
+//     let location = mockExhibit.location;
 //     let categories = mockExhibit.categories;
+//     let collaborators = mockExhibit.collaborators;
+//     let exhibitType = mockExhibit.exhibitType;
+//     let description = mockExhibit.description;
+//     let status = mockExhibit.status;
 //     let comments = mockExhibit.comments;
 //     if (err || !exhibit) {
 //         console.error("Could not create exhibit");

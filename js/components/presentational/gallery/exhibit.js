@@ -15,7 +15,7 @@ export default class Exhibit extends React.Component {
     render() {
         let exhibitImage = this.props.exhibit.image;
         let imageLink = this.props.exhibit.image;
-        let siteLink = this.props.exhibit.siteLink;
+        let location = this.props.exhibit.location;
         let title = this.props.exhibit.title;
         let postedBy = this.props.exhibit.username;
         let menuType;
@@ -24,8 +24,8 @@ export default class Exhibit extends React.Component {
         console.log(postedBy);
         return (
             <div>
-                <a href={siteLink} target="_blank">{<img className="exhibit-image" alt="image from exhibit" src={exhibitImage}/>}</a>
-                <h2 className="exhibit-title"><a href={siteLink} target="_blank">{title}</a></h2>
+                <a href={location} target="_blank">{<img className="exhibit-image" alt="image from exhibit" src={exhibitImage}/>}</a>
+                <h2 className="exhibit-title"><a href={location} target="_blank">{title}</a></h2>
                 <p className="exhibit-poster">Posted by: {postedBy} </p>
                 <Menu className={"gallery_menu"}/>
             </div>

@@ -1,8 +1,8 @@
-//schema for exhibit item - includes title, image, src link, search categories, comments.
-
+// mongoose model for exhibit document
 var mongoose = require('mongoose');
+var timestamps = require('mongoose-timestamp');
 
-var exhibitSchema = new mongoose.Schema({
+var ExhibitSchema = new mongoose.Schema({
     title: {
         type: String
     },
@@ -29,7 +29,7 @@ var exhibitSchema = new mongoose.Schema({
     collaborators: {
         type: Array
     },
-    siteLink: {
+    location: {
         type: String,
         required: [true, 'Source Link required for Exhibit']
     },
@@ -41,6 +41,6 @@ var exhibitSchema = new mongoose.Schema({
         type: Array    
     }
 });
-
-var Exhibit = mongoose.model('Exhibit', exhibitSchema);
+ExhibitSchema.plugin(timestamps);
+var Exhibit = mongoose.model('Exhibit', ExhibitSchema);
 module.exports = Exhibit;
