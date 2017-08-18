@@ -10,8 +10,11 @@ var MessageSchema = new mongoose.Schema({
     creator: {
         type: String,
         required: [true, 'Creator ID']
+    },
+    exhibit: {
+        type: mongoose.Schema.Types.ObjectId, ref:'Exhibit'
     }
 });
-messageSchema.plugin(timestamps);
+MessageSchema.plugin(timestamps);
 var Message = mongoose.model('Message', MessageSchema);
 module.exports = Message;

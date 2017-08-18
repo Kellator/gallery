@@ -29,7 +29,7 @@ var ExhibitSchema = new mongoose.Schema({
     collaborators: {
         type: Array
     },
-    siteLink: {
+    location: {
         type: String,
         required: [true, 'Source Link required for Exhibit']
     },
