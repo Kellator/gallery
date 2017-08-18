@@ -1,6 +1,6 @@
-//schema for exhibit item - includes title, image, src link, search categories, comments.
-
+// mongoose model for exhibit document
 var mongoose = require('mongoose');
+var timestamps = require('mongoose-timestamp');
 
 var exhibitSchema = new mongoose.Schema({
     title: {

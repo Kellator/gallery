@@ -86,6 +86,7 @@
     "loader-utils": "^1.1.0",
     "mongodb": "^2.2.29",
     "mongoose": "^4.11.1",
+    "mongoose-timestamp": "^0.6.0",
     "node-pre-gyp": "^0.6.36",
     "passport": "^0.3.2",
     "passport-http": "^0.3.0",

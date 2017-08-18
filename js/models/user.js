@@ -1,9 +1,9 @@
-//identifies user via unique email address
-//stores email address, hashed password, index
+// mongoose model for user document
 //bcrypt for password hashing
 
 var mongoose = require('mongoose');
 var bcrypt = require('bcryptjs');
+var timestamps = require('mongoose-timestamp');
 
 var UserSchema = new mongoose.Schema({
     username: {
@@ -33,8 +33,10 @@ var UserSchema = new mongoose.Schema({
         originals: [{ type: mongoose.Schema.Types.ObjectId, ref:'Exhibit'}],
         collaborations: A[{ type: mongoose.Schema.Types.ObjectId, ref:'Exhibit'}]
     }
+});
     // galleries: [{ type: mongoose.Schema.Types.ObjectId, ref:'Wall'}],
     // });
+UserSchema.plugin(timestamps);
 UserSchema.statics.findByUsername = function(username, callback) {
     return this.findOne({username: username}, function(err, user) {
         if (err) {

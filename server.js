@@ -201,6 +201,7 @@ app.post('/register', function(req, res) {
                         message: "Internal Server Error"
                     });
                 }
+                console.log(user.updatedAt);
                 return res.status(201).json({});
             });
         });
