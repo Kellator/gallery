@@ -11,7 +11,13 @@ const gal = actions.GalleryActions;
 // text as prop to define what to display (Welcome to the Gallery or Now Exiting the Gallery etc)
 class Welcome extends React.Component {
     render() {
-        let text = this.props.text;
+        let text;
+        if (this.props.text == true) {
+            text = "Welcome to the Gallery; a collaborative environment for your passion."
+        }
+        else {
+            text = "It looks like you haven't signed up with us yet.  Sign up to be a part of the Gallery Community."
+        }
         return (
             <div>
                 <h1>{text}</h1>
@@ -30,7 +36,7 @@ class Welcome extends React.Component {
 }
 const mapStateToProps = (state, props) => ({
     login: state.signingIn,
-    text: 'Welcome to the Gallery'
+    text: state.auth.text
 });
 const mapDispatchToProps = (dispatch, ownProps) => {
     return { onClickSignup: () => { dispatch(gal.showSignup())},
