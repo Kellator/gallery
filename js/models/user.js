@@ -24,9 +24,17 @@ var UserSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    //use population to link to documents in other collection - galleries contain walls, walls contain exhibits
-    galleries: [{ type: mongoose.Schema.Types.ObjectId, ref:'Wall'}],
-    });
+    avatar: {
+        type: String,
+        required: [true, 'Avatar image for user. Default assigned in none chosen.']
+    },
+    //use population to link to documents in other collection ?return list of exhibits with id as creator?
+    galleries: {
+        originals: [{ type: mongoose.Schema.Types.ObjectId, ref:'Exhibit'}],
+        collaborations: A[{ type: mongoose.Schema.Types.ObjectId, ref:'Exhibit'}]
+    }
+    // galleries: [{ type: mongoose.Schema.Types.ObjectId, ref:'Wall'}],
+    // });
 UserSchema.statics.findByUsername = function(username, callback) {
     return this.findOne({username: username}, function(err, user) {
         if (err) {

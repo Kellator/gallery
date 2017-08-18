@@ -4,6 +4,7 @@ import * as action from '../actions/index';
 const initialState = {
     loaded: false,
     authorized: false,
+    text: true,
     user: {
         username: null,
         id: null,
@@ -61,6 +62,7 @@ export default function auth(state = initialState, action) {
             return {
                 ...state,
                 authorized: false,
+                text: false,
                 user: { 
                     username: null,
                     id: null
