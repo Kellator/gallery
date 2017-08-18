@@ -2,7 +2,7 @@
 var mongoose = require('mongoose');
 var timestamps = require('mongoose-timestamp');
 
-var exhibitSchema = new mongoose.Schema({
+var ExhibitSchema = new mongoose.Schema({
     title: {
         type: String
     },
@@ -41,6 +41,6 @@ var exhibitSchema = new mongoose.Schema({
         type: Array    
     }
 });
-
-var Exhibit = mongoose.model('Exhibit', exhibitSchema);
+ExhibitSchema.plugin(timestamps);
+var Exhibit = mongoose.model('Exhibit', ExhibitSchema);
 module.exports = Exhibit;
