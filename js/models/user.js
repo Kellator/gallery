@@ -25,13 +25,13 @@ var UserSchema = new mongoose.Schema({
         required: true
     },
     avatar: {
-        type: String,
-        required: [true, 'Avatar image for user. Default assigned in none chosen.']
+        type: String
+        // required: [true, 'Avatar image for user. Default assigned in none chosen.']
     },
     //use population to link to documents in other collection ?return list of exhibits with id as creator?
     galleries: {
         originals: [{ type: mongoose.Schema.Types.ObjectId, ref:'Exhibit'}],
-        collaborations: A[{ type: mongoose.Schema.Types.ObjectId, ref:'Exhibit'}]
+        collaborations: [{ type: mongoose.Schema.Types.ObjectId, ref:'Exhibit'}]
     }
 });
     // galleries: [{ type: mongoose.Schema.Types.ObjectId, ref:'Wall'}],
