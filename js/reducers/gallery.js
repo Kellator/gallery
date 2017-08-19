@@ -4,6 +4,8 @@ const initialState = {
     searching: false,
     loaded: false,
     gallerySearch: '',
+    galleryView: true,
+    exhibitView: false,
     galleryExhibits: []
 }
 export default function gallery(state = initialState, action) {
@@ -28,6 +30,12 @@ export default function gallery(state = initialState, action) {
                 loaded: false,
                 error: action.error
             }
+        case 'SHOW_EXHIBIT' :
+        return {
+            ...state,
+            galleryView: false,
+            exhibitView: true
+        }
         default :
             return state;
     };    

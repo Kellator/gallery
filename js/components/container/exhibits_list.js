@@ -4,13 +4,13 @@ import { bindActionCreators } from 'redux';
 import { dispatch } from 'react-redux';
 import { connect } from 'react-redux';
 
-import Exhibit from '../presentational/gallery/exhibit';
+import GalleryViewExhibit from '../presentational/gallery/gallery_view_exhibit';
 
-class Exhibits extends React.Component {
+class ExhibitsList extends React.Component {
     render() {
         console.log(this.props);
         let exhibits = (this.props.exhibits) ? this.props.exhibits.map((exhibit, index) => {
-            return <Exhibit key={index} exhibit={exhibit} />
+            return <GalleryViewExhibit key={index} exhibit={exhibit} />
         }) : undefined;
         return (
             <div>
@@ -19,7 +19,7 @@ class Exhibits extends React.Component {
         )
     }
 }
-export default Exhibits;
+export default ExhibitsList;
 // const mapStateToProps = (state, props) => ({
 //     gallerySearch: state.gallery.gallerySearch,
 //     galleryExhibits: state.gallery.galleryExhibits
