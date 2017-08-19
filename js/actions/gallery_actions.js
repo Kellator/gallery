@@ -107,6 +107,36 @@ export const galleryFetch = (search) => {
         });       
     }
 };
+export const exhibitFetch = (exhibit_id) => {
+    console.log(exhibit_id);
+    return dispatch => {
+        dispatch(searchExhibit())
+        // axios.get(fetchUrl + "exhibit", {
+        //     params: {
+        //         _id: exhibit_id
+        //     }
+        // })
+        axios({
+            method: 'get',
+            url: 'exhibit',
+            params: {
+                exhibit_id: exhibit_id
+            }
+        })
+        .then(res => {
+            console.log(res);
+            console.log(res.data);
+            let data = res.data
+            if(res.status == 200) {
+                dispatch(exhibitFetchSuccess(data));
+            }
+        })
+    }
+}
+export const SEARCH_EXHIBIT = 'SEARCH_EXHIBIT';
+export const searchExhibit = () => ({
+    type: SEARCH_EXHIBIT
+});
 //shows selected exhibit
 export const SHOW_EXHIBIT = 'SHOW_EXHIBIT';
 export const showExhibit = (exhibit) => ({
@@ -114,6 +144,11 @@ export const showExhibit = (exhibit) => ({
     exhibit
 });
 
+export const EXHIBIT_FETCH_SUCCESS = 'EXHIBIT_FETCH_SUCCESS';
+export const exhibitFetchSuccess = (data) => ({
+    type: EXHIBIT_FETCH_SUCCESS,
+    data
+});
 //shows selected user wall
 export const SHOW_USER_WALL = 'SHOW_USER_WALL';
 export const showUserWall = (userID, wall) => ({
@@ -130,12 +165,6 @@ export const showUserGallery = (userID, gallery) => ({
     gallery
 });
 
-//shows selected wall 
-export const SHOW_WALL = 'SHOW_WALL';
-export const showWall = (wall) => ({
-    type: SHOW_WALL,
-    wall
-});
 
 //shows all exhibits in app
 export const SHOW_GALLERY = 'SHOW_GALLERY';

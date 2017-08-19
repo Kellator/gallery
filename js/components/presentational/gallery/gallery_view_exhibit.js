@@ -29,7 +29,7 @@ class GalleryViewExhibit extends React.Component {
         console.log(this.props);
         return (
             <div>
-                <img className="exhibit-image" alt="image from exhibit" onClick={this.props.exhibitOnClick} src={exhibitImage}/>
+                <img className="exhibit-image" onClick={this.props.onClick} alt="image from exhibit" src={exhibitImage}/>
                 <h2 className="exhibit-title"><a href={location} target="_blank">{title}</a></h2>
                 <p className="exhibit-poster">Posted by: {creator} </p>
                 <Menu className={"gallery_menu"}/>
@@ -37,17 +37,23 @@ class GalleryViewExhibit extends React.Component {
         )
     }
 }
-const mapStateToProps = (state, props) => ({
+export default GalleryViewExhibit;
+// const mapStateToProps = (state, props) => ({
 
-});
-const mapDispatchToProps = (dispatch, ownProps) => {
-    return {
-        exhibitOnClick: () => { 
-            console.log("image clicked for full exhibit view");
-            console.log(ownProps);
-            dispatch(galleryActions.showExhibit(ownProps));
-        },
-    }
-}
+// });
+// const mapDispatchToProps = (dispatch, ownProps) => {
+//     // return {
+//     //     exhibitOnClick: () => { 
+//     //         event.preventDefault();
+//     //         let exhibit = ownProps.exhibit;
+//     //         let exhibit_id = exhibit._id;
+//     //         console.log("image clicked for full exhibit view");
+//     //         console.log(ownProps);
+//     //         console.log(exhibit);
+//     //         console.log(exhibit_id);
+//     //         dispatch(galleryActions.showExhibit(exhibit));
+//     //     },
+//     // }
+// }
 
-export default connect(mapStateToProps, mapDispatchToProps)(GalleryViewExhibit);
+// export default connect(mapStateToProps, mapDispatchToProps)(GalleryViewExhibit);

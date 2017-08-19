@@ -29,13 +29,22 @@ export default function gallery(state = initialState, action) {
                 searching: false,
                 loaded: false,
                 error: action.error
-            }
+            };
+        case 'SEARCH_EXHIBIT' :
+        return {
+            ...state,
+            exhibitSearching: true,
+            exhibitLoaded: false,
+        }
         case 'SHOW_EXHIBIT' :
         return {
             ...state,
             galleryView: false,
-            exhibitView: true
-        }
+            exhibitView: true,
+            exhibitSearching:false,
+            exhibitLoaded: true,
+            exhibit: action.data
+        };
         default :
             return state;
     };    

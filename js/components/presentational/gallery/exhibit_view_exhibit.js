@@ -5,8 +5,10 @@ import { dispatch } from 'react-redux';
 import { connect } from 'react-redux';
 
 import * as galleryActions from '../../../actions/gallery_actions';
+
 class ExhibitViewExhibit extends React.Component {
     render() {
+        console.log(this.props);
         let creator;
         let createdOn;
         let updatedOn;
@@ -39,7 +41,6 @@ class ExhibitViewExhibit extends React.Component {
                     <p>To leave a comment, click here.</p>
                 </div>
         }
-        console.log(this.props);
         return (
             <div>
                 {component}
@@ -48,7 +49,7 @@ class ExhibitViewExhibit extends React.Component {
     }
 }
 const mapStateToProps = (state, props) => ({
-    
+    exhibit: state.gallery.exhibit
     });
 const mapDispatchToProps = (dispatch, ownProps) => {
     return {
