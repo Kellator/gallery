@@ -1,4 +1,5 @@
 // REAL TIME MESSAGE DISPLAY
+// state determines channel
 import React from 'react';
 import PropTypes from 'prop-types';
 
@@ -12,7 +13,7 @@ class MessageFeed extends React.Component {
     render() {
         return (
             <div>
-                <p>Message Feed Component</p>
+                <Message />
             </div>
         );
     };

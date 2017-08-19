@@ -63,6 +63,7 @@ export default function auth(state = initialState, action) {
                 ...state,
                 authorized: false,
                 text: false,
+                signinFail: true,
                 user: { 
                     username: null,
                     id: null

@@ -21,8 +21,13 @@ class LogIn extends React.Component {
     render() {
         let authStatus = this.props.authorized;
         let comp;
+        let authFail = this.props.signinFail;
+        console.log(this.props);
         if(authStatus == true) {
             return <Redirect push to='/user' />
+        }
+        if(authFail == true) {
+            return <Redirect push to='/signup' />
         }
         return (
             <div className="log_in">
@@ -34,7 +39,8 @@ class LogIn extends React.Component {
 
 const mapStateToProps = (state, props) => ({
     login: state.form.login,
-    authorized: state.auth.authorized
+    authorized: state.auth.authorized,
+    authFail: state.auth.signinFail
 });
 const mapDispatchToProps = (dispatch, ownProps) => {
     return {
