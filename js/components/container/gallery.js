@@ -7,10 +7,10 @@ import { dispatch } from 'react-redux';
 //separate local imports from dependencies
 import * as actions from '../../actions/index';
 import Menu from '../presentational/navigation/action_menu';
-import Exhibit from '../presentational/gallery/exhibit';
-import Exhibits from './exhibits';
-import Wall from '../presentational/gallery/wall';
+import GalleryViewExhibit from '../presentational/gallery/gallery_view_exhibit';
+import ExhibitsList from './exhibits_list';
 import NoResult from '../presentational/gallery/noResult';
+import ExhibitViewExhibit from '../presentational/gallery/exhibit_view_exhibit';
 
 //declare propTypes prior to component
 
@@ -21,15 +21,23 @@ import NoResult from '../presentational/gallery/noResult';
 
 class Gallery extends React.Component {
     render() {
-        let exhibits = this.props.galleryExhibits;
-        console.log(exhibits);
-        if (exhibits.length === 0) {
-            return <NoResult />
+        let view = this.props.galleryView;
+        if (view) {
+            let exhibits = this.props.galleryExhibits;
+            console.log(exhibits);
+                if (exhibits.length === 0) {
+                    return <NoResult />
+                }
+            return <ExhibitsList exhibits={this.props.galleryExhibits} />
+        };
+        if(!view) {
+            return <ExhibitViewExhibit />
         }
-        return <Exhibits exhibits={this.props.galleryExhibits} />
-    };
+        }
+
 };
 const mapStateToProps = (state, props) => ({
+    galleryView: state.gallery.galleryView,
     gallerySearch: state.gallery.gallerySearch,
     galleryExhibits: state.gallery.galleryExhibits
 });

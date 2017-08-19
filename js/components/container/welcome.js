@@ -16,7 +16,7 @@ class Welcome extends React.Component {
             text = "Welcome to the Gallery; a collaborative environment for your passion."
         }
         else {
-            text = "It looks like you haven't signed up with us yet.  Sign up to be a part of the Gallery Community."
+            text = "It looks like you haven't signed up with us yet.  Sign up to be a part of the Gallery Community."           
         }
         return (
             <div>
