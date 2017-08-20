@@ -47,14 +47,8 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     return {
         exhibitClick: (event) => {
             event.preventDefault();
-            console.log(ownProps);
-
             let data = ownProps.exhibit;
             dispatch(galleryActions.showExhibit(data));
-            console.log(data);
-            console.log(ownProps.id);
-            // dispatch(galleryActions.exhibitFetch(ownProps.id));
-            // console.log(exhibit);
         }
     }
 }

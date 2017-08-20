@@ -6,10 +6,7 @@ const CommentForm = props => {
     const {handleSubmit, pristine, reset, submitting} = props
     console.log(props);
     return (
-        <form onSubmit={handleSubmit(comment => {
-            console.log(comment);
-            console.log("onsubmit comment");
-            })}>
+        <form onSubmit={handleSubmit}>
             <div>
                 <label>Comment Text</label>
                 <div>
@@ -30,7 +27,12 @@ const CommentForm = props => {
         </form>
     )
 }
+
 export default reduxForm({
     name: 'comment',
     form: 'comment_form'
 })(CommentForm);
+// (comment => {
+//     console.log(comment);
+//     dispatch(commentUpdate(comment));
+//     })}

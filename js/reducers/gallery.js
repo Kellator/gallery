@@ -31,12 +31,12 @@ export default function gallery(state = initialState, action) {
                 error: action.error
             };
         case 'SEARCH_EXHIBIT' :
-        return {
-            ...state,
-            exhibitSearching: true,
-            exhibitLoaded: false,
-            exhibit_id: action.exhibit_id
-        }
+            return {
+                ...state,
+                exhibitSearching: true,
+                exhibitLoaded: false,
+                exhibit_id: action.exhibit_id
+            };
         case 'SHOW_EXHIBIT' :
         return {
             ...state,
@@ -60,6 +60,18 @@ export default function gallery(state = initialState, action) {
                 _id:  action.data._id
             }
         };
+        case 'COMMENT_IN_PROGRESS' :
+            return {
+                ...state,
+                commentLogComplete: false,
+                commentLogInProogress: true
+            }
+        case 'COMMENT_COMPLETE' :
+            return {
+                ...state,
+                commentLogComplete: true,
+                commentLogInProgress: false
+            }
         default :
             return state;
     };    

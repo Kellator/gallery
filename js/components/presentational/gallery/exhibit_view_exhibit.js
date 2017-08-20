@@ -19,8 +19,12 @@ class ExhibitViewExhibit extends React.Component {
         let collaborators = this.props.exhibit.collaborators;
         let description = this.props.exhibit.description;
         let comments = this.props.exhibit.comments;
+        let exhibit_id = this.props.exhibit._id;
         let open;
         console.log(title);
+        const handleSubmit = (values) => {
+            alert(JSON.stringify(values));
+        }
         if (status !== "Viewing Only") {
             open = true;
         }
@@ -40,7 +44,7 @@ class ExhibitViewExhibit extends React.Component {
                     <p>Last collaboration: {updatedAt}</p>
                     <p>Collaborators: {collaborators}</p>
                     <p>Collaborate by joinging the chat channel or leaving a comment.</p>
-                    <CommentForm />
+                    <CommentForm onSubmit={ handleSubmit }/>
                 </div>
         }
         else {
@@ -52,7 +56,7 @@ class ExhibitViewExhibit extends React.Component {
                     <p>On: {createdAt}</p>
                     <p>{description}</p>
                     <p>This work is closed to collaboration but open to comment.</p>
-                    <CommentForm />
+                    <CommentForm onSubmit={ handleSubmit }/>
                 </div>
         }
         return (

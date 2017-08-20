@@ -128,6 +128,21 @@ export const exhibitFetch = (exhibit_id) => {
         })
     }
 }
+export const commentUpdate = (exhibit_id, comment) => {
+    console.log(comment);
+    console.log(exhibit_id);
+    return dispatch => {
+        dispatch(commentInProgress(comment))
+        axios({
+            method: 'put',
+            url: fetch + 'exhibit',
+            params: {
+                exhibit_id: exhibit_id,
+                comment: comment
+            }
+        })
+    }
+  }
 export const SEARCH_EXHIBIT = 'SEARCH_EXHIBIT';
 export const searchExhibit = (exhibit_id) => ({
     type: SEARCH_EXHIBIT,
@@ -163,5 +178,9 @@ export const showGallery = (gallery) => ({
 });
 
 
-//thunks?
-//retrieve documents from monogo - exhibits, walls, user gallery etc
+
+export const COMMENT_COMPLETE = 'COMMENT_COMPLETE';
+export const commentComplete = (comment) => ({
+    type: LOG_COMMENT,
+    comment
+});
