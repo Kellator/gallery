@@ -9,11 +9,12 @@ import GalleryViewExhibit from '../presentational/gallery/gallery_view_exhibit';
 class ExhibitsList extends React.Component {
     render() {
         console.log(this.props);
-        let click = this.props.exhibitClick;
-        console.log(click);
+        // let click = this.props.exhibitClick;
+        // console.log(click);
         let exhibits = (this.props.exhibits) ? this.props.exhibits.map((exhibit) => {
-            return <GalleryViewExhibit onClick={click} key={exhibit._id} exhibit={exhibit} />
+            return <GalleryViewExhibit key={exhibit._id} id={exhibit._id} exhibit={exhibit} />
         }) : undefined;
+
         return (
             <div>
                 {exhibits}
@@ -21,20 +22,18 @@ class ExhibitsList extends React.Component {
         )
     }
 }
-// export default ExhibitsList;
-const mapStateToProps = (state, props) => ({
+export default ExhibitsList;
+// const mapStateToProps = (state, props) => ({
 
-});
-const mapDispatchToProps = (dispatch, ownProps) => {
-    console.log(ownProps);
-    return { 
-        exhibitClick: (event) => {
-            event.preventDefault();
-            let exhibitList = ownProps.exhibits;
-            let index = exhibitList.indexOf(event.target.value);
-            console.log(exhibitList);
-            console.log(index);
-        }
-    }
-}
-export default connect(mapStateToProps, mapDispatchToProps)(ExhibitsList);
+// });
+// const mapDispatchToProps = (dispatch, ownProps) => {
+//     console.log(ownProps);
+//     return { 
+//         exhibitClick: (event) => {
+//             event.preventDefault();
+//             console.log(ownProps);
+//             console.log(ownProps.exhibits);
+//         }
+//     }
+// }
+// export default connect(mapStateToProps, mapDispatchToProps)(ExhibitsList);

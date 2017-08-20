@@ -35,6 +35,7 @@ export default function gallery(state = initialState, action) {
             ...state,
             exhibitSearching: true,
             exhibitLoaded: false,
+            exhibit_id: action.exhibit_id
         }
         case 'SHOW_EXHIBIT' :
         return {
@@ -43,7 +44,21 @@ export default function gallery(state = initialState, action) {
             exhibitView: true,
             exhibitSearching:false,
             exhibitLoaded: true,
-            exhibit: action.data
+            exhibit: {
+                categories: action.data.categories,
+                collaborators: action.data.collaborators,
+                comments:  action.data.comments,
+                createdAt:  action.data.createdAt,
+                creator:  action.data.creator,
+                descriptions:  action.data.descriptions,
+                exhibitType:  action.data.exhibitType,
+                image:  action.data.image,
+                location:  action.data.location,
+                status:  action.data.status,
+                title:  action.data.title,
+                updatedAt:  action.data.updatedAt,
+                _id:  action.data._id
+            }
         };
         default :
             return state;

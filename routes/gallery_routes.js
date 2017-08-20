@@ -40,32 +40,21 @@ router.get('/', function(req, res) {
             res.json(exhibits);
         })
     }
-    // Exhibits.find({}, function(err, exhibit) {
+});
+//  returns single specific exhibit item (item)
+//  allows viewing of a single exhibit or item from the app
+router.get('/exhibit/:exhibit_id', function(req, res) {
+    console.log('exhibit request made');
+    console.log(req.params);
+    // let exhibit_id = req.query.exhibit_id;
+    // Exhibit.findById(exhibit_id, function(err, exhibit) {
     //     if (err) {
     //         return res.status(500).json({
     //             message: 'Internal Server Error'
     //         });
     //     }
-    //     return res.status(201).json(exhibits);
-    // });
-});
-//  returns all walls in the app as a categorized list (array of arrays)
-//  allows a view of all the categories or walls in the entire app
-
-//  returns single specific exhibit item (item)
-//  allows viewing of a single exhibit or item from the app
-router.get('/exhibit', function(req, res) {
-    console.log('exhibit request made');
-    console.log(res.req);
-    let exhibit_id = req.query.exhibit_id;
-    Exhibit.findById(exhibit_id, function(err, exhibit) {
-        if (err) {
-            return res.status(500).json({
-                message: 'Internal Server Error'
-            });
-        }
-        return res.status(201).json(exhibit);   
-    });     
+    //     return res.status(201).json(exhibit);   
+    // });     
 });
 //  creates new single exhibit item in exhibits collection
 router.post('/exhibit', function(req, res) {
