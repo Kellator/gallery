@@ -1,9 +1,9 @@
-
+// for user comments on exhibits - log user, timestamp, and text
 var mongoose = require('mongoose');
 var timestamps = require('mongoose-timestamp');
 
-var MessageSchema = new mongoose.Schema({
-    message: {
+var CommentSchema = new mongoose.Schema({
+    text: {
         type: String,
         required: [true, 'Message text']
     },
@@ -15,6 +15,6 @@ var MessageSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId, ref:'Exhibit'
     }
 });
-MessageSchema.plugin(timestamps);
-var Message = mongoose.model('Message', MessageSchema);
-module.exports = Message;
+CommentSchema.plugin(timestamps);
+var Comment = mongoose.model('Comment', CommentSchema);
+module.exports = Comment;
