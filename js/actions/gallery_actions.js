@@ -111,12 +111,10 @@ export const exhibitFetch = (exhibit_id) => {
     console.log(exhibit_id);
     return dispatch => {
         dispatch(searchExhibit(exhibit_id))
-        axios({
-            method: 'get',
-            url: fetchUrl + 'exhibit',
-            params: {
-                exhibit_id: exhibit_id
-            }
+        axios.get(fetchUrl + "exhibit" + "/" + exhibit_id, {
+            // params: {
+            //     exhibit_id: exhibit_id
+            // }
         })
         .then(res => {
             console.log(res);
@@ -126,19 +124,28 @@ export const exhibitFetch = (exhibit_id) => {
                 dispatch(exhibitFetchSuccess(data));
             }
         })
+        // axios({
+        //     method: 'get',
+        //     url: fetchUrl + 'exhibit/' + exhibit_id
+        //     // params: {
+        //     //     term: exhibit_id
+        //     // }
+        // })
+ 
     }
 }
-export const commentUpdate = (exhibit_id, comment) => {
-    console.log(comment);
+// should find by id then edit comments
+export const commentUpdate = (exhibit_id, text) => {
+    console.log(text);
     console.log(exhibit_id);
     return dispatch => {
-        dispatch(commentInProgress(comment))
-        axios({
-            method: 'put',
-            url: fetch + 'exhibit',
-            params: {
-                exhibit_id: exhibit_id,
-                comment: comment
+        dispatch(commentInProgress(text));
+        axios.put(fetchUrl + 'exhibit/' + exhibit_id, text)
+        .then(res => {
+            console.log(res.data);
+            let data = res.data;
+            if(res.status == 200) {
+                dispatch(commentComplete(text));
             }
         })
     }
@@ -177,10 +184,14 @@ export const showGallery = (gallery) => ({
     gallery
 });
 
-
+export const COMMENT_IN_PROGRESS = 'COMMENT_IN_PROGRESS';
+export const commentInProgress = (text) => ({
+    type: COMMENT_IN_PROGRESS,
+    text
+});
 
 export const COMMENT_COMPLETE = 'COMMENT_COMPLETE';
-export const commentComplete = (comment) => ({
+export const commentComplete = (text) => ({
     type: LOG_COMMENT,
     comment
 });

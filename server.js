@@ -31,7 +31,7 @@ app.use(bodyParser.json());
 app.use(session({ secret: 'keyboard cat' }));
 app.use(cors());
 app.use('/', routes);
-
+// console.log(routes);
 const server = http.Server(app);
 
 //coordinates the connection to the database, and the running on the HTTP server
