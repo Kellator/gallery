@@ -254,15 +254,15 @@ app.post('/register', function(req, res) {
 // };
 
 // var mockExhibit4 = {
-//     title: 'Fly by Night',
-//     image: 'http://dspncdn.com/a1/media/692x/78/c8/a1/78c8a13c4dd878d82d22940b48512315.jpg',
+//     title: 'Replacement for the Stars',
+//     image: 'http://orig00.deviantart.net/c31e/f/2016/089/d/c/replacement_for_the_stars_by_yuumei-d9x282e.jpg',
 //     description: 'Boy in red from manga called Knite.  For viewing only. Piece completed.',
 //     exhibitType: 'Art',
 //     status: 'Viewing Only',
-//     creator: "597e913edb7e6660086f25da",
+//     creator: "testy",
 //     collaborators: ["5988eb35c616a7950825a6fd"],
-//     location: 'http://designspiration.net/image/4609558023629/',
-//     categories: ['illustration', 'painting', 'digital', 'whimsical', 'people', 'portrait'],
+//     location: 'http://yuumei.deviantart.com/art/Replacement-for-the-Stars-599726678',
+//     categories: ['illustration', 'manga', 'digital', 'landscapes', 'scenery', 'people', 'portrait'],
 //     //comments as own collection that is referenced here - allows for moderation of comments
 //     comments: [
 //         {'username':'username',

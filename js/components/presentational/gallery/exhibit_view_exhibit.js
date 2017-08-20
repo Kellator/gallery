@@ -10,12 +10,14 @@ class ExhibitViewExhibit extends React.Component {
     render() {
         console.log(this.props);
         let creator = this.props.exhibit.creator;
-        let createdOn = this.props.exhibit.createdOn;
-        let updatedOn = this.props.exhibit.updatedOn;
+        let createdAt = this.props.exhibit.createdAt;
+        let updatedAt = this.props.exhibit.updatedAt;
         let image = this.props.exhibit.image;
         let title = this.props.exhibit.title;
         let status = this.props.status;
         let collaborators = this.props.exhibit.collaborators;
+        let description = this.props.exhibit.description;
+        let comments = this.props.exhibit.comments;
         let open;
         console.log(title);
         if (status !== "Viewing Only") {
@@ -32,8 +34,9 @@ class ExhibitViewExhibit extends React.Component {
                     <h1>{title}</h1>
                     <img src={image} />
                     <p>Created By: {creator}</p>
-                    <p>On: {createdOn}</p>
-                    <p>Last collaboration: {updatedOn}</p>
+                    <p>On: {createdAt}</p>
+                    <p>{description}</p>
+                    <p>Last collaboration: {updatedAt}</p>
                     <p>Collaborators: {collaborators}</p>
                     <p>Collaborate by joinging the chat channel or leaving a comment.</p>
                 </div>
@@ -44,7 +47,8 @@ class ExhibitViewExhibit extends React.Component {
                     <h1>{title}</h1>
                     <img src={image}/>
                     <p>Created By: {creator}</p>
-                    <p>On: {createdOn}</p>
+                    <p>On: {createdAt}</p>
+                    <p>{description}</p>
                     <p>This work is closed to collaboration but open to comment.</p>
                     <p>To leave a comment, click here.</p>
                 </div>
