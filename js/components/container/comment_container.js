@@ -5,16 +5,36 @@ import { dispatch } from 'react-redux';
 import { connect } from 'react-redux';
 import CommentForm from '../presentational/gallery/comment_form';
 import CommentList from './comment_list';
+import * as galleryActions from '../../actions/gallery_actions';
 
 class CommentContainer extends React.Component {
     render() {
-        console.log(this.props);
+        console.log(this.props.exhibit);
+        let id = this.props.exhibit._id;
+        console.log(id);
+        const handleSubmit = (values, dispatch) => {
+            console.log(values);
+            console.log(id);
+            let text = values.comment;
+            dispatch(galleryActions.commentUpdate(id, text));
+
+        }
         return (
             <div>
                 <CommentList />
-                <CommentForm onSubmit={ handleSubmit }/>
+                <CommentForm onSubmit={handleSubmit}/>
             </div>
         )
     }
 }
-export default CommentContainer;
+const mapStateToProps = (state, props) => ({
+})
+const mapDispatchToProps = (state, ownProps) => {
+    console.log(ownProps);
+    let id = ownProps.exhibit._id;
+    console.log(id);
+        return {
+            hiccup: "hiccup"
+    }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(CommentContainer);

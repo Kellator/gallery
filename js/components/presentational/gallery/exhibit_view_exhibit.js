@@ -23,13 +23,13 @@ class ExhibitViewExhibit extends React.Component {
         let exhibit_id = this.props.exhibit._id;
         let open;
         console.log(title);
-        const handleSubmit = (values, dispatch) => {
-            let text = values.comment;
-            console.log(text);
-            console.log(exhibit_id);
-            // dispatch(galleryActions.commentUpdate(exhibit_id, text));
-            dispatch(galleryActions.exhibitFetch(exhibit_id));
-        }
+        // const handleSubmit = (values, dispatch) => {
+        //     let text = values.comment;
+        //     console.log(text);
+        //     console.log(exhibit_id);
+        //     // dispatch(galleryActions.commentUpdate(exhibit_id, text));
+        //     dispatch(galleryActions.exhibitFetch(exhibit_id));
+        // }
         if (status !== "Viewing Only") {
             open = true;
         }
@@ -49,7 +49,7 @@ class ExhibitViewExhibit extends React.Component {
                     <p>Last collaboration: {updatedAt}</p>
                     <p>Collaborators: {collaborators}</p>
                     <p>Collaborate by joinging the chat channel or leaving a comment.</p>
-                    <CommentContainer onSubmit={ handleSubmit }/>
+                    <CommentContainer exhibit={this.props.exhibit} />
                 </div>
         }
         else {
@@ -61,7 +61,7 @@ class ExhibitViewExhibit extends React.Component {
                     <p>On: {createdAt}</p>
                     <p>{description}</p>
                     <p>This work is closed to collaboration but open to comment.</p>
-                    <CommentContainer onSubmit={ handleSubmit }/>
+                    <CommentContainer exhibit={this.props.exhibit} />
                 </div>
         }
         return (
@@ -78,9 +78,6 @@ const mapStateToProps = (state, props) => ({
 const mapDispatchToProps = (dispatch, ownProps) => {
     console.log(ownProps);
     return {
-        hello: () => {
-            console.log(ownProps);
-        }
 
     }
 }
