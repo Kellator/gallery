@@ -23,23 +23,6 @@ export const shareExhibit = (exhibit, sendingUserID, receivingUserID) => ({
     receivingUserID
 });
 
-//adds already existing exhibit to user wall
-export const ADD_TO_WALL = 'ADD_TO_WALL';
-export const addToWall = (exhibit, wall) => ({
-    type: ADD_TO_WALL,
-    exhibit,
-    wall
-});
-
-//creates a new wall for user
-export const ADD_NEW_WALL = 'ADD_NEW_WALL';
-export const addNewWall = (title, categories) => ({
-    type: ADD_NEW_WALL,
-    title,
-    categories
-});
-
-
 //UI ACTIONS - changes that occur to ui state tree
 //landing page - login vs sign up
 export const SHOW_LOGIN = 'SHOW_LOGIN';
@@ -125,14 +108,6 @@ export const exhibitFetch = (exhibit_id) => {
                 dispatch(exhibitFetchSuccess(data));
             }
         })
-        // axios({
-        //     method: 'get',
-        //     url: fetchUrl + 'exhibit/' + exhibit_id
-        //     // params: {
-        //     //     term: exhibit_id
-        //     // }
-        // })
- 
     }
 }
 // should find by id then edit comments

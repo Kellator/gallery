@@ -16,20 +16,13 @@ class ExhibitViewExhibit extends React.Component {
         let updatedAt = this.props.exhibit.updatedAt;
         let image = this.props.exhibit.image;
         let title = this.props.exhibit.title;
-        let status = this.props.status;
+        let status = this.props.exhibit.status;
         let collaborators = this.props.exhibit.collaborators;
         let description = this.props.exhibit.description;
         let comments = this.props.exhibit.comments;
         let exhibit_id = this.props.exhibit._id;
         let open;
-        console.log(title);
-        // const handleSubmit = (values, dispatch) => {
-        //     let text = values.comment;
-        //     console.log(text);
-        //     console.log(exhibit_id);
-        //     // dispatch(galleryActions.commentUpdate(exhibit_id, text));
-        //     dispatch(galleryActions.exhibitFetch(exhibit_id));
-        // }
+        console.log(status);
         if (status !== "Viewing Only") {
             open = true;
         }
@@ -72,8 +65,7 @@ class ExhibitViewExhibit extends React.Component {
     }
 }
 const mapStateToProps = (state, props) => ({
-    exhibit: state.gallery.exhibit,
-    status: state.gallery.exhibit.status
+    exhibit: state.gallery.exhibit
     });
 const mapDispatchToProps = (dispatch, ownProps) => {
     console.log(ownProps);

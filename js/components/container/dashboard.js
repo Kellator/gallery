@@ -6,8 +6,9 @@ import { connect } from 'react-redux';
 import { Field, reduxForm, initialize } from 'redux-form';
 //separate local imports from dependencies;
 import BrowserRail from '../presentational/browser_rail';
-import NavBar from '../container/nav_rail';
-import Gallery from '../container/gallery';
+import NavBar from './nav_rail';
+import Gallery from './gallery';
+import Workspace from './workspace_container';
 import Messenger from './messenger';
 import * as actions from '../../actions/index';
 //declare propTypes prior to component
@@ -21,13 +22,15 @@ import * as actions from '../../actions/index';
 class Dashboard extends React.Component {
     render() {
         console.log(this.props);
-        let username = this.props.username
+        let username = this.props.username;
+        let userData = this.props;
         return (
             <div>
                 <NavBar />
                 <p>Welcome to the Gallery, {username}!</p>
-                <Gallery />
-                <Messenger /> 
+                {/* <Gallery /> */}
+                <Workspace user={userData}/>
+                <Messenger user={userData}/> 
             </div>
         )
     }

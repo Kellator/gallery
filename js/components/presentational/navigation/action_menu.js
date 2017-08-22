@@ -25,7 +25,8 @@ class Menu extends React.Component {
             if (menuType == "user_menu") {
                 list = <ul className="user_menu_list">
                             <li>View My Gallery</li>
-                            <li>View Gallery Walls</li>
+                            <li>View My Profile</li>
+                            <li>Create a New Exhibit</li>
                             <li>Check My Messages</li>
                             <li>Log Out</li>
                         </ul>
