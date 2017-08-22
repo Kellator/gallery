@@ -7,7 +7,7 @@ import { dispatch } from 'react-redux';
 import { Field, reduxForm, initialize } from 'redux-form';
 import { Redirect } from 'react-router';
 //separate local imports from dependencies
-import Menu from '../navigation/action_menu.js';
+// import Menu from '../navigation/action_menu.js';  update when gallery action menu created
 import * as authActions from '../../../actions/auth_actions';
 import * as galleryActions from '../../../actions/gallery_actions';
 // import '../css/index.css';
@@ -35,7 +35,7 @@ class GalleryViewExhibit extends React.Component {
                     <h2 className="exhibit-title"><a href={location} target="_blank">{title}</a></h2>
                     <p className="exhibit-poster">Posted by: {creator} </p>
                 </div>
-                <Menu className={"gallery_menu"}/>
+                {/* <Menu className={"gallery_menu"}/> */}
             </div>
         )
     }

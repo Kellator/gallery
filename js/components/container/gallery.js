@@ -6,7 +6,6 @@ import { dispatch } from 'react-redux';
 
 //separate local imports from dependencies
 import * as actions from '../../actions/index';
-import Menu from '../presentational/navigation/action_menu';
 import GalleryViewExhibit from '../presentational/gallery/gallery_view_exhibit';
 import ExhibitsList from './exhibits_list';
 import NoResult from '../presentational/gallery/noResult';

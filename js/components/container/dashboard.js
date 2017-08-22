@@ -5,7 +5,6 @@ import { dispatch } from 'react-redux';
 import { connect } from 'react-redux';
 import { Field, reduxForm, initialize } from 'redux-form';
 //separate local imports from dependencies;
-import BrowserRail from '../presentational/browser_rail';
 import NavBar from './nav_rail';
 import Gallery from './gallery';
 import Workspace from './workspace_container';

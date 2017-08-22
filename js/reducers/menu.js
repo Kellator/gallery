@@ -2,15 +2,22 @@ import * as action from '../actions/index';
 console.log(action);
 
 const initialState = {
-    menuActive: false
+    userMenu: {
+        isOpen: false
+    },
+    galleryMenu: {
+        isOpen: false
+    }
 };
-const menu = ( state = {}, action ) => {
+const menu = ( state = initialState, action ) => {
     switch(action.type) {
         case 'TOGGLE_MENU':
-            return Object.assign({}, state, {
-                menuActive: !state.menuActive,
-                menu: state.menu
-            });
+            return {
+                ...state,
+                userMenu: {
+                    isOpen: !state.isOpen
+                }
+            };
         case 'USER_MENU':
             return Object.assign({}, state, {
                 menu: "user_menu"  
