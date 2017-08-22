@@ -9,9 +9,12 @@ import GalleryViewExhibit from '../presentational/gallery/gallery_view_exhibit';
 class ExhibitsList extends React.Component {
     render() {
         console.log(this.props);
-        let exhibits = (this.props.exhibits) ? this.props.exhibits.map((exhibit, index) => {
-            return <GalleryViewExhibit key={index} exhibit={exhibit} />
+        // let click = this.props.exhibitClick;
+        // console.log(click);
+        let exhibits = (this.props.exhibits) ? this.props.exhibits.map((exhibit) => {
+            return <GalleryViewExhibit key={exhibit._id} id={exhibit._id} exhibit={exhibit} />
         }) : undefined;
+
         return (
             <div>
                 {exhibits}
@@ -21,12 +24,16 @@ class ExhibitsList extends React.Component {
 }
 export default ExhibitsList;
 // const mapStateToProps = (state, props) => ({
-//     gallerySearch: state.gallery.gallerySearch,
-//     galleryExhibits: state.gallery.galleryExhibits
+
 // });
 // const mapDispatchToProps = (dispatch, ownProps) => {
+//     console.log(ownProps);
 //     return { 
-
+//         exhibitClick: (event) => {
+//             event.preventDefault();
+//             console.log(ownProps);
+//             console.log(ownProps.exhibits);
+//         }
 //     }
 // }
-// export default connect(mapStateToProps, mapDispatchToProps)(Exhibits);
+// export default connect(mapStateToProps, mapDispatchToProps)(ExhibitsList);

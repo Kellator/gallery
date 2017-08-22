@@ -31,7 +31,7 @@ class Gallery extends React.Component {
             return <ExhibitsList exhibits={this.props.galleryExhibits} />
         };
         if(!view) {
-            return <ExhibitViewExhibit />
+            return <ExhibitViewExhibit exhibit={this.props.galleryExhibits}/>
         }
         }
 
@@ -43,7 +43,12 @@ const mapStateToProps = (state, props) => ({
 });
 const mapDispatchToProps = (dispatch, ownProps) => {
     return { 
-
+        exhibitOnClick: () => { 
+            let exhibit = ownProps;
+            console.log("image clicked for full exhibit view");
+            console.log(ownProps);
+            dispatch(galleryActions.showExhibit(exhibit));
+        },
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(Gallery);

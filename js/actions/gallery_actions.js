@@ -100,6 +100,7 @@ export const galleryFetch = (search) => {
             let data = res.data
             if(res.status == 200) {
                 dispatch(searchGallerySuccess(data));
+                console.log(data);
             }
         })
         .catch(error => {
@@ -107,19 +108,66 @@ export const galleryFetch = (search) => {
         });       
     }
 };
+export const exhibitFetch = (exhibit_id) => {
+    console.log(exhibit_id);
+    return dispatch => {
+        dispatch(searchExhibit(exhibit_id))
+        axios.get(fetchUrl + "gallery/exhibit/" + exhibit_id, {
+            // params: {
+            //     exhibit_id: exhibit_id
+            // }
+        })
+        .then(res => {
+            console.log(res);
+            console.log(res.data);
+            let data = res.data
+            if(res.status == 200) {
+                dispatch(exhibitFetchSuccess(data));
+            }
+        })
+        // axios({
+        //     method: 'get',
+        //     url: fetchUrl + 'exhibit/' + exhibit_id
+        //     // params: {
+        //     //     term: exhibit_id
+        //     // }
+        // })
+ 
+    }
+}
+// should find by id then edit comments
+export const commentUpdate = (exhibit_id, text) => {
+    console.log(text);
+    console.log(exhibit_id);
+    console.log("hello");
+    return dispatch => {
+        dispatch(commentInProgress(text));
+        axios.put(fetchUrl + 'gallery/exhibit/' + exhibit_id, text)
+        .then(res => {
+            console.log(res.data);
+            let data = res.data;
+            if(res.status == 200) {
+                dispatch(commentComplete(text));
+            }
+        })
+    }
+  }
+export const SEARCH_EXHIBIT = 'SEARCH_EXHIBIT';
+export const searchExhibit = (exhibit_id) => ({
+    type: SEARCH_EXHIBIT,
+    exhibit_id
+});
 //shows selected exhibit
 export const SHOW_EXHIBIT = 'SHOW_EXHIBIT';
-export const showExhibit = (exhibit) => ({
+export const showExhibit = (data) => ({
     type: SHOW_EXHIBIT,
-    exhibit
+    data
 });
 
-//shows selected user wall
-export const SHOW_USER_WALL = 'SHOW_USER_WALL';
-export const showUserWall = (userID, wall) => ({
-    type: SHOW_USER_WALL,
-    userID,
-    wall
+export const EXHIBIT_FETCH_SUCCESS = 'EXHIBIT_FETCH_SUCCESS';
+export const exhibitFetchSuccess = (data) => ({
+    type: EXHIBIT_FETCH_SUCCESS,
+    data
 });
 
 //shows selected user gallery
@@ -130,12 +178,6 @@ export const showUserGallery = (userID, gallery) => ({
     gallery
 });
 
-//shows selected wall 
-export const SHOW_WALL = 'SHOW_WALL';
-export const showWall = (wall) => ({
-    type: SHOW_WALL,
-    wall
-});
 
 //shows all exhibits in app
 export const SHOW_GALLERY = 'SHOW_GALLERY';
@@ -144,6 +186,14 @@ export const showGallery = (gallery) => ({
     gallery
 });
 
+export const COMMENT_IN_PROGRESS = 'COMMENT_IN_PROGRESS';
+export const commentInProgress = (text) => ({
+    type: COMMENT_IN_PROGRESS,
+    text
+});
 
-//thunks?
-//retrieve documents from monogo - exhibits, walls, user gallery etc
+export const COMMENT_COMPLETE = 'COMMENT_COMPLETE';
+export const commentComplete = (text) => ({
+    type: LOG_COMMENT,
+    comment
+});
