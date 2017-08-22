@@ -12,6 +12,7 @@ import { CSSTransitionGroup } from 'react-transition-group';
 // Menu.propTypes = {
 
 // }
+
 class Menu extends React.Component {
     render() {
         // console.log(this.props);
@@ -20,15 +21,18 @@ class Menu extends React.Component {
         let menu;
         let list;
         let menuName = this.props.title;
+        const click = () => {
+            alert("hello");
+        }
         // console.log(menuType);
         if (menuState == true) {
             if (menuType == "user_menu") {
                 list = <ul className="user_menu_list">
-                            <li>View My Gallery</li>
-                            <li>View My Profile</li>
-                            <li>Create a New Exhibit</li>
-                            <li>Check My Messages</li>
-                            <li>Log Out</li>
+                            <li><a href="#" onClick={click}>View My Gallery</a></li>
+                            <li><a href="#" onClick={click}>View My Profile</a></li>
+                            <li><a href="#" onClick={click}>Create a New Exhibit</a></li>
+                            <li><a href="#" onClick={click}>Check My Messages</a></li>
+                            <li><a href="#" onClick={click}>Log Out</a></li>
                         </ul>
             }
             if (menuType == "gallery_menu_list") {
