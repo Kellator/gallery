@@ -100,6 +100,7 @@ export const galleryFetch = (search) => {
             let data = res.data
             if(res.status == 200) {
                 dispatch(searchGallerySuccess(data));
+                console.log(data);
             }
         })
         .catch(error => {
@@ -111,7 +112,7 @@ export const exhibitFetch = (exhibit_id) => {
     console.log(exhibit_id);
     return dispatch => {
         dispatch(searchExhibit(exhibit_id))
-        axios.get(fetchUrl + "exhibit" + "/" + exhibit_id, {
+        axios.get(fetchUrl + "gallery/exhibit/" + exhibit_id, {
             // params: {
             //     exhibit_id: exhibit_id
             // }
@@ -138,9 +139,10 @@ export const exhibitFetch = (exhibit_id) => {
 export const commentUpdate = (exhibit_id, text) => {
     console.log(text);
     console.log(exhibit_id);
+    console.log("hello");
     return dispatch => {
         dispatch(commentInProgress(text));
-        axios.put(fetchUrl + 'exhibit/' + exhibit_id, text)
+        axios.put(fetchUrl + 'gallery/exhibit/' + exhibit_id, text)
         .then(res => {
             console.log(res.data);
             let data = res.data;

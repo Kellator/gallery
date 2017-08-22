@@ -46,7 +46,7 @@ router.get('/', function(req, res) {
 router.get('/exhibit/:exhibit_id', function(req, res) {
     console.log('exhibit request made');
     console.log(req.query);
-    let exhibit_id = req.query.exhibit_id;
+    let exhibit_id = req.params.exhibit_id;
     Exhibit.findById(exhibit_id, function(err, exhibit) {
         if (err) {
             return res.status(500).json({

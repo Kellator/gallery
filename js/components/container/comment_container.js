@@ -12,6 +12,7 @@ class CommentContainer extends React.Component {
         console.log(this.props.exhibit);
         let id = this.props.exhibit._id;
         console.log(id);
+        let comments = this.props.exhibit.comments;
         const handleSubmit = (values, dispatch) => {
             console.log(values);
             console.log(id);
@@ -21,7 +22,7 @@ class CommentContainer extends React.Component {
         }
         return (
             <div>
-                <CommentList />
+                <CommentList comments={comments} />
                 <CommentForm onSubmit={handleSubmit}/>
             </div>
         )

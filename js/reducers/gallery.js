@@ -64,7 +64,7 @@ export default function gallery(state = initialState, action) {
             return {
                 ...state,
                 commentLogComplete: false,
-                commentLogInProogress: true
+                commentLogInProgress: true
             };
         case 'COMMENT_COMPLETE' :
             return {
