@@ -37,9 +37,8 @@ var ExhibitSchema = new mongoose.Schema({
         type: Array
     },
     //comments as own collection that is referenced here - allows for moderation of comments
-    comments: {   
-        type: Array    
-    }
+    comments: [{ type: mongoose.Schema.Types.ObjectId, ref:'Comment'}]    
+
 });
 ExhibitSchema.plugin(timestamps);
 var Exhibit = mongoose.model('Exhibit', ExhibitSchema);

@@ -4,9 +4,7 @@ import { Field, reduxForm, initialize } from 'redux-form';
 
 class GallerySearch extends React.Component {
     render() {
-        console.log(this.props);
         const { handleSubmit, pristine, reset, submitting, value } = this.props;
-        console.log(this.props.value);
         return(
             <div>
                 <form onSubmit={handleSubmit(this.props.onSubmit)}>

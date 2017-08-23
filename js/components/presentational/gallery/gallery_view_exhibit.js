@@ -7,7 +7,7 @@ import { dispatch } from 'react-redux';
 import { Field, reduxForm, initialize } from 'redux-form';
 import { Redirect } from 'react-router';
 //separate local imports from dependencies
-import Menu from '../navigation/action_menu.js';
+// import Menu from '../navigation/action_menu.js';  update when gallery action menu created
 import * as authActions from '../../../actions/auth_actions';
 import * as galleryActions from '../../../actions/gallery_actions';
 // import '../css/index.css';
@@ -26,27 +26,30 @@ class GalleryViewExhibit extends React.Component {
         let title = this.props.exhibit.title;
         let creator = this.props.exhibit.creator;
         let menuType;
+        // let exhibit = this.props.exhibit;
         console.log(this.props);
         return (
             <div>
-                <img className="exhibit-image" alt="image from exhibit" onClick={this.props.exhibitOnClick} src={exhibitImage}/>
-                <h2 className="exhibit-title"><a href={location} target="_blank">{title}</a></h2>
-                <p className="exhibit-poster">Posted by: {creator} </p>
-                <Menu className={"gallery_menu"}/>
+                <div onClick={this.props.exhibitClick} >
+                    <img className="exhibit-image" alt="image from exhibit" src={exhibitImage}/>
+                    <h2 className="exhibit-title"><a href={location} target="_blank">{title}</a></h2>
+                    <p className="exhibit-poster">Posted by: {creator} </p>
+                </div>
+                {/* <Menu className={"gallery_menu"}/> */}
             </div>
         )
     }
 }
+// export default GalleryViewExhibit;
 const mapStateToProps = (state, props) => ({
-
 });
 const mapDispatchToProps = (dispatch, ownProps) => {
     return {
-        exhibitOnClick: () => { 
-            console.log("image clicked for full exhibit view");
-            console.log(ownProps);
-            dispatch(galleryActions.showExhibit(ownProps));
-        },
+        exhibitClick: (event) => {
+            event.preventDefault();
+            let data = ownProps.exhibit;
+            dispatch(galleryActions.showExhibit(data));
+        }
     }
 }
 
