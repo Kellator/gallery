@@ -77,6 +77,15 @@ export default function gallery(state = initialState, action) {
                 commentLogComplete: true,
                 commentLogInProgress: false
             };
+        case 'LOAD_ADD_NEW_EXHIBIT' :
+            return {
+                ...state,
+                view: {
+                    galleryView: false,
+                    exhibitView: false,
+                    createExhibitView: true
+                }
+            };
         default :
             return state;
     };    

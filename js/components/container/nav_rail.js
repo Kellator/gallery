@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { dispatch } from 'react-redux';
-import { Dropdown, Icon } from 'semantic-ui-react';
 //separate local imports from dependencies.
 import GallerySearch from '../presentational/navigation/gallery_search';
 import GalleryLogo from '../presentational/landing/gallery_logo';

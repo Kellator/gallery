@@ -13,6 +13,10 @@ export const addNewExhibit = (title, image, source, categories, userID) => ({
     categories,
     userID
 });
+export const LOAD_ADD_NEW_EXHIBIT ='LOAD_ADD_NEW_EXHIBIT';
+export const loadAddNewExhibit = () => ({
+    type: LOAD_ADD_NEW_EXHIBIT
+})
 
 //shares a specific exhibit via message
 export const SHARE_EXHIBIT = 'SHARE_EXHIBIT';
