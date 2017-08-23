@@ -4,8 +4,10 @@ const initialState = {
     searching: false,
     loaded: false,
     gallerySearch: '',
-    galleryView: true,
-    exhibitView: false,
+    view: {
+        galleryView: true,
+        exhibitView: false,
+    },
     galleryExhibits: []
 }
 export default function gallery(state = initialState, action) {
@@ -40,8 +42,11 @@ export default function gallery(state = initialState, action) {
         case 'SHOW_EXHIBIT' :
             return {
                 ...state,
-                galleryView: false,
-                exhibitView: true,
+                view : {
+                    galleryView: true,
+                    exhibitView: true,
+                    createExhibitView: false
+                },
                 exhibitSearching:false,
                 exhibitLoaded: true,
                 exhibit: {
@@ -71,6 +76,15 @@ export default function gallery(state = initialState, action) {
                 ...state,
                 commentLogComplete: true,
                 commentLogInProgress: false
+            };
+        case 'LOAD_ADD_NEW_EXHIBIT' :
+            return {
+                ...state,
+                view: {
+                    galleryView: false,
+                    exhibitView: false,
+                    createExhibitView: true
+                }
             };
         default :
             return state;

@@ -7,7 +7,7 @@ import { dispatch } from 'react-redux';
 //separate local imports from dependencies.
 import GallerySearch from '../presentational/navigation/gallery_search';
 import GalleryLogo from '../presentational/landing/gallery_logo';
-import Menu from '../presentational/navigation/action_menu';
+import UserMenu from '../presentational/navigation/user_menu';
 import * as galleryActions from '../../actions/gallery_actions';
 
 class NavBar extends React.Component {
@@ -16,7 +16,7 @@ class NavBar extends React.Component {
             <div>
                 <GallerySearch onSubmit={this.props.onSubmit}/>
                 <GalleryLogo />
-                <Menu title={"Menu A"} className={"user_menu"} onClick={this.props.onClickA}/>
+                <UserMenu />
             </div>
         );
     }
@@ -36,8 +36,9 @@ const mapDispatchToProps = (dispatch, ownProps) => {
             }
             dispatch(galleryActions.galleryFetch(search))
         },
-        onClickA: () => {
+        userMenuClick: () => {
             event.preventDefault();
+            alert("menu clicked");
             dispatch(galleryActions.toggleMenu());
         }
     }

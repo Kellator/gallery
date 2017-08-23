@@ -68,7 +68,7 @@ export const checkUser = (username, email, password) => {
             }
         })
         .catch(error => {
-            dispatch(authSigninFail());
+            // dispatch(authSigninFail());
             // redirect to login on fail
             console.log(error);
         });       
