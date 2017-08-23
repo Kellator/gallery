@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { dispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { Dropdown } from 'semantic-ui-react'
+import { Dropdown, Menu } from 'semantic-ui-react';
 // import ReactCSSTransitionGroup from 'react-transition-group';
 // import { CSSTransitionGroup } from 'react-transition-group';
 import {userMenuOptions} from './menu_options';
@@ -15,9 +15,28 @@ import {userMenuOptions} from './menu_options';
 
 // }
 
+// class UserMenu extends React.Component {
+//     render() {
+//         return (
+
+//                 <Dropdown text='Menu'>
+//                     <Dropdown.Menu>
+//                         <Dropdown.Item text='Create an Exhibit' />
+//                         <Dropdown.Item text='My Profile' />
+//                         <Dropdown.Item text='My Gallery' />
+//                         <Dropdown.Item text='My Messages' />
+//                         <Dropdown.Divider />
+//                         <Dropdown.Item text='Log Out' />
+//                     </Dropdown.Menu>
+//                 </Dropdown>
+
+//         );
+//     };
+// };
 const UserMenu = () => (
-    <Dropdown placeholder="Menu" fluid selection options={userMenuOptions} />
+    <Dropdown placeholder="Menu" selection fluid options={userMenuOptions} />
 )
+  
 export default UserMenu;
 
 // class UserMenu extends React.Component {
