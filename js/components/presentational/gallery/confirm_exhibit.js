@@ -33,10 +33,10 @@ class ConfirmExhibitCard extends React.Component {
         )
     }
 }
-// const ConfirmExhibitCard = () => (
+// const ConfirmExhibitCard = (props) => (
 //     <div>
 //         <Card>
-//             <Image src="http://via.placeholder.com/350x150" />
+//             <Image src="http://via.placeholder.com/350x350" />
 //             <Card.Content>
 //                 <Card.Header>
 //                     Exhibit Title from CreateExhibitForm Title Field
