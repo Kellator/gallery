@@ -19,7 +19,7 @@ class Workspace extends React.Component {
             componentToRender = <Gallery />
         }
         if (view.createExhibitView === true) {
-            componentToRender = <CreateExhibitForm onSubmit={this.props.newExhibitSubmitHandler}/>
+            componentToRender = <CreateExhibitForm onSubmit={this.props.newExhibitSubmit}/>
         }
         return (
             <div>
@@ -32,10 +32,12 @@ const mapStateToProps = (state, props) => ({
     view: state.gallery.view
 });
 const mapDispatchToProps = (dispatch, ownProps) => {
-    newExhibitSubmitHandler: (values) => {
-        event.preventDefault();
-        console.log("there, there's a damned submit");
-        console.log(ownProps);
+    return {
+        newExhibitSubmit: (values) => {
+            event.preventDefault();
+            console.log("there, there's a damned submit");
+            console.log(ownProps);
+        }
     }
 };
 export default connect(mapStateToProps, mapDispatchToProps)(Workspace);
