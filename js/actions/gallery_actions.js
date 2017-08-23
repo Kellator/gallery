@@ -13,10 +13,20 @@ export const addNewExhibit = (title, image, source, categories, userID) => ({
     categories,
     userID
 });
-export const LOAD_ADD_NEW_EXHIBIT ='LOAD_ADD_NEW_EXHIBIT';
-export const loadAddNewExhibit = () => ({
-    type: LOAD_ADD_NEW_EXHIBIT
-})
+export const LOAD_NEW_EXHIBIT_WORKSPACE ='LOAD_NEW_EXHIBIT_WORKSPACE';
+export const loadAddNewExhibitSpace = () => ({
+    type: LOAD_NEW_EXHIBIT_WORKSPACE
+});
+
+export const LOAD_CONFIRM_EXHIBIT = 'LOAD_CONFIRM_EXHIBIT';
+export const loadConfirmExhibit = (values) => ({
+    type: LOAD_CONFIRM_EXHIBIT,
+    values
+});
+export const LOAD_CREATE_EXHIBIT = 'LOAD_CREATE_EXHIBIT';
+export const loadCreateExhibit = () => ({
+    type: LOAD_CREATE_EXHIBIT
+});
 
 //shares a specific exhibit via message
 export const SHARE_EXHIBIT = 'SHARE_EXHIBIT';
