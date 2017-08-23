@@ -2,6 +2,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Field, reduxForm, initialize } from 'redux-form';
+import { Form, Button } from 'semantic-ui-react';
 //separate local imports from dependencies
 
 
@@ -25,7 +26,7 @@ class CreateExhibitForm extends React.Component {
         return (
             <div>
                 <h1>Create a New Exhibit:</h1>
-                    <form onSubmit={handleSubmit(this.props.onSubmit)}>
+                    <Form onSubmit={handleSubmit(this.props.onSubmit)}>
                         <div>
                             <label>Title</label>
                             <div>
@@ -78,10 +79,10 @@ class CreateExhibitForm extends React.Component {
                             </div>
                         </div>
                         <div>
-                            <button type="submit" disabled={pristine || submitting}>Submit</button>
-                            <button type="button" disabled={pristine || submitting} onClick={reset}>Clear Values</button>
+                            <Button type="submit" disabled={pristine || submitting}>Submit</Button>
+                            <Button type="button" disabled={pristine || submitting} onClick={reset}>Clear Values</Button>
                         </div>
-                    </form>
+                    </Form>
             </div>
         )
     }    

@@ -36,7 +36,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
         newExhibitSubmit: (values) => {
             event.preventDefault();
             console.log("there, there's a damned submit");
-            console.log(ownProps);
+            console.log(values);
         }
     }
 };
