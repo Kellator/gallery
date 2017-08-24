@@ -38,12 +38,7 @@ class CreateExhibitForm extends React.Component {
                             <label htmlFor="thumbnail_image">Thumbnail Display</label> 
                             <div>
                                 <p>Choose the image that best represents your piece or upload your own:</p>
-                                <Field name="thumbnail_image" component={imageButton} >
-                                    <option type="image" value="visual_art"><img src='../../../default_images/hand.jpeg' maxHeight="48" /></option>
-                                    <option type="image" value="audio"><img src='../../../default_images/piano_keys.jpeg' maxHeight="48" /></option>
-                                    <option type="image" value="writing"><img src='../../../default_images/writing.jpeg' maxHeight="48" /></option>
-                                    <option type="image" value="artist_generated"><img src='../../../default_images/gallery.jpeg' maxHeight="48" /></option>
-                                </Field>
+                                <Field name="thumbnail_image" component="input" />
                             </div>
                         </div>
                         <div>
@@ -87,7 +82,6 @@ class CreateExhibitForm extends React.Component {
         )
     }    
 }
-
 export default reduxForm({
     form: 'create_exhibit',
     name: 'create_exhibit'

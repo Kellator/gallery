@@ -45,15 +45,15 @@ const mapDispatchToProps = (dispatch, ownProps) => {
             console.log("there, there's a damned submit");
             console.log(values);
             console.log(ownProps);
-            let user = ownProps.user.username;
+            let creator = ownProps.user.username;
             let title = values.exhibit_title;
             let description = values.exhibit_description;
             let exhibitType = values.exhibit_type;
             let location = values.exhibit_url;
-            let image = values.exhibit_url;  //change when image load works
+            let image = values.thumbnail_image; 
             let status = values.collaborate;
             let data = {
-                user: user,
+                creator: creator,
                 title: title,
                 description: description,
                 exhibitType: exhibitType,
