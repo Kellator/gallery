@@ -9,11 +9,8 @@ class GallerySearch extends React.Component {
         return(
             <div>
                 <Form onSubmit={handleSubmit(this.props.onSubmit)}>
-                    <fieldset className="gallery_search">
-                        <legend >Gallery Search</legend>
-                        <label htmlFor="gallery_search_input">Gallery Search</label>
-                        <Field name="gallery_search_input" type="text" placeholder="Search..."icon="search" component="Input"/>
-                    </fieldset>
+                    <label htmlFor="gallery_search_input">Gallery Search</label>
+                    <Field name="gallery_search_input" type="text" placeholder="Search..."icon="search" component="Input"/>
                 </Form>
             </div>
         )

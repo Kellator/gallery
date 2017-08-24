@@ -6,6 +6,7 @@ import { bindActionCreators } from 'redux';
 import { dispatch } from 'react-redux';
 import { Field, reduxForm, initialize } from 'redux-form';
 import { Redirect } from 'react-router';
+import { Card } from 'semantic-ui-react';
 //separate local imports from dependencies
 // import Menu from '../navigation/action_menu.js';  update when gallery action menu created
 import * as authActions from '../../../actions/auth_actions';
@@ -25,16 +26,21 @@ class GalleryViewExhibit extends React.Component {
         let location = this.props.exhibit.location;
         let title = this.props.exhibit.title;
         let creator = this.props.exhibit.creator;
+        let description = this.props.exhibit.description;
+        let status = this.props.exhibit.status;
         let menuType;
         // let exhibit = this.props.exhibit;
         console.log(this.props);
+        const meta = "Posted By: " + creator;
         return (
             <div>
-                <div onClick={this.props.exhibitClick} >
-                    <img className="exhibit-image" alt="image from exhibit" src={exhibitImage}/>
-                    <h2 className="exhibit-title"><a href={location} target="_blank">{title}</a></h2>
-                    <p className="exhibit-poster">Posted by: {creator} </p>
-                </div>
+                <Card onClick={this.props.exhibitClick} 
+                    image={exhibitImage}
+                    header={title}
+                    meta={meta}
+                    description={description}
+                    extra={status}
+                />
                 {/* <Menu className={"gallery_menu"}/> */}
             </div>
         )

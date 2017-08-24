@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { dispatch } from 'react-redux';
 import { connect } from 'react-redux';
-import { Card } from 'semantic-ui-react';
+import { Card, Icon, Image } from 'semantic-ui-react';
 import CommentForm from './comment_form';
 import CommentContainer from '../../container/comment_container';
 
@@ -23,6 +23,14 @@ class ExhibitViewExhibit extends React.Component {
         let comments = this.props.exhibit.comments;
         let exhibit_id = this.props.exhibit._id;
         let open;
+        const extra = (
+            <div><CommentContainer exhibit={this.props.exhibit} /></div>
+        )
+        const meta = "Created By: " + creator;
+        const collaborationMeta = "Collaborators: " + collaborators; 
+        const lastCollaboration = "Last Collabboration: " + updatedAt;
+        const collabs = <div><p>{collaborationMeta}</p> <p>{lastCollaboration}</p></div>;
+        const collaborationExtra = <p>Collaborate by joinging the chat channel or leaving a comment.</p>;
         console.log(status);
         if (status !== "Viewing Only") {
             open = true;
@@ -35,27 +43,41 @@ class ExhibitViewExhibit extends React.Component {
         if(open == true) {
             component = 
                 <div>
-                    <h1>{title}</h1>
-                    <img src={image} />
-                    <p>Created By: {creator}</p>
-                    <p>On: {createdAt}</p>
-                    <p>{description}</p>
-                    <p>Last collaboration: {updatedAt}</p>
-                    <p>Collaborators: {collaborators}</p>
-                    <p>Collaborate by joinging the chat channel or leaving a comment.</p>
-                    <CommentContainer exhibit={this.props.exhibit} />
+                    <Card 
+                    image={image}
+                    header={title}
+                    meta={collabs}
+                    description={description}
+                    extra={extra} 
+                    />
                 </div>
         }
         else {
             component = 
                 <div>
-                    <h1>{title}</h1>
-                    <img src={image}/>
-                    <p>Created By: {creator}</p>
-                    <p>On: {createdAt}</p>
-                    <p>{description}</p>
-                    <p>This work is closed to collaboration but open to comment.</p>
-                    <CommentContainer exhibit={this.props.exhibit} />
+                    <Card>
+                        <Image src={image} />
+                        <Card.Content>
+                            <Card.Header>
+                                {title}
+                            </Card.Header>
+                            <Card.Meta>
+                                {meta}
+                            </Card.Meta>
+                            <Card.Description>
+                                {description}
+                            </Card.Description>
+                            <Card.Meta>
+                                {collaborationMeta}
+                            </Card.Meta>
+                            <Card.Meta>
+                                {lastCollaboration}
+                            </Card.Meta> 
+                        </Card.Content>
+                        <Card.Content extra>
+                            {extra}
+                        </Card.Content>
+                    </Card>
                 </div>
         }
         return (

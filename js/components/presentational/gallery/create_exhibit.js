@@ -2,7 +2,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Field, reduxForm, initialize } from 'redux-form';
-import { Form, Button } from 'semantic-ui-react';
+import { Form, Button, TextArea } from 'semantic-ui-react';
 //separate local imports from dependencies
 
 
@@ -28,14 +28,14 @@ class CreateExhibitForm extends React.Component {
                 <h1>Create a New Exhibit:</h1>
                     <Form onSubmit={handleSubmit(this.props.onSubmit)}>
                         <div>
-                            <label>Title</label>
+                            <label htmlFor="exhibit_title">Title</label>
                             <div>
                                 <p>Give your passion a name:</p>
                                 <Field name="exhibit_title" component="input" type="text" />
                             </div>
                         </div>
                         <div>
-                            <label>Thumbnail Display</label> 
+                            <label htmlFor="thumbnail_image">Thumbnail Display</label> 
                             <div>
                                 <p>Choose the image that best represents your piece or upload your own:</p>
                                 <Field name="thumbnail_image" component={imageButton} >
@@ -47,7 +47,7 @@ class CreateExhibitForm extends React.Component {
                             </div>
                         </div>
                         <div>
-                            <label>Type</label>
+                            <label htmlFor="exhibit_type">Type</label>
                             <div>
                                 <p>Select your genre from these categories:</p>
                                 <Field name="exhibit_type" component="select" required>
@@ -59,20 +59,20 @@ class CreateExhibitForm extends React.Component {
                             </div>
                         </div>
                         <div>
-                            <label>Open for Collaboration</label>
+                            <label htmlFor="open_exhibit">Open for Collaboration</label>
                             <div>
                                 <Field name="collaborate" id="open_exhibit" component="input" type="checkbox" />
                             </div>
                         </div>
                         <div>
-                            <label>Description</label>
+                            <label htmlFor="exhibit_description">Description</label>
                             <div>
                                 <p>Provide a brief description of your piece in 250 characters or less:</p>
-                                <Field name="exhibit_description" component="input" type="text" maxLength="250" required/>
+                                <TextArea name="exhibit_description" maxLength="250" required/>
                             </div>
                         </div>
                         <div>
-                            <label>Location</label>
+                            <label htmlFor="exhibit_url">Location</label>
                             <div>
                                 <p>Add a link to your exhibit location:</p>
                                 <Field name="exhibit_url" component="input" type="text" />

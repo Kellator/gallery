@@ -19,7 +19,14 @@ export default function gallery(state = initialState, action) {
             return {
                 ...state,
                 searching: true,
-                gallerySearch: action.search
+                gallerySearch: action.search,
+                view: {
+                    galleryView: true,
+                    exhibitView: false,
+                    createWorkspaceView: false,
+                    createExhibitView: false,
+                    confirmExhibitView: false              
+                },
             };
         case 'SEARCH_GALLERY_SUCCESS' :
             return {
@@ -49,6 +56,7 @@ export default function gallery(state = initialState, action) {
                     galleryView: true,
                     exhibitView: true,
                     createExhibitView: false
+                    
                 },
                 exhibitSearching:false,
                 exhibitLoaded: true,
@@ -58,7 +66,7 @@ export default function gallery(state = initialState, action) {
                     comments:  action.data.comments,
                     createdAt:  action.data.createdAt,
                     creator:  action.data.creator,
-                    descriptions:  action.data.descriptions,
+                    description:  action.data.description,
                     exhibitType:  action.data.exhibitType,
                     image:  action.data.image,
                     location:  action.data.location,
