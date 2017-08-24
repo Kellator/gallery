@@ -34,7 +34,8 @@ const mapDispatchToProps = (dispatch, ownProps) => {
             if (search == undefined ) {
                 search = "";
             }
-            dispatch(galleryActions.galleryFetch(search))
+            // dispatch(galleryAction.showAll());
+            dispatch(galleryActions.galleryFetch(search));
         },
         userMenuClick: () => {
             event.preventDefault();

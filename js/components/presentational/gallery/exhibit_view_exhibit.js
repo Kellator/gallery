@@ -23,6 +23,14 @@ class ExhibitViewExhibit extends React.Component {
         let comments = this.props.exhibit.comments;
         let exhibit_id = this.props.exhibit._id;
         let open;
+        const extra = (
+            <div><CommentContainer exhibit={this.props.exhibit} /></div>
+        )
+        const meta = "Created By: " + creator;
+        const collaborationMeta = "Collaborators: " + collaborators; 
+        const lastCollaboration = "Last Collabboration: " + updatedAt;
+        const collabs = <div><p>{collaborationMeta}</p> <p>{lastCollaboration}</p></div>;
+        const collaborationExtra = <p>Collaborate by joinging the chat channel or leaving a comment.</p>;
         console.log(status);
         if (status !== "Viewing Only") {
             open = true;
@@ -35,27 +43,25 @@ class ExhibitViewExhibit extends React.Component {
         if(open == true) {
             component = 
                 <div>
-                    <h1>{title}</h1>
-                    <img src={image} />
-                    <p>Created By: {creator}</p>
-                    <p>On: {createdAt}</p>
-                    <p>{description}</p>
-                    <p>Last collaboration: {updatedAt}</p>
-                    <p>Collaborators: {collaborators}</p>
-                    <p>Collaborate by joinging the chat channel or leaving a comment.</p>
-                    <CommentContainer exhibit={this.props.exhibit} />
+                    <Card 
+                    image={image}
+                    header={title}
+                    meta={collabs}
+                    description={description}
+                    extra={extra} 
+                    />
                 </div>
         }
         else {
             component = 
                 <div>
-                    <h1>{title}</h1>
-                    <img src={image}/>
-                    <p>Created By: {creator}</p>
-                    <p>On: {createdAt}</p>
-                    <p>{description}</p>
-                    <p>This work is closed to collaboration but open to comment.</p>
-                    <CommentContainer exhibit={this.props.exhibit} />
+                    <Card
+                        image={image}
+                        header={title}
+                        meta={meta}
+                        description={description}
+                        extra={extra} 
+                    />
                 </div>
         }
         return (

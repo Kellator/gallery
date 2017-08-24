@@ -1,12 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Field, reduxForm, initialize } from 'redux-form';
+import { Form, Button } from 'semantic-ui-react';
 
 const CommentForm = props => {
     const {handleSubmit, pristine, reset, submitting} = props
     console.log(props);
     return (
-        <form onSubmit={handleSubmit}>
+        <Form onSubmit={handleSubmit}>
             <div>
                 <label>Comment Text</label>
                 <div>
@@ -18,13 +19,13 @@ const CommentForm = props => {
                     />
                 </div>
                 <div>
-                    <button type="submit" disabled={pristine || submitting}>Submit</button>
-                    <button type="submit" disabled={pristine || submitting} onClick={reset}>
+                    <Button type="submit" disabled={pristine || submitting}>Submit</Button>
+                    <Button type="submit" disabled={pristine || submitting} onClick={reset}>
                         Clear
-                    </button>
+                    </Button>
                 </div>
             </div>
-        </form>
+        </Form>
     )
 }
 

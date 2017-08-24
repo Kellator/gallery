@@ -267,12 +267,32 @@ app.post('/register', function(req, res) {
 //     comments: [
 //         {'username':'username',
 //         'date': 'date',
-//         'comments text': 'comments text'},
+//         'commentsText': 'comments text'},
 //         {'username':'username2',
 //         'date': 'date2',
-//         'comments text': 'comments text2'}
+//         'commentsText': 'comments text2'}
 //     ]
 // };
+// var mockExhibit5 = {
+//         title: 'Fly by Night',
+//         image: 'http://dspncdn.com/a1/media/692x/78/c8/a1/78c8a13c4dd878d82d22940b48512315.jpg',
+//         description: 'Flysing ship in the sky flanked by angler fish.  Dreamy landscape.',
+//         exhibitType: 'Art',
+//         status: 'Viewing Only',
+//         creator: "test4",
+//         collaborators: ["testy", "test4"],
+//         location: 'http://designspiration.net/image/4609558023629/',
+//         categories: ['illustration', 'painting', 'digital', 'whimsical', 'people', 'portrait'],
+//         //comments as own collection that is referenced here - allows for moderation of comments
+//         comments: [
+//             {'username':'username',
+//             'date': 'date',
+//             'commentsText': 'comments text'},
+//             {'username':'username2',
+//             'date': 'date2',
+//             'commentsText': 'comments text2'}
+//         ]
+//     };
 // let mockExhibit = mockExhibit4
 // Exhibit.create(mockExhibit, function(err, exhibit) {
 //     let title = mockExhibit.title;
