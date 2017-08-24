@@ -45,7 +45,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     return {
         newExhibitClickHandler: (event) => {
             console.log("gallery click");
-            dispatch(galleryActions.loadAddNewExhibit());
+            dispatch(galleryActions.loadCreateExhibit());
         }
     }
 }

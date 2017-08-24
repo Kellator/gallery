@@ -7,6 +7,9 @@ const initialState = {
     view: {
         galleryView: true,
         exhibitView: false,
+        createWorkspaceView: false,
+        createExhibitView: false,
+        confirmExhibitView: false
     },
     galleryExhibits: []
 }
@@ -77,15 +80,38 @@ export default function gallery(state = initialState, action) {
                 commentLogComplete: true,
                 commentLogInProgress: false
             };
-        case 'LOAD_ADD_NEW_EXHIBIT' :
+        case 'LOAD_NEW_EXHIBIT_WORKSPACE' :
             return {
                 ...state,
                 view: {
                     galleryView: false,
                     exhibitView: false,
-                    createExhibitView: true
+                    createWorkspaceView: true
                 }
             };
+        case 'LOAD_CREATE_EXHIBIT' :
+            return {
+                ...state,
+                view: {
+                    galleryView: false,
+                    exhibitView: false,
+                    createWorkspaceView: true,
+                    createExhibitView: true,
+                    confirmExhibitView: false              
+                },
+            }
+        case 'LOAD_CONFIRM_EXHIBIT' :
+        return {
+            ...state,
+            view: {
+                galleryView: false,
+                exhibitView: false,
+                createWorkspaceView: true,
+                createExhibitView: false,
+                confirmExhibitView: true               
+            },
+            exhibitCard: action.values
+        };
         default :
             return state;
     };    
