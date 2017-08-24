@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { dispatch } from 'react-redux';
 import { connect } from 'react-redux';
+import { Card } from 'semantic-ui-react';
 import CommentForm from './comment_form';
 import CommentContainer from '../../container/comment_container';
 

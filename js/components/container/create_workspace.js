@@ -20,7 +20,7 @@ class CreateWorkspace extends React.Component {
             componentToRender = <CreateExhibitForm onSubmit={this.props.newExhibitSubmit}/>
         }
         if (confirm_exhibit) {
-            componentToRender =  <ConfirmExhibitCard />
+            componentToRender =  <ConfirmExhibitCard values={this.props.values}/>
         };
         return (
             <div>
