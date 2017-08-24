@@ -55,8 +55,7 @@ export default function gallery(state = initialState, action) {
                 view : {
                     galleryView: true,
                     exhibitView: true,
-                    createExhibitView: false
-                    
+                    createExhibitView: false                    
                 },
                 exhibitSearching:false,
                 exhibitLoaded: true,
