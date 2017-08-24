@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { dispatch } from 'react-redux';
 import { connect } from 'react-redux';
-import { Card } from 'semantic-ui-react';
+import { Card, Icon, Image } from 'semantic-ui-react';
 import CommentForm from './comment_form';
 import CommentContainer from '../../container/comment_container';
 
@@ -55,13 +55,29 @@ class ExhibitViewExhibit extends React.Component {
         else {
             component = 
                 <div>
-                    <Card
-                        image={image}
-                        header={title}
-                        meta={meta}
-                        description={description}
-                        extra={extra} 
-                    />
+                    <Card>
+                        <Image src={image} />
+                        <Card.Content>
+                            <Card.Header>
+                                {title}
+                            </Card.Header>
+                            <Card.Meta>
+                                {meta}
+                            </Card.Meta>
+                            <Card.Description>
+                                {description}
+                            </Card.Description>
+                            <Card.Meta>
+                                {collaborationMeta}
+                            </Card.Meta>
+                            <Card.Meta>
+                                {lastCollaboration}
+                            </Card.Meta> 
+                        </Card.Content>
+                        <Card.Content extra>
+                            {extra}
+                        </Card.Content>
+                    </Card>
                 </div>
         }
         return (

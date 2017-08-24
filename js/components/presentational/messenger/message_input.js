@@ -12,12 +12,9 @@ class MessageInput extends React.Component {
         return (
             <div className="">
                 <Form>
-                    <fieldset>
-                        <legend>Messenger</legend>
-                            <label htmlFor="">Message Input</label>
-                            <Input type="text" placeholder="type a message..." />
-                            <Button type="submit">Submit</Button>
-                    </fieldset>
+                    <label htmlFor="message_input">Message Input</label>
+                    <Input type="text" id="message_input" placeholder="type a message..." />
+                    <Button type="submit">Submit</Button>
                 </Form>
             </div>
         );

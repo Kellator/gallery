@@ -66,7 +66,7 @@ export default function gallery(state = initialState, action) {
                     comments:  action.data.comments,
                     createdAt:  action.data.createdAt,
                     creator:  action.data.creator,
-                    descriptions:  action.data.descriptions,
+                    description:  action.data.description,
                     exhibitType:  action.data.exhibitType,
                     image:  action.data.image,
                     location:  action.data.location,
