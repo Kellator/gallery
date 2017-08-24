@@ -4,20 +4,19 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { dispatch } from 'react-redux';
+import { Menu } from 'semantic-ui-react';
 //separate local imports from dependencies.
 import GallerySearch from '../presentational/navigation/gallery_search';
-import GalleryLogo from '../presentational/landing/gallery_logo';
 import UserMenu from '../presentational/navigation/user_menu';
 import * as galleryActions from '../../actions/gallery_actions';
 
 class NavBar extends React.Component {
     render() {
         return (
-            <div>
+            <Menu attached='top'>
                 <GallerySearch onSubmit={this.props.onSubmit}/>
-                <GalleryLogo />
                 <UserMenu />
-            </div>
+            </Menu>
         );
     }
 }

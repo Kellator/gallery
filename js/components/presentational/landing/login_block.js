@@ -15,7 +15,6 @@ class LoginBlock extends React.Component {
         return (
             <div className="">
                 <GalleryLogo className=""></GalleryLogo>
-                <h1>Log in to the Gallery</h1>
                 <LoginForm className="" onSubmit={this.props.onSubmit}></LoginForm>
                 <SignUpText className="" sign_up={this.props.sign_up}></SignUpText>
             </div>
