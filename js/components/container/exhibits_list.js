@@ -23,17 +23,3 @@ class ExhibitsList extends React.Component {
     }
 }
 export default ExhibitsList;
-// const mapStateToProps = (state, props) => ({
-
-// });
-// const mapDispatchToProps = (dispatch, ownProps) => {
-//     console.log(ownProps);
-//     return { 
-//         exhibitClick: (event) => {
-//             event.preventDefault();
-//             console.log(ownProps);
-//             console.log(ownProps.exhibits);
-//         }
-//     }
-// }
-// export default connect(mapStateToProps, mapDispatchToProps)(ExhibitsList);

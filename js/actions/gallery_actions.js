@@ -3,16 +3,7 @@ import axios from 'axios';
 let fetchUrl = 'http://localhost:5050/';
 let userUrl = 'http://localhost:8080/';
 //GALLERY ACTIONS
-//adds exhibit data to exhibit document
-export const ADD_NEW_EXHIBIT = 'ADD_NEW_EXHIBIT';
-export const addNewExhibit = (title, image, source, categories, userID) => ({
-    type: ADD_NEW_EXHIBIT,
-    title,
-    image,
-    source,
-    categories,
-    userID
-});
+
 export const LOAD_NEW_EXHIBIT_WORKSPACE ='LOAD_NEW_EXHIBIT_WORKSPACE';
 export const loadAddNewExhibitSpace = () => ({
     type: LOAD_NEW_EXHIBIT_WORKSPACE
@@ -122,6 +113,9 @@ export const exhibitFetch = (exhibit_id) => {
                 dispatch(exhibitFetchSuccess(data));
             }
         })
+        .catch(error => {
+            console.log(error);
+        }); 
     }
 }
 // should find by id then edit comments
@@ -139,8 +133,34 @@ export const commentUpdate = (exhibit_id, text) => {
                 dispatch(commentComplete(text));
             }
         })
+        .catch(error => {
+            console.log(error);
+        }); 
     }
-  }
+}
+//adds exhibit data to exhibit document
+export const ADD_NEW_EXHIBIT = 'ADD_NEW_EXHIBIT';
+export const addNewExhibit = () => {
+    type: ADD_NEW_EXHIBIT
+}
+export const postNewExhibit = (data) => {
+    console.log("post values: ");
+    console.log(data);
+    console.log("hello add new");
+    // dispatch a loading/adding action call
+    return dispatch => {
+        axios.post(fetchUrl + 'gallery/exhibit/', data)
+        .then(res => {
+            console.log(res.data);
+            // dispatched added action call
+            if(res.status == 200) {
+            }
+        })
+        .catch(error => {
+            console.log(error);
+        }); 
+    }
+}
 export const SEARCH_EXHIBIT = 'SEARCH_EXHIBIT';
 export const searchExhibit = (exhibit_id) => ({
     type: SEARCH_EXHIBIT,

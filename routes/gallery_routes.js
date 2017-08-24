@@ -57,15 +57,18 @@ router.get('/exhibit/:exhibit_id', function(req, res) {
     });     
 });
 //  creates new single exhibit item in exhibits collection
-router.post('/exhibit/:exhibit_id', function(req, res) {
+router.post('/exhibit', function(req, res) {
     console.log('exhibit post made');
-    console.log(res.req);
+    console.log("req. params log " + req);
     let exhibit = req.body;
     Exhibit.create(exhibit, function(err, exhibit) {
         let title = exhibit.title;
         let creator = exhibit.username;
         let image = exhibit.image;
-        let siteLink = exhibit.siteLink;
+        let description = exhibit.description;
+        let status = exhibit.status;
+        let exhibitType = exhibit.exhibitType;
+        let location = exhibit.siteLink;
         let categories = exhibit.categories;
         if (err || !exhibit) {
             console.error("Could not create exhibit");
@@ -74,7 +77,7 @@ router.post('/exhibit/:exhibit_id', function(req, res) {
                 message: 'Internal Server Error'
             });
         }
-        console.log("Created Exhibit " + exhibit_id);
+        console.log("Created Exhibit ");
         res.status(201).json(exhibit);
     });
 });

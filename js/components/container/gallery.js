@@ -21,12 +21,10 @@ import ExhibitViewExhibit from '../presentational/gallery/exhibit_view_exhibit';
 
 class Gallery extends React.Component {
     render() {
-        console.log(this.props);
         let view = this.props.galleryView;
         let exhibitView = this.props.exhibitView;
         if (view) {
             let exhibits = this.props.galleryExhibits;
-            console.log(exhibits);
                 if (exhibits.length === 0) {
                     return <NoResult />
                 };
@@ -35,9 +33,6 @@ class Gallery extends React.Component {
                 };
             return <ExhibitsList exhibits={this.props.galleryExhibits} />
         };
-        // if(view && exhibitView) {
-        //     return <ExhibitViewExhibit exhibit={this.props.galleryExhibits}/>
-        // }
     }
 };
 const mapStateToProps = (state, props) => ({
@@ -50,8 +45,6 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     return { 
         exhibitOnClick: () => { 
             let exhibit = ownProps;
-            console.log("image clicked for full exhibit view");
-            console.log(ownProps);
             dispatch(galleryActions.showExhibit(exhibit));
         },
     }

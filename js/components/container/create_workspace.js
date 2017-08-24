@@ -38,12 +38,7 @@ const mapStateToProps = (state, props) => ({
 });
 const mapDispatchToProps = (dispatch, ownProps) => {
     return {
-        newExhibitSubmit: (values) => {
-            event.preventDefault();
-            console.log("there, there's a damned submit");
-            console.log(values);
-            dispatch(actions.GalleryActions.loadConfirmExhibit(values));
-        },
+
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(CreateWorkspace);

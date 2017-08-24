@@ -10,13 +10,6 @@ router.get('/:user/gallery', function(req, res) {
     console.log('user specific gallery');
     console.log(req.res);
 });
-//  returns user's own walls (array of arrays)
-// user specific ids
-router.get('/:user/walls', function(req, res) {
-    console.log('user specific walls');
-    console.log(req.res);
-});
-
 // returns a specific exhibit user has saved to a wall - should reference gallery exhibit ID 
 router.get('/:user/exhibit', function(req, res) {
     console.log('user specific exhibit item');
@@ -26,7 +19,6 @@ router.get('/:user/exhibit', function(req, res) {
 //     console.log('add item to user specific gallery');
 //     console.log(req.res);
 // });
-
 // adds an existing exhibit_id to users's specified wall array
 router.put('/:user/exhibit', function(req, res) {
     console.log('create new exhibit item');
