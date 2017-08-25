@@ -20,7 +20,7 @@ var ExhibitSchema = new mongoose.Schema({
     },
     status: {
         type: Boolean,
-        required: [true, 'Piece status: True = open to collaboration.  False = Closed, for viewing and comment only.']
+        // required: [true, 'Piece status: True = open to collaboration.  False = Closed, for viewing and comment only.']
     },
     creator: {
         type: String,

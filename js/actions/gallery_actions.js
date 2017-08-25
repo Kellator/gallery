@@ -137,30 +137,44 @@ export const commentUpdate = (exhibit_id, text) => {
             console.log(error);
         }); 
     }
-}
-//adds exhibit data to exhibit document
-export const ADD_NEW_EXHIBIT = 'ADD_NEW_EXHIBIT';
-export const addNewExhibit = () => {
-    type: ADD_NEW_EXHIBIT
-}
+};
+// action creators for creating new exhibit document
+export const NEW_EXHIBIT_LOADING = 'NEW_EXHIBIT_LOADING';
+export const newExhibitLoading = () => ({
+    type: NEW_EXHIBIT_LOADING
+});
+
+export const NEW_EXHIBIT_SUCCESS = 'NEW_EXHIBIT_SUCCESS';
+export const newExhibitSuccess = (newExhibit) => ({
+    type: NEW_EXHIBIT_SUCCESS,
+    newExhibit
+});
+
+export const NEW_EXHIBIT_FAIL = 'NEW_EXHIBIT_FAIL';
+export const newExhibitFail = (error) => ({
+    type: NEW_EXHIBIT_FAIL,
+    error
+});
 export const postNewExhibit = (data) => {
     console.log("post values: ");
     console.log(data);
-    console.log("hello add new");
-    // dispatch a loading/adding action call
+    console.log("hello add new");   
     return dispatch => {
+        dispatch(newExhibitLoading());
         axios.post(fetchUrl + 'gallery/exhibit/', data)
         .then(res => {
             console.log(res.data);
-            // dispatched added action call
+            let newExhibit = res.data;
+            dispatch(newExhibitSuccess(newExhibit));
             if(res.status == 200) {
             }
         })
         .catch(error => {
+            dispatch(newExhibitFail(error));
             console.log(error);
         }); 
     }
-}
+};
 export const SEARCH_EXHIBIT = 'SEARCH_EXHIBIT';
 export const searchExhibit = (exhibit_id) => ({
     type: SEARCH_EXHIBIT,
@@ -200,9 +214,37 @@ export const commentInProgress = (text) => ({
     type: COMMENT_IN_PROGRESS,
     text
 });
-
 export const COMMENT_COMPLETE = 'COMMENT_COMPLETE';
 export const commentComplete = (text) => ({
     type: LOG_COMMENT,
     comment
+});
+
+// actions for loading comments list for each exhibit
+export const COMMENT_LOADING = 'COMMENT_LOADING';
+export const commentLoading = () => ({
+    type: COMMENT_LOADING
+});
+export const COMMENT_LOAD_SUCCESS = 'COMMENT_LOAD_SUCCESS';
+export const commentLoadSuccess = () => ({
+    type: COMMENT_LOAD_SUCCESS
+});
+export const COMMENT_LOAD_FAIL = 'COMMENT_LOAD_FAIL';
+export const commentLoadFail =() => ({
+    type: COMMENT_LOAD_FAIL
+});
+
+// actions for creating new comments for an exhibit
+export const NEW_COMMENT_UPLOADING = 'NEW_COMMENT_UPLOADING';
+export const newCommentUploading = () => ({
+    type: NEW_COMMENT_UPLOADING
+});
+export const NEW_COMMENT_UPLOAD_SUCCESS = 'NEW_COMMENT_UPLOAD_SUCCESS';
+export const newCommentUploadSuccess = () => ({
+    type: NEW_COMMENT_UPLOAD_SUCCESS
+});
+export const NEW_COMMENT_UPLOAD_FAIL = 'NEW_COMMENT_UPLOAD_FAIL';
+export const newCommentUploadFail = (error) => ({
+    type: NEW_COMMENT_UPLOAD_FAIL,
+    error
 });

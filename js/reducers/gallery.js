@@ -108,17 +108,36 @@ export default function gallery(state = initialState, action) {
                 },
             }
         case 'LOAD_CONFIRM_EXHIBIT' :
-        return {
-            ...state,
-            view: {
-                galleryView: false,
-                exhibitView: false,
-                createWorkspaceView: true,
-                createExhibitView: false,
-                confirmExhibitView: true               
-            },
-            exhibitCard: action.values
-        };
+            return {
+                ...state,
+                view: {
+                    galleryView: false,
+                    exhibitView: false,
+                    createWorkspaceView: true,
+                    createExhibitView: false,
+                    confirmExhibitView: true               
+                },
+                exhibitCard: action.values
+            };
+        case 'NEW_EXHIBIT_LOADING' :
+            return {
+                ...state,
+                newExhibitLoading: true
+            };
+        case 'NEW_EXHIBIT_SUCCESS' :
+            return {
+                ...state,
+                newExhibitLoading: false,
+                newExhibitLoaded: true,
+                data: action.data
+            };
+        case 'NEW_EXHIBIT_FAIL' :
+            return {
+                ...state,
+                newExhibitLoading: false,
+                newExhibitLoaded: false,
+                error: action.error
+            };
         default :
             return state;
     };    
