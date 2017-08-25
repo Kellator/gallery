@@ -118,26 +118,7 @@ export const exhibitFetch = (exhibit_id) => {
         }); 
     }
 }
-// should find by id then edit comments
-export const commentUpdate = (exhibit_id, text) => {
-    console.log(text);
-    console.log(exhibit_id);
-    console.log("hello");
-    return dispatch => {
-        dispatch(commentInProgress(text));
-        axios.put(fetchUrl + 'gallery/exhibit/' + exhibit_id, text)
-        .then(res => {
-            console.log(res.data);
-            let data = res.data;
-            if(res.status == 200) {
-                dispatch(commentComplete(text));
-            }
-        })
-        .catch(error => {
-            console.log(error);
-        }); 
-    }
-};
+
 // action creators for creating new exhibit document
 export const NEW_EXHIBIT_LOADING = 'NEW_EXHIBIT_LOADING';
 export const newExhibitLoading = () => ({
@@ -209,17 +190,30 @@ export const showGallery = (gallery) => ({
     gallery
 });
 
-export const COMMENT_IN_PROGRESS = 'COMMENT_IN_PROGRESS';
-export const commentInProgress = (text) => ({
-    type: COMMENT_IN_PROGRESS,
-    text
-});
-export const COMMENT_COMPLETE = 'COMMENT_COMPLETE';
-export const commentComplete = (text) => ({
-    type: LOG_COMMENT,
-    comment
-});
-
+export const commentUpdate = (data) => {
+    console.log(data.exhibit_id);
+    console.log(data.user);
+    console.log(data.text);
+    let exhibit_id = data.exhibit_id;
+    let user = data.user;
+    let text = data.text;
+    return dispatch => {
+        dispatch(newCommentUploading());
+        console.log("hello comment update");
+        axios.put(fetchUrl + 'gallery/exhibit/' + exhibit_id, user, text)
+        .then(res => {
+            console.log(res.data);
+            let data = res.data;
+            if(res.status == 200) {
+                dispatch(newCommentUploadSuccess(data));
+            }
+        })
+        .catch(error => {
+            dispatch(newCommentUploadFail(error));
+            console.log(error);
+        }); 
+    }
+};
 // actions for loading comments list for each exhibit
 export const COMMENT_LOADING = 'COMMENT_LOADING';
 export const commentLoading = () => ({
@@ -240,8 +234,9 @@ export const newCommentUploading = () => ({
     type: NEW_COMMENT_UPLOADING
 });
 export const NEW_COMMENT_UPLOAD_SUCCESS = 'NEW_COMMENT_UPLOAD_SUCCESS';
-export const newCommentUploadSuccess = () => ({
-    type: NEW_COMMENT_UPLOAD_SUCCESS
+export const newCommentUploadSuccess = (data) => ({
+    type: NEW_COMMENT_UPLOAD_SUCCESS,
+    data
 });
 export const NEW_COMMENT_UPLOAD_FAIL = 'NEW_COMMENT_UPLOAD_FAIL';
 export const newCommentUploadFail = (error) => ({

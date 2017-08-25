@@ -75,18 +75,6 @@ export default function gallery(state = initialState, action) {
                     _id:  action.data._id
                 }
             };
-        case 'COMMENT_IN_PROGRESS' :
-            return {
-                ...state,
-                commentLogComplete: false,
-                commentLogInProgress: true
-            };
-        case 'COMMENT_COMPLETE' :
-            return {
-                ...state,
-                commentLogComplete: true,
-                commentLogInProgress: false
-            };
         case 'LOAD_NEW_EXHIBIT_WORKSPACE' :
             return {
                 ...state,
@@ -122,21 +110,52 @@ export default function gallery(state = initialState, action) {
         case 'NEW_EXHIBIT_LOADING' :
             return {
                 ...state,
-                newExhibitLoading: true
+                newExhibitStatus: {
+                    loading: true
+                }
             };
         case 'NEW_EXHIBIT_SUCCESS' :
             return {
                 ...state,
-                newExhibitLoading: false,
-                newExhibitLoaded: true,
+                newExhibitStatus: {
+                    loading: false,
+                    loaded: true
+                },
                 data: action.data
             };
         case 'NEW_EXHIBIT_FAIL' :
             return {
                 ...state,
-                newExhibitLoading: false,
-                newExhibitLoaded: false,
-                error: action.error
+                newExhibitStatus: {
+                    loading: false,
+                    loaded: false,
+                    error: action.error
+                }
+            };
+            case 'NEW_COMMENT_UPLOADING' :
+            return {
+                ...state,
+                newCommentStatus: {
+                    uploading: true,
+                    uploaded: false
+                }
+            };
+        case 'NEW_COMMENT_UPLOAD_SUCCESS' :
+            return {
+                ...state,
+                newComment: {
+                    uploading: false,
+                    uploaded: true
+                }
+            };
+        case 'NEW_COMMENT_UPLOAD_FAIL' :
+            return {
+                ...state,
+                newComment: {
+                    uploading: false,
+                    uploaded: false,
+                    error: action.error
+                }
             };
         default :
             return state;
