@@ -6,10 +6,7 @@ var express = require('express');
 var router = express.Router();
 var mongoose = require('mongoose');
 var Exhibit = mongoose.model('Exhibit');
-//  loads index.html for all routes
-// router.get('/*', function (req, res) {
-//     res.sendFile(path.join(__dirname, 'public', 'index.html'));
-// })
+var Comment = mongoose.model('Comment');
 
 //  returns all items in the app as a list (array of items)
 //  allows scrolling view of all items or exhibits in the app
@@ -55,6 +52,24 @@ router.get('/exhibit/:exhibit_id', function(req, res) {
         }
         return res.status(201).json(exhibit);   
     });     
+});
+router.post('/exhibit/comment', function(req, res) {
+    console.log("exhibit comment posted");
+    console.log(req.body);
+    let comment = req.body;
+    Comment.create(comment, function(err, comment) {
+        let user = comment.user;
+        let exhibit_id = comment.exhibit_id;
+        let text = comment.text;
+        if (err || ! comment) {
+            console.error("could not create comment");
+            return res.status(500).json({
+                message: 'Internal Server Error'
+            });
+        }
+        console.log("comment created: ");
+        res.status(201).json(comment);
+    });
 });
 //  creates new single exhibit item in exhibits collection
 router.post('/exhibit', function(req, res) {

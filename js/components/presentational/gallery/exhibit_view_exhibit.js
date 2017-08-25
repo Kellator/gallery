@@ -28,7 +28,7 @@ class ExhibitViewExhibit extends React.Component {
         )
         const meta = "Created By: " + creator;
         const collaborationMeta = "Collaborators: " + collaborators; 
-        const lastCollaboration = "Last Collabboration: " + updatedAt;
+        const lastCollaboration = "Last Collaboration: " + updatedAt;
         const collabs = <div><p>{collaborationMeta}</p> <p>{lastCollaboration}</p></div>;
         if (status !== "Viewing Only") {
             open = true;

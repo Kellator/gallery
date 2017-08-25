@@ -19,6 +19,7 @@ var config = require('./config');
 var Exhibit = require('./js/models/exhibit');
 var Gallery = require('./js/models/gallery');
 var Message = require('./js/models/message');
+var Comment = require('./js/models/comment.js');
 var UserGallery = require('./js/models/user-gallery');
 var UserWall = require('./js/models/user-wall');
 var User = require('./js/models/user');

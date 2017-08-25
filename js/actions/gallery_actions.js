@@ -200,7 +200,7 @@ export const commentUpdate = (data) => {
     return dispatch => {
         dispatch(newCommentUploading());
         console.log("hello comment update");
-        axios.put(fetchUrl + 'gallery/exhibit/' + exhibit_id, user, text)
+        axios.post(fetchUrl + 'gallery/exhibit/comment/', data)
         .then(res => {
             console.log(res.data);
             let data = res.data;
