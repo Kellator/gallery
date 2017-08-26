@@ -74,7 +74,6 @@ router.post('/exhibit/comment', function(req, res) {
 //  creates new single exhibit item in exhibits collection
 router.post('/exhibit', function(req, res) {
     console.log('exhibit post made');
-    console.log("req. params log " + req);
     let exhibit = req.body;
     Exhibit.create(exhibit, function(err, exhibit) {
         let title = exhibit.title;
