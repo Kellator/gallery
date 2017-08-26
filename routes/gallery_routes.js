@@ -57,19 +57,34 @@ router.post('/exhibit/comment', function(req, res) {
     console.log("exhibit comment posted");
     console.log(req.body);
     let comment = req.body;
-    Comment.create(comment, function(err, comment) {
-        let user = comment.user;
-        let exhibit_id = comment.exhibit_id;
-        let text = comment.text;
+    let exhibit_id = comment.exhibit_id;
+    Comment.create({creator: comment.user, text: comment.text, exhibit: comment.exhibit_id }, function(err, comment) {
+
         if (err || ! comment) {
             console.error("could not create comment");
+            console.log(err);
             return res.status(500).json({
                 message: 'Internal Server Error'
             });
         }
-        console.log("comment created: ");
+        console.log("comment create")
+        res.status(201).json(comment);
+        Exhibit.findById(exhibit_id, function(err, exhibit) {
+            if (err) {
+                return res.status(500).json({
+                    message: 'Internal Server Error'
+                });
+            }
+            console.log(exhibit.title);
+
+            exhibit.comments.push(comment);
+            exhibit.save(function (err) {
+                if(!err) console.log('Success');
+            });
+        console.log("comment added to exhibit");
         res.status(201).json(comment);
     });
+});
 });
 //  creates new single exhibit item in exhibits collection
 router.post('/exhibit', function(req, res) {

@@ -2,6 +2,8 @@
 var mongoose = require('mongoose');
 var timestamps = require('mongoose-timestamp');
 
+
+
 var ExhibitSchema = new mongoose.Schema({
     title: {
         type: String
@@ -24,7 +26,7 @@ var ExhibitSchema = new mongoose.Schema({
     },
     creator: {
         type: String,
-        required: [true, 'Creator ID required for Exhibit']
+        required: [true, 'Username']
     },
     collaborators: {
         type: Array

@@ -9,10 +9,11 @@ var CommentSchema = new mongoose.Schema({
     },
     creator: {
         type: String,
-        required: [true, 'Creator ID']
+        required: [true, 'Username']
     },
     exhibit: {
-        type: mongoose.Schema.Types.ObjectId, ref:'Exhibit'
+        type: String,
+        required: [true, 'exhibit_id in string form']
     }
 });
 CommentSchema.plugin(timestamps);
