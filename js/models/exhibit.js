@@ -19,8 +19,8 @@ var ExhibitSchema = new mongoose.Schema({
         required: [true, 'Piece type: Art, Music, Text, Game']
     },
     status: {
-        type: String,
-        required: [true, 'Piece status: Open for collaboration or closed and for viewing only.']
+        type: Boolean,
+        // required: [true, 'Piece status: True = open to collaboration.  False = Closed, for viewing and comment only.']
     },
     creator: {
         type: String,
@@ -31,7 +31,7 @@ var ExhibitSchema = new mongoose.Schema({
     },
     location: {
         type: String,
-        required: [true, 'Source Link required for Exhibit']
+        // required: [true, 'Source Link required for Exhibit']
     },
     categories: {
         type: Array

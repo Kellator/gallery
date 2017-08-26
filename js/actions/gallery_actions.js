@@ -3,16 +3,7 @@ import axios from 'axios';
 let fetchUrl = 'http://localhost:5050/';
 let userUrl = 'http://localhost:8080/';
 //GALLERY ACTIONS
-//adds exhibit data to exhibit document
-export const ADD_NEW_EXHIBIT = 'ADD_NEW_EXHIBIT';
-export const addNewExhibit = (title, image, source, categories, userID) => ({
-    type: ADD_NEW_EXHIBIT,
-    title,
-    image,
-    source,
-    categories,
-    userID
-});
+
 export const LOAD_NEW_EXHIBIT_WORKSPACE ='LOAD_NEW_EXHIBIT_WORKSPACE';
 export const loadAddNewExhibitSpace = () => ({
     type: LOAD_NEW_EXHIBIT_WORKSPACE
@@ -122,25 +113,49 @@ export const exhibitFetch = (exhibit_id) => {
                 dispatch(exhibitFetchSuccess(data));
             }
         })
+        .catch(error => {
+            console.log(error);
+        }); 
     }
 }
-// should find by id then edit comments
-export const commentUpdate = (exhibit_id, text) => {
-    console.log(text);
-    console.log(exhibit_id);
-    console.log("hello");
+
+// action creators for creating new exhibit document
+export const NEW_EXHIBIT_LOADING = 'NEW_EXHIBIT_LOADING';
+export const newExhibitLoading = () => ({
+    type: NEW_EXHIBIT_LOADING
+});
+
+export const NEW_EXHIBIT_SUCCESS = 'NEW_EXHIBIT_SUCCESS';
+export const newExhibitSuccess = (newExhibit) => ({
+    type: NEW_EXHIBIT_SUCCESS,
+    newExhibit
+});
+
+export const NEW_EXHIBIT_FAIL = 'NEW_EXHIBIT_FAIL';
+export const newExhibitFail = (error) => ({
+    type: NEW_EXHIBIT_FAIL,
+    error
+});
+export const postNewExhibit = (data) => {
+    console.log("post values: ");
+    console.log(data);
+    console.log("hello add new");   
     return dispatch => {
-        dispatch(commentInProgress(text));
-        axios.put(fetchUrl + 'gallery/exhibit/' + exhibit_id, text)
+        dispatch(newExhibitLoading());
+        axios.post(fetchUrl + 'gallery/exhibit/', data)
         .then(res => {
             console.log(res.data);
-            let data = res.data;
+            let newExhibit = res.data;
+            dispatch(newExhibitSuccess(newExhibit));
             if(res.status == 200) {
-                dispatch(commentComplete(text));
             }
         })
+        .catch(error => {
+            dispatch(newExhibitFail(error));
+            console.log(error);
+        }); 
     }
-  }
+};
 export const SEARCH_EXHIBIT = 'SEARCH_EXHIBIT';
 export const searchExhibit = (exhibit_id) => ({
     type: SEARCH_EXHIBIT,
@@ -175,14 +190,56 @@ export const showGallery = (gallery) => ({
     gallery
 });
 
-export const COMMENT_IN_PROGRESS = 'COMMENT_IN_PROGRESS';
-export const commentInProgress = (text) => ({
-    type: COMMENT_IN_PROGRESS,
-    text
+export const commentUpdate = (data) => {
+    console.log(data.exhibit_id);
+    console.log(data.user);
+    console.log(data.text);
+    let exhibit_id = data.exhibit_id;
+    let user = data.user;
+    let text = data.text;
+    return dispatch => {
+        dispatch(newCommentUploading());
+        console.log("hello comment update");
+        axios.post(fetchUrl + 'gallery/exhibit/comment/', data)
+        .then(res => {
+            console.log(res.data);
+            let data = res.data;
+            if(res.status == 200) {
+                dispatch(newCommentUploadSuccess(data));
+            }
+        })
+        .catch(error => {
+            dispatch(newCommentUploadFail(error));
+            console.log(error);
+        }); 
+    }
+};
+// actions for loading comments list for each exhibit
+export const COMMENT_LOADING = 'COMMENT_LOADING';
+export const commentLoading = () => ({
+    type: COMMENT_LOADING
+});
+export const COMMENT_LOAD_SUCCESS = 'COMMENT_LOAD_SUCCESS';
+export const commentLoadSuccess = () => ({
+    type: COMMENT_LOAD_SUCCESS
+});
+export const COMMENT_LOAD_FAIL = 'COMMENT_LOAD_FAIL';
+export const commentLoadFail =() => ({
+    type: COMMENT_LOAD_FAIL
 });
 
-export const COMMENT_COMPLETE = 'COMMENT_COMPLETE';
-export const commentComplete = (text) => ({
-    type: LOG_COMMENT,
-    comment
+// actions for creating new comments for an exhibit
+export const NEW_COMMENT_UPLOADING = 'NEW_COMMENT_UPLOADING';
+export const newCommentUploading = () => ({
+    type: NEW_COMMENT_UPLOADING
+});
+export const NEW_COMMENT_UPLOAD_SUCCESS = 'NEW_COMMENT_UPLOAD_SUCCESS';
+export const newCommentUploadSuccess = (data) => ({
+    type: NEW_COMMENT_UPLOAD_SUCCESS,
+    data
+});
+export const NEW_COMMENT_UPLOAD_FAIL = 'NEW_COMMENT_UPLOAD_FAIL';
+export const newCommentUploadFail = (error) => ({
+    type: NEW_COMMENT_UPLOAD_FAIL,
+    error
 });

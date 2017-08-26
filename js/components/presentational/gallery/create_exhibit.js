@@ -15,7 +15,7 @@ import { Form, Button, TextArea } from 'semantic-ui-react';
 const imageButton = () => {
     return (
         <div>
-            <img src="../../../../default_images/hand.jpeg" height="48" width="48" />
+            <img src="../../../default_images/hand.jpeg" height="48" width="48" />
         </div>
     )
 }
@@ -38,12 +38,7 @@ class CreateExhibitForm extends React.Component {
                             <label htmlFor="thumbnail_image">Thumbnail Display</label> 
                             <div>
                                 <p>Choose the image that best represents your piece or upload your own:</p>
-                                <Field name="thumbnail_image" component={imageButton} >
-                                    <option type="image" value="visual_art"  />
-                                    <option type="image" value="audio"  />
-                                    <option type="image" value="writing"  />
-                                    <option type="image" value="artist_generated"  />
-                                </Field>
+                                <Field name="thumbnail_image" component="input" />
                             </div>
                         </div>
                         <div>
@@ -68,7 +63,7 @@ class CreateExhibitForm extends React.Component {
                             <label htmlFor="exhibit_description">Description</label>
                             <div>
                                 <p>Provide a brief description of your piece in 250 characters or less:</p>
-                                <TextArea name="exhibit_description" maxLength="250" required/>
+                                <Field name="exhibit_description" component="input" type="text" maxLength="250" required/>
                             </div>
                         </div>
                         <div>
@@ -87,7 +82,6 @@ class CreateExhibitForm extends React.Component {
         )
     }    
 }
-
 export default reduxForm({
     form: 'create_exhibit',
     name: 'create_exhibit'

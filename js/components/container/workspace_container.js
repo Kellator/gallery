@@ -22,7 +22,7 @@ class Workspace extends React.Component {
             componentToRender = <Gallery />
         }
         if (createWorkspaceView === true) {
-            componentToRender = <CreateWorkspace />
+            componentToRender = <CreateWorkspace newExhibitSubmit={this.props.newExhibitSubmit}/>
         }
         return (
             <div>
@@ -35,11 +35,35 @@ const mapStateToProps = (state, props) => ({
     galleryView: state.gallery.view.galleryView,
     exhibitView: state.gallery.view.exhibitView,
     createWorkspaceView: state.gallery.view.createWorkspaceView,
-    confirmExhibitView: state.gallery.view.confirmExhibitView
+    confirmExhibitView: state.gallery.view.confirmExhibitView,
+    user: state.auth.user.username
 });
 const mapDispatchToProps = (dispatch, ownProps) => {
     return {
-
+        newExhibitSubmit: (values) => {
+            event.preventDefault();
+            console.log("there, there's a damned submit");
+            console.log(values);
+            console.log(ownProps);
+            let creator = ownProps.user.username;
+            let title = values.exhibit_title;
+            let description = values.exhibit_description;
+            let exhibitType = values.exhibit_type;
+            let location = values.exhibit_url;
+            let image = values.thumbnail_image; 
+            let status = values.collaborate;
+            let data = {
+                creator: creator,
+                title: title,
+                description: description,
+                exhibitType: exhibitType,
+                location: location,
+                image: image,
+                status: status
+            }
+            dispatch(actions.GalleryActions.postNewExhibit(data));
+            // dispatch(actions.GalleryActions.loadConfirmExhibit(values));
+        },
     }
 };
 export default connect(mapStateToProps, mapDispatchToProps)(Workspace);

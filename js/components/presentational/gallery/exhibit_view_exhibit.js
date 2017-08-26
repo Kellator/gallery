@@ -24,14 +24,12 @@ class ExhibitViewExhibit extends React.Component {
         let exhibit_id = this.props.exhibit._id;
         let open;
         const extra = (
-            <div><CommentContainer exhibit={this.props.exhibit} /></div>
+            <div><CommentContainer exhibit={this.props.exhibit} user={this.props.user} /></div>
         )
         const meta = "Created By: " + creator;
         const collaborationMeta = "Collaborators: " + collaborators; 
-        const lastCollaboration = "Last Collabboration: " + updatedAt;
+        const lastCollaboration = "Last Collaboration: " + updatedAt;
         const collabs = <div><p>{collaborationMeta}</p> <p>{lastCollaboration}</p></div>;
-        const collaborationExtra = <p>Collaborate by joinging the chat channel or leaving a comment.</p>;
-        console.log(status);
         if (status !== "Viewing Only") {
             open = true;
         }
@@ -88,7 +86,8 @@ class ExhibitViewExhibit extends React.Component {
     }
 }
 const mapStateToProps = (state, props) => ({
-    exhibit: state.gallery.exhibit
+    exhibit: state.gallery.exhibit,
+    user: state.auth.user.username
     });
 const mapDispatchToProps = (dispatch, ownProps) => {
     console.log(ownProps);

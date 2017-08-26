@@ -40,8 +40,4 @@ const mapStateToProps = (state, props) => ({
     email: state.auth.user.email,
     id: state.auth.user.id
 });
-// const mapDispatchToProps = (dispatch, ownProps) => {
-    
-// }
-
 export default connect(mapStateToProps)(Dashboard);

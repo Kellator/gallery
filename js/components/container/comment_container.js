@@ -5,37 +5,42 @@ import { dispatch } from 'react-redux';
 import { connect } from 'react-redux';
 import CommentForm from '../presentational/gallery/comment_form';
 import CommentList from './comment_list';
-import * as galleryActions from '../../actions/gallery_actions';
+import * as actions from '../../actions';
 
 class CommentContainer extends React.Component {
     render() {
-        console.log(this.props.exhibit);
-        let id = this.props.exhibit._id;
-        console.log(id);
+        console.log(this.props);
+        // let user = this.props.user;
         let comments = this.props.exhibit.comments;
-        const handleSubmit = (values, dispatch) => {
-            console.log(values);
-            console.log(id);
-            let text = values.comment;
-            dispatch(galleryActions.commentUpdate(id, text));
-
-        }
         return (
             <div>
                 <CommentList comments={comments} />
-                <CommentForm onSubmit={handleSubmit}/>
+                <CommentForm onSubmit={this.props.newCommentSubmit} exhibit={this.props.exhibit} user={this.props.user}/>
             </div>
         )
     }
 }
 const mapStateToProps = (state, props) => ({
+    
 })
-const mapDispatchToProps = (state, ownProps) => {
-    console.log(ownProps);
-    let id = ownProps.exhibit._id;
-    console.log(id);
-        return {
-            hiccup: "hiccup"
+const mapDispatchToProps = (dispatch, ownProps) => {
+    return {
+        newCommentSubmit: (values) => {
+            event.preventDefault();
+            console.log("newcommentsubmit");
+            console.log(values);
+            console.log(ownProps);
+            let exhibit_id = ownProps.exhibit._id;
+            let user = ownProps.user;
+            let text = values.comment;
+            let data = {
+                exhibit_id: exhibit_id,
+                user: user,
+                text: text
+            }
+            console.log(data);
+            dispatch(actions.GalleryActions.commentUpdate(data));
+        }
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(CommentContainer);
