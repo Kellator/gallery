@@ -15,13 +15,15 @@ router.get('/', function(req, res) {
     console.log(req.query);
     var search = req.query.term;
     if (search == "") {
-        Exhibit.find().exec(function(err,exhibits) {
+        Exhibit.find()
+        .exec(function(err, exhibits) {
             if (err) {
                 console.log(err);
                 return res.status(500).json({
                     message: 'Internal Server Error'
                 });
             }
+            
             res.json(exhibits);
         });
     }
@@ -59,7 +61,6 @@ router.post('/exhibit/comment', function(req, res) {
     let comment = req.body;
     let exhibit_id = comment.exhibit_id;
     Comment.create({creator: comment.user, text: comment.text, exhibit: comment.exhibit_id }, function(err, comment) {
-
         if (err || ! comment) {
             console.error("could not create comment");
             console.log(err);
@@ -69,23 +70,22 @@ router.post('/exhibit/comment', function(req, res) {
         }
         console.log("comment create")
         res.status(201).json(comment);
-        Exhibit.findById(exhibit_id, function(err, exhibit) {
-            if (err) {
-                return res.status(500).json({
-                    message: 'Internal Server Error'
-                });
-            }
-            console.log(exhibit.title);
-
-            exhibit.comments.push(comment);
-            exhibit.save(function (err) {
-                if(!err) console.log('Success');
-            });
-        console.log("comment added to exhibit");
-        res.status(201).json(comment);
+    // Exhibit.findByIdAndUpdate(exhibit_id, comment, function(err, exhibit) {
+    //     if (err) {
+    //         console.log(err);
+    //         return res.status(500).json({
+    //             message: 'Internal Server Error'
+    //         });
+    //     }
+    //     console.log(exhibit.title);
+    //     exhibit.comments.push(comment);
+    //     exhibit.save(function (err) {
+    //         if(!err) console.log('Success');
+    //     });
+    // console.log("comment added to exhibit");
     });
 });
-});
+
 //  creates new single exhibit item in exhibits collection
 router.post('/exhibit', function(req, res) {
     console.log('exhibit post made');

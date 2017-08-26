@@ -11,10 +11,7 @@ var CommentSchema = new mongoose.Schema({
         type: String,
         required: [true, 'Username']
     },
-    exhibit: {
-        type: String,
-        required: [true, 'exhibit_id in string form']
-    }
+    exhibit: [{ type: mongoose.Schema.Types.ObjectId, ref:'Exhibit'}] 
 });
 CommentSchema.plugin(timestamps);
 var Comment = mongoose.model('Comment', CommentSchema);
