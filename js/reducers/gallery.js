@@ -49,31 +49,62 @@ export default function gallery(state = initialState, action) {
                 exhibitLoaded: false,
                 exhibit_id: action.exhibit_id
             };
-        case 'SHOW_EXHIBIT' :
+        // case 'SHOW_EXHIBIT' :
+        //     return {
+        //         ...state,
+                // view : {
+                //     galleryView: true,
+                //     exhibitView: true,
+                //     createExhibitView: false                    
+                // },
+        //         exhibitSearching:false,
+        //         exhibitLoaded: true,
+        //         exhibit: {
+        //             categories: action.data.categories,
+        //             collaborators: action.data.collaborators,
+        //             comments:  action.data.comments,
+        //             createdAt:  action.data.createdAt,
+        //             creator:  action.data.creator,
+        //             description:  action.data.description,
+        //             exhibitType:  action.data.exhibitType,
+        //             image:  action.data.image,
+        //             location:  action.data.location,
+        //             status:  action.data.status,
+        //             title:  action.data.title,
+        //             updatedAt:  action.data.updatedAt,
+        //             _id:  action.data._id
+        //         }
+        //     };
+        case 'EXHIBIT_FETCHING' :
             return {
                 ...state,
+                exhibitStatus: {
+                    loading: true,
+                    loaded: false
+                }
+            };
+        case 'EXHIBIT_FETCH_SUCCESS' :
+            return {
+                ...state,
+                exhibitStatus: {
+                    loading: false,
+                    loaded: true
+                },
                 view : {
                     galleryView: true,
                     exhibitView: true,
                     createExhibitView: false                    
                 },
-                exhibitSearching:false,
-                exhibitLoaded: true,
-                exhibit: {
-                    categories: action.data.categories,
-                    collaborators: action.data.collaborators,
-                    comments:  action.data.comments,
-                    createdAt:  action.data.createdAt,
-                    creator:  action.data.creator,
-                    description:  action.data.description,
-                    exhibitType:  action.data.exhibitType,
-                    image:  action.data.image,
-                    location:  action.data.location,
-                    status:  action.data.status,
-                    title:  action.data.title,
-                    updatedAt:  action.data.updatedAt,
-                    _id:  action.data._id
-                }
+                exhibit: action.data
+            };
+        case 'EXHIBIT_FETCH_FAIL' :
+            return {
+                ...state,
+                exhibitStatus: {
+                    loading: false,
+                    loaded: false
+                },
+                error: action.error
             };
         case 'LOAD_NEW_EXHIBIT_WORKSPACE' :
             return {
