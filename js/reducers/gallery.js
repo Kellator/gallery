@@ -125,7 +125,7 @@ export default function gallery(state = initialState, action) {
                     createExhibitView: true,
                     confirmExhibitView: false              
                 },
-            }
+            };
         case 'LOAD_CONFIRM_EXHIBIT' :
             return {
                 ...state,
@@ -163,7 +163,7 @@ export default function gallery(state = initialState, action) {
                     error: action.error
                 }
             };
-            case 'NEW_COMMENT_UPLOADING' :
+        case 'NEW_COMMENT_UPLOADING' :
             return {
                 ...state,
                 newCommentStatus: {
@@ -187,6 +187,32 @@ export default function gallery(state = initialState, action) {
                     uploaded: false,
                     error: action.error
                 }
+            };
+        case 'COMMENT_FETCHING' :
+            return {
+                ...state,
+                commentStatus: {
+                    loading: true,
+                    loaded: false
+                }
+            };
+        case 'COMMENT_FETCH_SUCCESS' :
+        return {
+            ...state,
+            commentStatus: {
+                loading: false,
+                loaded: true
+            },
+            comments: action.commentData
+            };
+        case 'COMMENT_FETCH_FAIL' :
+        return {
+            ...state,
+            commentStatus: {
+                loading: false,
+                loaded: false,
+                error: action.error
+            }
             };
         default :
             return state;

@@ -10,11 +10,9 @@ import * as actions from '../../actions';
 class CommentContainer extends React.Component {
     render() {
         console.log(this.props);
-        // let user = this.props.user;
-        let comments = this.props.exhibit.comments;
         return (
             <div>
-                <CommentList comments={comments} />
+                <CommentList comments={this.props.comments} />
                 <CommentForm onSubmit={this.props.newCommentSubmit} exhibit={this.props.exhibit} user={this.props.user}/>
             </div>
         )

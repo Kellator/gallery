@@ -14,86 +14,109 @@ class ExhibitViewExhibit extends React.Component {
         console.log(this.props);
         let creator = this.props.exhibit.creator;
         let createdAt = this.props.exhibit.createdAt;
+        let createDate = new Date(createdAt);
+        let createDateDateString = createDate.toLocaleDateString();
+        let createDateTimeString = createDate.toTimeString();
         let updatedAt = this.props.exhibit.updatedAt;
+        let update = new Date(updatedAt);
+        let updateDateString = update.toLocaleDateString();
+        let updateTimeString = update.toTimeString();
         let image = this.props.exhibit.image;
         let title = this.props.exhibit.title;
         let status = this.props.exhibit.status;
         let collaborators = this.props.exhibit.collaborators;
         let description = this.props.exhibit.description;
-        let comments = this.props.exhibit.comments;
+        let comments = this.props.comments;
         let exhibit_id = this.props.exhibit._id;
         let open;
         const extra = (
-            <div><CommentContainer exhibit={this.props.exhibit} user={this.props.user} /></div>
+            <div><CommentContainer exhibit={this.props.exhibit} user={this.props.user} comments={this.props.comments}/></div>
         )
         const meta = "Created By: " + creator;
         const collaborationMeta = "Collaborators: " + collaborators; 
         const lastCollaboration = "Last Collaboration: " + updatedAt;
         const collabs = <div><p>{collaborationMeta}</p> <p>{lastCollaboration}</p></div>;
-        if (status !== "Viewing Only") {
-            open = true;
-        }
-        else {
-            open = false;
-        }
+        // if (status !== "Viewing Only") {
+        //     open = true;
+        // }
+        // else {
+        //     open = false;
+        // }
         
-        let component;
-        if(open == true) {
-            component = 
-                <div>
-                    <Card 
-                    image={image}
-                    header={title}
-                    meta={collabs}
-                    description={description}
-                    extra={extra} 
-                    />
-                </div>
-        }
-        else {
-            component = 
-                <div>
-                    <Card>
-                        <Image src={image} />
-                        <Card.Content>
-                            <Card.Header>
-                                {title}
-                            </Card.Header>
-                            <Card.Meta>
-                                {meta}
-                            </Card.Meta>
-                            <Card.Description>
-                                {description}
-                            </Card.Description>
-                            <Card.Meta>
-                                {collaborationMeta}
-                            </Card.Meta>
-                            <Card.Meta>
-                                {lastCollaboration}
-                            </Card.Meta> 
-                        </Card.Content>
-                        <Card.Content extra>
-                            {extra}
-                        </Card.Content>
-                    </Card>
-                </div>
-        }
+        // let component = 
+
+        // }
         return (
             <div>
-                {component}
+                <Card>
+                    <Image src={image} />
+                    <Card.Content>
+                        <Card.Header>
+                            {title}
+                        </Card.Header>
+                        <Card.Meta>
+                            {meta}
+                        </Card.Meta>
+                        <Card.Description>
+                            {description}
+                        </Card.Description>
+                        <Card.Meta>
+                            {collaborators}
+                        </Card.Meta>
+                        <Card.Meta>
+                            {updateDateString }
+                        </Card.Meta> 
+                    </Card.Content>
+                    <Card.Content>
+                        {extra}
+                    </Card.Content>
+                </Card>
             </div>
         )
     }
 }
 const mapStateToProps = (state, props) => ({
     exhibit: state.gallery.exhibit,
-    user: state.auth.user.username
+    user: state.auth.user.username,
+    comments: state.gallery.comments
     });
-const mapDispatchToProps = (dispatch, ownProps) => {
-    console.log(ownProps);
-    return {
+// const mapDispatchToProps = (dispatch, ownProps) => {
+//     console.log(ownProps);
+//     return {
 
-    }
-}
+//     }
+// }
     
-export default connect(mapStateToProps, mapDispatchToProps)(ExhibitViewExhibit);
+export default connect(mapStateToProps)(ExhibitViewExhibit);
+
+        // else {
+        //     component = 
+        //         <div>
+        //             <Card>
+        //                 <Image src={image} />
+        //                 <Card.Content>
+        //                     <Card.Header>
+        //                         {title}
+        //                     </Card.Header>
+        //                     <Card.Meta>
+        //                         {meta}
+        //                     </Card.Meta>
+        //                     <Card.Description>
+        //                         {description}
+        //                     </Card.Description>
+        //                     <Card.Meta>
+        //                         {collaborators}
+        //                     </Card.Meta>
+        //                     <Card.Meta>
+        //                         {lastCollaboration}
+        //                     </Card.Meta> 
+        //                 </Card.Content>
+        //                 <Card.Content>
+        //                     {extra}
+        //                 </Card.Content>
+        //             </Card>
+        //         </div>
+        // }
+            // <div>
+            //     {component}
+            // </div>

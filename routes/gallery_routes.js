@@ -61,7 +61,7 @@ router.get('/exhibit', function(req, res) {
 });
 router.get('/exhibit/comment/:exhibit_id', function(req, res) {
     console.log("fetching comments");
-    console.log(req.params);
+    // console.log(req.params);
     let exhibit_id = req.params.exhibit_id
     Comment.find().where('exhibit').equals(exhibit_id).limit(10)
     .exec(function(err, comments) {
@@ -78,7 +78,7 @@ router.get('/exhibit/comment/:exhibit_id', function(req, res) {
 });
 router.post('/exhibit/comment', function(req, res) {
     console.log("exhibit comment posted");
-    console.log(req.body);
+    // console.log(req.body);
     let comment = req.body;
     let exhibit_id = comment.exhibit_id;
     Comment.create({creator: comment.user, text: comment.text, exhibit: comment.exhibit_id }, function(err, comment) {

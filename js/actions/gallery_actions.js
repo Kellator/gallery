@@ -99,12 +99,21 @@ export const exhibitFetch = (exhibit_id) => {
             }
         }).then(
             axios.get(fetchUrl + "gallery/exhibit/comment/" + exhibit_id
+            ).then(res => {
+                // console.log(res);
+                // console.log(res.data);
+                let commentData = res.data;
+                if(res.status == 200) {
+                    console.log("you have received comments");
+                    dispatch(commentFetchSuccess(commentData));
+                }
+            })
         )
-    )
         .then(res => {
-            console.log(res);
-            console.log(res.data);
+            // console.log(res);
+            // console.log(res.data);
             let data = res.data
+
             if(res.status == 200) {
                 console.log("hello... you should get a response.");
                 dispatch(exhibitFetchSuccess(data));
@@ -209,17 +218,19 @@ export const commentUpdate = (data) => {
     }
 };
 // actions for loading comments list for each exhibit
-export const COMMENT_LOADING = 'COMMENT_LOADING';
-export const commentLoading = () => ({
-    type: COMMENT_LOADING
+export const COMMENT_FETCHING = 'COMMENT_FETCHING';
+export const commentFetching = () => ({
+    type: COMMENT_FETCHING
 });
-export const COMMENT_LOAD_SUCCESS = 'COMMENT_LOAD_SUCCESS';
-export const commentLoadSuccess = () => ({
-    type: COMMENT_LOAD_SUCCESS
+export const COMMENT_FETCH_SUCCESS = 'COMMENT_FETCH_SUCCESS';
+export const commentFetchSuccess = (commentData) => ({
+    type: COMMENT_FETCH_SUCCESS,
+    commentData
 });
-export const COMMENT_LOAD_FAIL = 'COMMENT_LOAD_FAIL';
-export const commentLoadFail =() => ({
-    type: COMMENT_LOAD_FAIL
+export const COMMENT_FETCH_FAIL = 'COMMENT_FETCH_FAIL';
+export const commentFetchFail =(error) => ({
+    type: COMMENT_FETCH_FAIL,
+    error
 });
 
 // actions for creating new comments for an exhibit
