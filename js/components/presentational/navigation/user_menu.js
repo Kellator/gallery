@@ -29,7 +29,7 @@ class UserMenu extends React.Component {
                 <Dropdown.Menu>
                     <Dropdown.Item  onClick={this.props.newExhibitClickHandler} text='Create an Exhibit' />
                     <Dropdown.Item text='My Profile' />
-                    <Dropdown.Item  text='My Gallery' />
+                    <Dropdown.Item text='My Gallery' />
                     <Dropdown.Item text='My Messages' />
                     <Dropdown.Divider />
                     <Dropdown.Item text='Log Out' />

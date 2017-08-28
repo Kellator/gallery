@@ -36,16 +36,6 @@ class ExhibitViewExhibit extends React.Component {
         const collaborationMeta = "Collaborators: " + collaborators; 
         const lastCollaboration = "Last Collaboration: " + updatedAt;
         const collabs = <div><p>{collaborationMeta}</p> <p>{lastCollaboration}</p></div>;
-        // if (status !== "Viewing Only") {
-        //     open = true;
-        // }
-        // else {
-        //     open = false;
-        // }
-        
-        // let component = 
-
-        // }
         return (
             <div>
                 <Card>
@@ -80,43 +70,5 @@ const mapStateToProps = (state, props) => ({
     user: state.auth.user.username,
     comments: state.gallery.comments
     });
-// const mapDispatchToProps = (dispatch, ownProps) => {
-//     console.log(ownProps);
-//     return {
 
-//     }
-// }
-    
 export default connect(mapStateToProps)(ExhibitViewExhibit);
-
-        // else {
-        //     component = 
-        //         <div>
-        //             <Card>
-        //                 <Image src={image} />
-        //                 <Card.Content>
-        //                     <Card.Header>
-        //                         {title}
-        //                     </Card.Header>
-        //                     <Card.Meta>
-        //                         {meta}
-        //                     </Card.Meta>
-        //                     <Card.Description>
-        //                         {description}
-        //                     </Card.Description>
-        //                     <Card.Meta>
-        //                         {collaborators}
-        //                     </Card.Meta>
-        //                     <Card.Meta>
-        //                         {lastCollaboration}
-        //                     </Card.Meta> 
-        //                 </Card.Content>
-        //                 <Card.Content>
-        //                     {extra}
-        //                 </Card.Content>
-        //             </Card>
-        //         </div>
-        // }
-            // <div>
-            //     {component}
-            // </div>
