@@ -15,13 +15,14 @@ router.get('/', function(req, res) {
     console.log(req.query);
     var search = req.query.term;
     if (search == "") {
-        Exhibit.find().exec(function(err,exhibits) {
+        Exhibit.find().exec(function(err, exhibits) {
             if (err) {
                 console.log(err);
                 return res.status(500).json({
                     message: 'Internal Server Error'
                 });
             }
+            
             res.json(exhibits);
         });
     }
@@ -40,37 +41,59 @@ router.get('/', function(req, res) {
 });
 //  returns single specific exhibit item (item)
 //  allows viewing of a single exhibit or item from the app
-router.get('/exhibit/:exhibit_id', function(req, res) {
+router.get('/exhibit', function(req, res) {
     console.log('exhibit request made');
-    console.log(req.query);
-    let exhibit_id = req.params.exhibit_id;
-    Exhibit.findById(exhibit_id, function(err, exhibit) {
+    let exhibit_id = req.query.exhibit_id;
+    Exhibit.findById(exhibit_id)
+    .populate({
+        path: 'comments',
+        options: { limit: 10 }
+    })
+    .exec(function(err, exhibit) {
         if (err) {
             return res.status(500).json({
                 message: 'Internal Server Error'
             });
         }
-        return res.status(201).json(exhibit);   
-    });     
+        console.log(exhibit);
+        res.status(200).json(exhibit);   
+    })  
 });
-router.post('/exhibit/comment', function(req, res) {
-    console.log("exhibit comment posted");
-    console.log(req.body);
-    let comment = req.body;
-    Comment.create(comment, function(err, comment) {
-        let user = comment.user;
-        let exhibit_id = comment.exhibit_id;
-        let text = comment.text;
-        if (err || ! comment) {
-            console.error("could not create comment");
+router.get('/exhibit/comment/:exhibit_id', function(req, res) {
+    console.log("fetching comments");
+    // console.log(req.params);
+    let exhibit_id = req.params.exhibit_id
+    Comment.find().where('exhibit').equals(exhibit_id).limit(10)
+    .exec(function(err, comments) {
+        if (err) {
+            console.log(err);
+            console.log("cannot fetch comments");
             return res.status(500).json({
                 message: 'Internal Server Error'
             });
         }
-        console.log("comment created: ");
+        console.log(comments);
+        return res.json(comments);
+    })
+});
+router.post('/exhibit/comment', function(req, res) {
+    console.log("exhibit comment posted");
+    // console.log(req.body);
+    let comment = req.body;
+    let exhibit_id = comment.exhibit_id;
+    Comment.create({creator: comment.user, text: comment.text, exhibit: comment.exhibit_id }, function(err, comment) {
+        if (err || ! comment) {
+            console.error("could not create comment");
+            console.log(err);
+            return res.status(500).json({
+                message: 'Internal Server Error'
+            });
+        }
+        console.log("comment create")
         res.status(201).json(comment);
     });
 });
+
 //  creates new single exhibit item in exhibits collection
 router.post('/exhibit', function(req, res) {
     console.log('exhibit post made');

@@ -19,15 +19,6 @@ export const loadCreateExhibit = () => ({
     type: LOAD_CREATE_EXHIBIT
 });
 
-//shares a specific exhibit via message
-export const SHARE_EXHIBIT = 'SHARE_EXHIBIT';
-export const shareExhibit = (exhibit, sendingUserID, receivingUserID) => ({
-    type: SHARE_EXHIBIT,
-    exhibit,
-    sendingUserID,
-    receivingUserID
-});
-
 //UI ACTIONS - changes that occur to ui state tree
 //landing page - login vs sign up
 export const SHOW_LOGIN = 'SHOW_LOGIN';
@@ -96,28 +87,58 @@ export const galleryFetch = (search) => {
         });       
     }
 };
+
+// actions to fetch and display individual exhibits
 export const exhibitFetch = (exhibit_id) => {
     console.log(exhibit_id);
     return dispatch => {
-        dispatch(searchExhibit(exhibit_id))
-        axios.get(fetchUrl + "gallery/exhibit/" + exhibit_id, {
-            // params: {
-            //     exhibit_id: exhibit_id
-            // }
-        })
+        dispatch(exhibitFetching())
+        axios.get(fetchUrl + "gallery/exhibit/", {
+            params: {
+                exhibit_id: exhibit_id
+            }
+        }).then(
+            axios.get(fetchUrl + "gallery/exhibit/comment/" + exhibit_id
+            ).then(res => {
+                // console.log(res);
+                // console.log(res.data);
+                let commentData = res.data;
+                if(res.status == 200) {
+                    console.log("you have received comments");
+                    dispatch(commentFetchSuccess(commentData));
+                }
+            })
+        )
         .then(res => {
-            console.log(res);
-            console.log(res.data);
+            // console.log(res);
+            // console.log(res.data);
             let data = res.data
+
             if(res.status == 200) {
+                console.log("hello... you should get a response.");
                 dispatch(exhibitFetchSuccess(data));
             }
         })
         .catch(error => {
+            dispatch(exhibitFetchFail(error));
             console.log(error);
-        }); 
+        })
     }
-}
+};
+export const EXHIBIT_FETCHING = 'EXHIBIT_FETCHING';
+export const exhibitFetching = () => ({
+    type: EXHIBIT_FETCHING,
+});
+export const EXHIBIT_FETCH_SUCCESS = 'EXHIBIT_FETCH_SUCCESS';
+export const exhibitFetchSuccess = (data) => ({
+    type: EXHIBIT_FETCH_SUCCESS,
+    data
+});
+export const EXHIBIT_FETCH_FAIL = 'EXHIBIT_FETCH_FAIL';
+export const exhibitFetchFail = (error) => ({
+    type: EXHIBIT_FETCH_FAIL,
+    error
+});
 
 // action creators for creating new exhibit document
 export const NEW_EXHIBIT_LOADING = 'NEW_EXHIBIT_LOADING';
@@ -156,23 +177,6 @@ export const postNewExhibit = (data) => {
         }); 
     }
 };
-export const SEARCH_EXHIBIT = 'SEARCH_EXHIBIT';
-export const searchExhibit = (exhibit_id) => ({
-    type: SEARCH_EXHIBIT,
-    exhibit_id
-});
-//shows selected exhibit
-export const SHOW_EXHIBIT = 'SHOW_EXHIBIT';
-export const showExhibit = (data) => ({
-    type: SHOW_EXHIBIT,
-    data
-});
-
-export const EXHIBIT_FETCH_SUCCESS = 'EXHIBIT_FETCH_SUCCESS';
-export const exhibitFetchSuccess = (data) => ({
-    type: EXHIBIT_FETCH_SUCCESS,
-    data
-});
 
 //shows selected user gallery
 export const SHOW_USER_GALLERY = 'SHOW_USER_GALLERY';
@@ -181,7 +185,6 @@ export const showUserGallery = (userID, gallery) => ({
     userID,
     gallery
 });
-
 
 //shows all exhibits in app
 export const SHOW_GALLERY = 'SHOW_GALLERY';
@@ -215,17 +218,19 @@ export const commentUpdate = (data) => {
     }
 };
 // actions for loading comments list for each exhibit
-export const COMMENT_LOADING = 'COMMENT_LOADING';
-export const commentLoading = () => ({
-    type: COMMENT_LOADING
+export const COMMENT_FETCHING = 'COMMENT_FETCHING';
+export const commentFetching = () => ({
+    type: COMMENT_FETCHING
 });
-export const COMMENT_LOAD_SUCCESS = 'COMMENT_LOAD_SUCCESS';
-export const commentLoadSuccess = () => ({
-    type: COMMENT_LOAD_SUCCESS
+export const COMMENT_FETCH_SUCCESS = 'COMMENT_FETCH_SUCCESS';
+export const commentFetchSuccess = (commentData) => ({
+    type: COMMENT_FETCH_SUCCESS,
+    commentData
 });
-export const COMMENT_LOAD_FAIL = 'COMMENT_LOAD_FAIL';
-export const commentLoadFail =() => ({
-    type: COMMENT_LOAD_FAIL
+export const COMMENT_FETCH_FAIL = 'COMMENT_FETCH_FAIL';
+export const commentFetchFail =(error) => ({
+    type: COMMENT_FETCH_FAIL,
+    error
 });
 
 // actions for creating new comments for an exhibit

@@ -49,31 +49,62 @@ export default function gallery(state = initialState, action) {
                 exhibitLoaded: false,
                 exhibit_id: action.exhibit_id
             };
-        case 'SHOW_EXHIBIT' :
+        // case 'SHOW_EXHIBIT' :
+        //     return {
+        //         ...state,
+                // view : {
+                //     galleryView: true,
+                //     exhibitView: true,
+                //     createExhibitView: false                    
+                // },
+        //         exhibitSearching:false,
+        //         exhibitLoaded: true,
+        //         exhibit: {
+        //             categories: action.data.categories,
+        //             collaborators: action.data.collaborators,
+        //             comments:  action.data.comments,
+        //             createdAt:  action.data.createdAt,
+        //             creator:  action.data.creator,
+        //             description:  action.data.description,
+        //             exhibitType:  action.data.exhibitType,
+        //             image:  action.data.image,
+        //             location:  action.data.location,
+        //             status:  action.data.status,
+        //             title:  action.data.title,
+        //             updatedAt:  action.data.updatedAt,
+        //             _id:  action.data._id
+        //         }
+        //     };
+        case 'EXHIBIT_FETCHING' :
             return {
                 ...state,
+                exhibitStatus: {
+                    loading: true,
+                    loaded: false
+                }
+            };
+        case 'EXHIBIT_FETCH_SUCCESS' :
+            return {
+                ...state,
+                exhibitStatus: {
+                    loading: false,
+                    loaded: true
+                },
                 view : {
                     galleryView: true,
                     exhibitView: true,
                     createExhibitView: false                    
                 },
-                exhibitSearching:false,
-                exhibitLoaded: true,
-                exhibit: {
-                    categories: action.data.categories,
-                    collaborators: action.data.collaborators,
-                    comments:  action.data.comments,
-                    createdAt:  action.data.createdAt,
-                    creator:  action.data.creator,
-                    description:  action.data.description,
-                    exhibitType:  action.data.exhibitType,
-                    image:  action.data.image,
-                    location:  action.data.location,
-                    status:  action.data.status,
-                    title:  action.data.title,
-                    updatedAt:  action.data.updatedAt,
-                    _id:  action.data._id
-                }
+                exhibit: action.data
+            };
+        case 'EXHIBIT_FETCH_FAIL' :
+            return {
+                ...state,
+                exhibitStatus: {
+                    loading: false,
+                    loaded: false
+                },
+                error: action.error
             };
         case 'LOAD_NEW_EXHIBIT_WORKSPACE' :
             return {
@@ -94,7 +125,7 @@ export default function gallery(state = initialState, action) {
                     createExhibitView: true,
                     confirmExhibitView: false              
                 },
-            }
+            };
         case 'LOAD_CONFIRM_EXHIBIT' :
             return {
                 ...state,
@@ -132,7 +163,7 @@ export default function gallery(state = initialState, action) {
                     error: action.error
                 }
             };
-            case 'NEW_COMMENT_UPLOADING' :
+        case 'NEW_COMMENT_UPLOADING' :
             return {
                 ...state,
                 newCommentStatus: {
@@ -156,6 +187,32 @@ export default function gallery(state = initialState, action) {
                     uploaded: false,
                     error: action.error
                 }
+            };
+        case 'COMMENT_FETCHING' :
+            return {
+                ...state,
+                commentStatus: {
+                    loading: true,
+                    loaded: false
+                }
+            };
+        case 'COMMENT_FETCH_SUCCESS' :
+        return {
+            ...state,
+            commentStatus: {
+                loading: false,
+                loaded: true
+            },
+            comments: action.commentData
+            };
+        case 'COMMENT_FETCH_FAIL' :
+        return {
+            ...state,
+            commentStatus: {
+                loading: false,
+                loaded: false,
+                error: action.error
+            }
             };
         default :
             return state;
