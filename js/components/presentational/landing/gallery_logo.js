@@ -12,6 +12,11 @@ import PropTypes from 'prop-types';
 
 export default class GalleryLogo extends React.Component {
     render() {
-        return <h1 className="full_logo">Gallery</h1>
+        return (
+            <div>
+                <h1>Welcome to the Gallery!</h1>
+                <h2>A collaborative workspace for your passion.</h2>
+            </div>
+        )
     }
 }

@@ -3,28 +3,20 @@ import axios from 'axios';
 let fetchUrl = 'http://localhost:5050/';
 let userUrl = 'http://localhost:8080/';
 //GALLERY ACTIONS
-//adds exhibit data to exhibit document
-export const ADD_NEW_EXHIBIT = 'ADD_NEW_EXHIBIT';
-export const addNewExhibit = (title, image, source, categories, userID) => ({
-    type: ADD_NEW_EXHIBIT,
-    title,
-    image,
-    source,
-    categories,
-    userID
-});
-export const LOAD_ADD_NEW_EXHIBIT ='LOAD_ADD_NEW_EXHIBIT';
-export const loadAddNewExhibit = () => ({
-    type: LOAD_ADD_NEW_EXHIBIT
-})
 
-//shares a specific exhibit via message
-export const SHARE_EXHIBIT = 'SHARE_EXHIBIT';
-export const shareExhibit = (exhibit, sendingUserID, receivingUserID) => ({
-    type: SHARE_EXHIBIT,
-    exhibit,
-    sendingUserID,
-    receivingUserID
+export const LOAD_NEW_EXHIBIT_WORKSPACE ='LOAD_NEW_EXHIBIT_WORKSPACE';
+export const loadAddNewExhibitSpace = () => ({
+    type: LOAD_NEW_EXHIBIT_WORKSPACE
+});
+
+export const LOAD_CONFIRM_EXHIBIT = 'LOAD_CONFIRM_EXHIBIT';
+export const loadConfirmExhibit = (values) => ({
+    type: LOAD_CONFIRM_EXHIBIT,
+    values
+});
+export const LOAD_CREATE_EXHIBIT = 'LOAD_CREATE_EXHIBIT';
+export const loadCreateExhibit = () => ({
+    type: LOAD_CREATE_EXHIBIT
 });
 
 //UI ACTIONS - changes that occur to ui state tree
@@ -95,59 +87,96 @@ export const galleryFetch = (search) => {
         });       
     }
 };
+
+// actions to fetch and display individual exhibits
 export const exhibitFetch = (exhibit_id) => {
     console.log(exhibit_id);
     return dispatch => {
-        dispatch(searchExhibit(exhibit_id))
-        axios.get(fetchUrl + "gallery/exhibit/" + exhibit_id, {
-            // params: {
-            //     exhibit_id: exhibit_id
-            // }
-        })
+        dispatch(exhibitFetching())
+        axios.get(fetchUrl + "gallery/exhibit/", {
+            params: {
+                exhibit_id: exhibit_id
+            }
+        }).then(
+            axios.get(fetchUrl + "gallery/exhibit/comment/" + exhibit_id
+            ).then(res => {
+                // console.log(res);
+                // console.log(res.data);
+                let commentData = res.data;
+                if(res.status == 200) {
+                    console.log("you have received comments");
+                    dispatch(commentFetchSuccess(commentData));
+                }
+            })
+        )
         .then(res => {
-            console.log(res);
-            console.log(res.data);
+            // console.log(res);
+            // console.log(res.data);
             let data = res.data
+
             if(res.status == 200) {
+                console.log("hello... you should get a response.");
                 dispatch(exhibitFetchSuccess(data));
             }
         })
-    }
-}
-// should find by id then edit comments
-export const commentUpdate = (exhibit_id, text) => {
-    console.log(text);
-    console.log(exhibit_id);
-    console.log("hello");
-    return dispatch => {
-        dispatch(commentInProgress(text));
-        axios.put(fetchUrl + 'gallery/exhibit/' + exhibit_id, text)
-        .then(res => {
-            console.log(res.data);
-            let data = res.data;
-            if(res.status == 200) {
-                dispatch(commentComplete(text));
-            }
+        .catch(error => {
+            dispatch(exhibitFetchFail(error));
+            console.log(error);
         })
     }
-  }
-export const SEARCH_EXHIBIT = 'SEARCH_EXHIBIT';
-export const searchExhibit = (exhibit_id) => ({
-    type: SEARCH_EXHIBIT,
-    exhibit_id
+};
+export const EXHIBIT_FETCHING = 'EXHIBIT_FETCHING';
+export const exhibitFetching = () => ({
+    type: EXHIBIT_FETCHING,
 });
-//shows selected exhibit
-export const SHOW_EXHIBIT = 'SHOW_EXHIBIT';
-export const showExhibit = (data) => ({
-    type: SHOW_EXHIBIT,
-    data
-});
-
 export const EXHIBIT_FETCH_SUCCESS = 'EXHIBIT_FETCH_SUCCESS';
 export const exhibitFetchSuccess = (data) => ({
     type: EXHIBIT_FETCH_SUCCESS,
     data
 });
+export const EXHIBIT_FETCH_FAIL = 'EXHIBIT_FETCH_FAIL';
+export const exhibitFetchFail = (error) => ({
+    type: EXHIBIT_FETCH_FAIL,
+    error
+});
+
+// action creators for creating new exhibit document
+export const NEW_EXHIBIT_LOADING = 'NEW_EXHIBIT_LOADING';
+export const newExhibitLoading = () => ({
+    type: NEW_EXHIBIT_LOADING
+});
+
+export const NEW_EXHIBIT_SUCCESS = 'NEW_EXHIBIT_SUCCESS';
+export const newExhibitSuccess = (newExhibit) => ({
+    type: NEW_EXHIBIT_SUCCESS,
+    newExhibit
+});
+
+export const NEW_EXHIBIT_FAIL = 'NEW_EXHIBIT_FAIL';
+export const newExhibitFail = (error) => ({
+    type: NEW_EXHIBIT_FAIL,
+    error
+});
+export const postNewExhibit = (data) => {
+    console.log("post values: ");
+    console.log(data);
+    console.log("hello add new");   
+    return dispatch => {
+        dispatch(newExhibitLoading());
+        axios.post(fetchUrl + 'gallery/exhibit/', data)
+        .then(res => {
+            console.log(res.data);
+            let newExhibit = res.data;
+            dispatch(newExhibitSuccess(newExhibit));
+            if(res.status == 200) {
+            }
+        })
+        .catch(error => {
+            dispatch(newExhibitFail(error));
+            console.log(error);
+        }); 
+    }
+};
 
 //shows selected user gallery
 export const SHOW_USER_GALLERY = 'SHOW_USER_GALLERY';
@@ -157,7 +186,6 @@ export const showUserGallery = (userID, gallery) => ({
     gallery
 });
 
-
 //shows all exhibits in app
 export const SHOW_GALLERY = 'SHOW_GALLERY';
 export const showGallery = (gallery) => ({
@@ -165,14 +193,58 @@ export const showGallery = (gallery) => ({
     gallery
 });
 
-export const COMMENT_IN_PROGRESS = 'COMMENT_IN_PROGRESS';
-export const commentInProgress = (text) => ({
-    type: COMMENT_IN_PROGRESS,
-    text
+export const commentUpdate = (data) => {
+    console.log(data.exhibit_id);
+    console.log(data.user);
+    console.log(data.text);
+    let exhibit_id = data.exhibit_id;
+    let user = data.user;
+    let text = data.text;
+    return dispatch => {
+        dispatch(newCommentUploading());
+        console.log("hello comment update");
+        axios.post(fetchUrl + 'gallery/exhibit/comment/', data)
+        .then(res => {
+            console.log(res.data);
+            let data = res.data;
+            if(res.status == 200) {
+                dispatch(newCommentUploadSuccess(data));
+            }
+        })
+        .catch(error => {
+            dispatch(newCommentUploadFail(error));
+            console.log(error);
+        }); 
+    }
+};
+// actions for loading comments list for each exhibit
+export const COMMENT_FETCHING = 'COMMENT_FETCHING';
+export const commentFetching = () => ({
+    type: COMMENT_FETCHING
+});
+export const COMMENT_FETCH_SUCCESS = 'COMMENT_FETCH_SUCCESS';
+export const commentFetchSuccess = (commentData) => ({
+    type: COMMENT_FETCH_SUCCESS,
+    commentData
+});
+export const COMMENT_FETCH_FAIL = 'COMMENT_FETCH_FAIL';
+export const commentFetchFail =(error) => ({
+    type: COMMENT_FETCH_FAIL,
+    error
 });
 
-export const COMMENT_COMPLETE = 'COMMENT_COMPLETE';
-export const commentComplete = (text) => ({
-    type: LOG_COMMENT,
-    comment
+// actions for creating new comments for an exhibit
+export const NEW_COMMENT_UPLOADING = 'NEW_COMMENT_UPLOADING';
+export const newCommentUploading = () => ({
+    type: NEW_COMMENT_UPLOADING
+});
+export const NEW_COMMENT_UPLOAD_SUCCESS = 'NEW_COMMENT_UPLOAD_SUCCESS';
+export const newCommentUploadSuccess = (data) => ({
+    type: NEW_COMMENT_UPLOAD_SUCCESS,
+    data
+});
+export const NEW_COMMENT_UPLOAD_FAIL = 'NEW_COMMENT_UPLOAD_FAIL';
+export const newCommentUploadFail = (error) => ({
+    type: NEW_COMMENT_UPLOAD_FAIL,
+    error
 });
