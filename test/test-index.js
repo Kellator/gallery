@@ -6,35 +6,10 @@ import configureStore from 'redux-mock-store';
 import { mount, shallow } from 'enzyme';
 import { expect } from 'chai';
 import { Form, Input, Button, Card, Message } from 'semantic-ui-react';
+import sinon from 'sinon';
 
 const should = chai.should();
-// semantic test workaround
-const fs = require( 'fs' );
 
-const visibilityFile = 'node_modules/semantic-ui-react/dist/commonjs/behaviors/Visibility/Visibility.js';
-const stickyFile = 'node_modules/semantic-ui-react/dist/commonjs/modules/Sticky/Sticky.js';
-
-fs.readFile( visibilityFile, 'utf8', function ( err, data ) {
-  if ( err ) {
-    return console.error( err );
-  }
-  const result = data.replace( 'context: window', 'context: typeof window === \'object\' && window !== null && window.self === window ? window : {}' );
-
-  fs.writeFile( visibilityFile, result, 'utf8', function ( err ) {
-    if ( err ) return console.error( err );
-  } );
-} );
-
-fs.readFile( stickyFile, 'utf8', function ( err, data ) {
-  if ( err ) {
-    return console.error( err );
-  }
-  const result = data.replace( 'scrollContext: window', 'scrollContext: typeof window === \'object\' && window !== null && window.self === window ? window : {}' );
-
-  fs.writeFile( stickyFile, result, 'utf8', function ( err ) {
-    if ( err ) return console.error( err );
-  } );
-} );
 
 //  MOCK DATA FOR TESTS
 
@@ -55,6 +30,7 @@ fs.readFile( stickyFile, 'utf8', function ( err, data ) {
 
 //  USER GALLERY COMPONENT IMPORTS
 import NoResult from '../js/components/presentational/gallery/noResult';
+import Comments from '../js/components/presentational/gallery/comment';
 
 // describe('<Gallery /> Component', () => {
 //     it('will render a div containing a list of walls without exploding things', () => {
@@ -81,8 +57,23 @@ describe('<NoResult /> Component', () => {
         const renderer = TestUtils.createRenderer();
         renderer.render(<NoResult />);
         const result = renderer.getRenderOutput();
+        let text = result.props.children.props.children;
+        text.should.be.a('string');
     })
-})
+});
+
+
+// describe('<Comments /> Component', () => {
+//     it('will render a comment component without wrecking everything', () => {
+//         const username = "test name";
+//         const timestamp = "2017-08-27T00:50:50.219Z";
+//         const text = "I am sample text";
+//         const renderer = TestUtils.createRenderer();
+//         renderer.render(<Comments username={username} timestamp={timestamp} text={text}/>);
+//         const result = renderer.getRenderOutput();
+//         console.log(result);
+//     })
+// })
 // describe('SignUpInstructions component', () => {
 //     it('Renders 2 lines of text', () => {
 //         const renderer = TestUtils.createRenderer();

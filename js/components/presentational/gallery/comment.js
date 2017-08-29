@@ -14,14 +14,16 @@ class Comments extends React.Component {
         console.log(timeString);
         let text = this.props.comment.text;
         return (
-            <Comment>
-                <Comment.Content>
-                    <Comment.Author>{username}</Comment.Author>
-                    <Comment.Metadata>{dateString}</Comment.Metadata>
-                    {/* <Comment.Metadata>{timeString}</Comment.Metadata> */}
-                    <Comment.Text>{text}</Comment.Text>
-                </Comment.Content>
-            </Comment>
+            <div>
+                <Comment>
+                    <Comment.Content>
+                        <Comment.Author>{username}</Comment.Author>
+                        <Comment.Metadata>{dateString}</Comment.Metadata>
+                        {/* <Comment.Metadata>{timeString}</Comment.Metadata> */}
+                        <Comment.Text>{text}</Comment.Text>
+                    </Comment.Content>
+                </Comment>
+            </div>
         )
     }
 }
