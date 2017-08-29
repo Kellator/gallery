@@ -45,10 +45,10 @@ router.get('/exhibit', function(req, res) {
     console.log('exhibit request made');
     let exhibit_id = req.query.exhibit_id;
     Exhibit.findById(exhibit_id)
-    .populate({
-        path: 'comments',
-        options: { limit: 10 }
-    })
+    // .populate({
+    //     path: 'comments',
+    //     options: { limit: 10 }
+    // })
     .exec(function(err, exhibit) {
         if (err) {
             return res.status(500).json({
@@ -89,6 +89,10 @@ router.post('/exhibit/comment', function(req, res) {
                 message: 'Internal Server Error'
             });
         }
+        // load exhibit, push comment to comments array, save exhibit
+        Exhibit.findById(exhibit_id, function(err, exhibit){
+
+        })
         console.log("comment create")
         res.status(201).json(comment);
     });

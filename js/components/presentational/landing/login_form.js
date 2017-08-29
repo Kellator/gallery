@@ -12,28 +12,6 @@ import { Form, Button } from 'semantic-ui-react';
 
 // }
 
-// //added from reduxForm tutorial example
-// const form = reduxForm({
-//     form: 'loginForm'   
-// });
-
-// const renderField = field => (
-//     <div>
-//         <label>{field.input.label}</label>
-//         <input {...field.input}/>
-//         {field.touched && field.error && <div className="error">{field.error}</div>}
-//     </div>
-// );
-
-// const renderSelect = field => (
-//     <div>
-//         <label>{field.input.label}</label>
-//         <select {...field.input}/>
-//         {field.touched && field.error && <div className="error">{field.error}</div>}
-//     </div>
-// );
-
-
 class LoginForm extends React.Component {
     render() {
         const { handleSubmit, pristine, reset, submitting } = this.props;

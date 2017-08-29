@@ -2,7 +2,8 @@
 //div that contains signup input input fields for email and password.  Also contains submit button.
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Form, Field, reduxForm, initialize } from 'redux-form';
+import { Field, reduxForm, initialize } from 'redux-form';
+import { Form, Button } from 'semantic-ui-react';
 //separate local imports from dependencies
 
 
@@ -16,22 +17,6 @@ import { Form, Field, reduxForm, initialize } from 'redux-form';
 const form = reduxForm({
     form: 'loginForm'   
 });
-
-const renderField = field => (
-    <div>
-        <label>{field.input.label}</label>
-        <input {...field.input}/>
-        {field.touched && field.error && <div className="error">{field.error}</div>}
-    </div>
-);
-
-const renderSelect = field => (
-    <div>
-        <label>{field.input.label}</label>
-        <select {...field.input}/>
-        {field.touched && field.error && <div className="error">{field.error}</div>}
-    </div>
-);
 
 class SignUpForm extends React.Component {
     render() {
@@ -49,7 +34,7 @@ class SignUpForm extends React.Component {
                             <Field id="password_signup" name="password" type="password" required placeholder="Enter your Password" component="input"/>
                             {/* <label htmlFor="match_password">Password</label>
                             <Field id="match_password" name="match_password" type="password" required placeholder="Re-Enter your Password" component="input"/> */}
-                            <button action="submit">Join Gallery</button>
+                            <Button action="submit">Join Gallery</Button>
                     </fieldset>
                 </Form>
             </div>

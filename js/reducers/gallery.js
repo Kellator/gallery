@@ -174,7 +174,7 @@ export default function gallery(state = initialState, action) {
         case 'NEW_COMMENT_UPLOAD_SUCCESS' :
             return {
                 ...state,
-                newComment: {
+                newCommentStatus: {
                     uploading: false,
                     uploaded: true
                 }
@@ -182,7 +182,7 @@ export default function gallery(state = initialState, action) {
         case 'NEW_COMMENT_UPLOAD_FAIL' :
             return {
                 ...state,
-                newComment: {
+                newCommentStatus: {
                     uploading: false,
                     uploaded: false,
                     error: action.error
