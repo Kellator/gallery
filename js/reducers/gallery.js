@@ -166,25 +166,26 @@ export default function gallery(state = initialState, action) {
         case 'NEW_COMMENT_UPLOADING' :
             return {
                 ...state,
-                newCommentStatus: {
-                    uploading: true,
-                    uploaded: false
+                commentStatus: {
+                    loading: true,
+                    loaded: false
                 }
             };
         case 'NEW_COMMENT_UPLOAD_SUCCESS' :
             return {
                 ...state,
-                newCommentStatus: {
-                    uploading: false,
-                    uploaded: true
-                }
+                commentStatus: {
+                    loading: false,
+                    loaded: true
+                },
+                comments: state.gallery.exhibit.comments.concat(action.data)
             };
         case 'NEW_COMMENT_UPLOAD_FAIL' :
             return {
                 ...state,
-                newCommentStatus: {
-                    uploading: false,
-                    uploaded: false,
+                commentStatus: {
+                    loading: false,
+                    loaded: false,
                     error: action.error
                 }
             };

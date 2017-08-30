@@ -1,7 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Field, reduxForm, initialize } from 'redux-form';
+import { Field, reduxForm, initialize, reset } from 'redux-form';
 import { Form, Button, Input, TextArea } from 'semantic-ui-react';
+import * as actions from '../../../actions';
 
 export function SemanticReplyFormField ({ input, label, meta: { touched, error, warning }, as: As = TextArea, ...props}) {
     function handleChange (e,  {value}) {
@@ -14,6 +15,12 @@ export function SemanticReplyFormField ({ input, label, meta: { touched, error, 
         </div>
     )
 }
+const submitSuccess = (result, dispatch) => {
+    dispatch(reset('comment_form'));
+    // dispatch(actions.GalleryActions.exhibitFetch(data.exhibit_id));
+}
+    
+
 class CommentForm extends React.Component {
     render() {
         console.log(this.props);
@@ -45,6 +52,7 @@ class CommentForm extends React.Component {
 
 export default reduxForm({
     name: 'comment',
-    form: 'comment_form'
+    form: 'comment_form',
+    onSubmitSuccess: submitSuccess,
 })(CommentForm);
 

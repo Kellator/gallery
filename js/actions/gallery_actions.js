@@ -207,7 +207,7 @@ export const commentUpdate = (data) => {
         .then(res => {
             console.log(res.data);
             let data = res.data;
-            if(res.status == 200) {
+            if(res.status == 201) {
                 dispatch(newCommentUploadSuccess(data));
             }
         })

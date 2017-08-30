@@ -45,21 +45,14 @@ const mapDispatchToProps = (dispatch, ownProps) => {
             console.log("there, there's a damned submit");
             console.log(values);
             console.log(ownProps);
-            let creator = ownProps.user.username;
-            let title = values.exhibit_title;
-            let description = values.exhibit_description;
-            let exhibitType = values.exhibit_type;
-            let location = values.exhibit_url;
-            let image = values.thumbnail_image; 
-            let status = values.collaborate;
             let data = {
-                creator: creator,
-                title: title,
-                description: description,
-                exhibitType: exhibitType,
-                location: location,
-                image: image,
-                status: status
+                creator: ownProps.user.username,
+                title: values.exhibit_title,
+                description: values.exhibit_description,
+                exhibitType: values.exhibit_type,
+                location: values.exhibit_url,
+                image: values.thumbnail_image,
+                status: values.collaborate
             }
             dispatch(actions.GalleryActions.postNewExhibit(data));
             // dispatch(actions.GalleryActions.loadConfirmExhibit(values));
