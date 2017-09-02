@@ -8,8 +8,8 @@ var CommentSchema = new mongoose.Schema({
         required: [true, 'Message text']
     },
     creator: {
-        type: String,
-        required: [true, 'Username']
+        type: String
+        // required: [true, 'Username']
     },
     exhibit: [{ type: mongoose.Schema.Types.ObjectId, ref:'Exhibit'}] 
 });

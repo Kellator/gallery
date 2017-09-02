@@ -12,7 +12,7 @@ class CommentContainer extends React.Component {
         console.log(this.props);
         return (
             <div>
-                <CommentList comments={this.props.comments} />
+                <CommentList comments={this.props.exhibit.comments} />
                 <CommentForm onSubmit={this.props.newCommentSubmit} exhibit={this.props.exhibit} user={this.props.user}/>
             </div>
         )
@@ -25,17 +25,11 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     return {
         newCommentSubmit: (values) => {
             event.preventDefault();
-            console.log("newcommentsubmit");
-            console.log(values);
-            console.log(ownProps);
-            let exhibit_id = ownProps.exhibit._id;
-            let user = ownProps.user;
-            let text = values.comment;
             let data = {
-                exhibit_id: exhibit_id,
-                user: user,
-                text: text
-            }
+                exhibit_id: ownProps.exhibit._id,
+                user: ownProps.user,
+                text: values.comment
+            };
             console.log(data);
             dispatch(actions.GalleryActions.commentUpdate(data));
         }

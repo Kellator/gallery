@@ -29,7 +29,7 @@ var routes = require('./routes/routes');
 const app = express();
 app.use(cookieParser());
 app.use(bodyParser.json());
-app.use(session({ secret: 'keyboard cat' }));
+app.use(session(config.SESSION_KEY));
 app.use(cors());
 app.use('/', routes);
 // console.log(routes);

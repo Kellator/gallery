@@ -45,6 +45,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     return { 
         exhibitOnClick: () => { 
             let exhibit = ownProps;
+            console.log(exhibit);
             dispatch(galleryActions.showExhibit(exhibit));
         },
     }

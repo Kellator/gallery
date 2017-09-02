@@ -26,11 +26,11 @@ class ExhibitViewExhibit extends React.Component {
         let status = this.props.exhibit.status;
         let collaborators = this.props.exhibit.collaborators;
         let description = this.props.exhibit.description;
-        let comments = this.props.comments;
+        let comments = this.props.exhibit.comments;
         let exhibit_id = this.props.exhibit._id;
         let open;
         const extra = (
-            <div><CommentContainer exhibit={this.props.exhibit} user={this.props.user} comments={this.props.comments}/></div>
+            <div><CommentContainer exhibit={this.props.exhibit} user={this.props.user} /></div>
         )
         const meta = "Created By: " + creator;
         const collaborationMeta = "Collaborators: " + collaborators; 
@@ -68,7 +68,6 @@ class ExhibitViewExhibit extends React.Component {
 const mapStateToProps = (state, props) => ({
     exhibit: state.gallery.exhibit,
     user: state.auth.user.username,
-    comments: state.gallery.comments
     });
 
 export default connect(mapStateToProps)(ExhibitViewExhibit);

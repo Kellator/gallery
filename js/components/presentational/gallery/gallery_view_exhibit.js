@@ -63,7 +63,6 @@ const mapDispatchToProps = (dispatch, ownProps) => {
             event.preventDefault();
             let data = ownProps.exhibit;
             console.log(data);
-            // dispatch(galleryActions.showExhibit(data));
             dispatch(galleryActions.exhibitFetch(data._id));
         }
     }
