@@ -90,28 +90,40 @@ router.post('/exhibit/comment', function(req, res) {
     console.log("exhibit comment posted");
     // console.log(req.body);
     let comment = req.body;
+    console.log("below is the comment body");
+    console.log(comment);
     let exhibit_id = comment.exhibit_id;
-    Comment.create(
-        {creator: comment.user, text: comment.text, exhibit: comment.exhibit_id }, 
-        function(err, comment) {
-            if (err || !comment) {
-                console.error("could not create comment");
-                console.log(err);
-                return res.status(500).json({
-                    message: 'Internal Server Error'
-                });
-            }
+    Comment.create(comment, function(err, comment) {
+        let text = comment.text;
+        let creator = comment.user;
+        let exhibit = comment.exhibit_id; 
+        if (err || !comment) {
+            console.error("could not create comment");
+            console.log(err);
+            return res.status(500).json({
+                message: 'Internal Server Error'
+            });
+        }
         // load exhibit, push comment to comments array, save exhibit
-        Exhibit.findById(exhibit_id, function(err, exhibit){
-            if (err) return handleError(err);
-                exhibit.comments.push(comment);
-                console.log(exhibit.comments);
+        Exhibit.findById(exhibit_id)
+        .populate('comments')
+        .exec(function(err, exhibit) {
+                if (err) {
+                    console.log("find error below");
+                    console.log(err);
+                    return handleError(err);
+                };
+            exhibit.comments.push(comment);
+            // console.log(exhibit.comments);
                 exhibit.save(function(err, updatedExhibit) {
                     if (err) {
+                        console.log("save error below");
+                        console.log(err);
                         return res.status(500).json({
                         message: 'Internal Server Error'
                     });
                     res.status(201).json(comment);
+                    // console.log(exhibit.comments);
                 }
             });
         });

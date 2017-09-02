@@ -32,7 +32,6 @@ const mapDispatchToProps = (dispatch, ownProps) => {
             };
             console.log(data);
             dispatch(actions.GalleryActions.commentUpdate(data));
-
         }
     }
 }

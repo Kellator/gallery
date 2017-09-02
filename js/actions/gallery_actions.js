@@ -197,18 +197,14 @@ export const commentUpdate = (data) => {
     console.log(data.exhibit_id);
     console.log(data.user);
     console.log(data.text);
-    let exhibit_id = data.exhibit_id;
-    let user = data.user;
-    let text = data.text;
     return dispatch => {
         dispatch(newCommentUploading());
         console.log("hello comment update");
         axios.post(fetchUrl + 'gallery/exhibit/comment/', data)
         .then(res => {
-            console.log(res.data);
-            let data = res.data;
             if(res.status == 201) {
-                dispatch(newCommentUploadSuccess(data));
+                dispatch(newCommentUploadSuccess(res.data));
+                console.log(res.data);
             }
         })
         .catch(error => {
