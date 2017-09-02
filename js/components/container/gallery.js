@@ -21,6 +21,7 @@ import ExhibitViewExhibit from '../presentational/gallery/exhibit_view_exhibit';
 
 class Gallery extends React.Component {
     render() {
+        console.log(this.props);
         let view = this.props.galleryView;
         let exhibitView = this.props.exhibitView;
         if (view) {
@@ -41,4 +42,5 @@ const mapStateToProps = (state, props) => ({
     gallerySearch: state.gallery.gallerySearch,
     galleryExhibits: state.gallery.galleryExhibits
 });
+
 export default connect(mapStateToProps)(Gallery);

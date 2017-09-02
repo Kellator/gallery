@@ -37,7 +37,6 @@ class GalleryViewExhibit extends React.Component {
             text ="Not Open for Collaboration."
         }
         // let exhibit = this.props.exhibit;
-        console.log(this.props);
         const meta = "Posted By: " + creator;
         return (
             <div>

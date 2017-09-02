@@ -97,23 +97,19 @@ export const exhibitFetch = (exhibit_id) => {
             params: {
                 exhibit_id: exhibit_id
             }
-        }).then(
-            axios.get(fetchUrl + "gallery/exhibit/comment/" + exhibit_id
-            ).then(res => {
-                // console.log(res);
-                // console.log(res.data);
-                let commentData = res.data;
-                if(res.status == 200) {
-                    console.log("you have received comments");
-                    dispatch(commentFetchSuccess(commentData));
-                }
-            })
-        )
+        })
+        // .then(
+        //     axios.get(fetchUrl + "gallery/exhibit/comment/" + exhibit_id
+        //     ).then(res => {
+        //         let commentData = res.data;
+        //         if(res.status == 200) {
+        //             console.log("you have received comments");
+        //             dispatch(commentFetchSuccess(commentData));
+        //         }
+        //     })
+        // )
         .then(res => {
-            // console.log(res);
-            // console.log(res.data);
             let data = res.data
-
             if(res.status == 200) {
                 console.log("hello... you should get a response.");
                 dispatch(exhibitFetchSuccess(data));
