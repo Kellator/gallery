@@ -41,13 +41,4 @@ const mapStateToProps = (state, props) => ({
     gallerySearch: state.gallery.gallerySearch,
     galleryExhibits: state.gallery.galleryExhibits
 });
-const mapDispatchToProps = (dispatch, ownProps) => {
-    return { 
-        exhibitOnClick: () => { 
-            let exhibit = ownProps;
-            console.log(exhibit);
-            dispatch(galleryActions.showExhibit(exhibit));
-        },
-    }
-}
-export default connect(mapStateToProps, mapDispatchToProps)(Gallery);
+export default connect(mapStateToProps)(Gallery);
