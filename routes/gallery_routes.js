@@ -79,7 +79,6 @@ router.post('/exhibit/comment', function(req, res) {
     Comment.create({ text: comment.text, creator: comment.user, exhibit: comment.exhibit_id }, function (err, comment) {
         if (err) return handleError(err);
         Exhibit.findById(exhibit_id, function(err, exhibit) {
-            console.log(exhibit);
             exhibit.comments.push(comment._id);
             exhibit.save(exhibit.comments);
         })

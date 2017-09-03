@@ -190,6 +190,7 @@ export const commentUpdate = (data) => {
         .then(res => {
             console.log(res)
             if(res.status == 201) {
+                dispatch(exhibitFetch(data.exhibit_id));
                 dispatch(newCommentUploadSuccess(res.data));
                 console.log(res.data);
             }

@@ -163,40 +163,7 @@ export default function gallery(state = initialState, action) {
                     error: action.error
                 }
             };
-        case 'NEW_COMMENT_UPLOADING' :
-            return {
-                ...state,
-                loading: true,
-                loaded: false,
-                // commentStatus: {
-                //     loading: true,
-                //     loaded: false
-                // }
-            };
-        case 'NEW_COMMENT_UPLOAD_SUCCESS' :
-            return {
-                ...state,
-                loading: false,
-                loaded: true,
-                // commentStatus: {
-                //     loading: false,
-                //     loaded: true
-                // },
-                // exhibit: state.exhibit.comments.concat(action.data)
-                data: action.data
-            };
-        case 'NEW_COMMENT_UPLOAD_FAIL' :
-            return {
-                ...state,
-                loading: false,
-                loaded: false,
-                // commentStatus: {
-                //     loading: false,
-                //     loaded: false,
-                //     error: action.error
-                // }
-                error: action.error
-            };
+
         case 'COMMENT_FETCHING' :
             return {
                 ...state,
