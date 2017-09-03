@@ -98,17 +98,8 @@ export const exhibitFetch = (exhibit_id) => {
                 exhibit_id: exhibit_id
             }
         })
-        // .then(
-        //     axios.get(fetchUrl + "gallery/exhibit/comment/" + exhibit_id
-        //     ).then(res => {
-        //         let commentData = res.data;
-        //         if(res.status == 200) {
-        //             console.log("you have received comments");
-        //             dispatch(commentFetchSuccess(commentData));
-        //         }
-        //     })
-        // )
         .then(res => {
+            console.log(res);
             let data = res.data
             if(res.status == 200) {
                 console.log("hello... you should get a response.");
@@ -137,22 +128,6 @@ export const exhibitFetchFail = (error) => ({
 });
 
 // action creators for creating new exhibit document
-export const NEW_EXHIBIT_LOADING = 'NEW_EXHIBIT_LOADING';
-export const newExhibitLoading = () => ({
-    type: NEW_EXHIBIT_LOADING
-});
-
-export const NEW_EXHIBIT_SUCCESS = 'NEW_EXHIBIT_SUCCESS';
-export const newExhibitSuccess = (newExhibit) => ({
-    type: NEW_EXHIBIT_SUCCESS,
-    newExhibit
-});
-
-export const NEW_EXHIBIT_FAIL = 'NEW_EXHIBIT_FAIL';
-export const newExhibitFail = (error) => ({
-    type: NEW_EXHIBIT_FAIL,
-    error
-});
 export const postNewExhibit = (data) => {
     console.log("post values: ");
     console.log(data);
@@ -173,6 +148,23 @@ export const postNewExhibit = (data) => {
         }); 
     }
 };
+export const NEW_EXHIBIT_LOADING = 'NEW_EXHIBIT_LOADING';
+export const newExhibitLoading = () => ({
+    type: NEW_EXHIBIT_LOADING
+});
+
+export const NEW_EXHIBIT_SUCCESS = 'NEW_EXHIBIT_SUCCESS';
+export const newExhibitSuccess = (newExhibit) => ({
+    type: NEW_EXHIBIT_SUCCESS,
+    newExhibit
+});
+
+export const NEW_EXHIBIT_FAIL = 'NEW_EXHIBIT_FAIL';
+export const newExhibitFail = (error) => ({
+    type: NEW_EXHIBIT_FAIL,
+    error
+});
+
 
 //shows selected user gallery
 export const SHOW_USER_GALLERY = 'SHOW_USER_GALLERY';
@@ -190,14 +182,13 @@ export const showGallery = (gallery) => ({
 });
 
 export const commentUpdate = (data) => {
-    console.log(data.exhibit_id);
-    console.log(data.user);
-    console.log(data.text);
     return dispatch => {
         dispatch(newCommentUploading());
         console.log("hello comment update");
+        console.log(data);
         axios.post(fetchUrl + 'gallery/exhibit/comment/', data)
         .then(res => {
+            console.log(res)
             if(res.status == 201) {
                 dispatch(newCommentUploadSuccess(res.data));
                 console.log(res.data);

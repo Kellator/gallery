@@ -182,9 +182,8 @@ export default function gallery(state = initialState, action) {
                 //     loading: false,
                 //     loaded: true
                 // },
-                exhibit: {
-                    comments: state.gallery.exhibit.comments.concat(action.data)
-                }               
+                // exhibit: state.exhibit.comments.concat(action.data)
+                data: action.data
             };
         case 'NEW_COMMENT_UPLOAD_FAIL' :
             return {
