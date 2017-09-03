@@ -22,7 +22,6 @@ class LogIn extends React.Component {
         let authStatus = this.props.authorized;
         let comp;
         let authFail = this.props.signinFail;
-        console.log(this.props);
         if(authStatus == true) {
             return <Redirect push to='/user' />
         }

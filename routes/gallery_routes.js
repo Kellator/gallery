@@ -11,36 +11,27 @@ var Comment = mongoose.model('Comment');
 //  returns all items in the app as a list (array of items)
 //  allows scrolling view of all items or exhibits in the app
 router.get('/', function(req, res) {
-    console.log('gallery request made');
-    console.log(req.query);
     var search = req.query.term;
     if (search == "") {
         Exhibit.find()
-        .populate({
-            path: 'comments',
-            options: { limit: 10 }
-        })
+        .populate('comments')
         .exec(function(err, exhibits) {
             if (err) {
-                console.log(err);
+                // console.log(err);
                 return res.status(500).json({
                     message: 'Internal Server Error'
                 });
             }
-
             res.json(exhibits);
         });
     }
     else {
         Exhibit.find({ 'categories': search })
-        .populate({
-            path: 'comments',
-            options: { limit: 10 }
-        })
+        .populate('comments')
         .exec(function(err, exhibits) {
             if (err) {
-                console.log(err);
-                console.log('cannot search by category');
+                // console.log(err);
+                // console.log('cannot search by category');
                 return res.status(500).json({
                     message: 'Internal Server Error'
                 });
@@ -55,78 +46,44 @@ router.get('/exhibit', function(req, res) {
     console.log('exhibit request made');
     let exhibit_id = req.query.exhibit_id;
     Exhibit.findById(exhibit_id)
-    .populate({
-        path: 'comments',
-        options: { limit: 10 }
-    })
+    .populate('comments')
     .exec(function(err, exhibit) {
         if (err) {
             return res.status(500).json({
                 message: 'Internal Server Error'
             });
         }
-        console.log(exhibit);
+        // console.log(exhibit);
         res.status(200).json(exhibit);   
     })  
 });
-router.get('/exhibit/comment/:exhibit_id', function(req, res) {
-    console.log("fetching comments");
-    // console.log(req.params);
-    let exhibit_id = req.params.exhibit_id
-    Comment.find().where('exhibit').equals(exhibit_id).limit(10)
-    .exec(function(err, comments) {
-        if (err) {
-            console.log(err);
-            console.log("cannot fetch comments");
-            return res.status(500).json({
-                message: 'Internal Server Error'
-            });
-        }
-        // console.log(comments);
-        return res.json(comments);
-    })
-});
+// router.get('/exhibit/comment/:exhibit_id', function(req, res) {
+//     console.log("fetching comments");
+//     let exhibit_id = req.params.exhibit_id
+//     Comment.find().where('exhibit').equals(exhibit_id).limit(10)
+//     .exec(function(err, comments) {
+//         if (err) {
+//             console.log(err);
+//             console.log("cannot fetch comments");
+//             return res.status(500).json({
+//                 message: 'Internal Server Error'
+//             });
+//         }
+//         return res.json(comments);
+//     })
+// });
 router.post('/exhibit/comment', function(req, res) {
-    console.log("exhibit comment posted");
-    // console.log(req.body);
     let comment = req.body;
-    console.log("below is the comment body");
-    console.log(comment);
     let exhibit_id = comment.exhibit_id;
-    Comment.create(comment, function(err, comment) {
-        let text = comment.text;
-        let creator = comment.user;
-        let exhibit = comment.exhibit_id; 
-        if (err || !comment) {
-            console.error("could not create comment");
-            console.log(err);
-            return res.status(500).json({
-                message: 'Internal Server Error'
-            });
-        }
-        // load exhibit, push comment to comments array, save exhibit
-        Exhibit.findById(exhibit_id)
-        .populate('comments')
-        .exec(function(err, exhibit) {
-                if (err) {
-                    console.log("find error below");
-                    console.log(err);
-                    return handleError(err);
-                };
-            exhibit.comments.push(comment);
-            // console.log(exhibit.comments);
-                exhibit.save(function(err, updatedExhibit) {
-                    if (err) {
-                        console.log("save error below");
-                        console.log(err);
-                        return res.status(500).json({
-                        message: 'Internal Server Error'
-                    });
-                    res.status(201).json(comment);
-                    // console.log(exhibit.comments);
-                }
-            });
-        });
+    console.log(comment);
+    Comment.create({ text: comment.text, creator: comment.user, exhibit: comment.exhibit_id }, function (err, comment) {
+        if (err) return handleError(err);
+        Exhibit.findById(exhibit_id, function(err, exhibit) {
+            exhibit.comments.push(comment._id);
+            exhibit.save(exhibit.comments);
+        })
+        console.log("Created and Saved comment");
+        res.status(201).json(comment);
     });
 });
 
@@ -171,4 +128,27 @@ router.put('/exhibit/:exhibit_id', function(req, res) {
         //  add some kind of user notification that comment was added
     });
 });
+  //     // load exhibit, push comment to comments array, save exhibit
+    //     Exhibit.findById(exhibit_id)
+    //     .exec(function(err, exhibit) {
+    //             if (err) {
+    //                 console.log("find error below");
+    //                 console.log(err);
+    //                 return handleError(err);
+    //             };
+    //         console.log(comment);
+    //         exhibit.comments.push(comment);
+    //         // exhibit.save(function(err, updatedExhibit) {
+    //         //     if (err) {
+    //         //         console.log("save error below");
+    //         //         console.log(err);
+    //         //         return res.status(500).json({
+    //         //         message: 'Internal Server Error'
+    //         //     });
+    //             res.status(201).json(comment);
+    //             // }
+    //         });
+    //     });
+    // });
+// });
 module.exports = router;
