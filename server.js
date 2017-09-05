@@ -11,6 +11,7 @@ var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 var cors = require('cors');
 var cookieParser = require('cookie-parser');
+var socketEvents = require('./socketEvents');
 
 const path = require('path');
 // local import
@@ -59,6 +60,9 @@ if (require.main === module) {
 }
 exports.app = app;
 exports.runServer = runServer;
+
+const io = require('socket.io').listen(server);
+socketEvents(io);
 
 passport.use(new LocalStrategy(
     function(username, password, done) {

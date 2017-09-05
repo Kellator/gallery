@@ -3,13 +3,17 @@ var mongoose = require('mongoose');
 var timestamps = require('mongoose-timestamp');
 
 var MessageSchema = new mongoose.Schema({
-    message: {
+    conversationId: {
+        type: Schema.Types.ObjectId,
+        required: true
+    },
+    body: {
         type: String,
         required: [true, 'Message text']
     },
-    creator: {
+    author: {
         type: String,
-        required: [true, 'Creator ID']
+        ref: 'User'
     },
     exhibit: {
         type: mongoose.Schema.Types.ObjectId, ref:'Exhibit'
