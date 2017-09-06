@@ -18,3 +18,4 @@ exports = module.exports = function(io) {
         });
     });
 }
+// individual messenger vs group chat?

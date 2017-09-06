@@ -6,7 +6,11 @@ import { Form, Input, Button } from 'semantic-ui-react';
 // MessageInput.propTypes = {
 
 // }
-
+// const handleSubmit = (event) => {
+//     const {user, socket, activeChannel } = this.props;
+//     const text = event.target.value.trim();
+    
+// }
 class MessageInput extends React.Component {
     render() {
         return (
