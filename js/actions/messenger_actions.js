@@ -44,6 +44,12 @@ export const channelsSuccess = (data) => ({
     type: CHANNELS_SUCCESS,
     data
 });
+// channel fetch fail
+export const CHANNELS_FAIL = 'CHANNELS_FAIL';
+export const channelsFail = (error) => ({
+    type: CHANNELS_FAIL,
+    error
+});
 // messages fetch loading
 export const MESSAGES_LOADING = 'MESSAGES_LOADING';
 export const messagesLoading = () => ({
@@ -83,6 +89,6 @@ export const createChannel = (channel) => {
 // create a new message 
 export const createMessage = (message) => {
     return dispatch => {
-        
+
     }
 };
