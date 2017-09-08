@@ -8,15 +8,20 @@ const initialState = {
 export default function channels(state = intialState, action) {
     switch(action.type) {
         case 'ADD_CHANNEL' :
-            return {
-
-            };
-        case 'CHANGE_CHANNEL' :
-            if (state.data.filter(channel => channel.name = action.channel.name).length !==0) {
+            if (state.data.filter(channel => channel.name = action.channel.name).length !== 0) {
                 return state;
             }
             return {
-                
+                ...state,
+                data: [...state.data, action.channel]
+            };
+        case 'CHANGE_CHANNEL' :
+            if (state.data.filter(channel => channel.name = action.channel.name).length !== 0) {
+                return state;
+            }
+            return {
+                ...state,
+                data: [...state.data, action.channel]
             };
         case 'CHANNELS_LOADING' :
             return {
