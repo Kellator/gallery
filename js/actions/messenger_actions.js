@@ -60,7 +60,11 @@ export const MESSAGES_SUCCESS = 'MESSAGES_SUCCESS';
 export const messagesSuccess = (data, channel) => ({
     type: MESSAGES_SUCCESS
 });
-
+export const MESSAGES_FAIL = 'MESSAGES_FAIL';
+export const messagesFail = (error) => ({
+    type: MESSAGES_FAIL,
+    error
+});
 // async actions 
 // fetch list of available channels  - user
 export const fetchUserChannels = (username) => {

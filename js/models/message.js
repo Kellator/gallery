@@ -4,7 +4,7 @@ var timestamps = require('mongoose-timestamp');
 
 var MessageSchema = new mongoose.Schema({
     conversationId: {
-        type: Schema.Types.ObjectId,
+        type: mongoose.Schema.Types.ObjectId, ref: 'Channel',
         required: true
     },
     body: {
