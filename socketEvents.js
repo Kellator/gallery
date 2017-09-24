@@ -1,5 +1,10 @@
 exports = module.exports = function(io) {
-    io.on('connection', (socket) => {
+    const nsp = io.of('/chat');
+    nsp.on('connection', (socket) => {
+        socket.join('Lobby');
+        socket.on('chat mounted', function(username) {
+          socket.emit('receive socket', socket.id)
+        });
         console.log('a user connected');
         //on channel entry, join broadcast channel
         socket.on('enter channel', (channel) => {
@@ -12,6 +17,7 @@ exports = module.exports = function(io) {
         });
         socket.on('new message', (channel) => {
             io.sockets.in(channel).emit('refresh messages', channel);
+            console.log('a new message');
         });
         socket.on('disconnect', () => {
             console.log('user disconnected');

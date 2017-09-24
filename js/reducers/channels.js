@@ -2,6 +2,7 @@ import * as action from '../actions/messenger_actions';
 
 const initialState = {
     loaded: false,
+    channel: main,
     data: []
 };
 

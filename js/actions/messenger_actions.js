@@ -3,6 +3,11 @@ import axios from 'axios';
 let fetchUrl = 'http://localhost:5050/';
 let userUrl = 'http://localhost:8080/';
 
+export const RECEIVE_MESSAGE = 'RECEIVE_MESSAGE';
+export const receiveRawMessage = (message) => ({
+    type: RECEIVE_MESSAGE,
+    message
+});
 // when message is complete and to emit
 export const ADD_MESSAGE = 'ADD_MESSAGE';
 export const addMessage = (value) => ({

@@ -18,7 +18,19 @@ import MessageInput from '../presentational/messenger/message_input';
 // MAIN CHAT LOGIC HERE - COMMUNICATE WITH CHAT SERVER (SEND AND RECEIVE MSGS)  THEN PASS DATA RECEIVED FROM 
 // SERVER TO OTHER COMPONENTS TO DISPLAY
 class Messenger extends React.Component {
+// default channel will always load main.  User must choose to enter other channel
+// What does socket need to do:  broadcast :
     render() {
+        console.log(this.props);
+        const socket = io();
+        var username = this.props.user.username;
+        socket.emit('chat mounted', username);
+        // what chat has opened  - ?  does this need a join?
+        // socket.emit('welcome', 'Welcome, {user}, to the {channel} chat.')
+        // who has entered the chat
+        // socket.broadcast.emit('broadcast', '{user} has entered the chat.')
+        // load last message saved to DB 
+        // socket.emit('last message', {message})
         console.log(this.props);
         return (
             <div>
@@ -29,4 +41,7 @@ class Messenger extends React.Component {
         );
     };
 };
-export default Messenger;
+const mapStateToProps = (state, props) => ({
+
+});
+export default connect(mapStateToProps)(Messenger);

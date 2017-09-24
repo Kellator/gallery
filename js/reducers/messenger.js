@@ -7,6 +7,11 @@ intialState = {
 
 export default function messenger(state = initialState, action) {
     switch(action.type) {
+        case 'RECEIVE_MESSAGE' :
+            return {
+                ...state,
+                data: [...state.data, action.message]
+            };
         case 'ADD_MESSAGE' :
             return {
                 ...state,
