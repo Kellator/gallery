@@ -22,16 +22,23 @@ class Messenger extends React.Component {
 
     render() {
         console.log(this.props);
+        // let channel = this.state.channel;
+        // if(channel !== 'main') {
+
+        // }
+        let username = this.props.user.username;
         return (
             <div>
                 <h3>Messenger</h3>
-                <MessageFeed messages={"this.state.messages"} />
+                <MessageFeed messages={["sample", "messages", "here"]} username={username}/>
                 <MessageInput onSend={"this.sendHandler"} />
             </div>
         );
     };
 };
 const mapStateToProps = (state, props) => ({
-
+    channel: state.channel,
+    messages: state.messenger
 });
+
 export default connect(mapStateToProps)(Messenger);

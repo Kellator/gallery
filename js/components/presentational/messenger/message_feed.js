@@ -11,9 +11,15 @@ import Message from './message';
 // loop through each message and pass it to the message component
 class MessageFeed extends React.Component {
     render() {
+        console.log(this.props);
+        const messages = this.props.messages.map((message, i) => {
+            return (
+                <Message key={i} username={message.username} message={message.message} />
+            );
+        });
         return (
             <div>
-                <Message />
+                {messages}
             </div>
         );
     };

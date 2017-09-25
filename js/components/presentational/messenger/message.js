@@ -8,14 +8,17 @@ import PropTypes from 'prop-types';
 class Message extends React.Component {
     render () {
         console.log("message component");
-        let time;
-        let user;
-        let text;
+        console.log(this.props);
         return (
             <div> 
-                <p>({time}) {user} : {text}</p>
+                <div>
+                    {this.props.username}
+                </div>
+                <div>
+                    {this.props.message}
+                </div>
             </div>
-        )
+        );
     }
 }
 export default Message;
