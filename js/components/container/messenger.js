@@ -30,8 +30,8 @@ class Messenger extends React.Component {
         return (
             <div>
                 <h3>Messenger</h3>
-                <MessageFeed messages={["sample", "messages", "here"]} username={username}/>
-                <MessageInput onSend={"this.sendHandler"} />
+                <MessageFeed messages={this.props.messages} username={username}/>
+                <MessageInput onSubmit={this.props.newMessageSubmit}/>
             </div>
         );
     };
@@ -40,5 +40,21 @@ const mapStateToProps = (state, props) => ({
     channel: state.channel,
     messages: state.messenger
 });
+const mapDispatchToProps = (dispatch, ownProps) => {
+    return {
+        newMessageSubmit: (values) => {
+            event.preventDefault();
+            console.log(ownProps);
+            console.log(values);
+            let data = {
+                user: ownProps.user.username,
+                text: values.message
+            };
+            console.log(data);
+            dispatch(actions.MessengerActions.addMessage(data));
+            dispatch(actions.MessengerActions.fetchMessages());
+        }
+    }
+}
 
-export default connect(mapStateToProps)(Messenger);
+export default connect(mapStateToProps, mapDispatchToProps)(Messenger);

@@ -84,7 +84,7 @@ export const fetchExhibitChannels = (exhibit) => {
     }
 };
 //  message fetch
-export const fetchMessages = (channel) => {
+export const fetchMessages = () => {
     return dispatch => {
         
     }

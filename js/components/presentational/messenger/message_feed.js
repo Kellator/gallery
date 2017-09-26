@@ -12,11 +12,12 @@ import Message from './message';
 class MessageFeed extends React.Component {
     render() {
         console.log(this.props);
-        const messages = this.props.messages.map((message, i) => {
-            return (
-                <Message key={i} username={message.username} message={message.message} />
-            );
-        });
+        let messages = (this.props.messages) ? this.props.messages.map((message, index) => {
+            return <Message key={index}   message={message}/>
+        }) : undefined;
+        if(messages == undefined) {
+            return messages = <p>Be the first!</p>
+        }
         return (
             <div>
                 {messages}
