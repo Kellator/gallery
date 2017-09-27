@@ -11,7 +11,6 @@ var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 var cors = require('cors');
 var cookieParser = require('cookie-parser');
-var socketEvents = require('./socketEvents');
 
 const path = require('path');
 // local import
@@ -19,12 +18,10 @@ var config = require('./config');
 // mongoose models
 var Exhibit = require('./js/models/exhibit');
 var Gallery = require('./js/models/gallery');
-var Message = require('./js/models/message');
 var Comment = require('./js/models/comment.js');
 var UserGallery = require('./js/models/user-gallery');
 var User = require('./js/models/user');
-var Message = require('./js/models/message.js');
-var Channel = require('./js/models/channel.js');
+
 var routes = require('./routes/routes');
 
 const app = express();
@@ -35,6 +32,16 @@ app.use(cors());
 app.use('/', routes);
 // console.log(routes);
 const server = http.Server(app);
+
+var Grid = require('gridfs-stream');
+var MediaFile = require('./js/models/mediaFile');
+var conn = mongoose.connection;
+Grid.mongo = mongoose.mongo;
+var gfs;
+conn.once('open', function() {
+    constole.log('open');
+    gfs = Grid(conn.db);
+});
 
 //coordinates the connection to the database, and the running on the HTTP server
 const runServer = function(callback) {
@@ -60,9 +67,6 @@ if (require.main === module) {
 }
 exports.app = app;
 exports.runServer = runServer;
-
-const io = require('socket.io').listen(server);
-socketEvents(io);
 
 passport.use(new LocalStrategy(
     function(username, password, done) {

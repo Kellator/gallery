@@ -8,7 +8,7 @@ import { Field, reduxForm, initialize } from 'redux-form';
 import NavBar from './nav_rail';
 import Gallery from './gallery';
 import Workspace from './workspace_container';
-import Messenger from './messenger';
+
 import * as actions from '../../actions/index';
 //declare propTypes prior to component
 
@@ -29,7 +29,7 @@ class Dashboard extends React.Component {
                 <p>Welcome to the Gallery, {username}!</p>
                 {/* <Gallery /> */}
                 <Workspace user={userData}/>
-                <Messenger user={userData}/> 
+
             </div>
         )
     }
