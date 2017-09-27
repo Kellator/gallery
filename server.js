@@ -33,16 +33,6 @@ app.use('/', routes);
 // console.log(routes);
 const server = http.Server(app);
 
-var Grid = require('gridfs-stream');
-var MediaFile = require('./js/models/mediaFile');
-var conn = mongoose.connection;
-Grid.mongo = mongoose.mongo;
-var gfs;
-conn.once('open', function() {
-    constole.log('open');
-    gfs = Grid(conn.db);
-});
-
 //coordinates the connection to the database, and the running on the HTTP server
 const runServer = function(callback) {
     mongoose.connect(config.DATABASE_URL, {useMongoClient: true}, function(err) {
