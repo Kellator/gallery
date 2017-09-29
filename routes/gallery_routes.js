@@ -2,11 +2,73 @@
 // individual users should not be able to delete exhibits, walls, or the gallery. 
 //  patch to update comments in exhibit only
 'use strict';
+var config = require('../config');
 var express = require('express');
 var router = express.Router();
 var mongoose = require('mongoose');
 var Exhibit = mongoose.model('Exhibit');
 var Comment = mongoose.model('Comment');
+// for uploading media files to db - based on https://ciphertrick.com/2017/02/28/file-upload-with-nodejs-and-gridfs-mongodb/
+
+mongoose.connect(config.DATABASE_URL);
+var conn = mongoose.connection;
+var Grid = require('gridfs-stream');
+var multer = require('multer');
+Grid.mongo = mongoose.mongo;
+var gfs = Grid(conn.db);
+
+var GridFsStorage = require('multer-gridfs-storage');
+
+var storage = GridFsStorage({
+    url: 'mongodb://localhost/gallery-dev',
+    gfs: gfs,
+    filename: function(req, file, cb) {
+        var datetimestamp = Date.now();
+        cb(null, file.fieldname + '-' + datetimestamp + '.' + file.originalname.split('.')[file.originalname.split('.').length -1]);
+    },
+    metadata: function(req, file, cb) {
+        cb(null, {originalname: file.originalname});
+    },
+    root: 'mediaFiles'
+});
+var upload = multer({
+    storage: storage
+}).single('file');
+
+// path that will upload files
+router.post('/upload', function(req, res) {
+    upload(req, res, function(err) {
+        if(err) {
+            return res.status(500).json({
+                message: 'Internal Server Error'
+            });
+        }
+        res.status(200).json({
+            message: 'Success!'
+        });
+    });
+});
+// path that will retrieve media files
+router.get('/file/:file_id', function(req, res) {
+    gfs.collection('mediaFiles');
+    // checks if file exists
+    gfs.files.find({file_id: req.params.file_id}).toArray(function(err, files) {
+        if(!files || files.length === 0) {
+            return res.status(404).json({
+                message: 'Error'
+            });
+        }
+        // create read stream
+        var readstream = gfs.createReadStream({
+            file_id: files[0].file_id,
+            root: 'mediaFiles'
+        });
+        // set content type
+        res.set('Content-Type', files[0].contentType)
+        // return response
+        return readstream.pipe(res);
+    });
+});
 
 //  returns all items in the app as a list (array of items)
 //  allows scrolling view of all items or exhibits in the app

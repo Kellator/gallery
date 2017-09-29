@@ -18,12 +18,10 @@ var config = require('./config');
 // mongoose models
 var Exhibit = require('./js/models/exhibit');
 var Gallery = require('./js/models/gallery');
-var Message = require('./js/models/message');
 var Comment = require('./js/models/comment.js');
 var UserGallery = require('./js/models/user-gallery');
-var UserWall = require('./js/models/user-wall');
 var User = require('./js/models/user');
-var Wall = require('./js/models/wall');
+
 var routes = require('./routes/routes');
 
 const app = express();
@@ -208,3 +206,19 @@ app.post('/register', function(req, res) {
         });
     });
 });
+// var channel_test = {
+//     title: 'main',
+//     creator: 'testy'
+// }
+// Channel.create(channel_test, function(err, channel) {
+//     console.log("test channel go")
+//     if(err || !channel_test) {
+//         console.error('could not create channel');
+//         return res.status(500).json({
+//             message: 'Internal Server Error'
+//         });
+//     };
+//     // let display_name = channel_test.title;
+//     // let creator = channel_test.creator;
+//     // res.status(201).json(channel_test);
+// });

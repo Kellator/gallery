@@ -1,6 +1,5 @@
 import * as action from '../actions/index';
 
-
 const initialState = {
     loaded: false,
     authorized: false,
