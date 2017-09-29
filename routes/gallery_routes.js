@@ -10,7 +10,7 @@ var Exhibit = mongoose.model('Exhibit');
 var Comment = mongoose.model('Comment');
 // for uploading media files to db - based on https://ciphertrick.com/2017/02/28/file-upload-with-nodejs-and-gridfs-mongodb/
 
-mongoose.connect('mongodb://localhost/gallery-dev');
+mongoose.connect(config.DATABASE_URL);
 var conn = mongoose.connection;
 var Grid = require('gridfs-stream');
 var multer = require('multer');
