@@ -1,9 +1,8 @@
 'use strict'
 
 export const UPLOADING = 'UPLOADING';
-export const uploading = (data) => {
-    type: 'UPLOADING',
-    data
+export const uploading = () => {
+    type: 'UPLOADING'
 }
 export const UPLOAD_SUCCESS = 'UPLOAD_SUCCESS';
 export const uploadSuccess = (data) => {
@@ -30,7 +29,7 @@ export const retrieveFail = (error) => {
     type: 'RETRIEVE_FAIL',
     error
 }
-
+// to retrieve file (image) from Exhibit for collaborative efforts
 export const fileFetch = (file_id) => {
     return dispatch => {
         dispatch(retrievingFile())
@@ -49,6 +48,27 @@ export const fileFetch = (file_id) => {
         })
         .catch(error => {
             dispatch(retrieveFail(error));
+            console.log(error);
+        });
+    }
+};
+// to upload file (image) to Comment as response
+
+//to upload file (image) to Exhibit
+export const filePost = (data) => {
+    return dispatch => {
+        dispatch(uploading());
+        axios.post(fetchUrl + "files/")
+        .then(res => {
+            console.log(res.data);
+            let mediaFile = res.data;
+            dispatch(uploadSuccess(mediaFile));
+            if(res.status == 200) {
+                console.log("successfully uploaded media file");
+            }
+        })
+        .catch(error => {
+            dispatch(uploadFail(error));
             console.log(error);
         });
     }
