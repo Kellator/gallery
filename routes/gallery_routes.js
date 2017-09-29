@@ -2,20 +2,25 @@
 // individual users should not be able to delete exhibits, walls, or the gallery. 
 //  patch to update comments in exhibit only
 'use strict';
+var config = require('../config');
 var express = require('express');
 var router = express.Router();
 var mongoose = require('mongoose');
 var Exhibit = mongoose.model('Exhibit');
 var Comment = mongoose.model('Comment');
 // for uploading media files to db - based on https://ciphertrick.com/2017/02/28/file-upload-with-nodejs-and-gridfs-mongodb/
-var Grid = require('gridfs-stream');
+
+mongoose.connect('mongodb://localhost/gallery-dev');
 var conn = mongoose.connection;
+var Grid = require('gridfs-stream');
+var multer = require('multer');
 Grid.mongo = mongoose.mongo;
 var gfs = Grid(conn.db);
-var multer = require('multer');
+
 var GridFsStorage = require('multer-gridfs-storage');
 
 var storage = GridFsStorage({
+    url: 'mongodb://localhost/gallery-dev',
     gfs: gfs,
     filename: function(req, file, cb) {
         var datetimestamp = Date.now();
