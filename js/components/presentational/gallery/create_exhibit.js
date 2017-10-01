@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { Field, reduxForm, initialize } from 'redux-form';
 import Dropzone from 'react-dropzone';
 import { Form, Button, TextArea } from 'semantic-ui-react';
-import { FileImportForm } from './file_input';
+// import FileInputForm from './file_input.js';
 //separate local imports from dependencies
 
 
@@ -27,6 +27,20 @@ class CreateExhibitForm extends React.Component {
                             <div>
                                 <p>Give your passion a name:</p>
                                 <Field name="exhibit_title" component="input" type="text" />
+                            </div>
+                        </div>
+                        <div>
+                            <label htmlFor="file_upload">Upload a copy of your project.</label>
+                            <div>
+                                <Dropzone >
+                                    <Field name="file_upload" component="input" 
+                                    onDrop={this.props.onDrop}
+                                    onChange={this.props.onChange}
+                                    onFocus={this.props.onCHange}
+                                    onUpdate={this.props.onUpdate}>
+                                    <input type="file" value={value === '' && value} error={touched ? error : ''}/>
+                                    </Field>
+                                </Dropzone>
                             </div>
                         </div>
                         <div>
