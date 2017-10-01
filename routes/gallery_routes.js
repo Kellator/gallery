@@ -77,6 +77,8 @@ router.get('/', function(req, res) {
     if (search == "") {
         Exhibit.find()
         .populate('comments')
+        .sort({'date': -1})
+        .limit(10)
         .exec(function(err, exhibits) {
             if (err) {
                 // console.log(err);

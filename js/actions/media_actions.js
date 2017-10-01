@@ -52,8 +52,25 @@ export const fileFetch = (file_id) => {
         });
     }
 };
-// to upload file (image) to Comment as response
-
+// to upload file (image) to Comment as response (add file_id?)
+export const commentFilePost = (data) => {
+    return dispatch => {
+        dispatch(uploading());
+        axios.post(fetchUrl + "files/comment/")
+        .then(res => {
+            console.log(res.data);
+            let mediaFile = res.data;
+            dispatch(uploadSuccess(mediaFile));
+            if(res.status == 200) {
+                console.log("successfully uploaded media file to comment");
+            }
+        })
+        .catch(error => {
+            dispatch(uploadFail(error));
+            console.log(error);
+        });
+    }
+};
 //to upload file (image) to Exhibit
 export const filePost = (data) => {
     return dispatch => {
