@@ -13,6 +13,7 @@ import { Form, Button, TextArea } from 'semantic-ui-react';
 // SignUpInput.propTypes = {
 
 // }
+const FileUpload = ({input, type}) => <input type={type} {...input} />
 
 class CreateExhibitForm extends React.Component {
     render() {
@@ -32,15 +33,7 @@ class CreateExhibitForm extends React.Component {
                         <div>
                             <label htmlFor="file_upload">Upload a copy of your project.</label>
                             <div>
-                                <Dropzone >
-                                    <Field name="file_upload" component="input" 
-                                    onDrop={this.props.onDrop}
-                                    onChange={this.props.onChange}
-                                    onFocus={this.props.onCHange}
-                                    onUpdate={this.props.onUpdate}>
-                                    <input type="file" value={value === '' && value} error={touched ? error : ''}/>
-                                    </Field>
-                                </Dropzone>
+                                <Field name="file_upload" component={FileUpload} type="file"/>
                             </div>
                         </div>
                         <div>

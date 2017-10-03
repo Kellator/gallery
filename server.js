@@ -206,6 +206,11 @@ app.post('/register', function(req, res) {
         });
     });
 });
+//log out of gallery
+app.post('/logout', function(req, res) {
+    req.logout();
+    res.redirect('/');
+});
 // var channel_test = {
 //     title: 'main',
 //     creator: 'testy'

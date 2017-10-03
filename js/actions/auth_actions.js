@@ -96,9 +96,27 @@ export const authSigninSuccess = (user, email, id) => ({
 export const authSigninFail = () => ({
     type: AUTH_SIGNIN_FAIL
 });
-export const authSignout = () => ({
-    type: AUTH_SIGNOUT
-});
+export const authSignout = () => {
+    return dispatch => {
+        dispatch(authSignoutSuccess())
+        axios({
+            method: 'post',
+            url: fetchUrl + 'logout',
+        })
+        .then(res => {
+            console.log(res);
+            if(res.status == 200) {
+                dispatch(authSignoutSuccess());
+                dispatch(showLogin());
+            }
+        })
+        .catch(error => {
+            dispatch(authSignupFail());
+            // redirect to login on fail
+            console.log(error);
+        });       
+    }
+};
 export const authSignoutSuccess = () => ({
     type: AUTH_SIGNOUT_SUCCESS
 });

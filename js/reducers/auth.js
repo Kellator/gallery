@@ -96,15 +96,19 @@ export default function auth(state = initialState, action) {
             return {
                 ...state, 
                 signingOut: false,
+                authorized: false,
+                loaded: false,
+                loading: false,
+                singingIn: false,
+                signingOut: false,
                 user: {
                     username: null,
-                    id: null
+                    id: null,
                 }
             };
         case 'AUTH_SIGNOUT_FAIL':
             return {
                 ...state,
-                signingOut: false,
                 sigingOutError: action.error
             };
         default:
