@@ -201,7 +201,12 @@ app.post('/register', function(req, res) {
                     });
                 }
                 console.log(user.updatedAt);
-                return res.status(201).json({});
+                return res.status(201).json({
+                    status: 'Login successful!',
+                    username: user.username,
+                    email: user.email,
+                    password: password 
+                });
             });
         });
     });

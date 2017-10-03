@@ -29,17 +29,27 @@ export const RECEIVE_SOCKET = 'RECIEVE_SOCKET';
 
 export const addUser = (username, email, password) => {
     return dispatch => {
-        axios.post(fetchUrl + 'register', {
-            username: username,
-            email: email,
-            password: password
+        axios({
+            method: 'post',
+            url: fetchUrl + 'register', 
+            data: {
+                username: username,
+                email: email,
+                password: password
+            }
         })
         .then(res => {
-            console.log(res);
-
+            if(res.status == 201) {
+                console.log(res);
+                let username = res.data.username;
+                let password = res.data.password;
+                let email = res.data.email;
+                dispatch(checkUser(username, email, password));
+            }
         })
         .catch(error => {
             console.log(error);
+            // if email or username == existing email or username, send message
         });
         console.log("REGISTRATION COMPLETED");
     }
@@ -126,8 +136,10 @@ export const authSignoutFail = () => ({
 export const authSignup = () => ({
     type: AUTH_SIGNUP
 });
-export const authSignupSuccess = () => ({
-    type: AUTH_SIGNUP_SUCCESS
+export const authSignupSuccess = (username, password) => ({
+    type: AUTH_SIGNUP_SUCCESS,
+    username,
+    password
 });
 export const authSignupFail = () => ({
     type: AUTH_SIGNUP_FAIL
