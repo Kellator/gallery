@@ -10,24 +10,28 @@ class FileInputForm extends React.Component {
       const {
         handleSubmit,
         resetForm,
-        submitting
+        submitting,
+        value
       } = this.props
-      return (<Field onSubmit={handleSubmit}>
-          <div>
-            <label>Image Files</label>
+      return (
+      <Form onSubmit={handleSubmit}>       
             <div>
-              <input type="file" value={ null } />
+              <label>Image Files</label>
+              <div>
+                <input 
+                type="file" 
+                />
+              </div>
             </div>
-          </div>
-          <div>
-            <button type="submit" disabled={submitting}>
-              {submitting ? <i/> : <i/>} Submit
-            </button>
-            <button type="button" disabled={submitting} onClick={resetForm}>
-              Clear Values
-            </button>
-          </div>
-        </Field>
+            <div>
+              <Button type="submit" disabled={submitting}>
+                {submitting ? <i/> : <i/>} Submit
+              </Button>
+              <Button type="button" disabled={submitting} onClick={resetForm}>
+                Clear Values
+              </Button>
+            </div>          
+        </Form>
       )
     }
   }
@@ -39,8 +43,7 @@ class FileInputForm extends React.Component {
   //   submitting: PropTypes.bool.isRequired
   // }
   
-  // export default reduxForm({
-  //   form: 'file',
-  //   fields
-  // })(FileInputForm)
-  export default FileInputForm;
+  export default reduxForm({
+    form: 'file',
+    name: 'file'
+  })(FileInputForm)

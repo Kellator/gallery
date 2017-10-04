@@ -14,7 +14,7 @@ import {FileUpload } from 'redux-file-upload';
 
 // }
 
-let uploadUrl = "http://localhost:5050/upload"
+
 class CreateExhibitForm extends React.Component {
     render() {
         console.log(this.props);
@@ -28,17 +28,6 @@ class CreateExhibitForm extends React.Component {
                             <div>
                                 <p>Give your passion a name:</p>
                                 <Field name="exhibit_title" component="input" type="text" />
-                            </div>
-                        </div>
-                        <div>
-                            <label htmlFor="file_upload">Upload a copy of your project.</label>
-                            <div>
-                                <FileUpload
-                                    allowedFileTypes={['jpg', 'jpeg', 'png', 'gif', 'tiff']}
-                                    data={{type: 'picture'}}
-                                    dropzoneId="fileUpload"
-                                    url={uploadUrl}>
-                                </FileUpload>
                             </div>
                         </div>
                         <div>

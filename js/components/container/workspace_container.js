@@ -22,7 +22,7 @@ class Workspace extends React.Component {
             componentToRender = <Gallery />
         }
         if (createWorkspaceView === true) {
-            componentToRender = <CreateWorkspace newExhibitSubmit={this.props.newExhibitSubmit}/>
+            componentToRender = <CreateWorkspace newExhibitSubmit={this.props.newExhibitSubmit} fileUploadSubmit={this.props.fileUploadSubmit}/>
         }
         return (
             <div>
@@ -57,6 +57,10 @@ const mapDispatchToProps = (dispatch, ownProps) => {
             dispatch(actions.GalleryActions.postNewExhibit(data));
             // dispatch(actions.GalleryActions.loadConfirmExhibit(values));
         },
+        fileUploadSubmit: (value) => {
+            event.preventDefault();
+            console.log(value);
+        }
     }
 };
 export default connect(mapStateToProps, mapDispatchToProps)(Workspace);
