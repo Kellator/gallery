@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { Field, reduxForm, initialize } from 'redux-form';
 import Dropzone from 'react-dropzone';
 import { Form, Button, TextArea } from 'semantic-ui-react';
-// import FileInputForm from './file_input.js';
+import {FileUpload } from 'redux-file-upload';
 //separate local imports from dependencies
 
 
@@ -13,8 +13,8 @@ import { Form, Button, TextArea } from 'semantic-ui-react';
 // SignUpInput.propTypes = {
 
 // }
-const FileUpload = ({input, type}) => <input type={type} {...input} />
 
+let uploadUrl = "http://localhost:5050/upload"
 class CreateExhibitForm extends React.Component {
     render() {
         console.log(this.props);
@@ -33,7 +33,12 @@ class CreateExhibitForm extends React.Component {
                         <div>
                             <label htmlFor="file_upload">Upload a copy of your project.</label>
                             <div>
-                                <Field name="file_upload" component={FileUpload} type="file"/>
+                                <FileUpload
+                                    allowedFileTypes={['jpg', 'jpeg', 'png', 'gif', 'tiff']}
+                                    data={{type: 'picture'}}
+                                    dropzoneId="fileUpload"
+                                    url={uploadUrl}>
+                                </FileUpload>
                             </div>
                         </div>
                         <div>
