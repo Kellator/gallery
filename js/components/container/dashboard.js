@@ -8,6 +8,7 @@ import { Field, reduxForm, initialize } from 'redux-form';
 import NavBar from './nav_rail';
 import Gallery from './gallery';
 import Workspace from './workspace_container';
+import LogIn from './login-container';
 
 import * as actions from '../../actions/index';
 //declare propTypes prior to component
@@ -23,6 +24,13 @@ class Dashboard extends React.Component {
         console.log(this.props);
         let username = this.props.username;
         let userData = this.props;
+        if(!username) {
+            return (
+                <div>
+                    <LogIn />
+                </div>
+            )
+        }
         return (
             <div>
                 <NavBar />

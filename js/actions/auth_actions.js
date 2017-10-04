@@ -29,17 +29,27 @@ export const RECEIVE_SOCKET = 'RECIEVE_SOCKET';
 
 export const addUser = (username, email, password) => {
     return dispatch => {
-        axios.post(fetchUrl + 'register', {
-            username: username,
-            email: email,
-            password: password
+        axios({
+            method: 'post',
+            url: fetchUrl + 'register', 
+            data: {
+                username: username,
+                email: email,
+                password: password
+            }
         })
         .then(res => {
-            console.log(res);
-
+            if(res.status == 201) {
+                console.log(res);
+                let username = res.data.username;
+                let password = res.data.password;
+                let email = res.data.email;
+                dispatch(checkUser(username, email, password));
+            }
         })
         .catch(error => {
             console.log(error);
+            // if email or username == existing email or username, send message
         });
         console.log("REGISTRATION COMPLETED");
     }
@@ -96,9 +106,27 @@ export const authSigninSuccess = (user, email, id) => ({
 export const authSigninFail = () => ({
     type: AUTH_SIGNIN_FAIL
 });
-export const authSignout = () => ({
-    type: AUTH_SIGNOUT
-});
+export const authSignout = () => {
+    return dispatch => {
+        dispatch(authSignoutSuccess())
+        axios({
+            method: 'post',
+            url: fetchUrl + 'logout',
+        })
+        .then(res => {
+            console.log(res);
+            if(res.status == 200) {
+                dispatch(authSignoutSuccess());
+                dispatch(showLogin());
+            }
+        })
+        .catch(error => {
+            dispatch(authSignupFail());
+            // redirect to login on fail
+            console.log(error);
+        });       
+    }
+};
 export const authSignoutSuccess = () => ({
     type: AUTH_SIGNOUT_SUCCESS
 });
@@ -108,8 +136,10 @@ export const authSignoutFail = () => ({
 export const authSignup = () => ({
     type: AUTH_SIGNUP
 });
-export const authSignupSuccess = () => ({
-    type: AUTH_SIGNUP_SUCCESS
+export const authSignupSuccess = (username, password) => ({
+    type: AUTH_SIGNUP_SUCCESS,
+    username,
+    password
 });
 export const authSignupFail = () => ({
     type: AUTH_SIGNUP_FAIL

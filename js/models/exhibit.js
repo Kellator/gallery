@@ -16,10 +16,10 @@ var ExhibitSchema = new mongoose.Schema({
         type: String,
         required: [true, 'Brief description of posting and what artist wants to accomplish with collaboration.']
     },
-    exhibitType: {
-        type: String,
-        required: [true, 'Piece type: Art, Music, Text, Game']
-    },
+    // exhibitType: {
+    //     type: String,
+    //     required: [true, 'Piece type: Art, Music, Text, Game']
+    // },
     status: {
         type: Boolean,
         // required: [true, 'Piece status: True = open to collaboration.  False = Closed, for viewing and comment only.']
@@ -31,10 +31,10 @@ var ExhibitSchema = new mongoose.Schema({
     collaborators: {
         type: Array
     },
-    location: {
-        type: String,
-        // required: [true, 'Source Link required for Exhibit']
-    },
+    // location: {
+    //     type: String,
+    //     // required: [true, 'Source Link required for Exhibit']
+    // },
     categories: {
         type: Array
     },

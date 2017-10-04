@@ -6,6 +6,9 @@ import { dispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Dropdown } from 'semantic-ui-react';
 import * as galleryActions from '../../../actions/gallery_actions';
+import * as authActions from '../../../actions/auth_actions';
+import LogoutPage from './logout';
+
 
 //separate local imports from dependencies
 //declare propTypes prior to component
@@ -16,13 +19,6 @@ import * as galleryActions from '../../../actions/gallery_actions';
 
 class UserMenu extends React.Component {
     render() {
-        // const galleryClickHandler = () => {
-        //     alert("gallery click");
-        // }
-        // const createExhibitClickHandler = (event, dispatch) => {
-        //     // alert("exhibit click");
-        //     dispatch(galleryActions.loadAddNewExhibit());
-        // }
         console.log(this.props);
         return (
             <Dropdown text='User Menu'>
@@ -32,7 +28,7 @@ class UserMenu extends React.Component {
                     <Dropdown.Item text='My Gallery' />
                     <Dropdown.Item text='My Messages' />
                     <Dropdown.Divider />
-                    <Dropdown.Item text='Log Out' />
+                    <Dropdown.Item onClick={this.props.logoutClickHandler} text='Log Out' />
                 </Dropdown.Menu>
             </Dropdown> 
         );       
@@ -46,6 +42,11 @@ const mapDispatchToProps = (dispatch, ownProps) => {
         newExhibitClickHandler: (event) => {
             console.log("gallery click");
             dispatch(galleryActions.loadCreateExhibit());
+        },
+        logoutClickHandler: (event) => {
+            console.log("logout click");
+            dispatch(authActions.authSignout());
+
         }
     }
 }

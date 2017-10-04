@@ -17,13 +17,34 @@ export default function files(state = initialState, action) {
             return {
                 ...state,
                 uploading: false,
-                uploaded: true
+                uploaded: true,
+                data: action.data
             };
         case 'UPLOAD_FAIL' :
             return {
                 ...state,
                 uploading: false,
                 uploaded: false,
+                error: action.error
+            };
+        case 'RETRIEVING_FILE' :
+            return {
+                ...state,
+                downloading: true,
+                downloaded: false
+            };
+        case 'RETRIEVE_SUCCESS' :
+            return {
+                ...state,
+                downloading: false,
+                downloaded: true,
+                data: action.data
+            };
+        case 'RETRIEVE_ERROR' :
+            return {
+                ...state,
+                dowloading: false,
+                downloaded: false,
                 error: action.error
             };
         default :

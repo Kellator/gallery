@@ -6,6 +6,7 @@ import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { dispatch } from 'react-redux';
 import { Field, reduxForm, initialize } from 'redux-form';
+import { Redirect } from 'react-router';
 
 //separate local imports from dependencies
 import LoginBlock from '../presentational/landing/login_block';
@@ -20,6 +21,10 @@ import * as authActions from '../../actions/auth_actions';
 
 class SignUp extends React.Component {
     render() {
+        let authStatus = this.props.authorized;
+        if(authStatus == true) {
+            return <Redirect push to='/user' />
+        }
         console.log(this.props);
         return (
             <div className="sign_up">
@@ -30,7 +35,8 @@ class SignUp extends React.Component {
 }
 
 const mapStateToProps = (state, props) => ({
-    login: state.auth.signingIn
+    login: state.auth.signingIn,
+    authorized: state.auth.authorized,
 });
 const mapDispatchToProps = (dispatch, ownProps) => {
     return { 

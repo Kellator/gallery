@@ -2,7 +2,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Field, reduxForm, initialize } from 'redux-form';
+import Dropzone from 'react-dropzone';
 import { Form, Button, TextArea } from 'semantic-ui-react';
+import {FileUpload } from 'redux-file-upload';
 //separate local imports from dependencies
 
 
@@ -11,14 +13,8 @@ import { Form, Button, TextArea } from 'semantic-ui-react';
 // SignUpInput.propTypes = {
 
 // }
-// image button and thumbnail selection not yet functional.
-const imageButton = () => {
-    return (
-        <div>
-            <img src="../../../default_images/hand.jpeg" height="48" width="48" />
-        </div>
-    )
-}
+
+let uploadUrl = "http://localhost:5050/upload"
 class CreateExhibitForm extends React.Component {
     render() {
         console.log(this.props);
@@ -35,22 +31,14 @@ class CreateExhibitForm extends React.Component {
                             </div>
                         </div>
                         <div>
-                            <label htmlFor="thumbnail_image">Thumbnail Display</label> 
+                            <label htmlFor="file_upload">Upload a copy of your project.</label>
                             <div>
-                                <p>Choose the image that best represents your piece or upload your own:</p>
-                                <Field name="thumbnail_image" component="input" />
-                            </div>
-                        </div>
-                        <div>
-                            <label htmlFor="exhibit_type">Type</label>
-                            <div>
-                                <p>Select your genre from these categories:</p>
-                                <Field name="exhibit_type" component="select" required>
-                                    <option></option>
-                                    <option value="visual">Visual Art</option>
-                                    <option value="music">Music</option>
-                                    <option value="writing">Creative Writing</option>
-                                </Field>
+                                <FileUpload
+                                    allowedFileTypes={['jpg', 'jpeg', 'png', 'gif', 'tiff']}
+                                    data={{type: 'picture'}}
+                                    dropzoneId="fileUpload"
+                                    url={uploadUrl}>
+                                </FileUpload>
                             </div>
                         </div>
                         <div>
@@ -62,15 +50,8 @@ class CreateExhibitForm extends React.Component {
                         <div>
                             <label htmlFor="exhibit_description">Description</label>
                             <div>
-                                <p>Provide a brief description of your piece in 250 characters or less:</p>
+                                <p>Provide a brief description of your project in 250 characters or less:</p>
                                 <Field name="exhibit_description" component="input" type="text" maxLength="250" required/>
-                            </div>
-                        </div>
-                        <div>
-                            <label htmlFor="exhibit_url">Location</label>
-                            <div>
-                                <p>Add a link to your exhibit location:</p>
-                                <Field name="exhibit_url" component="input" type="text" />
                             </div>
                         </div>
                         <div>
