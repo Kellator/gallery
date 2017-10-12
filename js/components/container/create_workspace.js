@@ -3,12 +3,16 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { dispatch } from 'react-redux';
+import {FileUpload } from 'redux-file-upload';
+import { Form, Button, TextArea } from 'semantic-ui-react';
 
 //separate local imports from dependencies
 import * as actions from '../../actions/index';
 // import * as galleryActions from '../../actions/gallery_actions';
 import CreateExhibitForm from '../presentational/gallery/create_exhibit';
 import ConfirmExhibitCard from '../presentational/gallery/confirm_exhibit';
+import FileInputForm from '../presentational/gallery/file_input';
+let uploadUrl = "http://localhost:5050/upload"
 
 class CreateWorkspace extends React.Component {
     render() {
@@ -17,7 +21,12 @@ class CreateWorkspace extends React.Component {
         let confirm_exhibit = this.props.confirmExhibitView;
         let componentToRender;
         if (create_exhibit) {
-            componentToRender = <CreateExhibitForm onSubmit={this.props.newExhibitSubmit}/>
+            componentToRender = 
+            <div>
+                <CreateExhibitForm onSubmit={this.props.newExhibitSubmit}/>
+                <label htmlFor="file_upload">Upload a copy of your project.</label>
+                <FileInputForm onSubmit={this.props.fileUploadSubmit}/>
+            </div>
         }
         if (confirm_exhibit) {
             componentToRender =  <ConfirmExhibitCard values={this.props.values}/>
