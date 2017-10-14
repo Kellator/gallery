@@ -24,12 +24,12 @@ class FileInputForm extends React.Component {
               </div>
             </div>
             <div>
-              <Button type="submit" disabled={submitting}>
+              {/* <Button type="submit" disabled={submitting}>
                 {submitting ? <i/> : <i/>} Submit
               </Button>
               <Button type="button" disabled={submitting} onClick={resetForm}>
                 Clear Values
-              </Button>
+              </Button> */}
             </div>          
         </Form>
       )

@@ -43,10 +43,10 @@ class CreateExhibitForm extends React.Component {
                                 <Field name="exhibit_description" component="input" type="text" maxLength="250" required/>
                             </div>
                         </div>
-                        <div>
+                        {/* <div>
                             <Button type="submit" disabled={pristine || submitting}>Submit</Button>
                             <Button type="button" disabled={pristine || submitting} onClick={reset}>Clear Values</Button>
-                        </div>
+                        </div> */}
                     </Form>
             </div>
         )

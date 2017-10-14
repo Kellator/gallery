@@ -8,6 +8,7 @@ var router = express.Router();
 var mongoose = require('mongoose');
 var Exhibit = mongoose.model('Exhibit');
 var Comment = mongoose.model('Comment');
+var MediaFile = mongoose.model('MediaFile');
 // for uploading media files to db - based on https://ciphertrick.com/2017/02/28/file-upload-with-nodejs-and-gridfs-mongodb/
 
 mongoose.connect(config.DATABASE_URL);

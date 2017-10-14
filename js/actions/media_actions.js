@@ -77,9 +77,11 @@ export const filePost = (data) => {
         dispatch(uploading());
         axios.post(fetchUrl + "files/")
         .then(res => {
+            console.log('hello');
             console.log(res.data);
             let mediaFile = res.data;
             dispatch(uploadSuccess(mediaFile));
+            console.log(res.status);
             if(res.status == 200) {
                 console.log("successfully uploaded media file");
             }

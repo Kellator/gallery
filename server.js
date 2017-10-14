@@ -21,6 +21,7 @@ var Gallery = require('./js/models/gallery');
 var Comment = require('./js/models/comment.js');
 var UserGallery = require('./js/models/user-gallery');
 var User = require('./js/models/user');
+var MediaFile = require('./js/models/media_file.js');
 
 var routes = require('./routes/routes');
 

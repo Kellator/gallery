@@ -22,7 +22,10 @@ class Workspace extends React.Component {
             componentToRender = <Gallery />
         }
         if (createWorkspaceView === true) {
-            componentToRender = <CreateWorkspace newExhibitSubmit={this.props.newExhibitSubmit} fileUploadSubmit={this.props.fileUploadSubmit}/>
+            componentToRender = <CreateWorkspace 
+                newExhibitSubmit={this.props.newExhibitSubmit} 
+                fileUploadSubmit={this.props.fileUploadSubmit}
+                />
         }
         return (
             <div>
@@ -42,7 +45,6 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     return {
         newExhibitSubmit: (values) => {
             event.preventDefault();
-            console.log("there, there's a damned submit");
             console.log(values);
             console.log(ownProps);
             let data = {
@@ -57,9 +59,11 @@ const mapDispatchToProps = (dispatch, ownProps) => {
             dispatch(actions.GalleryActions.postNewExhibit(data));
             // dispatch(actions.GalleryActions.loadConfirmExhibit(values));
         },
-        fileUploadSubmit: (value) => {
+        fileUploadSubmit: (data) => {
             event.preventDefault();
-            console.log(value);
+            console.log(data);
+            console.log('data above');
+            dispatch(actions.MediaActions.filePost(data));
         }
     }
 };
