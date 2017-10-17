@@ -25,9 +25,9 @@ class CreateWorkspace extends React.Component {
             componentToRender = 
             <div>
                 <CreateExhibitForm onSubmit={this.props.newExhibitSubmit}/>
-                <UploadMyFile />
-                {/* <label htmlFor="file_upload">Upload a copy of your project.</label>
-                <FileInputForm onChange={this.props.fileOnChange}/> */}
+                {/* <UploadMyFile /> */}
+                {/* <label htmlFor="file_upload">Upload a copy of your project.</label>*/}
+                <FileInputForm onChange={this.props.fileOnChange} onSubmit={this.props.fileOnChange}/> 
             </div>
         }
         if (confirm_exhibit) {

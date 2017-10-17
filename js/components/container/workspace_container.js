@@ -56,6 +56,10 @@ const mapDispatchToProps = (dispatch, ownProps) => {
                 image: values.thumbnail_image,
                 status: values.collaborate
             }
+            // dispatch(actions.MediaActions.uploadDocumentRequest({
+            //     file,
+            //     name: 'test'
+            // }))
             dispatch(actions.GalleryActions.postNewExhibit(data));
             // dispatch(actions.GalleryActions.loadConfirmExhibit(values));
         },

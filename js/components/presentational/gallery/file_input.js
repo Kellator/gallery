@@ -18,7 +18,7 @@ class FileInputForm extends React.Component {
 
         
       return (
-        <Form onChange={fileOnChange}>       
+        <Form onChange={fileOnChange} onSubmit={fileOnChange}>       
               <div>
                 <label>Image Files</label>
                 <div>

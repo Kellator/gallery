@@ -19,6 +19,8 @@ Grid.mongo = mongoose.mongo;
 var gfs = Grid(conn.db);
 
 var GridFsStorage = require('multer-gridfs-storage');
+
+
 // borrowed from https://medium.com/ecmastack/uploading-files-with-react-js-and-node-js-e7e6b707f4ef
 const storage = multer.diskStorage({
     destination: '/files',
