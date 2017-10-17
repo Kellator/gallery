@@ -24,7 +24,7 @@ class Workspace extends React.Component {
         if (createWorkspaceView === true) {
             componentToRender = <CreateWorkspace 
                 newExhibitSubmit={this.props.newExhibitSubmit} 
-                fileUploadSubmit={this.props.fileUploadSubmit}
+                fileOnChange={this.props.fileOnChange}
                 />
         }
         return (
@@ -59,12 +59,27 @@ const mapDispatchToProps = (dispatch, ownProps) => {
             dispatch(actions.GalleryActions.postNewExhibit(data));
             // dispatch(actions.GalleryActions.loadConfirmExhibit(values));
         },
-        fileUploadSubmit: (data) => {
+        fileOnChange: (data) => {
             event.preventDefault();
-            console.log(data);
-            console.log('data above');
-            dispatch(actions.MediaActions.filePost(data));
+            console.log("handle change fired")
+            const file = files[0];
+            this.props.actions.MediaActions.uploadDocumentRequest({
+                file,
+                name: 'test'
+            })
+
         }
     }
 };
 export default connect(mapStateToProps, mapDispatchToProps)(Workspace);
+
+// const handleUploadFile = (event) => {
+//     const data = new FormData();
+//     data.append('file', event.target.files[0]);
+//     data.append('name', 'some value user types');
+//     data.append('description', 'some value user types');
+//     // '/files' is your node.js route that triggers our middleware
+//     axios.post('/files', data).then((response) => {
+//       console.log(response); // do something with the response
+//     })
+//   }

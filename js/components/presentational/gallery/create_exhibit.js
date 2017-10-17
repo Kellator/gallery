@@ -18,7 +18,7 @@ import {FileUpload } from 'redux-file-upload';
 class CreateExhibitForm extends React.Component {
     render() {
         console.log(this.props);
-        const { handleSubmit, pristine, reset, submitting } = this.props;
+        const { handleSubmit, pristine, reset, submitting, value } = this.props;
         return (
             <div>
                 <h1>Create a New Exhibit:</h1>
@@ -44,9 +44,16 @@ class CreateExhibitForm extends React.Component {
                             </div>
                         </div>
                         {/* <div>
+                            <label>Image Files</label>
+                            <div>
+                                <Field name="file_upload" component="input" type="file" />
+                            </div>
+                        </div> */}
+                         <div>
                             <Button type="submit" disabled={pristine || submitting}>Submit</Button>
                             <Button type="button" disabled={pristine || submitting} onClick={reset}>Clear Values</Button>
-                        </div> */}
+                        </div>
+                    
                     </Form>
             </div>
         )

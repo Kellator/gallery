@@ -29,66 +29,78 @@ export const retrieveFail = (error) => {
     type: 'RETRIEVE_FAIL',
     error
 }
+
+export const uploadDocumentRequest = ({file, name}) => {
+    let data = new FormData();
+    data.append('file', document);
+    data.append('name', name);
+    return(dispatch) => {
+        axios.post('/files', data)
+        .then(response => dispatch(uploadSuccess(response)))
+        .catch(error => dispatch(uploadFail(error)))
+    };
+}
 // to retrieve file (image) from Exhibit for collaborative efforts
-export const fileFetch = (file_id) => {
-    return dispatch => {
-        dispatch(retrievingFile())
-        axios.get(fetchUrl + "files/", {
-            params: {
-                file_id: file_id
-            }
-        })
-        .then(res => {
-            console.log(res);
-            let data = res.data
-            if(res.status == 200) {
-                console.log("You have fetched a file.  Good Job!");
-                dispatch(retrieveSuccess(data));
-            }
-        })
-        .catch(error => {
-            dispatch(retrieveFail(error));
-            console.log(error);
-        });
-    }
-};
-// to upload file (image) to Comment as response (add file_id?)
-export const commentFilePost = (data) => {
-    return dispatch => {
-        dispatch(uploading());
-        axios.post(fetchUrl + "files/comment/")
-        .then(res => {
-            console.log(res.data);
-            let mediaFile = res.data;
-            dispatch(uploadSuccess(mediaFile));
-            if(res.status == 200) {
-                console.log("successfully uploaded media file to comment");
-            }
-        })
-        .catch(error => {
-            dispatch(uploadFail(error));
-            console.log(error);
-        });
-    }
-};
-//to upload file (image) to Exhibit
-export const filePost = (data) => {
-    return dispatch => {
-        dispatch(uploading());
-        axios.post(fetchUrl + "files/")
-        .then(res => {
-            console.log('hello');
-            console.log(res.data);
-            let mediaFile = res.data;
-            dispatch(uploadSuccess(mediaFile));
-            console.log(res.status);
-            if(res.status == 200) {
-                console.log("successfully uploaded media file");
-            }
-        })
-        .catch(error => {
-            dispatch(uploadFail(error));
-            console.log(error);
-        });
-    }
-};
+// export const fileFetch = (file_id) => {
+//     return dispatch => {
+//         dispatch(retrievingFile())
+//         axios.get(fetchUrl + "files/", {
+//             params: {
+//                 file_id: file_id
+//             }
+//         })
+//         .then(res => {
+//             console.log(res);
+//             let data = res.data
+//             if(res.status == 200) {
+//                 console.log("You have fetched a file.  Good Job!");
+//                 dispatch(retrieveSuccess(data));
+//             }
+//         })
+//         .catch(error => {
+//             dispatch(retrieveFail(error));
+//             console.log(error);
+//         });
+//     }
+// };
+// // to upload file (image) to Comment as response (add file_id?)
+// export const commentFilePost = (data) => {
+//     return dispatch => {
+//         dispatch(uploading());
+//         axios.post(fetchUrl + "files/comment/")
+//         .then(res => {
+//             console.log(res.data);
+//             let mediaFile = res.data;
+//             dispatch(uploadSuccess(mediaFile));
+//             if(res.status == 200) {
+//                 console.log("successfully uploaded media file to comment");
+//             }
+//         })
+//         .catch(error => {
+//             dispatch(uploadFail(error));
+//             console.log(error);
+//         });
+//     }
+// };
+// //to upload file (image) to Exhibit
+// export const filePost = (data) => {
+//     console.log("filePost triggered");
+//     return dispatch => {
+//         dispatch(uploading());
+//         axios.post(fetchUrl + "/upload")
+//         .then(res => {
+//             console.log('hello');
+//             console.log(res.data);
+//             let mediaFile = res.data;
+//             dispatch(uploadSuccess(mediaFile));
+//             console.log(res.status);
+//             if(res.status == 200) {
+//                 console.log("successfully uploaded media file");
+//             }
+//         })
+//         .catch(error => {
+//             dispatch(uploadFail(error));
+//             console.log(error);
+//         });
+//     }
+// };

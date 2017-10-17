@@ -6,14 +6,9 @@ var MediaFileSchema = new mongoose.Schema({
     filename: {
         type: String
     },
-    chunkSize: {
-        type: Number
-    },
-    uploadDate: {
-        type: Date
-    },
-    md5: {
-        type: String
+    img: {
+        data: Buffer,
+        contentType: String
     }
 });
 MediaFileSchema.plugin(timestamps);

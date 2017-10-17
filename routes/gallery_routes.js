@@ -19,57 +19,82 @@ Grid.mongo = mongoose.mongo;
 var gfs = Grid(conn.db);
 
 var GridFsStorage = require('multer-gridfs-storage');
-
-var storage = GridFsStorage({
-    url: 'mongodb://localhost/gallery-dev',
-    gfs: gfs,
-    filename: function(req, file, cb) {
-        var datetimestamp = Date.now();
-        cb(null, file.fieldname + '-' + datetimestamp + '.' + file.originalname.split('.')[file.originalname.split('.').length -1]);
+// borrowed from https://medium.com/ecmastack/uploading-files-with-react-js-and-node-js-e7e6b707f4ef
+const storage = multer.diskStorage({
+    destination: '/files',
+    filename(req, file, cb) {
+        cd(null, `${new Date()}-${file.originalname}`);
     },
-    metadata: function(req, file, cb) {
-        cb(null, {originalname: file.originalname});
-    },
-    root: 'mediaFiles'
 });
-var upload = multer({
-    storage: storage
-}).single('file');
+
+const upload = multer({storage});
+
+//express route where files from client received
+//passing multer middleware
+router.post('/files', upload.single('file'), (req, res) => {
+    const file = req.file;
+    const meta = req.body;
+    axios({
+        url: `mongodb://localhost/gallery-dev`,
+        method: 'post',
+        data: {
+            file,
+            name: meta.name,
+        },
+    })
+.then(response => res.status(200).json(response.data.data))
+.catch((error) => res.status(500).json(error.response.data));
+});
+// var storage = GridFsStorage({
+//     url: 'mongodb://localhost/gallery-dev',
+//     gfs: gfs,
+//     filename: function(req, file, cb) {
+//         var datetimestamp = Date.now();
+//         cb(null, file.fieldname + '-' + datetimestamp + '.' + file.originalname.split('.')[file.originalname.split('.').length -1]);
+//     },
+//     metadata: function(req, file, cb) {
+//         cb(null, {originalname: file.originalname});
+//     },
+//     root: 'mediaFiles'
+// });
+// var upload = multer({
+//     storage: storage
+// }).single('file');
 
 // path that will upload files
-router.post('/upload', function(req, res) {
-    upload(req, res, function(err) {
-        if(err) {
-            return res.status(500).json({
-                message: 'Internal Server Error'
-            });
-        }
-        res.status(200).json({
-            message: 'Success!'
-        });
-    });
-});
-// path that will retrieve media files
-router.get('/file/:file_id', function(req, res) {
-    gfs.collection('mediaFiles');
-    // checks if file exists
-    gfs.files.find({file_id: req.params.file_id}).toArray(function(err, files) {
-        if(!files || files.length === 0) {
-            return res.status(404).json({
-                message: 'Error'
-            });
-        }
-        // create read stream
-        var readstream = gfs.createReadStream({
-            file_id: files[0].file_id,
-            root: 'mediaFiles'
-        });
-        // set content type
-        res.set('Content-Type', files[0].contentType)
-        // return response
-        return readstream.pipe(res);
-    });
-});
+// router.post('/upload', function(req, res) {
+//     upload(req, res, function(err) {
+//         if(err) {
+//             return res.status(500).json({
+//                 message: 'Internal Server Error'
+//             });
+//         }
+//         res.status(200).json({
+//             message: 'Success!'
+//         });
+//     });
+// });
+// // path that will retrieve media files
+// router.get('/file/:file_id', function(req, res) {
+//     gfs.collection('mediaFiles');
+//     // checks if file exists
+//     gfs.files.find({file_id: req.params.file_id}).toArray(function(err, files) {
+//         if(!files || files.length === 0) {
+//             return res.status(404).json({
+//                 message: 'Error'
+//             });
+//         }
+//         // create read stream
+//         var readstream = gfs.createReadStream({
+//             file_id: files[0].file_id,
+//             root: 'mediaFiles'
+//         });
+//         // set content type
+//         res.set('Content-Type', files[0].contentType)
+//         // return response
+//         return readstream.pipe(res);
+//     });
+// });
 
 //  returns all items in the app as a list (array of items)
 //  allows scrolling view of all items or exhibits in the app
@@ -193,27 +218,4 @@ router.put('/exhibit/:exhibit_id', function(req, res) {
         //  add some kind of user notification that comment was added
     });
 });
-  //     // load exhibit, push comment to comments array, save exhibit
-    //     Exhibit.findById(exhibit_id)
-    //     .exec(function(err, exhibit) {
-    //             if (err) {
-    //                 console.log("find error below");
-    //                 console.log(err);
-    //                 return handleError(err);
-    //             };
-    //         console.log(comment);
-    //         exhibit.comments.push(comment);
-    //         // exhibit.save(function(err, updatedExhibit) {
-    //         //     if (err) {
-    //         //         console.log("save error below");
-    //         //         console.log(err);
-    //         //         return res.status(500).json({
-    //         //         message: 'Internal Server Error'
-    //         //     });
-    //             res.status(201).json(comment);
-    //             // }
-    //         });
-    //     });
-    // });
-// });
 module.exports = router;

@@ -12,6 +12,7 @@ import * as actions from '../../actions/index';
 import CreateExhibitForm from '../presentational/gallery/create_exhibit';
 import ConfirmExhibitCard from '../presentational/gallery/confirm_exhibit';
 import FileInputForm from '../presentational/gallery/file_input';
+import UploadMyFile from '../presentational/gallery/uploadMyFile.js';
 let uploadUrl = "http://localhost:5050/upload"
 
 class CreateWorkspace extends React.Component {
@@ -24,9 +25,9 @@ class CreateWorkspace extends React.Component {
             componentToRender = 
             <div>
                 <CreateExhibitForm onSubmit={this.props.newExhibitSubmit}/>
-                <label htmlFor="file_upload">Upload a copy of your project.</label>
-                <FileInputForm onSubmit={this.props.fileUploadSubmit}/>
-                <Button onSubmit={}>Button for submitting both</Button>
+                <UploadMyFile />
+                {/* <label htmlFor="file_upload">Upload a copy of your project.</label>
+                <FileInputForm onChange={this.props.fileOnChange}/> */}
             </div>
         }
         if (confirm_exhibit) {

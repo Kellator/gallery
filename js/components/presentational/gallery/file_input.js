@@ -7,35 +7,39 @@ import { Form, Button, TextArea } from 'semantic-ui-react';
 
 class FileInputForm extends React.Component {
     render() {
+
       const {
         handleSubmit,
+        fileOnChange,
         resetForm,
         submitting,
-        value
+        value,
       } = this.props
+
+        
       return (
-      <Form onSubmit={handleSubmit}>       
-            <div>
-              <label>Image Files</label>
+        <Form onChange={fileOnChange}>       
               <div>
-                <input 
-                type="file" 
-                />
+                <label>Image Files</label>
+                <div>
+                  <input 
+                  type="file" 
+                  />
+                </div>
               </div>
-            </div>
-            <div>
-              {/* <Button type="submit" disabled={submitting}>
-                {submitting ? <i/> : <i/>} Submit
-              </Button>
-              <Button type="button" disabled={submitting} onClick={resetForm}>
-                Clear Values
-              </Button> */}
-            </div>          
-        </Form>
+              <div>
+                <Button type="submit" disabled={submitting}>
+                  {submitting ? <i/> : <i/>} Submit
+                </Button>
+                <Button type="button" disabled={submitting} onClick={resetForm}>
+                  Clear Values
+                </Button>
+              </div>          
+          </Form>
       )
     }
   }
-  
+  export default FileInputForm;
   // FileInputForm.propTypes = {
   //   fields: PropTypes.object.isRequired,
   //   handleSubmit: PropTypes.func.isRequired,
@@ -43,7 +47,7 @@ class FileInputForm extends React.Component {
   //   submitting: PropTypes.bool.isRequired
   // }
   
-  export default reduxForm({
-    form: 'file',
-    name: 'file'
-  })(FileInputForm)
+  // export default reduxForm({
+  //   form: 'file',
+  //   name: 'file'
+  // })(FileInputForm)
